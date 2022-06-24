@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -15,7 +16,7 @@ use App\Http\Controllers\PagesController;
 |
 */
 
-/*-- Routing before login --*/
-Route::get('/',[PagesController::class, 'home'])->name("home");
-
-/*-- Routing before login end --*/
+/* User */
+Route::get('/',[UserController::class, 'home'])->name("home");
+Route::get('/signin',[UserController::class, 'signin'])->name("signin");
+Route::get('/singup',[UserController::class, 'singup'])->name("singup");
