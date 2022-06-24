@@ -12,4 +12,8 @@ class DirectorController extends Controller
     {
         $this->middleware('validDirector');
     }
+
+    public function dashboard(){
+        return view('director.dashboard');
+    }
 }

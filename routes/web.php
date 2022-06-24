@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DirectorController;
 
 
 /*
@@ -26,4 +27,7 @@ Route::get('/logout',[UserController::class,'logout'])->name('logout');
 Route::get('/singup',[UserController::class, 'singup'])->name("singup");
 
 /* Admin */
-Route::get('/admin/dash', [AdminController::class, 'dashboard'])->name('adminDash'); 
+Route::get('/admin', [AdminController::class, 'dashboard'])->name('adminDash'); 
+
+/* Director */
+Route::get('/director', [DirectorController::class, 'dashboard'])->name('directorDash'); 

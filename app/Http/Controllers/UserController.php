@@ -28,6 +28,15 @@ class UserController extends Controller
           session()->forget('error_message');
           return view('user.signin')->with('error_message', $error_message);
         }
+        if(Session::has('admin')){
+            return redirect()->route('adminDash');
+        }
+        else if(Session::has('executive')){
+            return redirect()->route('executiveDash');
+        }
+        else if(Session::has('member')){
+            return redirect()->route('memberDash');
+        }
         return view('user.signin');
     }
 
