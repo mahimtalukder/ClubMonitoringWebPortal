@@ -12,4 +12,9 @@ class MemberController extends Controller
     {
         $this->middleware('validMember');
     }
+
+    public function dashboard()
+    {
+      return view('member.dashboard');
+    }
 }

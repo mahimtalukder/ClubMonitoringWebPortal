@@ -12,4 +12,9 @@ class ExecutiveController extends Controller
     {
         $this->middleware('validExecutive');
     }
+
+    public function dashboard()
+    {
+      return view('executive.dashboard');
+    }
 }

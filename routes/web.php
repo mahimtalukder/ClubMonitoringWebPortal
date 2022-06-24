@@ -5,18 +5,9 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DirectorController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ExecutiveController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 /* User */
 Route::get('/',[UserController::class, 'home'])->name("home");
@@ -31,3 +22,10 @@ Route::get('/admin', [AdminController::class, 'dashboard'])->name('adminDash');
 
 /* Director */
 Route::get('/director', [DirectorController::class, 'dashboard'])->name('directorDash'); 
+
+/* Member */
+Route::get('/member', [MemberController::class, 'dashboard'])->name('memberDash'); 
+
+
+/* Member */
+Route::get('/executive', [ExecutiveController::class, 'dashboard'])->name('executiveDash'); 
