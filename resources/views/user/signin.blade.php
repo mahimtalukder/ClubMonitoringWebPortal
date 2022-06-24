@@ -10,16 +10,24 @@
             <div class="auth-form-wrapper px-4 py-5">
                 <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
                 <h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
-                <form class="forms-sample">
+                @if (!empty($error_message))
+                    <h5 class="text-danger">{{$error_message}}</h5>
+                @endif
+                <form class="forms-sample" action="{{route('signinSubmitted')}}" method="post">
+                    {{csrf_field()}}
                     <div class="mb-3">
-                        <label for="userEmail" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="userEmail"
-                            placeholder="Email">
+                        <label for="id" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" placeholder="XX-XXXXX-XX">
+                        @error('id')
+                            <span class="font-weight-light text-danger">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="userPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="userPassword"
-                            autocomplete="current-password" placeholder="Password">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        @error('password')
+                            <span class="font-weight-light text-danger">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" id="authCheck">
@@ -28,8 +36,7 @@
                         </label>
                     </div>
                     <div>
-                        <button type="button"
-                            class="btn btn-primary me-2 mb-2 mb-md-0 text-white">
+                        <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">
                             Login
                         </button>
                     </div>

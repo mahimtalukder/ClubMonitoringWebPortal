@@ -17,7 +17,7 @@ class DirectorSeeder extends Seeder
         DB::table('directors')->insert([
             'id' => '11-10001-3',
             'name' => "Syed Syfuzzaman",
-            'images' => 'publicAssets\images\profile\default.png',
+            'images' => '../assets_2/images/faces/default.png',
             'dob' => '31-12-1980',
             'phone' => '01712458721',
             'address' => 'Uttara, Dhaka-1230',
@@ -27,7 +27,7 @@ class DirectorSeeder extends Seeder
         DB::table('directors')->insert([
             'id' => '11-10002-3',
             'name' => "Rakibul Alam",
-            'images' => 'publicAssets\images\profile\default.png',
+            'images' => '../assets_2/images/faces/default.png',
             'dob' => '15-06-1991',
             'phone' => '01755152458',
             'address' => 'khilkhet, Dhaka-1230',
