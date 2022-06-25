@@ -20,12 +20,12 @@ class AdminController extends Controller
     }
     public function profile(){
         $admin_session = session()->get('admin');
-        $admin = Admin::where("id", "12-10001-3")->first();
+        $admin = Admin::where("user_id", $admin_session["user_id"])->first();
         return view('admin.profile')->with('admin', $admin);
     }
     public function editProfile(){
         $admin_session = session()->get('admin');
-        $admin = Admin::where("id", "12-10001-3")->first();
+        $admin = Admin::where("user_id", "12-10001-3")->first();
         return view('admin.editProfile')->with('admin', $admin);
     }
     public function editProfileSubmitted(Request $request){

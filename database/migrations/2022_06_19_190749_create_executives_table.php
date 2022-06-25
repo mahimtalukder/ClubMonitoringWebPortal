@@ -14,9 +14,9 @@ class CreateExecutivesTable extends Migration
     public function up()
     {
         Schema::create('executives', function (Blueprint $table) {
-            $table->string('id');
-            $table->primary('id');
-            $table->foreign('id')->references('id')->on('users');
+            $table->string('user_id');
+            $table->primary('user_id');
+            $table->foreign('user_id')->references('user_id')->on('users');
             $table->string('designation');
             $table->string('join_at');
             $table->string('end_at');

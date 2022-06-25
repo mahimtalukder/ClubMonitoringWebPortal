@@ -51,24 +51,24 @@ class UserController extends Controller
         ];
         $this->validate($request, $rules, $messages );
 
-        $user = User::whereRaw("BINARY id = '$request->id'")->first();
+        $user = User::whereRaw("BINARY user_id = '$request->id'")->first();
 
 
         if(!empty($user)){
             if (Hash::check($request->password, $user['password'])) {
                 if($user['user_type'] == 'admin'){
-                    $admin = Admin::whereRaw("BINARY id = '$request->id'")->first();
+                    $admin = Admin::whereRaw("BINARY user_id = '$request->id'")->first();
                     $request->session()->put('admin', $admin);
                     return redirect()->route('adminDash');
                 }
                 else if($user['user_type'] == 'director'){
-                    $director = Director::whereRaw("BINARY id = '$request->id'")->first();
+                    $director = Director::whereRaw("BINARY user_id = '$request->id'")->first();
                     $request->session()->put('director', $director);
                     return redirect()->route('directorDash');
                 }
                 else if($user['user_type'] == 'member'){
-                    $member = Member::whereRaw("BINARY id = '$request->id'")->first();
-                    $executive =Executive::whereRaw("BINARY id = '$request->id'")->first();
+                    $member = Member::whereRaw("BINARY user_id = '$request->id'")->first();
+                    $executive =Executive::whereRaw("BINARY user_id = '$request->id'")->first();
                     if(!empty($executive)){
                         $request->session()->put('executive', $member);
                         return redirect()->route('executiveDash');

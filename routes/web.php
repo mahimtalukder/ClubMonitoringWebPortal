@@ -18,10 +18,10 @@ Route::get('/logout',[UserController::class,'logout'])->name('logout');
 Route::get('/singup',[UserController::class, 'singup'])->name("singup");
 
 /* Admin */
-Route::get('/admin', [AdminController::class, 'dashboard'])->name('adminDash');
+Route::get('/admin/dash', [AdminController::class, 'dashboard'])->name('adminDash');
 Route::get('/admin/profile', [AdminController::class, 'profile'])->name('profile');
 Route::get('/admin/edit', [AdminController::class, 'editProfile'])->name('editProfile');
-Route::post('/admin/edit', [AdminController::class, 'editProfileSubmitted'])->name('editProfileSubmitted');
+Route::post('/admin/editSubmitted', [AdminController::class, 'editProfileSubmitted'])->name('editProfileSubmitted');
 
 /* Director */
 Route::get('/director', [DirectorController::class, 'dashboard'])->name('directorDash');

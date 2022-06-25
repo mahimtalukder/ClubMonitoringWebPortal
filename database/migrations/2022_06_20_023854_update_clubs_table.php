@@ -15,7 +15,7 @@ class UpdateClubsTable extends Migration
     {
         Schema::table('clubs', function (Blueprint $table) {
             $table->string('created_by');
-            $table->foreign('created_by')->references('id')->on('directors');
+            $table->foreign('created_by')->references('user_id')->on('directors');
         });
     }
 

@@ -15,7 +15,7 @@ class AdminSeeder extends Seeder
     public function run()
     {
         DB::table('admins')->insert([
-            'id' => '12-10001-3',
+            'user_id' => '12-10001-3',
             'name' => "Syed Syfuzzaman",
             'images' => '../assets_2/images/faces/default.png',
             'dob' => '31-12-1980',
@@ -30,7 +30,7 @@ class AdminSeeder extends Seeder
         ]);
 
         DB::table('admins')->insert([
-            'id' => '12-10002-3',
+            'user_id' => '12-10002-3',
             'name' => "Ahsanul Kabir",
             'images' => '../assets_2/images/faces/default.png',
             'dob' => '31-12-1990',
