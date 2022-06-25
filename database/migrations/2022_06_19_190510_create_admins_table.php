@@ -20,7 +20,12 @@ class CreateAdminsTable extends Migration
             $table->string('name');
             $table->string('images');
             $table->string('dob');
+            $table->string('gender');
             $table->string('phone');
+            $table->string('email');
+            $table->string('designation');
+            $table->string('organisation');
+            $table->string('bio');
             $table->text('address');
             $table->string('blood_group');
         });

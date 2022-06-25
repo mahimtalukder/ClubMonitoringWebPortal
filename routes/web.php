@@ -18,14 +18,17 @@ Route::get('/logout',[UserController::class,'logout'])->name('logout');
 Route::get('/singup',[UserController::class, 'singup'])->name("singup");
 
 /* Admin */
-Route::get('/admin', [AdminController::class, 'dashboard'])->name('adminDash'); 
+Route::get('/admin', [AdminController::class, 'dashboard'])->name('adminDash');
+Route::get('/admin/profile', [AdminController::class, 'profile'])->name('profile');
+Route::get('/admin/edit', [AdminController::class, 'editProfile'])->name('editProfile');
+Route::post('/admin/edit', [AdminController::class, 'editProfileSubmitted'])->name('editProfileSubmitted');
 
 /* Director */
-Route::get('/director', [DirectorController::class, 'dashboard'])->name('directorDash'); 
+Route::get('/director', [DirectorController::class, 'dashboard'])->name('directorDash');
 
 /* Member */
-Route::get('/member', [MemberController::class, 'dashboard'])->name('memberDash'); 
+Route::get('/member', [MemberController::class, 'dashboard'])->name('memberDash');
 
 
 /* Member */
-Route::get('/executive', [ExecutiveController::class, 'dashboard'])->name('executiveDash'); 
+Route::get('/executive', [ExecutiveController::class, 'dashboard'])->name('executiveDash');

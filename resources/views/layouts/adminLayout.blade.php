@@ -23,6 +23,8 @@
 
 	<!-- Plugin css for this page -->
   <link rel="stylesheet" href="{{asset('../assets_2/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
+    <link href="https://www.nobleui.com/laravel/template/demo1/assets/plugins/dropzone/dropzone.min.css" rel="stylesheet" />
+    <link href="https://www.nobleui.com/laravel/template/demo1/assets/plugins/dropify/css/dropify.min.css" rel="stylesheet" />
 	<!-- End plugin css for this page -->
 
 	<!-- inject:css -->
@@ -30,7 +32,7 @@
 	<link rel="stylesheet" href="{{asset('../assets_2/vendors/flag-icon-css/css/flag-icon.min.css')}}">
 	<!-- endinject -->
 
-  <!-- Layout styles -->  
+  <!-- Layout styles -->
 	<link rel="stylesheet" href="{{asset('../assets_2/css/demo1/style.min.css')}}">
   <!-- End layout styles -->
 
@@ -41,13 +43,13 @@
 	<!--Change Needed -->
 
     @include('inc.adminSideNav')
-	
+
 		<div class="page-wrapper">
-					
+
       @include('inc.adminTopNav')
 
 	<div class="page-content">
-        @yield('contant')
+        @yield('content')
 
 	</div>
 
@@ -56,7 +58,7 @@
 				<p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a href="{{route('home')}}">MT</a>.</p>
 			</footer>
 			<!-- partial -->
-		
+
 		</div>
 	</div>
 
@@ -70,6 +72,11 @@
   <script src="{{asset('../assets_2/vendors/jquery.flot/jquery.flot.resize.js')}}"></script>
   <script src="{{asset('../assets_2/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
   <script src="{{asset('../assets_2/vendors/apexcharts/apexcharts.min.js')}}"></script>
+    <script src="https://www.nobleui.com/laravel/template/demo1/assets/plugins/dropzone/dropzone.min.js"></script>
+    <script src="https://www.nobleui.com/laravel/template/demo1/assets/plugins/dropify/js/dropify.min.js"></script>
+    <script src="https://www.nobleui.com/laravel/template/demo1/assets/js/dropzone.js"></script>
+    <script src="https://www.nobleui.com/laravel/template/demo1/assets/js/dropify.js"></script>
+
 	<!-- End plugin js for this page -->
 
 	<!-- inject:js -->
@@ -82,6 +89,7 @@
   <script src="{{asset('../assets_2/js/datepicker.js')}}"></script>
 	<!-- End custom js for this page -->
 
+
 </body>
 
-</html>    
+</html>
