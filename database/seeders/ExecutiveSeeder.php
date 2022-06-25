@@ -15,7 +15,7 @@ class ExecutiveSeeder extends Seeder
     public function run()
     {
         DB::table('executives')->insert([
-            'id' => '13-10001-3',
+            'user_id' => '13-10001-3',
             'designation' => "persident",
             'join_at' => '12-05-2010',
         ]);

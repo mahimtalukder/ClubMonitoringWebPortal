@@ -14,16 +14,6 @@ class RequestedComponentSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('requested_components')->insert([
-            'application_id' => 1,
-            'requested_componet' => '2 Class Room',
-            'approved_componet' => ""
-        ]);
-
-        DB::table('requested_components')->insert([
-            'application_id' => 1,
-            'requested_componet' => 'Auditorium',
-            'approved_componet' => "Not Approved"
-        ]);
+        
     }
 }

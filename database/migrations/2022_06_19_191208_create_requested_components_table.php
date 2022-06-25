@@ -17,8 +17,8 @@ class CreateRequestedComponentsTable extends Migration
             $table->increments('id');
             $table->integer('application_id')->unsigned();
             $table->foreign('application_id')->references('id')->on('applications');
-            $table->string('requested_componet');
-            $table->string('approved_componet');
+            $table->integer('requested_component')->unsigned();
+            $table->string('is_approved');
         });
     }
 

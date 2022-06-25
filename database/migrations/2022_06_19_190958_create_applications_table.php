@@ -20,9 +20,9 @@ class CreateApplicationsTable extends Migration
             $table->string('is_approved');
             $table->timestamps();
             $table->string('executive_id');
-            $table->foreign('executive_id')->references('id')->on('executives');
+            $table->foreign('executive_id')->references('user_id')->on('executives');
             $table->string('director_id');
-            $table->foreign('director_id')->references('id')->on('directors');
+            $table->foreign('director_id')->references('user_id')->on('directors');
         });
     }
 

@@ -15,7 +15,7 @@ class DirectorSeeder extends Seeder
     public function run()
     {
         DB::table('directors')->insert([
-            'id' => '11-10001-3',
+            'user_id' => '11-10001-3',
             'name' => "Syed Syfuzzaman",
             'images' => '../assets_2/images/faces/default.png',
             'dob' => '31-12-1980',
@@ -25,7 +25,7 @@ class DirectorSeeder extends Seeder
         ]);
 
         DB::table('directors')->insert([
-            'id' => '11-10002-3',
+            'user_id' => '11-10002-3',
             'name' => "Rakibul Alam",
             'images' => '../assets_2/images/faces/default.png',
             'dob' => '15-06-1991',

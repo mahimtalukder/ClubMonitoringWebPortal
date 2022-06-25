@@ -16,7 +16,7 @@ class CreateInboxParticipantsTable extends Migration
         Schema::create('inbox_participants', function (Blueprint $table) {
             $table->increments('id');
             $table->string('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('user_id')->on('users');
             $table->integer('inbox_id')->unsigned();
             $table->foreign('inbox_id')->references('id')->on('inboxes');
         });

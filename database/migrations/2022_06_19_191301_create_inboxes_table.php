@@ -16,10 +16,10 @@ class CreateInboxesTable extends Migration
         Schema::create('inboxes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('message_to');
-            $table->foreign('message_to')->references('id')->on('users');
+            $table->foreign('message_to')->references('user_id')->on('users');
             $table->text('last_message');
             $table->string('last_sant_user_email');
-            $table->foreign('last_sant_user_email')->references('id')->on('users');
+            $table->foreign('last_sant_user_email')->references('user_id')->on('users');
         });
     }
 

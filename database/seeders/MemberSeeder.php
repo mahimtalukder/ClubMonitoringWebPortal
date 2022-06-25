@@ -15,7 +15,7 @@ class MemberSeeder extends Seeder
     public function run()
     {
         DB::table('members')->insert([
-            'id' => '13-10001-3',
+            'user_id' => '13-10001-3',
             'club_id' => 2,
             'name' => "Shahriyar Shams",
             'images' => '../assets_2/images/faces/default.png',
@@ -26,7 +26,7 @@ class MemberSeeder extends Seeder
         ]);
 
         DB::table('members')->insert([
-            'id' => '13-10002-3',
+            'user_id' => '13-10002-3',
             'club_id' => 2,
             'name' => "Nahiyan Islam",
             'images' => '../assets_2/images/faces/default.png',

@@ -12,12 +12,12 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
+     * @return vouser_id
      */
     public function run()
     {
         DB::table('users')->insert([
-            'id' => '11-10001-3',
+            'user_id' => '11-10001-3',
             'password' => Hash::make('Admin@123'),
             'user_type' => 'director',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'id' => '11-10002-3',
+            'user_id' => '11-10002-3',
             'password' => Hash::make('Admin@123'),
             'user_type' => 'director',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'id' => '12-10001-3',
+            'user_id' => '12-10001-3',
             'password' => Hash::make('Admin@123'),
             'user_type' => 'admin',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'id' => '12-10002-3',
+            'user_id' => '12-10002-3',
             'password' => Hash::make('Admin@123'),
             'user_type' => 'admin',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'id' => '13-10001-3',
+            'user_id' => '13-10001-3',
             'password' => Hash::make('Member@123'),
             'user_type' => 'member',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'id' => '13-10002-3',
+            'user_id' => '13-10002-3',
             'password' => Hash::make('Member@123'),
             'user_type' => 'member',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),

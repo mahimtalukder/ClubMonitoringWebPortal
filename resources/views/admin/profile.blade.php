@@ -95,7 +95,7 @@
                                             <label class="tx-12 fw-bolder mb-0 text-uppercase">ID:</label>
                                         </div>
                                         <div class="col-10">
-                                            <p>{{$admin->id}}</p>
+                                            <p>{{$admin->user_id}}</p>
                                         </div>
                                     </div>
                                 </li>

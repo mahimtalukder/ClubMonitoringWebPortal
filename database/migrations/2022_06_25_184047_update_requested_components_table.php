@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateRequestedComponentTable extends Migration
+class UpdateRequestedComponentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class UpdateRequestedComponentTable extends Migration
     public function up()
     {
         Schema::table('requested_components', function (Blueprint $table) {
-            $table->string('is_approved')->nullable()->change();
+            $table->foreign('requested_component')->references('id')->on('components');
+
         });
     }
 
