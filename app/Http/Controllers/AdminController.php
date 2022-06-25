@@ -18,18 +18,20 @@ class AdminController extends Controller
     {
       return view('admin.dashboard');
     }
+
     public function profile(){
         $admin_session = session()->get('admin');
         $admin = Admin::where("user_id", $admin_session["user_id"])->first();
         return view('admin.profile')->with('admin', $admin);
     }
+
     public function editProfile(){
         $admin_session = session()->get('admin');
-        $admin = Admin::where("user_id", "12-10001-3")->first();
+        $admin = Admin::where("user_id", $admin_session["user_id"])->first();
         return view('admin.editProfile')->with('admin', $admin);
     }
-    public function editProfileSubmitted(Request $request){
 
+    public function editProfileSubmitted(Request $request){
         $validate = $request->validate([
             "name" => "required|regex:/(^([a-zA-z]+)(\d+)?$)/u",
             "email" => "email",
@@ -42,7 +44,10 @@ class AdminController extends Controller
 //            ['name.required'=>"Please put you name here"],
 
         );
-
+        $admin_session = session()->get('admin');
+        Admin::where('user_id', $admin_session["user_id"])->update([
+            'email' => 'johndoe@gmail.com'
+        ]);
     }
 
 }
