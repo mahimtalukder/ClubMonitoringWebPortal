@@ -26,7 +26,7 @@ class AdminController extends Controller
     public function editProfile(){
         $admin_session = session()->get('admin');
         $admin = Admin::where("id", "12-10001-3")->first();
-        return view('admin.profile')->with('admin', $admin);
+        return view('admin.editProfile')->with('admin', $admin);
     }
     public function editProfileSubmitted(Request $request){
 
