@@ -25,10 +25,19 @@ Route::post('/admin/edit', [AdminController::class, 'editProfileSubmitted'])->na
 
 /* Director */
 Route::get('/director', [DirectorController::class, 'dashboard'])->name('directorDash');
+Route::get('/director/profile', [DirectorController::class, 'profile'])->name('profile');
+Route::get('/director/edit', [DirectorController::class, 'EditProfile'])->name('EditProfile');
+Route::post('/director/edit', [DirectorController::class, 'editProfileSubmitted'])->name('editProfileSubmitted');
 
 /* Member */
 Route::get('/member', [MemberController::class, 'dashboard'])->name('memberDash');
+Route::get('/member/profile', [MemberController::class, 'profile'])->name('profile');
+Route::get('/member/edit', [MemberController::class, 'EditProfile'])->name('EditProfile');
+Route::post('/member/edit', [MemberController::class, 'editProfileSubmitted'])->name('editProfileSubmitted');
 
 
 /* Member */
 Route::get('/executive', [ExecutiveController::class, 'dashboard'])->name('executiveDash');
+Route::get('/executive/profile', [ExecutiveController::class, 'profile'])->name('profile');
+Route::get('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('EditProfile');
+Route::post('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('EditProfile');

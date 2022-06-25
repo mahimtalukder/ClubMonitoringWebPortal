@@ -47,7 +47,7 @@
       @include('inc.executiveTopNav')
 
 	<div class="page-content">
-        @yield('contant')
+        @yield('content')
 
 	</div>
 
