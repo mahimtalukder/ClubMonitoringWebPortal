@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
             ClubSeeder::class,
             MemberSeeder::class,
             ExecutiveSeeder::class,
-            ApplicationSeeder::class,
-            RequestedComponentSeeder::class,
             InboxSeeder::class,
             InboxParticipantSeeder::class,
             MessageSeeder::class,
