@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             InboxParticipantSeeder::class,
             MessageSeeder::class,
             ResourceSeeder::class,
-            RegistrationSeeder::class
+            RegistrationSeeder::class,
+            ComponentSeeder::class,
         ]);
     }
 }
