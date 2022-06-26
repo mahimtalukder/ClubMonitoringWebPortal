@@ -23,5 +23,14 @@ class ApplicationSeeder extends Seeder
             'request_date' => '23/05/2022',
             'executive_id' => '13-10001-3'
         ]);
+
+        DB::table('applications')->insert([
+            'application_id' => '10-102',
+            'subject' => "Permission for Ideas Challenge",
+            'description' => 'Respected Sir, We need your permission for ideas challenge event. Regards, Syfuzzaman',
+            'sent_to' => 'director',
+            'request_date' => '23/05/2022',
+            'executive_id' => '13-10001-3'
+        ]);
     }
 }

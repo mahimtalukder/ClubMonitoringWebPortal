@@ -19,8 +19,7 @@
                                     <div class="col-lg-6">
                                         <div class="d-flex align-items-end mb-2 mb-md-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox text-muted me-2"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg>
-                                            <h4 class="me-1">Applications</h4>
-                                            <span class="text-muted">(2 new application)</span>
+                                            <h4 class="me-1">{{$labelName}}</h4>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -46,18 +45,18 @@
                             <div class="email-list">
                                 @foreach($applications as $application)
                                 <!-- email list item -->
-                                <div class="email-list-item email-list-item--unread">
+                                <div class="email-list-item">
                                     <div class="email-list-actions">
                                         @if($application->is_approved == "approved")
-                                        <i data-feather="check" class="icon-lg me-2"></i>
+                                        <i data-feather="check" class="text-success icon-lg me-2"></i>
                                         @endif
 
-                                        @if($application->is_approved == "pending")
+                                        @if($application->is_approved == "pending" or $application->is_approved == "")
                                             <i data-feather="clock" class="icon-lg me-2"></i>
                                         @endif
 
                                         @if($application->is_approved == "rejected")
-                                            <i data-feather="x" class="icon-lg me-2"></i>
+                                            <i data-feather="x" class="text-danger icon-lg me-2"></i>
                                         @endif
                                     </div>
                                     <a href="{{route('executiveApplicationRead')}}" class="email-list-detail">

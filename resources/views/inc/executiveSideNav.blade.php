@@ -81,11 +81,11 @@
                     </a>
                     <div class="collapse" id="general-pages">
                       <ul class="nav sub-menu">
+                          <li class="nav-item">
+                              <a href="{{route('executiveAllApplication')}}" class="nav-link">All Application</a>
+                          </li>
                         <li class="nav-item">
-                          <a href="#" class="nav-link">Sent</a>
-                        </li>
-                        <li class="nav-item">
-                          <a href="{{route('executiveApplicationCompose')}}" class="nav-link">compose</a>
+                          <a href="{{route('executiveApplicationCompose')}}" class="nav-link">New Application</a>
                         </li>
                       </ul>
                     </div>

@@ -19,6 +19,7 @@ class CreateApplicationsTable extends Migration
             $table->string('subject');
             $table->text('description');
             $table->string('is_approved')->nullable();
+            $table->string('rejection_msg')->nullable();
             $table->timestamps();
             $table->string('executive_id');
             $table->foreign('executive_id')->references('user_id')->on('executives');

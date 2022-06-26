@@ -16,8 +16,18 @@
                         <div class="col-lg-9">
                             <div class="d-flex align-items-center justify-content-between p-3 border-bottom tx-16">
                                 <div class="d-flex align-items-center">
+                                    @if($application_info->is_approved == "approved")
                                     <i data-feather="check" class="text-primary icon-lg me-2"></i>
-                                    <span>Application Subject</span>
+                                    @endif
+
+                                    @if($application_info->is_approved == "rejected")
+                                        <i data-feather="x" class="text-primary icon-lg me-2"></i>
+                                    @endif
+
+                                    @if($application_info->is_approved == "pending" or $application_info->is_approved == "")
+                                        <i data-feather="x" class="text-primary icon-lg me-2"></i>
+                                    @endif
+                                    <span>{{$application_info->subject}}</span>
                                 </div>
                                 <div>
                                     <a href="#"><i data-feather="printer" class="text-muted icon-lg me-2" data-bs-toggle="tooltip" title="Print"></i></a>
@@ -34,16 +44,11 @@
                                 <div class="tx-13 text-muted mt-2 mt-sm-0">Nov 20, 11:20</div>
                             </div>
                             <div class="p-4">
-                                <p>Hello,</p>
-                                <br>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                                <br>
-                                <p>Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.</p>
-                                <br>
-                                <p><strong>Regards</strong>,<br> John Doe</p>
+                                {{$application_info->description}}
                             </div>
                             <div class="p-4 border-bottom" >
-                                <div class="mb-3">Requested Date: 12/05/2022</div>
+                                <div class="mb-3">Requested Date: {{$application_info->request_date}}</div>
+                                @if($requested_components->count() != 0)
                                 <div class="mb-3">Requested Components</div>
                                 <div class="col-md-12 border-2">
                                     <div class="mb-3">
@@ -58,25 +63,29 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            @php
+                                                $count=0;
+                                            @endphp
+                                            @foreach($requested_components as $component)
                                             <tr>
-                                                <td>1</td>
-                                                <td>Multipurpose</td>
-                                                <td>8:00 AM</td>
-                                                <td>10:00 AM</td>
-                                                <td>2</td>
+
+                                                <td>{{$count+1}}</td>
+                                                <td>{{$component->name}}</td>
+                                                <td>{{$component->start_time}}</td>
+                                                <td>{{$component->end_time}}</td>
+                                                <td>{{$component->quantity}}</td>
+                                                @php
+                                                    $count = $count+1;
+                                                @endphp
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Classroom</td>
-                                                <td>8:00 AM</td>
-                                                <td>10:00 AM</td>
-                                                <td>2</td>
-                                            </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+                                @endif
                             </div>
+                            @if($application_info->is_approved == "approved")
                             <div class="p-3 bg-body">
                                 <div class="mb-3">Approved Date: 13/05/2022</div>
                                 <div>Approved Components</div>
@@ -114,6 +123,15 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
+
+                            @if($application_info->is_approved == "rejected")
+                                <div class="p-3 bg-warning">
+                                    <div class="mb-3"><strong>Application Rejected</strong></div>
+                                    <div>Directors Comment:</div>
+                                    {{$application_info->rejection_msg}}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

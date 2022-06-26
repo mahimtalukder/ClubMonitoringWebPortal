@@ -29,5 +29,13 @@ class RequestedComponentSeeder extends Seeder
             'end_time' => '05:00 PM',
             'quantity' => 1,
         ]);
+
+        DB::table('requested_components')->insert([
+            'application_id' => '10-102',
+            'component_id' => 2,
+            'start_time' => '04:00 PM',
+            'end_time' => '05:00 PM',
+            'quantity' => 1,
+        ]);
     }
 }

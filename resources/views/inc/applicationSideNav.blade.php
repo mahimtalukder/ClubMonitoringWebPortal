@@ -15,12 +15,23 @@
         <div class="email-aside-nav collapse">
             <ul class="nav flex-column">
                 <li class="nav-item active" >
+                    <a class="nav-link d-flex align-items-center" href="{{route('executiveAllApplication')}}">
+                        <i data-feather="inbox" class="icon-lg me-2"></i>
+                        All Applications
+                    </a>
+                </li>
+
+            </ul>
+
+            <p class="text-muted tx-12 fw-bolder text-uppercase mb-2 mt-4">Labels</p>
+            <ul class="nav flex-column">
+                <li class="nav-item">
                     <a class="nav-link d-flex align-items-center" href="{{route('executiveApplicationApproved')}}">
-                        <i data-feather="check" class="icon-lg me-2"></i>
+                        <i data-feather="check" class="text-success icon-lg me-2"></i>
                         Approved Application
                     </a>
                 </li>
-                <li class="nav-item" >
+                <li class="nav-item">
                     <a class="nav-link d-flex align-items-center" href="{{route('executiveApplicationPending')}}">
                         <i data-feather="clock" class="icon-lg me-2"></i>
                         Under Review
@@ -28,12 +39,13 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center" href="{{route('executiveApplicationRejected')}}">
-                        <i data-feather="x" class="icon-lg me-2"></i>
+                        <i data-feather="x" class="text-danger icon-lg me-2"></i>
                         Rejected Application
-                        <span class="badge bg-secondary fw-bolder ms-auto">4</span>
                     </a>
                 </li>
             </ul>
         </div>
+
+
     </div>
 </div>
