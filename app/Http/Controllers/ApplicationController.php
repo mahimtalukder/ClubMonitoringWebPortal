@@ -13,7 +13,7 @@ class ApplicationController extends Controller
     }
 
     public function applicationApproved(){
-        return view('executive.approvedApplication')
+        return view('executive.approvedApplication');
     }
     public function applicationPending(){
 
