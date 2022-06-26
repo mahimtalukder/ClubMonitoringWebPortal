@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             ResourceSeeder::class,
             RegistrationSeeder::class,
             ComponentSeeder::class,
+            ApplicationSeeder::class,
+            RequestedComponentSeeder::class
         ]);
     }
 }
