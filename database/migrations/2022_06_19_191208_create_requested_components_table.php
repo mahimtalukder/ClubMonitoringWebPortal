@@ -19,12 +19,12 @@ class CreateRequestedComponentsTable extends Migration
             $table->foreign('application_id')->references('application_id')->on('applications');
             $table->integer('component_id')->unsigned();
             $table->string('start_time');
-            $table->string('approved_start_time');
+            $table->string('approved_start_time')->nullable();
             $table->string('end_time');
-            $table->string('approved_end_time');
+            $table->string('approved_end_time')->nullable();
             $table->integer('quantity')->unsigned();
-            $table->string('is_approved');
-            $table->string('remarks');
+            $table->string('is_approved')->nullable();
+            $table->string('remarks')->nullable();
         });
     }
 

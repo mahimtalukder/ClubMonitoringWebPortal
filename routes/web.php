@@ -49,3 +49,5 @@ Route::get('/executive/application/compose', [ApplicationController::class, 'app
 Route::get('/executive/application/approved', [ApplicationController::class, 'applicationApproved'])->name('executiveApplicationApproved');
 Route::get('/executive/application/pending', [ApplicationController::class, 'applicationPending'])->name('executiveApplicationPending');
 Route::get('/executive/application/rejected', [ApplicationController::class, 'applicationRejected'])->name('executiveApplicationRejected');
+Route::get('/executive/application/read', [ApplicationController::class, 'applicationRead'])->name('executiveApplicationRead');
+Route::get('/executive/application/', [ApplicationController::class, 'allApplication'])->name('executiveAllApplication');
