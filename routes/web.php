@@ -18,7 +18,7 @@ Route::get('/logout',[UserController::class,'logout'])->name('logout');
 Route::get('/singup',[UserController::class, 'singup'])->name("singup");
 
 /* Admin */
-Route::get('/admin/dash', [AdminController::class, 'dashboard'])->name('adminDash');
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adminDash');
 Route::get('/admin/profile', [AdminController::class, 'profile'])->name('adminProfile');
 Route::get('/admin/edit', [AdminController::class, 'editProfile'])->name('editProfile');
 Route::post('/admin/editSubmitted', [AdminController::class, 'editProfileSubmitted'])->name('editProfileSubmitted');
@@ -36,8 +36,8 @@ Route::get('/member/edit', [MemberController::class, 'EditProfile'])->name('Edit
 Route::post('/member/edit', [MemberController::class, 'editProfileSubmitted'])->name('editProfileSubmitted');
 
 
-/* Member */
-Route::get('/executive', [ExecutiveController::class, 'dashboard'])->name('executiveDash');
+/* Executive */
+Route::get('/executive/dashboard', [ExecutiveController::class, 'dashboard'])->name('executiveDash');
 Route::get('/executive/profile', [ExecutiveController::class, 'profile'])->name('profile');
 Route::get('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('EditProfile');
 Route::post('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('EditProfile');
