@@ -1,7 +1,8 @@
 <?php $executive = session()->get('executive')?>
 @extends('layouts.executiveLayout')
 @section('title', 'Dashboard')
-@section('picture', $executive['images'])
+@php $picture = '../../'.$executive['images']; @endphp
+@section('picture', $picture)
 @section('name', $executive['name'])
 @section('phone', $executive['phone'])
 
