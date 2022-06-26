@@ -83,7 +83,7 @@
 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
-                                    <input id="name" class="form-control @error('name'){{"is-invalid"}}@enderror" name="name" type="text" value="{{old('name')}}">
+                                    <input id="name" class="form-control @error('name'){{"is-invalid"}}@enderror" name="name" type="text" value="{{$admin->name}}">
 
                                     @error('name')
                                     <span class="text-danger">{{$message}}</span>
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input id="email" class="form-control  @error('email'){{"is-invalid"}}@enderror" name="email" type="email" value="{{old('email')}}">
+                                    <input id="email" class="form-control  @error('email'){{"is-invalid"}}@enderror" name="email" type="email" value="{{$admin->email}}">
                                     @error('email')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="phone" class="form-label">Phone</label>
-                                    <input id="phone" class="form-control  @error('phone'){{"is-invalid"}}@enderror" name="phone" type="text" value="{{old('phone')}}">
+                                    <input id="phone" class="form-control  @error('phone'){{"is-invalid"}}@enderror" name="phone" type="text" value="{{$admin->phone}}">
                                     @error('phone')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -110,19 +110,19 @@
                                     <label class="form-label">Gender</label>
                                     <div>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="gender" value="Male" id="gender1">
+                                            <input type="radio" class="form-check-input" name="gender" value="Male" id="gender1" {{ $admin->gender == 'Male' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="gender1">
                                                 Male
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="gender" value="Female" id="gender2">
+                                            <input type="radio" class="form-check-input" name="gender" value="Female" id="gender2" {{ $admin->gender == 'Female' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="gender2">
                                                 Female
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="gender" value="Other" id="gender3">
+                                            <input type="radio" class="form-check-input" name="gender" value="Other" id="gender3"{{ $admin->gender == 'Other' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="gender3">
                                                 Other
                                             </label>
@@ -137,7 +137,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Date of Birth</label>
                                     <div class="input-group date datepicker mx-0 px-0">
-                                        <input data-provide="datepicker" data-date-format="dd/mm/yyyy" type="text" id="datepicker" name="dob" class="form-control  @error('dob'){{"is-invalid"}}@enderror" value="{{old('dob')}}">
+                                        <input data-provide="datepicker" data-date-format="dd/mm/yyyy" type="text" id="datepicker" name="dob" class="form-control  @error('dob'){{"is-invalid"}}@enderror" value="{{$admin->dob}}">
                                         <span class="input-group-text input-group-addon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
                                     </div>
                                     @error('dob')
@@ -164,7 +164,7 @@
 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Address</label>
-                                    <input id="address" class="form-control" name="address" type="text" value="{{old('address')}}">
+                                    <input id="address" class="form-control" name="address" type="text" value="{{$admin->address}}">
                                     @error('address')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
