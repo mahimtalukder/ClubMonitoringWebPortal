@@ -21,7 +21,7 @@
                 </li>
                 <li class="nav-item nav-category">Personal</li>
                 <li class="nav-item">
-                    <a href="{{route('profile')}}" class="nav-link">
+                    <a href="{{route('adminProfile')}}" class="nav-link">
                         <i class="link-icon" data-feather="user"></i>
                         <span class="link-title">View Profile</span>
                     </a>
@@ -59,7 +59,7 @@
                 </li>
                 <li class="nav-item nav-category">Personal</li>
                 <li class="nav-item">
-                    <a href="{{route('profile')}}" class="nav-link">
+                    <a href="{{route('adminProfile')}}" class="nav-link">
                         <i class="link-icon" data-feather="user"></i>
                         <span class="link-title">View Profile</span>
                     </a>
