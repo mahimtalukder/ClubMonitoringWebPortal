@@ -50,18 +50,26 @@
                                 <div class="d-flex align-items-center p-3 border-bottom tx-16">
                                     <span data-feather="edit" class="icon-md me-2"></span>
                                     New Application
+                                    @if (!empty($message))
+                                        <h6 class="card-title text-primary">{{$message}}</h6>
+                                    @endif
                                 </div>
-                                @error($errors->any())
-                                    <span class="font-weight-light text-danger">{{$message}}</span>
-                                @enderror
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            <li>All fields are required</li>
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                             <form class="forms-sample" action="{{route('executiveApplicationComposeSubmitted')}}" method="post">
+                                {{csrf_field()}}
                                 <div class="p-3 pb-0">
                                     <div class="to">
                                         <div class="row mb-3">
                                             <label class="col-md-2 col-form-label">To:</label>
                                             <div class="col-md-10">
-                                                <select class="compose-multiple-select form-select" name="send_to">
+                                                <select class="compose-multiple-select form-select" name="sent_to">
                                                     <option value="director">Directors</option>
                                                 </select>
                                             </div>

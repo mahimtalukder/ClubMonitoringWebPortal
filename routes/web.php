@@ -45,8 +45,10 @@ Route::post('/executive/edit', [ExecutiveController::class, 'EditProfile'])->nam
 
 
 //Executive Application
-Route::get('/executive/application/compose', [ApplicationController::class, 'applicationCompose'])->name('executiveApplicationCompose');
-Route::post('/executive/application/composeSubmitted', [ApplicationController::class, 'applicationComposeSubmitted'])->name('executiveApplicationComposeSubmitted');
+Route::get('/executive/application/compose', [ApplicationController::class, 'applicationCompose'])
+->name('executiveApplicationCompose')->middleware('validExecutive');;
+Route::post('/executive/application/composeSubmitted', [ApplicationController::class, 'applicationComposeSubmitted'])
+->name('executiveApplicationComposeSubmitted')->middleware('validExecutive');;
 
 Route::get('/executive/application/approved', [ApplicationController::class, 'applicationApproved'])->name('executiveApplicationApproved');
 Route::get('/executive/application/pending', [ApplicationController::class, 'applicationPending'])->name('executiveApplicationPending');
