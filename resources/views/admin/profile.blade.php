@@ -18,7 +18,7 @@
                                     <a class="nav-link active">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('editProfile')}}">Edit Profile</a>
+                                    <a class="nav-link" href="{{route('adminEditProfile')}}">Edit Profile</a>
                                 </li>
                             </ul>
 
