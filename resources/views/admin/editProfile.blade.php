@@ -15,7 +15,7 @@
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('profile')}}">About</a>
+                                <a class="nav-link" href="{{route('adminProfile')}}">About</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" >Edit Profile</a>

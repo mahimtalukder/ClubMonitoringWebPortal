@@ -1,9 +1,9 @@
 <?php $executive = session()->get('executive')?>
 @extends('layouts.executiveLayout')
 @section('title', 'Dashboard')
-{{--@section('picture', $executive['images'])--}}
-{{--@section('name', $executive['name'])--}}
-{{--@section('phone', $executive['phone'])--}}
+@section('picture', $executive['images'])
+@section('name', $executive['name'])
+@section('phone', $executive['phone'])
 
 
 @section('content')

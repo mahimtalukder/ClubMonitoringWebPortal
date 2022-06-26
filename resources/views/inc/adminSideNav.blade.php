@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('editProfile')}}" class="nav-link">
+                    <a href="{{route('adminEditProfile')}}" class="nav-link">
                         <i class="link-icon" data-feather="edit"></i>
                         <span class="link-title">Edit Profile</span>
                     </a>
@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('editProfile')}}" class="nav-link">
+                    <a href="{{route('adminEditProfile')}}" class="nav-link">
                         <i class="link-icon" data-feather="edit"></i>
                         <span class="link-title">Edit Profile</span>
                     </a>

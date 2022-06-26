@@ -21,13 +21,13 @@
                 </li>
                 <li class="nav-item nav-category">Personal</li>
                 <li class="nav-item">
-                    <a href="{{ route('profile') }}" class="nav-link">
+                    <a href="{{ route('memberProfile') }}" class="nav-link">
                         <i class="link-icon" data-feather="user"></i>
                         <span class="link-title">View Profile</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('EditProfile')}}" class="nav-link">
+                    <a href="{{route('memberEditProfile')}}" class="nav-link">
                         <i class="link-icon" data-feather="edit"></i>
                         <span class="link-title">Edit Profile</span>
                     </a>
@@ -59,13 +59,13 @@
                 </li>
                 <li class="nav-item nav-category">Personal</li>
                 <li class="nav-item">
-                    <a href="{{ route('profile') }}" class="nav-link">
+                    <a href="{{ route('memberProfile') }}" class="nav-link">
                         <i class="link-icon" data-feather="user"></i>
                         <span class="link-title">View Profile</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('EditProfile')}}" class="nav-link">
+                    <a href="{{route('adminEditProfile')}}" class="nav-link">
                         <i class="link-icon" data-feather="edit"></i>
                         <span class="link-title">Edit Profile</span>
                     </a>
@@ -74,4 +74,3 @@
         </div>
     </nav>
     <!-- partial -->
-  
