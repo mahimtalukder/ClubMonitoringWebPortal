@@ -14,7 +14,7 @@ class UpdateRequestedComponentsTable extends Migration
     public function up()
     {
         Schema::table('requested_components', function (Blueprint $table) {
-            $table->foreign('requested_component')->references('id')->on('components');
+            $table->foreign('component_id')->references('id')->on('components');
 
         });
     }

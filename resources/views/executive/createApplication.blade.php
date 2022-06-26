@@ -32,7 +32,7 @@
                                             <a class="nav-link d-flex align-items-center" href="inbox.html">
                                                 <i data-feather="inbox" class="icon-lg me-2"></i>
                                                 Approved Application
-                                                <span class="badge bg-danger fw-bolder ms-auto">2
+                                                <span class="badge bg-danger fw-bolder ms-auto">2</span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -45,7 +45,7 @@
                                             <a class="nav-link d-flex align-items-center" href="#">
                                                 <i data-feather="briefcase" class="icon-lg me-2"></i>
                                                 Rejected Application
-                                                <span class="badge bg-secondary fw-bolder ms-auto">4
+                                                <span class="badge bg-secondary fw-bolder ms-auto">4</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -93,7 +93,7 @@
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label class="form-label" for="simpleMdeEditor">Descriptions </label>
-                                        <textarea class="form-control" name="tinymce" id="simpleMdeEditor" rows="5"></textarea>
+                                        <textarea class="form-control" name="description" rows="5"></textarea>
                                     </div>
                                 </div>
 
@@ -112,7 +112,7 @@
                                                 </select>
                                             </div>
                                             <div class="col-1">
-                                                <button class="btn btn-primary" type="add"> Add</button>
+                                                <a class="btn btn-primary" href="#">Add</a>
                                             </div>
                                         </div>
                                     </div>

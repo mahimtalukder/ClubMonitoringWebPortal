@@ -15,6 +15,7 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('application_id')->unique();
             $table->string('subject');
             $table->text('description');
             $table->string('is_approved');

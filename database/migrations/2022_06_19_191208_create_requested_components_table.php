@@ -15,10 +15,16 @@ class CreateRequestedComponentsTable extends Migration
     {
         Schema::create('requested_components', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('application_id')->unsigned();
-            $table->foreign('application_id')->references('id')->on('applications');
-            $table->integer('requested_component')->unsigned();
+            $table->string('application_id');
+            $table->foreign('application_id')->references('application_id')->on('applications');
+            $table->integer('component_id')->unsigned();
+            $table->string('start_time');
+            $table->string('approved_start_time');
+            $table->string('end_time');
+            $table->string('approved_end_time');
+            $table->integer('quantity')->unsigned();
             $table->string('is_approved');
+            $table->string('remarks');
         });
     }
 
