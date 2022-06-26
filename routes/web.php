@@ -19,7 +19,7 @@ Route::get('/singup',[UserController::class, 'singup'])->name("singup");
 
 /* Admin */
 Route::get('/admin/dash', [AdminController::class, 'dashboard'])->name('adminDash');
-Route::get('/admin/profile', [AdminController::class, 'profile'])->name('profile');
+Route::get('/admin/profile', [AdminController::class, 'profile'])->name('adminProfile');
 Route::get('/admin/edit', [AdminController::class, 'editProfile'])->name('editProfile');
 Route::post('/admin/editSubmitted', [AdminController::class, 'editProfileSubmitted'])->name('editProfileSubmitted');
 
