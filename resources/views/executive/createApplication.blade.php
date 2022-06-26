@@ -13,46 +13,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3 border-end-lg">
-                            <div class="aside-content">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <button class="navbar-toggle btn btn-icon border d-block d-lg-none" data-bs-target=".email-aside-nav" data-bs-toggle="collapse" type="button">
-                                        <span class="icon"><i data-feather="chevron-down"></i></span>
-                                    </button>
-                                    <div class="order-first">
-                                        <h4>Application Service</h4>
-                                        <p class="text-muted">{{$club['name']}}</p>
-                                    </div>
-                                </div>
-                                <div class="d-grid my-3">
-                                    <a class="btn btn-primary" href="compose.html">Create Application</a>
-                                </div>
-                                <div class="email-aside-nav collapse">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="inbox.html">
-                                                <i data-feather="inbox" class="icon-lg me-2"></i>
-                                                Approved Application
-                                                <span class="badge bg-danger fw-bolder ms-auto">2</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="#">
-                                                <i data-feather="mail" class="icon-lg me-2"></i>
-                                                Under Review
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="#">
-                                                <i data-feather="briefcase" class="icon-lg me-2"></i>
-                                                Rejected Application
-                                                <span class="badge bg-secondary fw-bolder ms-auto">4</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        @include('inc.applicationSideNav')
                         <div class="col-lg-9">
                             <div>
                                 <div class="d-flex align-items-center p-3 border-bottom tx-16">
