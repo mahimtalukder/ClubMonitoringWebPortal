@@ -6,7 +6,7 @@
             </button>
             <div class="order-first">
                 <h4>Application Service</h4>
-                <p class="text-muted">AIUB SOCIAL WELFARE CLUB - SHOMOY</p>
+                <p class="text-muted">@yield('club_name')</p>
             </div>
         </div>
         <div class="d-grid my-3">

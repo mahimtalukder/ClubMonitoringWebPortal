@@ -50,13 +50,4 @@ class ExecutiveController extends Controller
   }
 
 
-
-  //applications
-
-  public function applicationCompose()
-  {
-    $executive = session()->get('executive');
-    $club = Club::where("id", $executive['club_id'])->first();
-    return view('executive.createApplication')->with('club', $club);
-  }
 }

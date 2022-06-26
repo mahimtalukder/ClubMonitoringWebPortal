@@ -5,6 +5,37 @@
 @section('picture', $picture)
 @section('name', $executive['name'])
 @section('phone', $executive['phone'])
+@section('club_name', $club['name'])
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $( "#add" ).click(function(){
+            var selected=[];
+            $('#components :selected').each(function(){
+                selected[$(this).val()]=$(this).text();
+                });
+            
+            var i = 1;
+            $("#component_body").empty();
+            $.each(selected, function(key, value){
+                if(typeof value != 'undefined'){
+                    console.log(value);
+                    var html = "<tr> <td>"+i+"</td> <td>"+ value +"</td>";
+                        format = '\"\'alias\'' + ':' + '\'datetime\'\"';
+                        html += "<td> <input class='form-control' data-inputmask= " +  format + "data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name='start_time" + i + "' placeholder='hh:mm tm'></td>";
+                        html += "<td> <input class='form-control' data-inputmask= " +  format + "data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name='end_time" + i + "' placeholder='hh:mm tm'></td>";
+                        html += "<td> <input type='number' class='form-control' id='exampleInputMobile' placeholder='Quantity' name='quantity" + i + "'></td></tr>"
+                        html += "<input type='hidden' name='component"+i+"'  value='"+ value +"'>"
+                    $('#component_body').append(html);
+                    i++;
+                }
+            });
+            var total_components = i-1;
+            document.getElementById('total_componet').value = total_components;
+        });
+    });    
+</script>
 
 
 @section('content')
@@ -27,7 +58,7 @@
                                         <label class="col-md-2 col-form-label">To:</label>
                                         <div class="col-md-10">
                                             <select class="compose-multiple-select form-select" multiple="multiple">
-                                                <option value="AL">Directors</option>
+                                                <option value="director">Directors</option>
                                             </select>
                                         </div>
                                     </div>
@@ -65,16 +96,14 @@
                                         <label class="form-label" for="simpleMdeEditor">Components </label>
                                         <div class="row">
                                             <div class="col-11">
-                                                <select class="compose-multiple-select form-select" multiple="multiple">
-                                                    <option value="AL">Directors</option>
-                                                    <option value="AL">Directors</option>
-                                                    <option value="AL">Directors</option>
-                                                    <option value="AL">Directors</option>
-                                                    <option value="AL">Directors</option>
+                                                <select class="compose-multiple-select form-select" multiple="multiple" id="components" name='components[]'>
+                                                    @foreach($components as $component)
+                                                        <option value={{$component['id']}}>{{$component['name']}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="col-1">
-                                                <a class="btn btn-primary" href="#">Add</a>
+                                                <a class="btn btn-primary" id="add" href="#">Add</a>
                                             </div>
                                         </div>
                                     </div>
@@ -93,24 +122,16 @@
                                                 <th>Quantity</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Multipurpose</td>
-                                                <td>
-                                                    <input class="form-control" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="hh:mm tt" inputmode="numeric">
-                                                </td>
-                                                <td>
-                                                    <input class="form-control" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="hh:mm tt" inputmode="numeric">
-                                                </td>
-                                                <td>
-                                                    <input type="number" class="form-control" id="exampleInputMobile" placeholder="Quantity">
-                                                </td>
-                                            </tr>
+                                            <tbody id="component_body">
+                                                <div id="component_section">
+
+                                                </div>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+
+                                <input type="hidden" name='total_componet' id='total_componet' value=0>
 
                                 <div>
                                     <div class="col-md-12">
@@ -125,6 +146,9 @@
             </div>
         </div>
     </div>
+
+
+    
 
 
 
