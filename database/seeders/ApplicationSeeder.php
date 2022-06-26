@@ -16,7 +16,7 @@ class ApplicationSeeder extends Seeder
     public function run()
     {
         DB::table('applications')->insert([
-            'application_id' => '10-101',
+            'application_id' => '22-10001-06',
             'subject' => "Permission for General Meeting",
             'description' => 'Respected Sir, We need your permission to conduct our weekly general meeting. Regards, Syfuzzaman',
             'sent_to' => 'director',

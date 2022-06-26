@@ -7,6 +7,7 @@ use App\Models\Club;
 use App\Models\Component;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
+use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
@@ -17,6 +18,27 @@ class ApplicationController extends Controller
       $components = Component::all();
 
       return view('executive.createApplication')->with('club', $club)->with('components', $components);
+    }
+
+
+    public function applicationComposeSubmitted(Request $request)
+    {
+        return view('executive.createApplication');
+        $total_componet=(int)$request->total_componet;
+        if($total_componet>0){
+            $rules=[
+                '*' => 'required'
+            ];
+            $messages = [
+                'required'=>"Please fill all the filds",
+            ];
+            $this->validate($request, $rules, $messages );
+            return view('executive.createApplication');
+
+        }else{
+            return view('executive.createApplication');
+        }
+
     }
 
     public function applicationApproved(){
