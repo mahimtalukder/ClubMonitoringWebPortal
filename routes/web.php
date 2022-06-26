@@ -43,7 +43,5 @@ Route::get('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name
 Route::post('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('executiveEditProfile');
 
 
-//Testing
-Route::get('/test', function () {
-    return view('director.viewApplications');
-});
+//Application
+Route::get('/executive/application/compose', [ExecutiveController::class, 'applicationCompose'])->name('applicationCompose');

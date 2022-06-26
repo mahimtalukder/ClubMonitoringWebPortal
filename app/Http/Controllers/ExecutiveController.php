@@ -18,6 +18,11 @@ class ExecutiveController extends Controller
       return view('executive.dashboard');
     }
 
+    public function applicationCompose()
+    {
+        return view('executive.createApplication');
+    }
+
     public function profile(){
       $executive_session = session()->get('executive');
       $executive = executive::where("id", "13-10001-3")->first();
