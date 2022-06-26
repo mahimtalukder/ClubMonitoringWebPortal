@@ -8,5 +8,18 @@ use App\Http\Requests\UpdateApplicationRequest;
 
 class ApplicationController extends Controller
 {
-    
+    public function applicationCompose(){
+        return view('executive.createApplication');
+    }
+
+    public function applicationApproved(){
+        return view('executive.approvedApplication');
+    }
+    public function applicationPending(){
+
+    }
+    public function applicationRejected(){
+
+    }
+
 }

@@ -85,7 +85,7 @@
                           <a href="#" class="nav-link">Sent</a>
                         </li>
                         <li class="nav-item">
-                          <a href="{{route('applicationCompose')}}" class="nav-link">compose</a>
+                          <a href="{{route('executiveApplicationCompose')}}" class="nav-link">compose</a>
                         </li>
                       </ul>
                     </div>
