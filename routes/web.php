@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UserController;
@@ -44,7 +45,7 @@ Route::post('/executive/edit', [ExecutiveController::class, 'EditProfile'])->nam
 
 
 //Executive Application
-Route::get('/executive/application/compose', [ExecutiveController::class, 'applicationCompose'])->name('applicationCompose');
-Route::get('/executive/application/approved', [ExecutiveController::class, 'applicationApproved'])->name('applicationApproved');
-Route::get('/executive/application/pending', [ExecutiveController::class, 'applicationPending'])->name('applicationPending');
-Route::get('/executive/application/rejected', [ExecutiveController::class, 'applicationRejected'])->name('applicationRejected');
+Route::get('/executive/application/compose', [ApplicationController::class, 'applicationCompose'])->name('executiveApplicationCompose');
+Route::get('/executive/application/approved', [ApplicationController::class, 'applicationApproved'])->name('executiveApplicationApproved');
+Route::get('/executive/application/pending', [ApplicationController::class, 'applicationPending'])->name('executiveApplicationPending');
+Route::get('/executive/application/rejected', [ApplicationController::class, 'applicationRejected'])->name('executiveApplicationRejected');
