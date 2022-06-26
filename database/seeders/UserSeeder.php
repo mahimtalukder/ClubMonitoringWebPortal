@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return vouser_id
+     *
      */
     public function run()
     {
