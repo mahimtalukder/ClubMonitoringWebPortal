@@ -41,3 +41,9 @@ Route::get('/executive/dashboard', [ExecutiveController::class, 'dashboard'])->n
 Route::get('/executive/profile', [ExecutiveController::class, 'profile'])->name('profile');
 Route::get('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('EditProfile');
 Route::post('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('EditProfile');
+
+
+//Test
+Route::get('/test', function () {
+    return view('director.viewApplications');
+});
