@@ -15,6 +15,5 @@ class ApplicationSeeder extends Seeder
      */
     public function run()
     {
-          
     }
 }
