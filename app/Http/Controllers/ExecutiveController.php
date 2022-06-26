@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Executive;
+use App\Models\Club;
 use App\Http\Requests\StoreExecutiveRequest;
 use App\Http\Requests\UpdateExecutiveRequest;
+use Illuminate\Http\Request;
 
 class ExecutiveController extends Controller
 {
@@ -45,5 +47,16 @@ class ExecutiveController extends Controller
 
       );
 
+  }
+
+
+
+  //applications
+
+  public function applicationCompose()
+  {
+    $executive = session()->get('executive');
+    $club = Club::where("id", $executive['club_id'])->first();
+    return view('executive.createApplication')->with('club', $club);
   }
 }
