@@ -110,13 +110,13 @@
                                     <label class="form-label">Gender</label>
                                     <div>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="gender" value="Male" id="gender1" {{ $admin->gender == 'Male' ? 'checked' : '' }}>
+                                            <input type="radio" class="form-check-input" name="gender" value="male" id="gender1" {{ $admin->gender == 'male' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="gender1">
                                                 Male
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="gender" value="Female" id="gender2" {{ $admin->gender == 'Female' ? 'checked' : '' }}>
+                                            <input type="radio" class="form-check-input" name="gender" value="female" id="gender2" {{ $admin->gender == 'female' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="gender2">
                                                 Female
                                             </label>
@@ -147,15 +147,16 @@
                                 <div class="mb-3">
                                     <label class="form-label">Blood Group</label>
                                     <select class="js-example-basic-single form-select select2-hidden-accessible  @error('blood_group'){{"is-invalid"}}@enderror" name="blood_group" id="blood_group" data-width="100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                        <option value="" data-select2-id="1">Select blood group</option>
-                                        <option value="a-pos" data-select2-id="3">A+</option>
-                                        <option value="a-neg" data-select2-id="13">A-</option>
-                                        <option value="ab-pos" data-select2-id="14">AB+</option>
-                                        <option value="ab-neg" data-select2-id="15">AB-</option>
-                                        <option value="o-pos" data-select2-id="16">O+</option>
-                                        <option value="o-neg" data-select2-id="16">O-</option>
-                                        <option value="b-pos" data-select2-id="16">B+</option>
-                                        <option value="b-neg" data-select2-id="16">B-</option>
+                                        {{$admin->blood_group}}
+                                        <option name="blood_group" value="" data-select2-id="1">Select blood group</option>
+                                        <option name="blood_group" value="a-pos" data-select2-id="3" {{ $admin->blood_group == 'a-pos' ? 'selected' : '' }}>A+</option>
+                                        <option name="blood_group" value="a-neg" data-select2-id="13" {{ $admin->blood_group == 'a-neg' ? 'selected' : '' }}>A-</option>
+                                        <option name="blood_group" value="ab-pos" data-select2-id="14" {{ $admin->blood_group == 'AB+' ? 'selected' : '' }}>AB+</option>
+                                        <option name="blood_group" value="ab-neg" data-select2-id="15" {{ $admin->blood_group == 'ab-neg' ? 'selected' : '' }}>AB-</option>
+                                        <option name="blood_group" value="o-pos" data-select2-id="16" {{ $admin->blood_group == 'O+' ? 'selected' : '' }}>O+</option>
+                                        <option name="blood_group" value="o-neg" data-select2-id="16" {{ $admin->blood_group == 'o-neg' ? 'selected' : '' }}>O-</option>
+                                        <option name="blood_group" value="b-pos" data-select2-id="16" {{ $admin->blood_group == 'b-pos' ? 'selected' : '' }}>B+</option>
+                                        <option name="blood_group" value="b-neg" data-select2-id="16" {{ $admin->blood_group == 'b-neg' ? 'selected' : '' }}>B-</option>
                                     </select>
                                     @error('blood_group')
                                     <span class="text-danger">{{$message}}</span>

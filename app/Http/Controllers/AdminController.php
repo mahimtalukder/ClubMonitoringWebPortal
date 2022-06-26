@@ -26,6 +26,7 @@ class AdminController extends Controller
     }
 
     public function editProfile(){
+        // return admin::find ($user_id);
         $admin_session = session()->get('admin');
         $admin = Admin::where("user_id", $admin_session["user_id"])->first();
         return view('admin.editProfile')->with('admin', $admin);
@@ -33,21 +34,31 @@ class AdminController extends Controller
 
     public function editProfileSubmitted(Request $request){
         $validate = $request->validate([
-            "name" => "required|regex:/(^([a-zA-z]+)(\d+)?$)/u",
+            "name" => "required|regex:/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/u",
             "email" => "email",
-            "phone" => "required|numeric|digits:10",
+            "phone" => "required|numeric",
             "gender" => "required",
             "dob" => "required",
             "blood_group" => "required",
             'address' => 'required'
-        ],
-//            ['name.required'=>"Please put you name here"],
-
-        );
-        $admin_session = session()->get('admin');
-        Admin::where('user_id', $admin_session["user_id"])->update([
-            'email' => 'johndoe@gmail.com'
         ]);
+        $admin_session = session()->get('admin');
+        $admin = Admin::where("user_id", $admin_session["user_id"])->update([
+        // return $admin;
+        // return $request;
+        'name' => $request->name,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'gender' => $request->gender,
+        'dob' => $request->dob,
+        'blood_group' =>$request->blood_group,
+        'address' => $request->address,
+        ]);
+        // $admin_session = session()->get('admin');
+        // Admin::where('user_id', $admin_session["user_id"])->update([
+        //     'email' => 'johndoe@gmail.com'
+        // ]);
+        // return redirect('editProfile');
     }
 
 }
