@@ -15,7 +15,7 @@
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('profile')}}">About</a>
+                                <a class="nav-link" href="{{route('adminProfile')}}">About</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" >Edit Profile</a>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="mt-3">
                         <label class="tx-11 fw-bolder mb-0 text-uppercase">ID:</label>
-                        <p class="text-muted">{{$admin->id}}</p>
+                        <p class="text-muted">{{$admin->user_id}}</p>
                     </div>
                     <div class="mt-3">
                         <label class="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
@@ -78,7 +78,7 @@
                         <div class="card-body">
                             <h4 class="card-title pb-3">Update personal information</h4>
 
-                            <form method="post" action="{{route('editProfileSubmitted')}}" id="signupForm" novalidate="novalidate">
+                            <form method="post" action="{{route('adminEditProfileSubmitted')}}" id="signupForm" novalidate="novalidate">
                                 {{ csrf_field() }}
 
                                 <div class="mb-3">
