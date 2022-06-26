@@ -17,7 +17,7 @@ class UpdateApplicationsTable extends Migration
             $table->string('director_id')->nullable()->change();
             $table->string('sent_to');
             $table->string('request_date');
-            $table->string('approve_date');
+            $table->string('approve_date')->nullable();
         });
     }
 

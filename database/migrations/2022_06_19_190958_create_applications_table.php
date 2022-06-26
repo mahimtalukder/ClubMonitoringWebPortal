@@ -18,11 +18,11 @@ class CreateApplicationsTable extends Migration
             $table->string('application_id')->unique();
             $table->string('subject');
             $table->text('description');
-            $table->string('is_approved');
+            $table->string('is_approved')->nullable();
             $table->timestamps();
             $table->string('executive_id');
             $table->foreign('executive_id')->references('user_id')->on('executives');
-            $table->string('director_id');
+            $table->string('director_id')->nullable();
             $table->foreign('director_id')->references('user_id')->on('directors');
         });
     }
