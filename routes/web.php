@@ -43,5 +43,8 @@ Route::get('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name
 Route::post('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('executiveEditProfile');
 
 
-//Application
+//Executive Application
 Route::get('/executive/application/compose', [ExecutiveController::class, 'applicationCompose'])->name('applicationCompose');
+Route::get('/executive/application/approved', [ExecutiveController::class, 'applicationApproved'])->name('applicationApproved');
+Route::get('/executive/application/pending', [ExecutiveController::class, 'applicationPending'])->name('applicationPending');
+Route::get('/executive/application/rejected', [ExecutiveController::class, 'applicationRejected'])->name('applicationRejected');

@@ -13,6 +13,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
+<<<<<<< HEAD
                         <div class="col-lg-3 border-end-lg">
                             <div class="aside-content">
                                 <div class="d-flex align-items-center justify-content-between">
@@ -53,6 +54,9 @@
                                 </div>
                             </div>
                         </div>
+=======
+                        @include('inc.applicationSideNav')
+>>>>>>> eb0a943ffa17262f3fdf63dc4d78e2f5c1723b3d
                         <div class="col-lg-9">
                             <div>
                                 <div class="d-flex align-items-center p-3 border-bottom tx-16">
