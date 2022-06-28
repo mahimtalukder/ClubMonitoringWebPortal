@@ -193,8 +193,9 @@ class ApplicationController extends Controller
 
 
 
-    public function applicationRead(){
-        $application_info = Application::where("application_id", '10-101')->first();
+    public function applicationRead(Request $request){
+
+        $application_info = Application::where("application_id", $request->id)->first();
 
         $requested_components = Application::select('requested_components.*', 'components.name')
             ->join('requested_components', 'applications.application_id', '=', 'requested_components.application_id')
