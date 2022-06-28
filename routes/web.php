@@ -25,7 +25,7 @@ Route::get('/admin/edit', [AdminController::class, 'editProfile'])->name('adminE
 Route::post('/admin/editSubmitted', [AdminController::class, 'editProfileSubmitted'])->name('adminEditProfileSubmitted');
 
 /* Director */
-Route::get('/director', [DirectorController::class, 'dashboard'])->name('directorDash');
+Route::get('/director/dashboard', [DirectorController::class, 'dashboard'])->name('directorDash');
 Route::get('/director/profile', [DirectorController::class, 'profile'])->name('directorProfile');
 Route::get('/director/edit', [DirectorController::class, 'EditProfile'])->name('directorEditProfile');
 Route::post('/director/edit', [DirectorController::class, 'editProfileSubmitted'])->name('directorEditProfileSubmitted');
@@ -46,12 +46,20 @@ Route::post('/executive/edit', [ExecutiveController::class, 'EditProfile'])->nam
 
 //Executive Application
 Route::get('/executive/application/compose', [ApplicationController::class, 'applicationCompose'])
-->name('executiveApplicationCompose')->middleware('validExecutive');;
+->name('executiveApplicationCompose')->middleware('validExecutive');
 Route::post('/executive/application/composeSubmitted', [ApplicationController::class, 'applicationComposeSubmitted'])
-->name('executiveApplicationComposeSubmitted')->middleware('validExecutive');;
+->name('executiveApplicationComposeSubmitted')->middleware('validExecutive');
 
-Route::get('/executive/application/approved', [ApplicationController::class, 'applicationApproved'])->name('executiveApplicationApproved');
-Route::get('/executive/application/pending', [ApplicationController::class, 'applicationPending'])->name('executiveApplicationPending');
-Route::get('/executive/application/rejected', [ApplicationController::class, 'applicationRejected'])->name('executiveApplicationRejected');
-Route::get('/executive/application/read/{id}', [ApplicationController::class, 'applicationRead'])->name('executiveApplicationRead');
-Route::get('/executive/application/', [ApplicationController::class, 'allApplication'])->name('executiveAllApplication');
+Route::get('/executive/application/approved', [ApplicationController::class, 'applicationApproved'])
+->name('executiveApplicationApproved')->middleware('validExecutive');
+Route::get('/executive/application/pending', [ApplicationController::class, 'applicationPending'])
+->name('executiveApplicationPending')->middleware('validExecutive');
+Route::get('/executive/application/rejected', [ApplicationController::class, 'applicationRejected'])
+->name('executiveApplicationRejected')->middleware('validExecutive');
+Route::get('/executive/application/read/{id}', [ApplicationController::class, 'applicationRead'])
+->name('executiveApplicationRead')->middleware('validExecutive');
+Route::get('/executive/application/', [ApplicationController::class, 'allApplication'])
+->name('executiveAllApplication')->middleware('validExecutive');
+
+/* Director Application */
+
