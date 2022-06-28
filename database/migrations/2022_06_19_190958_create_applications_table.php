@@ -22,6 +22,7 @@ class CreateApplicationsTable extends Migration
             $table->string('rejection_msg')->nullable();
             $table->timestamps();
             $table->string('executive_id');
+            $table->string('club_id');
             $table->foreign('executive_id')->references('user_id')->on('executives');
             $table->string('director_id')->nullable();
             $table->foreign('director_id')->references('user_id')->on('directors');

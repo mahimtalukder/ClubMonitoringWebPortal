@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="{{asset('../assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('../assets/vendors/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('../assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('../assets_2/vendors/sweetalert2/sweetalert2.min.css')}}">
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
@@ -86,7 +87,7 @@
     <script src="{{asset('../assets_2/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
     <script src="{{asset('../assets_2/vendors/moment/moment.min.js')}}"></script>
     <script src="{{asset('../assets_2/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js')}}"></script>
-
+    <script src="{{asset('../assets_2/vendors/sweetalert2/sweetalert2.min.js')}}"></script>
     <!-- End plugin js for this page -->
 
     <!-- inject:js -->
@@ -106,7 +107,7 @@
     <script src="{{asset('../assets_2/js/tags-input.js')}}"></script>
     <script src="{{asset('../assets_2/js/bootstrap-maxlength.js')}}"></script>
     <script src="{{asset('../assets_2/js/form-validation.js')}}"></script>
-
+    <script src="{{asset('../assets_2/js/sweet-alert.js')}}"></script>
     <!-- End custom js for this page -->
 
 

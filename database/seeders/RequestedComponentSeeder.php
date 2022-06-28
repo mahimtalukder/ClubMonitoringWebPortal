@@ -31,7 +31,7 @@ class RequestedComponentSeeder extends Seeder
         ]);
 
         DB::table('requested_components')->insert([
-            'application_id' => '10-102',
+            'application_id' => '22-10002-06',
             'component_id' => 2,
             'start_time' => '04:00 PM',
             'end_time' => '05:00 PM',

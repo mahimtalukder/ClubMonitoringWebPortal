@@ -15,7 +15,7 @@
             $('#components :selected').each(function(){
                 selected[$(this).val()]=$(this).text();
                 });
-            
+
             var i = 1;
             $("#component_body").empty();
             $.each(selected, function(key, value){
@@ -34,7 +34,7 @@
             var total_components = i-1;
             document.getElementById('total_componet').value = total_components;
         });
-    });    
+    });
 </script>
 
 
@@ -50,9 +50,6 @@
                                 <div class="d-flex align-items-center p-3 border-bottom tx-16">
                                     <span data-feather="edit" class="icon-md me-2"></span>
                                     New Application
-                                    @if (!empty($message))
-                                        <h6 class="card-title text-primary">{{$message}}</h6>
-                                    @endif
                                 </div>
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -61,6 +58,15 @@
                                         </ul>
                                     </div>
                                 @endif
+
+                                @if (!empty($message))
+                                    <div class="alert alert-success" role="alert">
+                                        <i data-feather="check" class="text-success icon-lg me-2"></i>
+                                        {{$message}}
+                                    </div>
+                                    <h6 class="card-title text-primary"></h6>
+                                @endif
+
                             </div>
                             <form class="forms-sample" action="{{route('executiveApplicationComposeSubmitted')}}" method="post">
                                 {{csrf_field()}}
