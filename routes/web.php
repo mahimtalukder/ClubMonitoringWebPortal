@@ -62,4 +62,10 @@ Route::get('/executive/application/', [ApplicationController::class, 'allApplica
 ->name('executiveAllApplication')->middleware('validExecutive');
 
 /* Director Application */
+Route::get('/director/application', [DirectorController::class, 'allApplication'])
+->name('directorAllApplication');
+Route::get('/director/application/read/{id}', [DirectorController::class, 'applicationRead'])
+->name('directorApplicationRead');
+Route::post('/director/application/updateSubmitted', [ApplicationController::class, 'applicationUpdateSubmitted'])
+->name('directorApplicationUpdateSubmitted')->middleware('validDirector');
 
