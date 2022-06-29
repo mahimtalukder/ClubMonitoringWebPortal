@@ -1,6 +1,6 @@
 <?php $executive = session()->get('executive')?>
 @extends('layouts.executiveLayout')
-@section('title', 'Dashboard')
+@section('title', $labelName)
 @php $picture = '../../'.$executive['images']; @endphp
 @section('picture', $picture)
 @section('name', $executive['name'])
@@ -49,7 +49,7 @@
                             <div>
                                 <div class="d-flex align-items-center p-3 border-bottom tx-16">
                                     <span data-feather="edit" class="icon-md me-2"></span>
-                                    New Application
+                                    {{$labelName}}
                                 </div>
                                 @if ($errors->any())
                                     <div class="alert alert-danger">

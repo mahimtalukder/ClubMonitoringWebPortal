@@ -9,7 +9,7 @@ use App\Models\Component;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class ApplicationController extends Controller
 {
@@ -22,13 +22,11 @@ class ApplicationController extends Controller
       if(Session::has('message')){
           $message = session()->get('message');
           session()->forget('message');
-        return view('executive.createApplication')->with('club', $club)->with('components', $components)->with('message', $message);
+          return view('executive.createApplication')->with('club', $club)->with('components', $components)->with('message', $message)->with('labelName', 'New Applications');
         }
 
-      return view('executive.createApplication')->with('club', $club)->with('components', $components);
+      return view('executive.createApplication')->with('club', $club)->with('components', $components)->with('labelName', 'New Applications');
     }
-
-
     public function applicationComposeSubmitted(Request $request)
     {
         $total_componet=(int)$request->total_componet;
@@ -175,35 +173,91 @@ class ApplicationController extends Controller
     }
 
     public function applicationApproved(){
-        $applications = Application::where('is_approved', 'approved')->get();
-        return view('executive.applications')->with('applications', $applications)->with('labelName', 'Approved Applications');
+        $executive = session()->get('executive');
+        $club = Club::where("id", $executive['club_id'])->first();
+
+        $applications = Application::where('is_approved', 'approved')
+            ->where('club_id', $club->id)
+            ->paginate(1);
+
+        return view('executive.applications')->with('club', $club)->with('applications', $applications)->with('labelName', 'Approved Applications');
     }
     public function allApplication(){
-        $applications = Application::all();
-        return view('executive.applications')->with('applications', $applications)->with('labelName', 'Applications');
+        $executive = session()->get('executive');
+        $club = Club::where("id", $executive['club_id'])->first();
+
+        $applications = Application::where('club_id', $club->id)->paginate(1);
+
+        return view('executive.applications')
+            ->with('club', $club)
+            ->with('applications', $applications)
+            ->with('labelName', 'Applications');
     }
     public function applicationPending(){
-        $applications = Application::where('is_approved', 'pending')->get();
-        return view('executive.applications')->with('applications', $applications)->with('labelName', 'Pending Applications');
+        $executive = session()->get('executive');
+        $club = Club::where("id", $executive['club_id'])->first();
+
+        $applications = Application::where('is_approved', 'pending')
+            ->where('club_id', $club->id)
+            ->paginate(1);
+
+        return $applications;
+//        return view('executive.applications')
+//            ->with('club', $club)->with('applications', $applications)
+//            ->with('labelName', 'Pending Applications');
     }
     public function applicationRejected(){
-        $applications = Application::where('is_approved', 'rejected')->get();
-        return view('executive.applications')->with('applications', $applications)->with('labelName', 'Rejected Applications');
+        $executive = session()->get('executive');
+        $club = Club::where("id", $executive['club_id'])->first();
+
+        $applications = Application::where('is_approved', 'rejected')
+            ->where('club_id', $club->id)
+            ->paginate(1);
+
+        return view('executive.applications')
+            ->with('club', $club)
+            ->with('applications', $applications)
+            ->with('labelName', 'Rejected Applications');
     }
-
-
-
     public function applicationRead(Request $request){
+
+        $executive = session()->get('executive');
+        $club = Club::where("id", $executive['club_id'])->first();
 
         $application_info = Application::where("application_id", $request->id)->first();
 
         $requested_components = Application::select('requested_components.*', 'components.name')
             ->join('requested_components', 'applications.application_id', '=', 'requested_components.application_id')
             ->join('components', 'requested_components.component_id', '=', 'components.id')
-            ->where(['requested_components.application_id' => '10-101'])
+            ->where(['requested_components.application_id' => $application_info->application_id])
             ->get();
 
+//        if($executive['club_id']) == $application_info->club_id){
+//
+//        }
+        return view('executive.readApplication')
+            ->with('club', $club)
+            ->with('application_info', $application_info)
+            ->with('labelName', 'Read Applications')
+            ->with('requested_components',$requested_components);
+    }
 
-        return view('executive.readApplication')->with('application_info', $application_info)->with('requested_components',$requested_components);
+    public function searchExecutiveApplication(Request $request){
+        $executive = session()->get('executive');
+        $club = Club::where("id", $executive['club_id'])->first();
+
+        $search = $request->input('search');
+
+        $applications = Application::where('club_id', $club->id)->where(function($query) use ($search){
+            $query->where('subject', 'LIKE', "%{$search}%")
+                ->orWhere('description', 'LIKE', "%{$search}%");
+        })->paginate(1);
+//
+
+
+        return view('executive.applications')
+            ->with('club', $club)
+            ->with('applications', $applications)
+            ->with('labelName', 'Search Results');
     }
 }

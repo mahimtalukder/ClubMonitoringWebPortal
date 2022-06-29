@@ -4,7 +4,7 @@
 @section('picture', $executive['images'])
 @section('name', $executive['name'])
 @section('phone', $executive['phone'])
-
+@section('club_name', $club['name'])
 
 @section('content')
     <div class="row inbox-wrapper">
@@ -17,15 +17,15 @@
                             <div class="d-flex align-items-center justify-content-between p-3 border-bottom tx-16">
                                 <div class="d-flex align-items-center">
                                     @if($application_info->is_approved == "approved")
-                                    <i data-feather="check" class="text-primary icon-lg me-2"></i>
+                                    <i data-feather="check" class="text-success icon-lg me-2"></i>
                                     @endif
 
                                     @if($application_info->is_approved == "rejected")
-                                        <i data-feather="x" class="text-primary icon-lg me-2"></i>
+                                        <i data-feather="x" class="text-danger icon-lg me-2"></i>
                                     @endif
 
-                                    @if($application_info->is_approved == "pending" or $application_info->is_approved == "")
-                                        <i data-feather="x" class="text-primary icon-lg me-2"></i>
+                                    @if($application_info->is_approved == "pending")
+                                        <i data-feather="clock" class="text-muted icon-lg me-2"></i>
                                     @endif
                                     <span>{{$application_info->subject}}</span>
                                 </div>
@@ -36,12 +36,12 @@
                             <div class="d-flex align-items-center justify-content-between flex-wrap px-3 py-2 border-bottom">
                                 <div class="d-flex align-items-center">
                                     <div class="d-flex align-items-center">
-                                        <a href="#" class="text-muted">AIUB SHOMOY CLUB</a>
+                                        <a href="#" class="text-muted">{{$club->name}}</a>
                                         <span class="mx-2 text-muted">to</span>
-                                        <a href="#" class="text-body me-2">Directors</a>
+                                        <a href="#" class="text-body me-2">{{$application_info->sent_to}}</a>
                                     </div>
                                 </div>
-                                <div class="tx-13 text-muted mt-2 mt-sm-0">Nov 20, 11:20</div>
+                                <div class="tx-13 text-muted mt-2 mt-sm-0">{{date("M d, Y", strtotime($application_info->created_at))}}</div>
                             </div>
                             <div class="p-4">
                                 {{$application_info->description}}

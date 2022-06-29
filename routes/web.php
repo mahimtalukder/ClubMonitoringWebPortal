@@ -61,5 +61,8 @@ Route::get('/executive/application/read/{id}', [ApplicationController::class, 'a
 Route::get('/executive/application/', [ApplicationController::class, 'allApplication'])
 ->name('executiveAllApplication')->middleware('validExecutive');
 
+Route::get('/executive/application/search', [ApplicationController::class, 'searchExecutiveApplication'])
+    ->name('searchExecutiveApplication')->middleware('validExecutive');
+
 /* Director Application */
 
