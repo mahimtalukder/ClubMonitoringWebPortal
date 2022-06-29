@@ -23,6 +23,7 @@ class ApplicationSeeder extends Seeder
             'request_date' => '23/05/2022',
             'executive_id' => '13-10001-3',
             'club_id' => '2',
+            'is_approved'=> 'pending',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -35,6 +36,7 @@ class ApplicationSeeder extends Seeder
             'request_date' => '23/05/2022',
             'executive_id' => '13-10001-3',
             'club_id' => '2',
+            'is_approved'=> 'pending',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
