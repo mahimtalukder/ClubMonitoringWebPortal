@@ -1,7 +1,8 @@
 <?php $director = session()->get('director')?>
 @extends('layouts.directorLayout')
 @section('title', 'Dashboard')
-@section('picture', $director['images'])
+@php $picture = '../../'.$director['images']; @endphp
+@section('picture', $picture)
 @section('name', $director['name'])
 @section('phone', $director['phone'])
 
