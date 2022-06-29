@@ -8,6 +8,7 @@
 @section('club_name', $club['name'])
 
 
+
 @section('content')
     <div class="row inbox-wrapper">
         <div class="col-lg-12">
@@ -86,7 +87,6 @@
                                             <table class="table table-bordered">
                                                 <thead>
                                                 <tr>
-                                                    <th>#</th>
                                                     <th>Name</th>
                                                     <th>Requested Start Time</th>
                                                     <th>Approved Start Time</th>
@@ -94,10 +94,23 @@
                                                     <th>Approved Start Time</th>
                                                     <th>Requested Quantity</th>
                                                     <th>Approved Quantity</th>
+                                                    <th>Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="component_body">
                                                     <div id="component_section">
+                                                        @foreach($requested_components as $component)
+                                                            <tr id=@php echo "row".$component["id"]; @endphp>
+                                                                <td>{{$component['name']}}</td>
+                                                                <td>{{$component['start_time']}}</td>
+                                                                <td><input class='form-control' data-inputmask= "'alias':'datetime'" data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=@php echo "approved_start_time".$component["id"]; @endphp placeholder='hh:mm tm'></td>
+                                                                <td>{{$component['end_time']}}</td>
+                                                                <td><input class='form-control' data-inputmask= "'alias':'datetime'" data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=@php echo "approved_end_time".$component["id"]; @endphp placeholder='hh:mm tm'></td>
+                                                                <td>{{$component['quantity']}}</td> 
+                                                                <td><input type='number' class='form-control' id='exampleInputMobile' placeholder='Quantity' name=@php echo "approved_quantity".$component["id"]; @endphp></td>
+                                                                <td><a class="btn btn-primary" onclick="reject({{$component['id']}},'{{$component->application_id}}')">Remove</a></td> 
+                                                            </tr>
+                                                        @endforeach
 
                                                     </div>
                                                 </tbody>
@@ -109,8 +122,8 @@
 
                                     <div>
                                         <div class="col-md-12">
-                                            <button class="btn btn-primary me-1 mb-1" type="submit"> Send</button>
-                                            <a class="btn btn-secondary me-1 mb-1" href="#">Cancel</a>
+                                            <button class="btn btn-primary me-1 mb-1" type="submit"> Approve</button>
+                                            <a class="btn btn-secondary me-1 mb-1" href="#">Reject</a>
                                         </div>
                                     </div>
                                 </div>
@@ -121,4 +134,32 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        var reject_function;
+        // this is jQuery function
+        $(function(){
+            reject_function = function(id,application_id)
+            {
+                new Attention.Prompt({
+                title: 'Reject Component',
+                content: 'Please enter a remark:',
+                onSubmit: function(component, value) {
+                    var url = "{{route('directorRemoveComponent',['id'=>":id",'application_id'=>":application_id",'remarks'=>":remarks"])}}";
+                    url = url.replace(':id', id);
+                    url = url.replace(':application_id', application_id);
+                    url = url.replace(':remarks', value);
+                    window.location.href=url;
+                }
+                });
+            }
+        })
+        // This is javascript function
+        function reject(id,application_id )
+        {
+            reject_function(id,application_id);
+        }
+    </script>
+
 @endsection

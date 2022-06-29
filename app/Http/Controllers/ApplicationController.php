@@ -57,6 +57,7 @@ class ApplicationController extends Controller
                 $applicaion->sent_to = $request->sent_to;
                 $applicaion->request_date = $request->date;
                 $applicaion->is_approved = "pending";
+                $applicaion->club_id = $executive->club_id;
                 $applicaion->save();
 
                 for ($i = 1; $i <= $total_componet; $i++) {
@@ -94,6 +95,7 @@ class ApplicationController extends Controller
                 $applicaion->sent_to = $request->sent_to;
                 $applicaion->request_date = $request->date;
                 $applicaion->is_approved = "pending";
+                $applicaion->club_id = $executive->club_id;
                 $applicaion->save();
 
                 for ($i = 1; $i <= $total_componet; $i++) {
@@ -147,6 +149,7 @@ class ApplicationController extends Controller
                 $applicaion->sent_to = $request->sent_to;
                 $applicaion->request_date = $request->date;
                 $applicaion->is_approved = "pending";
+                $applicaion->club_id = $executive->club_id;
                 $applicaion->save();
 
                 return redirect()->route('executiveApplicationCompose')->with([ 'message' => "Application successfully submitted!"]);
@@ -164,6 +167,7 @@ class ApplicationController extends Controller
                 $applicaion->sent_to = $request->sent_to;
                 $applicaion->request_date = $request->date;
                 $applicaion->is_approved = "pending";
+                $applicaion->club_id = $executive->club_id;
                 $applicaion->save();
 
                 return redirect()->route('executiveApplicationCompose')->with([ 'message' => "Application successfully submitted!"]);
@@ -259,5 +263,15 @@ class ApplicationController extends Controller
             ->with('club', $club)
             ->with('applications', $applications)
             ->with('labelName', 'Search Results');
+    }
+
+    public function removeComponent(Request $request){
+        
+        $removeComponent = RequestedComponent::where("id", $request->id)->update([
+            'is_approved' => "no",
+            'remarks' => $request->remarks
+            ]);
+        
+        return redirect()->route('directorApplicationRead',['id'=>$request->application_id]);
     }
 }

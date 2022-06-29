@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Director;
 use App\Models\Application;
-use App\Models\Member;
+use App\Models\Club;
 use App\Http\Requests\StoreDirectorRequest;
 use App\Http\Requests\UpdateDirectorRequest;
 use Illuminate\Http\Request;
@@ -61,17 +61,24 @@ class DirectorController extends Controller
         $requested_components = Application::select('requested_components.*', 'components.name')
             ->join('requested_components', 'applications.application_id', '=', 'requested_components.application_id')
             ->join('components', 'requested_components.component_id', '=', 'components.id')
-            ->where(['requested_components.application_id' => $request->id])
+            ->where([['requested_components.application_id', "=", $request->id]])
             ->get();
+        return $requested_components;
 
-        $club = Member::select('clubs.*')
-            ->join('clubs', 'members.club_id', '=', 'clubs.id')
-            ->where(['members.user_id' => $application_info->executive_id ])
-            ->get()->first();
+        $club = Club::where("id", $application_info->club_id)->first();
+
         if($application_info->is_approved == "pending"){
-            return view('director.updateApplication')->with('application_info', $application_info)->with('requested_components',$requested_components)->with('club',$club);
+            return view('director.updateApplication')
+            ->with('application_info', $application_info)
+            ->with('requested_components',$requested_components)
+            ->with('club',$club)
+            ->with('labelName', 'Read Applications');
         }
 
-        return view('director.readApplication')->with('application_info', $application_info)->with('requested_components',$requested_components)->with('club',$club);
+        return view('director.readApplication')
+        ->with('application_info', $application_info)
+        ->with('requested_components',$requested_components)
+        ->with('club',$club)
+        ->with('labelName', 'Read Applications');
     }
 }

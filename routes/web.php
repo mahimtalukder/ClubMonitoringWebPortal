@@ -69,6 +69,10 @@ Route::get('/director/application', [DirectorController::class, 'allApplication'
 ->name('directorAllApplication');
 Route::get('/director/application/read/{id}', [DirectorController::class, 'applicationRead'])
 ->name('directorApplicationRead');
+
+Route::get('/director/application/removeComponent/{id}/{application_id}/{remarks}', [ApplicationController::class, 'removeComponent'])
+->name('directorRemoveComponent')->middleware('validDirector');
+
 Route::post('/director/application/updateSubmitted', [ApplicationController::class, 'applicationUpdateSubmitted'])
 ->name('directorApplicationUpdateSubmitted')->middleware('validDirector');
 

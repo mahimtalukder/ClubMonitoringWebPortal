@@ -59,7 +59,7 @@
                                             <i data-feather="x" class="text-danger icon-lg me-2"></i>
                                         @endif
                                     </div>
-                                    <a href="/director/application/read/{{$application->application_id}}" class="email-list-detail">
+                                    <a href="{{route('directorApplicationRead',['id' => $application->application_id])}}" class="email-list-detail">
                                         <div class="content">
                                             <span class="from">{{$application->subject}}</span>
                                             <p class="msg">{{$application->description}}</p>
