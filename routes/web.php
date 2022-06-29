@@ -89,10 +89,6 @@ Route::get('/director/application/rejectApplication/{application_id}/{remarks}',
 Route::post('/director/application/updateSubmitted', [ApplicationController::class, 'applicationUpdateSubmitted'])
 ->name('directorApplicationUpdateSubmitted')->middleware('validDirector');
 
-
-Route::get('/executive/application/approved', [ApplicationController::class, 'applicationApproved'])->name('executiveApplicationApproved');
-Route::get('/executive/application/pending', [ApplicationController::class, 'applicationPending'])->name('executiveApplicationPending');
-Route::get('/executive/application/rejected', [ApplicationController::class, 'applicationRejected'])->name('executiveApplicationRejected');
-Route::get('/executive/application/read', [ApplicationController::class, 'applicationRead'])->name('executiveApplicationRead');
-Route::get('/executive/application/', [ApplicationController::class, 'allApplication'])->name('executiveAllApplication');
+Route::get('/director/application/club/{id}', [DirectorController::class, 'clubWiseApplication'])
+    ->name('clubWiseApplication')->middleware('validDirector');
 
