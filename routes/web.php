@@ -82,12 +82,10 @@ Route::get('/director/application/rejectApplication/{application_id}/{remarks}',
 Route::post('/director/application/updateSubmitted', [ApplicationController::class, 'applicationUpdateSubmitted'])
 ->name('directorApplicationUpdateSubmitted')->middleware('validDirector');
 
-<<<<<<< HEAD
 
 Route::get('/executive/application/approved', [ApplicationController::class, 'applicationApproved'])->name('executiveApplicationApproved');
 Route::get('/executive/application/pending', [ApplicationController::class, 'applicationPending'])->name('executiveApplicationPending');
 Route::get('/executive/application/rejected', [ApplicationController::class, 'applicationRejected'])->name('executiveApplicationRejected');
 Route::get('/executive/application/read', [ApplicationController::class, 'applicationRead'])->name('executiveApplicationRead');
 Route::get('/executive/application/', [ApplicationController::class, 'allApplication'])->name('executiveAllApplication');
-=======
->>>>>>> af63fd19b519b7da73fd8b48ba38ee91540f03fe
+

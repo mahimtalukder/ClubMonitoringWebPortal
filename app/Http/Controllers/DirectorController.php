@@ -54,11 +54,7 @@ class DirectorController extends Controller
             'address' => $request->address,
             ]);
             return redirect()->route('directorEditProfile');
-        }
-
-<<<<<<< HEAD
-=======
-        );
+        
 
     }
 
@@ -94,5 +90,4 @@ class DirectorController extends Controller
         ->with('club',$club)
         ->with('labelName', 'Read Applications');
     }
->>>>>>> af63fd19b519b7da73fd8b48ba38ee91540f03fe
 }
