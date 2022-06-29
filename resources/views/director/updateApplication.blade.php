@@ -20,10 +20,7 @@
                             <div>
                                 <div class="d-flex align-items-center p-3 border-bottom tx-16">
                                     <span data-feather="edit" class="icon-md me-2"></span>
-                                    New Application
-                                    @if (!empty($message))
-                                        <h6 class="card-title text-primary">{{$message}}</h6>
-                                    @endif
+                                    Application
                                 </div>
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -35,6 +32,7 @@
                             </div>
                             <form class="forms-sample" action="{{route('directorApplicationUpdateSubmitted')}}" method="post">
                                 {{csrf_field()}}
+                                <input type="hidden" name='application_id' value={{$application_info["application_id"]}}>
                                 <div class="p-3 pb-0">
                                     <div class="to">
                                         <div class="row mb-3">
@@ -99,19 +97,22 @@
                                                 </thead>
                                                 <tbody id="component_body">
                                                     <div id="component_section">
+                                                        @php $i=0; @endphp
                                                         @foreach($requested_components as $component)
                                                             <tr id=@php echo "row".$component["id"]; @endphp>
+                                                                <input type="hidden" name='@php echo "component[".$i."][id]"; @endphp' value={{$component["id"]}}>
                                                                 <td>{{$component['name']}}</td>
                                                                 <td>{{$component['start_time']}}</td>
-                                                                <td><input class='form-control' data-inputmask= "'alias':'datetime'" data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=@php echo "approved_start_time".$component["id"]; @endphp placeholder='hh:mm tm'></td>
+                                                                <td><input class='form-control' data-inputmask= "'alias':'datetime'" data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=@php echo "component[".$i."][approved_start_time]"; @endphp placeholder='hh:mm tm'></td>
                                                                 <td>{{$component['end_time']}}</td>
-                                                                <td><input class='form-control' data-inputmask= "'alias':'datetime'" data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=@php echo "approved_end_time".$component["id"]; @endphp placeholder='hh:mm tm'></td>
+                                                                <td><input class='form-control' data-inputmask= "'alias':'datetime'" data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=@php echo "component[".$i."][approved_end_time]"; @endphp placeholder='hh:mm tm'></td>
                                                                 <td>{{$component['quantity']}}</td> 
-                                                                <td><input type='number' class='form-control' id='exampleInputMobile' placeholder='Quantity' name=@php echo "approved_quantity".$component["id"]; @endphp></td>
-                                                                <td><a class="btn btn-primary" onclick="reject({{$component['id']}},'{{$component->application_id}}')">Remove</a></td> 
+                                                                <td><input type='number' class='form-control' id='exampleInputMobile' placeholder='Quantity' name=@php echo "component[".$i."][approved_quantity]"; @endphp></td>
+                                                                <td><a class="btn btn-primary" onclick="reject({{$component['id']}},'{{$component->application_id}}')">Reject</a></td> 
                                                             </tr>
+                                                            @php $i++; @endphp
                                                         @endforeach
-
+                                                        <input type="hidden" name='total_component' value={{$i}}>
                                                     </div>
                                                 </tbody>
                                             </table>
@@ -123,7 +124,7 @@
                                     <div>
                                         <div class="col-md-12">
                                             <button class="btn btn-primary me-1 mb-1" type="submit"> Approve</button>
-                                            <a class="btn btn-secondary me-1 mb-1" href="#">Reject</a>
+                                            <a class="btn btn-secondary me-1 mb-1" onclick="reject_full_application('{{$component->application_id}}')">Reject</a>
                                         </div>
                                     </div>
                                 </div>
@@ -159,6 +160,30 @@
         function reject(id,application_id )
         {
             reject_function(id,application_id);
+        }
+
+
+        var reject_application;
+        // this is jQuery function
+        $(function(){
+            reject_application = function(application_id)
+            {
+                new Attention.Prompt({
+                title: 'Reject Full Component',
+                content: 'Please enter a remark:',
+                onSubmit: function(component, value) {
+                    var url = "{{route('directorRejectApplication',['application_id'=>":application_id",'remarks'=>":remarks"])}}";
+                    url = url.replace(':application_id', application_id);
+                    url = url.replace(':remarks', value);
+                    window.location.href=url;
+                }
+                });
+            }
+        })
+        // This is javascript function
+        function reject_full_application(application_id )
+        {
+            reject_application(application_id);
         }
     </script>
 

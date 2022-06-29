@@ -73,6 +73,9 @@ Route::get('/director/application/read/{id}', [DirectorController::class, 'appli
 Route::get('/director/application/removeComponent/{id}/{application_id}/{remarks}', [ApplicationController::class, 'removeComponent'])
 ->name('directorRemoveComponent')->middleware('validDirector');
 
+Route::get('/director/application/rejectApplication/{application_id}/{remarks}', [ApplicationController::class, 'rejectApplication'])
+->name('directorRejectApplication')->middleware('validDirector');
+
 Route::post('/director/application/updateSubmitted', [ApplicationController::class, 'applicationUpdateSubmitted'])
 ->name('directorApplicationUpdateSubmitted')->middleware('validDirector');
 

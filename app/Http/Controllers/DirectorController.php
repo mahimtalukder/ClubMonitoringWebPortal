@@ -57,13 +57,13 @@ class DirectorController extends Controller
     public function applicationRead(Request $request){
 
         $application_info = Application::where("application_id", $request->id)->first();
+        $is_approved ="no";
 
         $requested_components = Application::select('requested_components.*', 'components.name')
             ->join('requested_components', 'applications.application_id', '=', 'requested_components.application_id')
             ->join('components', 'requested_components.component_id', '=', 'components.id')
-            ->where([['requested_components.application_id', "=", $request->id]])
+            ->where([['requested_components.application_id', "=", $request->id],["requested_components.is_approved", "=", "pending"]])
             ->get();
-        return $requested_components;
 
         $club = Club::where("id", $application_info->club_id)->first();
 

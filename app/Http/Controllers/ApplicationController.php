@@ -77,6 +77,7 @@ class ApplicationController extends Controller
                     $request_componet->start_time = $request[$start_time];
                     $request_componet->end_time = $request[$end_time];
                     $request_componet->quantity = $request[$quantity];
+                    $request_componet->is_approved = "pending";
                     $request_componet->save();
                 }
 
@@ -115,6 +116,7 @@ class ApplicationController extends Controller
                     $request_componet->start_time = $request[$start_time];
                     $request_componet->end_time = $request[$end_time];
                     $request_componet->quantity = $request[$quantity];
+                    $request_componet->is_approved = "pending";
                     $request_componet->save();
                 }
 
@@ -273,10 +275,54 @@ class ApplicationController extends Controller
     public function removeComponent(Request $request){
         
         $removeComponent = RequestedComponent::where("id", $request->id)->update([
-            'is_approved' => "no",
+            'is_approved' => "rejected",
             'remarks' => $request->remarks
             ]);
         
         return redirect()->route('directorApplicationRead',['id'=>$request->application_id]);
+    }
+
+    public function rejectApplication(Request $request){
+
+        $rejectApplication = Application::where("application_id", $request->application_id )->update([
+            'is_approved' => "rejected",
+            'rejection_msg' => $request->remarks
+            ]);
+
+        $rejectComponent = RequestedComponent::where("application_id", $request->application_id )
+        ->update([
+            'is_approved' => "rejected",
+            'remarks' => $request->remarks
+            ]);
+        
+        return redirect()->route('directorAllApplication');
+    }
+
+    public function applicationUpdateSubmitted(Request $request){
+        $validate = $request->validate([
+            '*' => 'required'
+        ],
+        );
+
+        if((int)$request->total_component>0)
+        {
+            for ($i = 1; $i <= $request->total_component; $i++){
+                $approvedComponent = RequestedComponent::where("id", $request['component['.$i.'][id]'] )
+                ->update([
+                    'is_approved' => "approved",
+                    'approved_start_time' => $request['component['.$i.'][approved_start_time]'],
+                    'approved_end_time' => $request['component['.$i.'][approved_end_time]'], 
+                    'quantity' => $request['component['.$i.'][approved_quantity]']
+                    ]);
+            }
+
+            $approvedApplication = Application::where("application_id", $request->application_id )->update([
+                'is_approved' => "approved",
+                'approve_date' => $request->date
+                ]);
+        }
+
+        return redirect()->route('directorAllApplication');
+
     }
 }
