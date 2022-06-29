@@ -46,6 +46,13 @@ Route::post('/executive/edit', [ExecutiveController::class, 'editProfileSubmitte
 
 Route::post('/executive/edit/upload', [ExecutiveController::class, 'executiveImageUpload'])->name('executiveImageUpload');
 
+Route::get('/executive/AllMembers', [ExecutiveController::class, 'ViewAllMamber'])->name('executiveViewAllMamber');
+Route::get('/executive/NewMembers', [ExecutiveController::class, 'CreateNewMamber'])->name('executiveCreateNewMamber');
+Route::post('/executive/NewMembers', [ExecutiveController::class, 'CreateMamber'])->name('executiveCreateMambersubmitted');
+
+
+
+
 
 //Executive Application
 Route::get('/executive/application/compose', [ApplicationController::class, 'applicationCompose'])
