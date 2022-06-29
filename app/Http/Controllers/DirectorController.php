@@ -54,13 +54,18 @@ class DirectorController extends Controller
             'address' => $request->address,
             ]);
             return redirect()->route('directorEditProfile');
-        
+
 
     }
 
     public function allApplication(){
-        $applications = Application::where('sent_to', 'director')->get();
-        return view('director.applications')->with('applications', $applications)->with('labelName', 'Applications');
+        $clubs = Club::all();
+        $applications = Application::where('sent_to', 'director')->paginate(1);
+
+        return view('director.applications')
+            ->with('applications', $applications)
+            ->with('clubs', $clubs)
+            ->with('labelName', 'Applications');
     }
 
     public function applicationRead(Request $request){
@@ -89,5 +94,20 @@ class DirectorController extends Controller
         ->with('requested_components',$requested_components)
         ->with('club',$club)
         ->with('labelName', 'Read Applications');
+    }
+
+    public function clubWiseApplication(Request $request){
+        $director_session = session()->get('director');
+        $clubs = Club::all();
+        $club_info = Club::where("id", $request->id)->first();
+        $applications = Application::where('club_id', $request->id)
+            ->orderBy("created_at", "desc")
+            ->paginate(1);
+
+        return view('director.applications')
+            ->with('club_info', $club_info)
+            ->with('clubs', $clubs)
+            ->with('applications', $applications)
+            ->with('labelName', 'Applications of '.$club_info->name);
     }
 }

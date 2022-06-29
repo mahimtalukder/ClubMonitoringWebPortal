@@ -273,12 +273,12 @@ class ApplicationController extends Controller
     }
 
     public function removeComponent(Request $request){
-        
+
         $removeComponent = RequestedComponent::where("id", $request->id)->update([
             'is_approved' => "rejected",
             'remarks' => $request->remarks
             ]);
-        
+
         return redirect()->route('directorApplicationRead',['id'=>$request->application_id]);
     }
 
@@ -294,7 +294,7 @@ class ApplicationController extends Controller
             'is_approved' => "rejected",
             'remarks' => $request->remarks
             ]);
-        
+
         return redirect()->route('directorAllApplication');
     }
 
@@ -311,7 +311,7 @@ class ApplicationController extends Controller
                 ->update([
                     'is_approved' => "approved",
                     'approved_start_time' => $request['component['.$i.'][approved_start_time]'],
-                    'approved_end_time' => $request['component['.$i.'][approved_end_time]'], 
+                    'approved_end_time' => $request['component['.$i.'][approved_end_time]'],
                     'quantity' => $request['component['.$i.'][approved_quantity]']
                     ]);
             }
@@ -325,4 +325,5 @@ class ApplicationController extends Controller
         return redirect()->route('directorAllApplication');
 
     }
+
 }
