@@ -41,7 +41,10 @@ Route::post('/member/edit', [MemberController::class, 'editProfileSubmitted'])->
 Route::get('/executive/dashboard', [ExecutiveController::class, 'dashboard'])->name('executiveDash');
 Route::get('/executive/profile', [ExecutiveController::class, 'profile'])->name('executiveProfile');
 Route::get('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('executiveEditProfile');
-Route::post('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('executiveEditProfile');
+
+Route::post('/executive/edit', [ExecutiveController::class, 'editProfileSubmitted'])->name('executiveEditProfileSubmitted');
+
+Route::post('/executive/edit/upload', [ExecutiveController::class, 'executiveImageUpload'])->name('executiveImageUpload');
 
 
 //Executive Application
@@ -49,6 +52,7 @@ Route::get('/executive/application/compose', [ApplicationController::class, 'app
 ->name('executiveApplicationCompose')->middleware('validExecutive');;
 Route::post('/executive/application/composeSubmitted', [ApplicationController::class, 'applicationComposeSubmitted'])
 ->name('executiveApplicationComposeSubmitted')->middleware('validExecutive');;
+
 
 Route::get('/executive/application/approved', [ApplicationController::class, 'applicationApproved'])->name('executiveApplicationApproved');
 Route::get('/executive/application/pending', [ApplicationController::class, 'applicationPending'])->name('executiveApplicationPending');

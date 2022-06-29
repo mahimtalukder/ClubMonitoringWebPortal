@@ -19,9 +19,14 @@ class DirectorSeeder extends Seeder
             'name' => "Syed Syfuzzaman",
             'images' => '../assets_2/images/faces/default.png',
             'dob' => '31-12-1980',
+            'gender' => 'male',
             'phone' => '01712458721',
+            'email' => 'ador@gmail.com',
+            'designation' => 'Admin',
+            'organisation' => 'Club Monitoring Web Portal',
+            'bio' => 'Hi! I am Syed the Senior Admin at CMWP. We hope you enjoy the software and quality of Social.',
             'address' => 'Uttara, Dhaka-1230',
-            'blood_group' => 'O+',
+            'blood_group' => 'o-pos',
         ]);
 
         DB::table('directors')->insert([
@@ -29,9 +34,14 @@ class DirectorSeeder extends Seeder
             'name' => "Rakibul Alam",
             'images' => '../assets_2/images/faces/default.png',
             'dob' => '15-06-1991',
+            'gender' => 'male',
             'phone' => '01755152458',
+            'email' => 'ador@gmail.com',
+            'designation' => 'Admin',
+            'organisation' => 'Club Monitoring Web Portal',
+            'bio' => 'Hi! I am Syed the Senior Admin at CMWP. We hope you enjoy the software and quality of Social.',
             'address' => 'khilkhet, Dhaka-1230',
-            'blood_group' => 'AB+',
+            'blood_group' => 'ab-pos',
         ]);
     }
 }

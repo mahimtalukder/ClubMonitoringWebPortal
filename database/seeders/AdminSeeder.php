@@ -26,7 +26,7 @@ class AdminSeeder extends Seeder
             'organisation' => 'Club Monitoring Web Portal',
             'bio' => 'Hi! I am Syed the Senior Admin at CMWP. We hope you enjoy the software and quality of Social.',
             'address' => 'Uttara, Dhaka-1230',
-            'blood_group' => 'O+',
+            'blood_group' => 'o-pos',
         ]);
 
         DB::table('admins')->insert([
@@ -41,7 +41,7 @@ class AdminSeeder extends Seeder
             'organisation' => 'Club Monitoring Web Portal',
             'bio' => 'Hi! I am Ahsanul the Senior Admin at CMWP. We hope you enjoy the software and quality of Social.',
             'address' => 'Khamarbari, Dhaka',
-            'blood_group' => 'AB+',
+            'blood_group' => 'ab-pos',
         ]);
 
     }

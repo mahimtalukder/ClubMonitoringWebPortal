@@ -26,10 +26,9 @@ class AdminController extends Controller
     }
 
     public function editProfile(){
-        // return admin::find ($user_id);
         $admin_session = session()->get('admin');
         $admin = Admin::where("user_id", $admin_session["user_id"])->first();
-        return view('admin.editProfile')->with('admin', $admin);
+        return view('admin.editProfile')->with('admin_info', $admin);
     }
 
     public function editProfileSubmitted(Request $request){
@@ -44,8 +43,6 @@ class AdminController extends Controller
         ]);
         $admin_session = session()->get('admin');
         $admin = Admin::where("user_id", $admin_session["user_id"])->update([
-        // return $admin;
-        // return $request;
         'name' => $request->name,
         'email' => $request->email,
         'phone' => $request->phone,
@@ -54,11 +51,7 @@ class AdminController extends Controller
         'blood_group' =>$request->blood_group,
         'address' => $request->address,
         ]);
-        // $admin_session = session()->get('admin');
-        // Admin::where('user_id', $admin_session["user_id"])->update([
-        //     'email' => 'johndoe@gmail.com'
-        // ]);
-        // return redirect('editProfile');
+        return redirect()->route('adminEditProfile');
     }
 
 }

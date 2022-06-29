@@ -18,7 +18,7 @@
                                     <a class="nav-link active">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('adminEditProfile')}}">Edit Profile</a>
+                                    <a class="nav-link" href="{{route('executiveEditProfile')}}">Edit Profile</a>
                                 </li>
                             </ul>
 
@@ -106,7 +106,7 @@
                                             <label class="tx-12 fw-bolder mb-0 text-uppercase">Email:</label>
                                         </div>
                                         <div class="col-10">
-                                            <p>me@nobleui.com</p>
+                                            <p>{{$executive->email}}</p>
                                         </div>
                                     </div>
                                 </li>
