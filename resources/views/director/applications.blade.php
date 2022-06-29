@@ -1,9 +1,9 @@
-<?php $executive = session()->get('executive')?>
-@extends('layouts.executiveLayout')
+<?php $director = session()->get('director')?>
+@extends('layouts.directorLayout')
 @section('title', 'Dashboard')
-@section('picture', $executive['images'])
-@section('name', $executive['name'])
-@section('phone', $executive['phone'])
+@section('picture', $director['images'])
+@section('name', $director['name'])
+@section('phone', $director['phone'])
 
 
 @section('content')
@@ -19,8 +19,7 @@
                                     <div class="col-lg-6">
                                         <div class="d-flex align-items-end mb-2 mb-md-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox text-muted me-2"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg>
-                                            <h4 class="me-1">Applications</h4>
-                                            <span class="text-muted">(2 new application)</span>
+                                            <h4 class="me-1">{{$labelName}}</h4>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -44,40 +43,31 @@
                                 </div>
                             </div>
                             <div class="email-list">
-
+                                @foreach($applications as $application)
                                 <!-- email list item -->
-                                <div class="email-list-item email-list-item--unread">
+                                <div class="email-list-item">
                                     <div class="email-list-actions">
-                                        <i data-feather="check" class="icon-lg me-2"></i>
+                                        @if($application->is_approved == "approved")
+                                        <i data-feather="check" class="text-success icon-lg me-2"></i>
+                                        @endif
+
+                                        @if($application->is_approved == "pending" or $application->is_approved == "")
+                                            <i data-feather="clock" class="icon-lg me-2"></i>
+                                        @endif
+
+                                        @if($application->is_approved == "rejected")
+                                            <i data-feather="x" class="text-danger icon-lg me-2"></i>
+                                        @endif
                                     </div>
-                                    <a href="{{route('executiveApplicationRead')}}" class="email-list-detail">
+                                    <a href="{{route('directorApplicationRead',['id' => $application->application_id])}}" class="email-list-detail">
                                         <div class="content">
-                                            <span class="from">Cedric Kelly</span>
-                                            <p class="msg">Urgent - You forgot your keys in the class room, please come imediatly! Urgent - You forgot your keys in the class room, please come imediatly! Urgent - You forgot your keys in the class room, please come imediatly! Urgent - You forgot your keys in the class room, please come imediatly! Urgent - You forgot your keys in the class room, please come imediatly!</p>
+                                            <span class="from">{{$application->subject}}</span>
+                                            <p class="msg">{{$application->description}}</p>
                                         </div>
                                         <span class="date">08 Jan</span>
                                     </a>
                                 </div>
-
-
-                                <!-- email list item -->
-                                <div class="email-list-item">
-                                    <div class="email-list-actions">
-                                        <i data-feather="check" class="icon-lg me-2"></i>
-                                    </div>
-                                    <a href="{{route('executiveApplicationRead')}}" class="email-list-detail">
-                                        <div class="content">
-                                            <span class="from">Bradley Greer</span>
-                                            <p class="msg">The world looks mighty good to me, cause Tootsie Rolls are all I see. Whatever it is I think I see, becomes a Tootsie Roll to me! Tootsie Roll how I love your chocolatey chew, Tootsie Roll I think I'm in love with you. Whatever it is I think I see, becomes a Tootsie Roll to me!</p>
-                                        </div>
-                                        <span class="date">
-                                            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-paperclip"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg> </span>
-                                            14 Jan
-                                        </span>
-                                    </a>
-                                </div>
-
-
+                                @endforeach
                             </div>
                         </div>
                     </div>

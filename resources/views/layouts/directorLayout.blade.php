@@ -24,13 +24,15 @@
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{asset('../assets_2/vendors/select2/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('../assets_2/vendors/simplemde/simplemde.min.css')}}">
-    <link rel="stylesheet" href="{{asset('../assets/vendors/jquery-tags-input/jquery.tagsinput.min.css')}}">
-    <link rel="stylesheet" href="{{asset('../assets/vendors/dropzone/dropzone.min.css')}}">
-    <link rel="stylesheet" href="{{asset('../assets/vendors/dropify/dist/dropify.min.css')}}">
-    <link rel="stylesheet" href="{{asset('../assets/vendors/bootstrap-colorpicker/bootstrap-colorpicker.min.css')}}">
-    <link rel="stylesheet" href="{{asset('../assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
-    <link rel="stylesheet" href="{{asset('../assets/vendors/font-awesome/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('../assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('../assets_2/jquery-tags-input/jquery.tagsinput.min.css')}}">
+    <link rel="stylesheet" href="{{asset('../assets_2/dropzone/dropzone.min.css')}}">
+    <link rel="stylesheet" href="{{asset('../assets_2/dropify/dist/dropify.min.css')}}">
+    <link rel="stylesheet" href="{{asset('../assets_2/bootstrap-colorpicker/bootstrap-colorpicker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('../assets_2/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('../assets_2/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('../assets_2/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link href="{{asset('../assets_2/dist/attention.css')}}" rel="stylesheet">
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
@@ -95,6 +97,7 @@
     <!-- endinject -->
 
     <!-- Custom js for this page -->
+    <script src="{{asset('../assets_2/dist/attention.js')}}"></script>
     <script src="{{asset('../assets_2/js/email.js')}}"></script>
     <script src="{{asset('../assets_2/js/timepicker.js')}}"></script>
     <script src="{{asset('../assets_2/js/datepicker.js')}}"></script>

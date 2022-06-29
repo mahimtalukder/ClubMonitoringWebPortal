@@ -19,6 +19,7 @@ class RequestedComponentSeeder extends Seeder
             'component_id' => 1,
             'start_time' => '08:00 AM',
             'end_time' => '09:00 AM',
+            'is_approved'=>'pending',
             'quantity' => 2,
         ]);
 
@@ -27,14 +28,16 @@ class RequestedComponentSeeder extends Seeder
             'component_id' => 2,
             'start_time' => '04:00 PM',
             'end_time' => '05:00 PM',
+            'is_approved'=>'pending',
             'quantity' => 1,
         ]);
 
         DB::table('requested_components')->insert([
-            'application_id' => '10-102',
+            'application_id' => '22-10002-06',
             'component_id' => 2,
             'start_time' => '04:00 PM',
             'end_time' => '05:00 PM',
+            'is_approved'=>'pending',
             'quantity' => 1,
         ]);
     }
