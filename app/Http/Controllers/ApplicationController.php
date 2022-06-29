@@ -178,6 +178,7 @@ class ApplicationController extends Controller
 
         $applications = Application::where('is_approved', 'approved')
             ->where('club_id', $club->id)
+            ->orderBy("created_at", "desc")
             ->paginate(1);
 
         return view('executive.applications')->with('club', $club)->with('applications', $applications)->with('labelName', 'Approved Applications');
@@ -186,7 +187,7 @@ class ApplicationController extends Controller
         $executive = session()->get('executive');
         $club = Club::where("id", $executive['club_id'])->first();
 
-        $applications = Application::where('club_id', $club->id)->paginate(1);
+        $applications = Application::where('club_id', $club->id)->orderBy("created_at", "desc")->paginate(1);
 
         return view('executive.applications')
             ->with('club', $club)
@@ -199,12 +200,13 @@ class ApplicationController extends Controller
 
         $applications = Application::where('is_approved', 'pending')
             ->where('club_id', $club->id)
+            ->orderBy("created_at", "desc")
             ->paginate(1);
 
-        return $applications;
-//        return view('executive.applications')
-//            ->with('club', $club)->with('applications', $applications)
-//            ->with('labelName', 'Pending Applications');
+
+        return view('executive.applications')
+            ->with('club', $club)->with('applications', $applications)
+            ->with('labelName', 'Pending Applications');
     }
     public function applicationRejected(){
         $executive = session()->get('executive');
@@ -212,6 +214,7 @@ class ApplicationController extends Controller
 
         $applications = Application::where('is_approved', 'rejected')
             ->where('club_id', $club->id)
+            ->orderBy("created_at", "desc")
             ->paginate(1);
 
         return view('executive.applications')
@@ -251,7 +254,9 @@ class ApplicationController extends Controller
         $applications = Application::where('club_id', $club->id)->where(function($query) use ($search){
             $query->where('subject', 'LIKE', "%{$search}%")
                 ->orWhere('description', 'LIKE', "%{$search}%");
-        })->paginate(1);
+        })
+            ->orderBy("created_at", "desc")
+            ->paginate(1);
 //
 
 
