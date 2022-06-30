@@ -154,7 +154,7 @@ class AdminController extends Controller
         User::where('user_id', $request->id)->update([
             'status' => $request->status_code
         ]);
-        return redirect()->route('adminDirectorList')->with('message', 'Status changed successfully');
+        return redirect()->route('adminDirectorList');
     }
 
 }
