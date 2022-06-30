@@ -28,7 +28,6 @@ class CreateDirectorsTable extends Migration
             $table->string('bio')->nullable();
             $table->text('address')->nullable();
             $table->string('blood_group')->nullable();
-
         });
     }
 
