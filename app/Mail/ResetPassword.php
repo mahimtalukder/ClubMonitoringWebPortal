@@ -16,11 +16,11 @@ class ResetPassword extends Mailable
      *
      * @return void
      */
-    public $email;
+    public $data;
 
-    public function __construct($email)
+    public function __construct($data)
     {
-        $this->email = $email;
+        $this->data = $data;
     }
 
     /**
@@ -32,6 +32,7 @@ class ResetPassword extends Mailable
     {
         return $this
         ->subject('Reset Password')
-        ->markdown('emails.resetPassword');
+        ->markdown('emails.resetPassword')
+        ->with('data', $this->data);
     }
 }
