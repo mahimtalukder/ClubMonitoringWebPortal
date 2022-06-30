@@ -95,3 +95,11 @@ Route::post('/director/application/updateSubmitted', [ApplicationController::cla
 Route::get('/director/application/club/{id}', [DirectorController::class, 'clubWiseApplication'])
     ->name('clubWiseApplication')->middleware('validDirector');
 
+
+
+/* Director Club */
+Route::get('/director/club/allClub', [DirectorController::class, 'allClub'])->name('directorAllClub');
+Route::get('/director/club/info/{id}', [DirectorController::class, 'clubInfo'])->name('directorClubInfo');
+
+Route::get('/director/club/create', [DirectorController::class, 'createClub'])->name('directorCreateClub');
+Route::post('/director/club/createSubmitted', [DirectorController::class, 'createClubSubmitted'])->name('directorCreateClubSubmitted');

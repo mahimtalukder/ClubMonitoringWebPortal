@@ -107,4 +107,34 @@ class DirectorController extends Controller
             ->with('applications', $applications)
             ->with('labelName', 'Applications of '.$club_info->name);
     }
+
+    public function allClub()
+    {
+        $clubs = Club::orderBy("created_at", "desc")->paginate(1);
+
+        return view('director.allClub')->with('clubs', $clubs);
+    }
+
+    public function createClub()
+    {
+        $director_session = session()->get('director');
+        $director = director::where("user_id", $director_session["user_id"])->first();
+        return view('director.createClub')->with('director_info', $director);
+    }
+
+    public function createClubSubmitted(Request $request)
+    {
+        $validate = $request->validate([
+            "name" => "required|unique:clubs,name",
+        ]);
+
+        $director_session = session()->get('director');
+
+        $club = new Club();
+        $club->name = $request->name;
+        $club->created_by = $director_session->user_id;
+        $club->save();
+
+        return view('director.createClub')->with('message','New club successfully added!');
+    }
 }
