@@ -147,7 +147,20 @@ class AdminController extends Controller
     }
 
     public function directorUpdateSubmitted(Request $request){
+        Director::where('user_id', $request->id)->update([
+            'name' => $request->name,
+            'designation' => $request->designation,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'blood_group' => $request->blood_group,
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+            'address' => $request->address
 
+        ]);
+
+
+        return redirect()->route('adminDirectorUpdate',['id' => $request->id]);
     }
 
     public function directorStatusUpdate(Request  $request){
