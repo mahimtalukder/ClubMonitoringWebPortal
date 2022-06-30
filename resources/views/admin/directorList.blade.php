@@ -5,6 +5,7 @@
 @section('picture', $picture)
 @section('name', $admin['name'])
 @section('phone', $admin['phone'])
+
 @section('content')
     <div class="page-content mx-0 px-0 my-0 py-0">
         <div class="row">
@@ -13,6 +14,11 @@
                     <div class="card-body">
                         <h6 class="card-title">Data Table</h6>
                         <p class="text-muted mb-3">View, Edit and Block/Unblock Directors</p>
+                        @if(!empty($message))
+                            <div class="alert alert-success" role="alert">
+                                {{$message}}
+                            </div>
+                        @endif
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table">
                                 <thead>
@@ -23,9 +29,6 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Designation</th>
-                                    <th>Blood Group</th>
-                                    <th>Gender</th>
-                                    <th>Address</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -36,16 +39,17 @@
                                         <img class="wd-30 ht-30 rounded-circle" src={{asset($director->images)}}>
                                     </td>
                                     <td>{{$director->name}}</td>
-                                    <td>{{$director->id}}</td>
+                                    <td>{{$director->user_id}}</td>
                                     <td>{{$director->email}}</td>
                                     <td>{{$director->phone}}</td>
                                     <td>{{$director->designation}}</td>
-                                    <td>{{$director->blood_group}}</td>
-                                    <td>{{$director->gender}}</td>
-                                    <td>{{$director->address}}</td>
                                     <td>
                                         <a href="/admin/update/director/{{$director->user_id}}" class="btn btn-primary me-1 mb-1">Edit</a>
-                                        <a class="btn btn-danger me-1 mb-1">Block</a>
+                                        @if($director->status == 1)
+                                            <a href="/admin/update/status/director/{{$director->user_id}}/0" class="btn btn-danger me-1 mb-1">Block</a>
+                                        @else
+                                            <a href="/admin/update/status/director/{{$director->user_id}}/1" class="btn btn-success me-1 mb-1">Unblock</a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

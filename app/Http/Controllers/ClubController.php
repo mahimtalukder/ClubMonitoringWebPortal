@@ -9,10 +9,14 @@ use PDF;
 
 class ClubController extends Controller
 {
-   public function print()
-   {
-    $pdf = PDF::loadView('layouts.clubInfoPrintLayout');
-    
-    return $pdf->download('club_info.pdf');
-   }
+    public function print()
+    {
+        $data = [
+            'title' => 'Welcome to ItSolutionStuff.com',
+            'date' => date('m/d/Y')
+        ];
+        $pdf = PDF::loadView('layouts.clubInfoPrintLayout', $data);
+
+        return $pdf->download('club_info.pdf');
+    }
 }
