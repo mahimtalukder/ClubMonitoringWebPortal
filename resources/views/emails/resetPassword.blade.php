@@ -1,13 +1,9 @@
 @component('mail::message')
 
-Dear {{$email}},
+Dear {{$data['name']}},
 
-The body of your message.
+Your reset otp is: <b>{{$data['reset_password_otp']}}</b>
 
-@component('mail::button', ['url' => 'mahimtlaukder.me'])
-Button Text
-@endcomponent
-
-Thanks,<br>
-{{ config('app.name') }}
+Regards,<br>
+<b>Club Monitoring Web Portal</b>
 @endcomponent

@@ -14,6 +14,7 @@
                         <h6 class="card-title">Update Director's Account</h6>
 
                         <form action="/admin/update/director/{{$director->user_id}}" method="post">
+                            {{@csrf_field()}}
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">

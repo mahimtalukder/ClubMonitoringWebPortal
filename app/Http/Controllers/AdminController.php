@@ -148,14 +148,50 @@ class AdminController extends Controller
     }
 
     public function directorUpdateSubmitted(Request $request){
+        Director::where('user_id', $request->id)->update([
+            'name' => $request->name,
+            'designation' => $request->designation,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'blood_group' => $request->blood_group,
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+            'address' => $request->address
 
-    }
-
-    public function directorStatusUpdate(Request  $request){
-        User::where('user_id', $request->id)->update([
-            'status' => $request->status_code
         ]);
-        return redirect()->route('adminDirectorList');
+
+
+        return redirect()->route('adminDirectorUpdate',['id' => $request->id]);
     }
+
+
+    public function adminImageUpload(Request $request){
+        $request->validate([
+          'image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000',
+      ]);
+    
+    
+        if($request->hasFile('image')){
+            $admin_session = session()->get('admin');
+            $imageName = time()."_".$request->file('image')->getClientOriginalName();
+            $request->image->move(public_path('assets_2/images'), $imageName);
+            $imageName = "assets_2/images/".$imageName;
+    
+      
+              /* New File name */
+              $newFileName = 'assets_2/images/'.time()."_".$admin_session['user_id'].'.'.$request->file('image')->getClientOriginalExtension();
+              rename($imageName, $newFileName);
+                
+            $imageName='../'.$newFileName;
+                     
+            $admin = Admin::where("user_id", $admin_session["user_id"])->update([
+                'images' => $imageName
+                ]);
+            $admin_session['images'] = $imageName;
+    
+            session()->put('admin', $admin_session);
+            return redirect()->route('adminEditProfile');
+        }
+      }
 
 }
