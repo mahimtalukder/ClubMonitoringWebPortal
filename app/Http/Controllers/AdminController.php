@@ -106,6 +106,7 @@ class AdminController extends Controller
                 $user->user_id = $unique_id;
                 $user->password = Hash::make($unique_pass);
                 $user->user_type = "director";
+                $user->status = 1;
                 $user->save();
 
                 $director = new Director();
