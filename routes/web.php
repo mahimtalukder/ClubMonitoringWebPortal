@@ -24,7 +24,10 @@ Route::get('/admin/profile', [AdminController::class, 'profile'])->name('adminPr
 Route::get('/admin/edit', [AdminController::class, 'editProfile'])->name('adminEditProfile');
 Route::post('/admin/editSubmitted', [AdminController::class, 'editProfileSubmitted'])->name('adminEditProfileSubmitted');
 Route::get('/admin/create/director', [AdminController::class, 'adminCreateDirector'])->name('adminCreateDirector');
+Route::post('/admin/create/director', [AdminController::class, 'adminCreateDirectorSubmitted'])->name('adminCreateDirectorSubmitted');
 Route::get('/admin/list/director', [AdminController::class, 'directorList'])->name('adminDirectorList');
+Route::get('/admin/update/director/{id}', [AdminController::class, 'directorUpdate'])->name('adminDirectorUpdate');
+Route::post('/admin/update/director/{id}', [AdminController::class, 'directorUpdateSubmitted'])->name('adminDirectorUpdateSubmitted');
 
 
 /* Director */

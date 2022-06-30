@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    /**
+     * @var string
+     */
+
     public function __construct()
     {
         $this->middleware('validAdmin');
@@ -59,9 +63,57 @@ class AdminController extends Controller
         return view('admin.createDirector');
     }
 
+    public function adminCreateDirectorSubmitted(Request $request){
+        $validate = $request->validate([
+            "name" => "required|regex:/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/u",
+            "email" => "email",
+            "phone" => "required|numeric"
+        ]);
+
+        //Generating unique id for director
+        $directors = json_encode(Director::all());
+        $directors = json_decode($directors);
+        $unique_id = "";
+        if(!empty($directors)) {
+            $last_director = end($directors);
+            $last_director_id = $last_director->user_id;
+            $arr = explode("-", $last_director_id);
+            $id_mid = (int)$arr[1];
+            $id_changed = $id_mid + 1;
+            $unique_id = "11" . "-" . $id_changed . "-" . "3";
+        }
+        else{
+            $unique_id= "11" . "-" ."10001"."-". "3";
+        }
+
+        //generating unique password
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        $unique_pass = implode($pass);
+
+        return $unique_id."  ".$unique_pass;
+    }
+
+
+
     public function directorList(){
         $directors = Director::all();
         return view('admin.directorList')->with('directors', $directors);
+    }
+
+
+    public function directorUpdate(Request $request){
+        $directors = Director::where('user_id', $request->id)->first();
+        return view('admin.updateDirector')->with('director', $directors);
+    }
+
+    public function directorUpdateSubmitted(Request $request){
+
     }
 
 }

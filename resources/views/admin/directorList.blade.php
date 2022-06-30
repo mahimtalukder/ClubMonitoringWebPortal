@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">Data Table</h6>
-                        <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank"> Official DataTables Documentation </a>for a full list of instructions and other options.</p>
+                        <p class="text-muted mb-3">View, Edit and Block/Unblock Directors</p>
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table">
                                 <thead>
@@ -44,7 +44,7 @@
                                     <td>{{$director->gender}}</td>
                                     <td>{{$director->address}}</td>
                                     <td>
-                                        <a class="btn btn-primary me-1 mb-1">Edit</a>
+                                        <a href="/admin/update/director/{{$director->user_id}}" class="btn btn-primary me-1 mb-1">Edit</a>
                                         <a class="btn btn-danger me-1 mb-1">Block</a>
                                     </td>
                                 </tr>
