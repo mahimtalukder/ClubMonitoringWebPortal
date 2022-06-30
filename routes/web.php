@@ -6,6 +6,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DirectorController;
+use App\Http\Controllers\ClubController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ExecutiveController;
 
@@ -24,7 +25,10 @@ Route::get('/admin/profile', [AdminController::class, 'profile'])->name('adminPr
 Route::get('/admin/edit', [AdminController::class, 'editProfile'])->name('adminEditProfile');
 Route::post('/admin/editSubmitted', [AdminController::class, 'editProfileSubmitted'])->name('adminEditProfileSubmitted');
 Route::get('/admin/create/director', [AdminController::class, 'adminCreateDirector'])->name('adminCreateDirector');
+Route::post('/admin/create/director', [AdminController::class, 'adminCreateDirectorSubmitted'])->name('adminCreateDirectorSubmitted');
 Route::get('/admin/list/director', [AdminController::class, 'directorList'])->name('adminDirectorList');
+Route::get('/admin/update/director/{id}', [AdminController::class, 'directorUpdate'])->name('adminDirectorUpdate');
+Route::post('/admin/update/director/{id}', [AdminController::class, 'directorUpdateSubmitted'])->name('adminDirectorUpdateSubmitted');
 
 
 /* Director */
@@ -95,3 +99,14 @@ Route::post('/director/application/updateSubmitted', [ApplicationController::cla
 Route::get('/director/application/club/{id}', [DirectorController::class, 'clubWiseApplication'])
     ->name('clubWiseApplication')->middleware('validDirector');
 
+
+
+/* Director Club */
+Route::get('/director/club/allClub', [DirectorController::class, 'allClub'])->name('directorAllClub');
+Route::get('/director/club/info/{id}', [DirectorController::class, 'clubInfo'])->name('directorClubInfo');
+
+Route::get('/director/club/create', [DirectorController::class, 'createClub'])->name('directorCreateClub');
+Route::post('/director/club/createSubmitted', [DirectorController::class, 'createClubSubmitted'])->name('directorCreateClubSubmitted');
+
+
+Route::get('/print', [ClubController::class, 'print'])->name('print');

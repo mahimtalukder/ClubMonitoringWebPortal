@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Director;
 use App\Models\Application;
 use App\Models\Club;
+use App\Models\Member;
+use App\Models\Executive;
 use App\Http\Requests\StoreDirectorRequest;
 use App\Http\Requests\UpdateDirectorRequest;
 use Illuminate\Http\Request;
@@ -106,5 +108,53 @@ class DirectorController extends Controller
             ->with('clubs', $clubs)
             ->with('applications', $applications)
             ->with('labelName', 'Applications of '.$club_info->name);
+    }
+
+    public function allClub()
+    {
+        $clubs = Club::orderBy("created_at", "desc")->paginate(1);
+
+        return view('director.allClub')->with('clubs', $clubs);
+    }
+
+    public function clubInfo(Request $request)
+    {
+        $members = Member::where('club_id', '<=', $request->id)->get();
+        $total_member = $members->count();
+
+        $applications = Application::where('club_id', '<=', $request->id)->get();
+        $total_application = $applications->count();
+
+        $executives = Executive::where('club_id', '<=', $request->id)->get();
+        $total_executive = $executives->count();
+
+        $club = Club::where('id', '<=', $request->id)->first();
+
+        return view('director.clubInfo')
+        ->with('total_member',$total_member)
+        ->with('total_application',$total_application)
+        ->with('total_executive',$total_executive)
+        ->with('club',$club);
+    }
+
+    public function createClub()
+    {
+        return view('director.createClub');
+    }
+
+    public function createClubSubmitted(Request $request)
+    {
+        $validate = $request->validate([
+            "name" => "required|unique:clubs,name",
+        ]);
+
+        $director_session = session()->get('director');
+
+        $club = new Club();
+        $club->name = $request->name;
+        $club->created_by = $director_session->user_id;
+        $club->save();
+
+        return view('director.createClub')->with('message','New club successfully added!');
     }
 }

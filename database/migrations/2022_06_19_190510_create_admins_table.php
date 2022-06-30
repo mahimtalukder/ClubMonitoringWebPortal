@@ -18,16 +18,16 @@ class CreateAdminsTable extends Migration
             $table->primary('user_id');
             $table->foreign('user_id')->references('user_id')->on('users');
             $table->string('name');
-            $table->string('images');
-            $table->string('dob');
-            $table->string('gender');
+            $table->string('images')->nullable();
+            $table->string('dob')->nullable();
+            $table->string('gender')->nullable();
             $table->string('phone');
             $table->string('email');
-            $table->string('designation');
-            $table->string('organisation');
-            $table->string('bio');
-            $table->text('address');
-            $table->string('blood_group');
+            $table->string('designation')->nullable();
+            $table->string('organisation')->nullable();
+            $table->string('bio')->nullable();
+            $table->text('address')->nullable();
+            $table->string('blood_group')->nullable();
         });
     }
 
