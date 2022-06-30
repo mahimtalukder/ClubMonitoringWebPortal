@@ -9,6 +9,13 @@ use App\Models\Club;
 use App\Http\Requests\StoreExecutiveRequest;
 use App\Http\Requests\UpdateExecutiveRequest;
 use Illuminate\Http\Request;
+//for image
+use Illuminate\Support\Facades\Input;
+use App\Http\Controllers\Postimage;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageServiceProvider;
 
 class ExecutiveController extends Controller
 {
@@ -70,8 +77,39 @@ class ExecutiveController extends Controller
 
   public function executiveImageUpload(Request $request){
     $validate = $request->validate([
-      'image' => 'dimensions:width=100px,height=100px',
+      'image' => '',
   ] );
+  $member_session = session()->get('executive');
+  $member = Member::where("user_id", $member_session["user_id"])->first();
+
+
+  if(!empty($request->image)){
+    $filename=$request->image;
+    $path = public_path('C:/Users/mdali/Desktop/images' . $filename);
+    // $file->store('image');
+    // $path->save();
+    Image::make($request->image->getRealPath())->save($path);
+  }
+
+
+
+
+  // // $data= new Postimage();
+  // $image=$request->image;
+
+
+  //   $file= $request->file('image');
+  //   // $image = Input::file('img')
+  //   $filename = $image->getClientOriginalExtension();
+  //   // $path = public_path('C:/Users/mdali/Desktop/images' . $filename);
+  //   $file-> move(public_path('/images'), $filename);
+  //   Image::make($image->getRealPath())->save($file);
+  //   // $data['image']= $filename;
+  //   // $data->save();
+  //   $Member->image = $file;
+  //   $Member->save();
+
+
   return redirect()->route('executiveEditProfile');
   }
 
@@ -96,6 +134,15 @@ class ExecutiveController extends Controller
       "password" => "required"
       
       ] );
+
+      $member_session = session()->get('executive');
+      $member = Member::where("user_id", $member_session["user_id"])->first();
+
+      static::created(function ($obj) {
+        // $obj->id= Member::"13-"."$Id+1"."-3";
+        $obj->save();
+    });
+
       $User = new  User();
       $User->user_id = $request->user_id;
       $User->password =$request->password;
@@ -107,9 +154,22 @@ class ExecutiveController extends Controller
       $Member->club_id = $request->club_id;
       $Member->name = $request->name;
       $Member->email = $request->email;
+      $Member->phone = $request->phone;
+      $Member->gender = $request->gender;
+      $Member->dob = $request->dob;
+      $Member->blood_group = $request->blood_group;
+      $Member->address = $request->address;
       $Member->save();
 
       return redirect()->route("executiveCreateMambersubmitted");
+      }
+
+      public function MemberDelete(Request $request)
+      {
+        $User = User::where('username',$request->user_id)->delete();
+        $Member = Member::where('username',$request->user_id)->delete();
+        
+        return redirect()->route('employeeList')->with([ 'error_message' => "Employee deleted" ]);
       }
 
 

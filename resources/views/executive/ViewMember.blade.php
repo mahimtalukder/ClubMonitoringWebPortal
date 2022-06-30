@@ -26,7 +26,7 @@
                     <td>{{$MemberList['email']}}</td>
                     <td>{{$MemberList['designation']}}</td>
                     <td>
-                        <a href="" class="btn btn-primary btn-icon-text">Edit</a>
+                        <a href="" class="btn btn-primary btn-icon-text">Update</a>
                         {{-- /admin/editEmployee/{{$employee['username']}} --}}
                    
                         <a href="" class="btn btn-danger btn-icon-text">Block</a>
