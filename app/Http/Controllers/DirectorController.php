@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Director;
 use App\Models\Application;
 use App\Models\Club;
+use App\Models\Member;
+use App\Models\Executive;
 use App\Http\Requests\StoreDirectorRequest;
 use App\Http\Requests\UpdateDirectorRequest;
 use Illuminate\Http\Request;
@@ -115,11 +117,29 @@ class DirectorController extends Controller
         return view('director.allClub')->with('clubs', $clubs);
     }
 
+    public function clubInfo(Request $request)
+    {
+        $members = Member::where('club_id', '<=', $request->id)->get();
+        $total_member = $members->count();
+
+        $applications = Application::where('club_id', '<=', $request->id)->get();
+        $total_application = $applications->count();
+
+        $executives = Executive::where('club_id', '<=', $request->id)->get();
+        $total_executive = $executives->count();
+
+        $club = Club::where('id', '<=', $request->id)->first();
+
+        return view('director.clubInfo')
+        ->with('total_member',$total_member)
+        ->with('total_application',$total_application)
+        ->with('total_executive',$total_executive)
+        ->with('club',$club);
+    }
+
     public function createClub()
     {
-        $director_session = session()->get('director');
-        $director = director::where("user_id", $director_session["user_id"])->first();
-        return view('director.createClub')->with('director_info', $director);
+        return view('director.createClub');
     }
 
     public function createClubSubmitted(Request $request)

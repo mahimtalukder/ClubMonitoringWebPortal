@@ -92,13 +92,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button" aria-expanded="false"
-                      aria-controls="general-pages">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#clubs" role="button" aria-expanded="false"
+                      aria-controls="#clubs">
                       <i class="link-icon" data-feather="mail"></i>
                       <span class="link-title">Club</span>
                       <i class="link-arrow" data-feather="chevron-down"></i>
                     </a>
-                    <div class="collapse" id="general-pages">
+                    <div class="collapse" id="clubs">
                       <ul class="nav sub-menu">
                           <li class="nav-item">
                               <a href="{{ route('directorAllClub') }}" class="nav-link">All Club</a>

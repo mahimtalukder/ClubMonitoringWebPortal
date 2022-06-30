@@ -43,7 +43,7 @@
                                     <div class="email-list-actions">
                                         <i class="link-icon" data-feather="folder"></i>
                                     </div>
-                                    <a href="{{route('directorClubInfo',['id' => $club->id])}}" class="email-list-detail">
+                                    <a href="{{route('directorClubInfo',['id' => $club->id])}}" target="_blank" class="email-list-detail">
                                         <div class="content">
                                             <span class="from">{{$club->name}}</span>
                                         </div>
@@ -58,7 +58,4 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection

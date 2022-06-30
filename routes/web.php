@@ -6,6 +6,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DirectorController;
+use App\Http\Controllers\ClubController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ExecutiveController;
 
@@ -103,3 +104,6 @@ Route::get('/director/club/info/{id}', [DirectorController::class, 'clubInfo'])-
 
 Route::get('/director/club/create', [DirectorController::class, 'createClub'])->name('directorCreateClub');
 Route::post('/director/club/createSubmitted', [DirectorController::class, 'createClubSubmitted'])->name('directorCreateClubSubmitted');
+
+
+Route::get('/print', [ClubController::class, 'print'])->name('print');
