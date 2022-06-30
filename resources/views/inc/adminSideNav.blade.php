@@ -70,6 +70,20 @@
                         <span class="link-title">Edit Profile</span>
                     </a>
                 </li>
+
+                <li class="nav-item nav-category">Director</li>
+                <li class="nav-item">
+                    <a href="{{ route('adminCreateDirector') }}" class="nav-link">
+                        <i class="link-icon" data-feather="box"></i>
+                        <span class="link-title">Create Director Account</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('adminDirectorList') }}" class="nav-link">
+                        <i class="link-icon" data-feather="box"></i>
+                        <span class="link-title">Director List</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>

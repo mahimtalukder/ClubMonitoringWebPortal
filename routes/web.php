@@ -23,6 +23,9 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 Route::get('/admin/profile', [AdminController::class, 'profile'])->name('adminProfile');
 Route::get('/admin/edit', [AdminController::class, 'editProfile'])->name('adminEditProfile');
 Route::post('/admin/editSubmitted', [AdminController::class, 'editProfileSubmitted'])->name('adminEditProfileSubmitted');
+Route::get('/admin/create/director', [AdminController::class, 'adminCreateDirector'])->name('adminCreateDirector');
+Route::get('/admin/list/director', [AdminController::class, 'directorList'])->name('adminDirectorList');
+
 
 /* Director */
 Route::get('/director/dashboard', [DirectorController::class, 'dashboard'])->name('directorDash');

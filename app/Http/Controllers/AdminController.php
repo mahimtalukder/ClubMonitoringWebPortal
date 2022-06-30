@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Director;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use Illuminate\Http\Request;
@@ -52,6 +53,15 @@ class AdminController extends Controller
         'address' => $request->address,
         ]);
         return redirect()->route('adminEditProfile');
+    }
+
+    public function adminCreateDirector(){
+        return view('admin.createDirector');
+    }
+
+    public function directorList(){
+        $directors = Director::all();
+        return view('admin.directorList')->with('directors', $directors);
     }
 
 }
