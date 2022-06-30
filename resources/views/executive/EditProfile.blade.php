@@ -1,5 +1,5 @@
 <?php $executive = session()->get('executive')?>
-@extends('layouts.memberLayout')
+@extends('layouts.executiveLayout')
 @section('title', $executive['name'])
 @section('picture', $executive['images'])
 @section('name', $executive['name'])
@@ -189,11 +189,10 @@
                         <div class="card-body">
                             <form action="{{route('executiveImageUpload')}}" method="post">
                                 {{ csrf_field() }}
-
                                 <h6 class="card-title">Change Profile Picture</h6>
                                 <p class="text-muted mb-3">Image must be 100X100 px.</p>
                                 <div class="mb-3">
-                                    <input class="form-control" type="file" id="formFile" name="image">
+                                    <input class="form-control" type="file"  name="image">
                                 </div>
                                 @error('image')
                                     <span class="text-danger">{{$message}}</span>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Executive;
 use App\Models\Member;
 use App\Models\Club;
@@ -73,5 +74,43 @@ class ExecutiveController extends Controller
   ] );
   return redirect()->route('executiveEditProfile');
   }
+
+  public function ViewAllMamber(){
+
+    $Member = Member::paginate(6);
+
+    return view('executive.ViewMember')->with('MemberList', $Member);
+  }
+
+  public function CreateNewMamber(){
+
+    return view('executive.NewMember');
+
+  }
+
+  public function CreateMamber(Request $request){
+
+    $validate = $request->validate([
+      "name" => "required|regex:/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/u",
+      "email" => "email",
+      "password" => "required"
+      
+      ] );
+      $User = new  User();
+      $User->user_id = $request->user_id;
+      $User->password =$request->password;
+      $User->user_type="member";
+      $User->save();
+
+      $Member = new  Member();
+      $Member->user_id = $request->user_id;
+      $Member->club_id = $request->club_id;
+      $Member->name = $request->name;
+      $Member->email = $request->email;
+      $Member->save();
+
+      return redirect()->route("executiveCreateMambersubmitted");
+      }
+
 
 }

@@ -90,6 +90,28 @@
                       </ul>
                     </div>
                   </li>
+                  
+
+
+                  <li class="nav-item nav-category">Users</li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button" aria-expanded="false"
+                        aria-controls="general-pages">
+                        <i class="link-icon" data-feather="user"></i>
+                        <span class="link-title">Members</span>
+                        <i class="link-arrow" data-feather="chevron-down"></i>
+                      </a>
+                      <div class="collapse" id="general-pages">
+                        <ul class="nav sub-menu">
+                            <li class="nav-item">
+                                <a href="{{route('executiveViewAllMamber')}}" class="nav-link">All Members</a>
+                            </li>
+                          <li class="nav-item">
+                            <a href="{{route('executiveCreateNewMamber')}}" class="nav-link">New Members</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
             </ul>
 
 
