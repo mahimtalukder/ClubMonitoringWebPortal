@@ -22,7 +22,7 @@ class CreateDirectorsTable extends Migration
             $table->string('dob')->nullable();
             $table->string('gender')->nullable();
             $table->string('phone');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('designation')->nullable();
             $table->string('organisation')->nullable();
             $table->string('bio')->nullable();

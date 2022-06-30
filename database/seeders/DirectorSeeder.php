@@ -21,7 +21,7 @@ class DirectorSeeder extends Seeder
             'dob' => '31-12-1980',
             'gender' => 'male',
             'phone' => '01712458721',
-            'email' => 'ador@gmail.com',
+            'email' => 'adosr@gmail.com',
             'designation' => 'Admin',
             'organisation' => 'Club Monitoring Web Portal',
             'bio' => 'Hi! I am Syed the Senior Admin at CMWP. We hope you enjoy the software and quality of Social.',

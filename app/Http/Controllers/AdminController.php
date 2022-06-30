@@ -6,7 +6,10 @@ use App\Models\Admin;
 use App\Models\Director;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -66,8 +69,8 @@ class AdminController extends Controller
     public function adminCreateDirectorSubmitted(Request $request){
         $validate = $request->validate([
             "name" => "required|regex:/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/u",
-            "email" => "email",
-            "phone" => "required|numeric"
+            "email" => "email|unique:directors,email",
+            "phone" => "required|numeric||unique:directors,phone"
         ]);
 
         //Generating unique id for director
@@ -96,7 +99,36 @@ class AdminController extends Controller
         }
         $unique_pass = implode($pass);
 
-        return $unique_id."  ".$unique_pass;
+
+        try {
+            DB::transaction(function () use ($unique_id, $unique_pass, $request){
+                $user = new User();
+                $user->user_id = $unique_id;
+                $user->password = Hash::make($unique_pass);
+                $user->user_type = "director";
+                $user->save();
+
+                $director = new Director();
+                $director->user_id = $unique_id;
+                $director->name = $request->name;
+                $director->designation = $request->designation;
+                $director->email = $request->email;
+                $director->phone = $request->phone;
+                $director->blood_group = $request->blood_group;
+                $director->gender = $request->gender;
+                $director->dob = $request->dob;
+                $director->address = $request->address;
+                $director->images = "../assets_2/images/faces/default.png";
+                $director->save();
+            }, 5);
+        }
+        catch (\Exception $e){
+            DB::rollBack();
+            return $e->getMessage();
+        }
+
+
+        return view('admin.createDirector')->with('message', "Account created successfully. Note: User ID and Password sent to his email address.");
     }
 
 
