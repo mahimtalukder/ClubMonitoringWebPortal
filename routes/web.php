@@ -20,6 +20,8 @@ Route::get('/logout',[UserController::class,'logout'])->name('logout');
 Route::get('/singup',[UserController::class, 'singup'])->name("singup");
 Route::get('/forgetPassword',[UserController::class, 'forgetPassword'])->name("forgetPassword");
 Route::post('/forgotPasswordSubmitted',[UserController::class, 'forgotPasswordSubmitted'])->name("forgotPasswordSubmitted");
+Route::get('/resetPassword/{user_id}',[UserController::class, 'resetPassword'])->name("resetPassword");
+Route::post('/resetPasswordSubmitted',[UserController::class, 'resetPasswordSubmitted'])->name("resetPasswordSubmitted");
 
 /* Admin */
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adminDash');
