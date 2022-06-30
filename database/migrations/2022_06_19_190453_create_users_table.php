@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('user_type');
             $table->integer('status');
+            $table->integer('reset_password_otp')->nullable();
             $table->timestamps();
         });
     }

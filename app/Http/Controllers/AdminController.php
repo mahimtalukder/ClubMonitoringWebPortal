@@ -134,7 +134,9 @@ class AdminController extends Controller
 
 
     public function directorList(){
-        $directors = Director::all();
+        $directors = User::select('directors.*', 'users.status')
+            ->join('directors', 'users.user_id', '=', 'directors.user_id')
+            ->get();
         return view('admin.directorList')->with('directors', $directors);
     }
 
