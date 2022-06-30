@@ -157,4 +157,35 @@ class DirectorController extends Controller
 
         return view('director.createClub')->with('message','New club successfully added!');
     }
+
+
+    public function directorImageUpload(Request $request){
+        $request->validate([
+          'image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000',
+      ]);
+    
+    
+    
+        if($request->hasFile('image')){
+            $director_session = session()->get('director');
+            $imageName = time()."_".$request->file('image')->getClientOriginalName();
+            $request->image->move(public_path('assets_2/images'), $imageName);
+            $imageName = "assets_2/images/".$imageName;
+    
+      
+              /* New File name */
+              $newFileName = 'assets_2/images/'.time()."_".$director_session['user_id'].'.'.$request->file('image')->getClientOriginalExtension();
+              rename($imageName, $newFileName);
+                
+            $imageName='../'.$newFileName;
+                     
+            $director = director::where("user_id", $director_session["user_id"])->update([
+                'images' => $imageName
+                ]);
+            $director_session['images'] = $imageName;
+    
+            session()->put('director', $director_session);
+            return redirect()->route('directorEditProfile');
+        }
+      }
 }

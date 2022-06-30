@@ -148,4 +148,34 @@ class AdminController extends Controller
 
     }
 
+
+    public function adminImageUpload(Request $request){
+        $request->validate([
+          'image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000',
+      ]);
+    
+    
+        if($request->hasFile('image')){
+            $admin_session = session()->get('admin');
+            $imageName = time()."_".$request->file('image')->getClientOriginalName();
+            $request->image->move(public_path('assets_2/images'), $imageName);
+            $imageName = "assets_2/images/".$imageName;
+    
+      
+              /* New File name */
+              $newFileName = 'assets_2/images/'.time()."_".$admin_session['user_id'].'.'.$request->file('image')->getClientOriginalExtension();
+              rename($imageName, $newFileName);
+                
+            $imageName='../'.$newFileName;
+                     
+            $admin = Admin::where("user_id", $admin_session["user_id"])->update([
+                'images' => $imageName
+                ]);
+            $admin_session['images'] = $imageName;
+    
+            session()->put('admin', $admin_session);
+            return redirect()->route('adminEditProfile');
+        }
+      }
+
 }

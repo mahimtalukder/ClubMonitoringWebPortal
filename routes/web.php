@@ -30,6 +30,8 @@ Route::post('/admin/create/director', [AdminController::class, 'adminCreateDirec
 Route::get('/admin/list/director', [AdminController::class, 'directorList'])->name('adminDirectorList');
 Route::get('/admin/update/director/{id}', [AdminController::class, 'directorUpdate'])->name('adminDirectorUpdate');
 Route::post('/admin/update/director/{id}', [AdminController::class, 'directorUpdateSubmitted'])->name('adminDirectorUpdateSubmitted');
+Route::post('/admin/edit/upload', [AdminController::class, 'adminImageUpload'])->name('adminImageUploadsubmitted');
+
 
 
 /* Director */
@@ -37,12 +39,15 @@ Route::get('/director/dashboard', [DirectorController::class, 'dashboard'])->nam
 Route::get('/director/profile', [DirectorController::class, 'profile'])->name('directorProfile');
 Route::get('/director/edit', [DirectorController::class, 'EditProfile'])->name('directorEditProfile');
 Route::post('/director/edit', [DirectorController::class, 'editProfileSubmitted'])->name('directorEditProfileSubmitted');
+Route::post('/director/edit/upload', [DirectorController::class, 'directorImageUpload'])->name('directorImageUploadsubmitted');
+
 
 /* Member */
 Route::get('/member', [MemberController::class, 'dashboard'])->name('memberDash');
 Route::get('/member/profile', [MemberController::class, 'profile'])->name('memberProfile');
 Route::get('/member/edit', [MemberController::class, 'EditProfile'])->name('memberEditProfile');
 Route::post('/member/edit', [MemberController::class, 'editProfileSubmitted'])->name('memberEditProfileSubmitted');
+Route::post('/member/edit/upload', [MemberController::class, 'memberImageUpload'])->name('memberImageUploadsubmitted');
 
 
 /* Executive */
