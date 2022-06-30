@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Session;
 use App\Mail\ResetPassword;
-use App\Models\Subscriber;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
