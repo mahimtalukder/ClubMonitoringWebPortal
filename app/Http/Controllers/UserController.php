@@ -203,7 +203,7 @@ class UserController extends Controller
             return view('user.signin')->with('message', "Password reset successfully done!");
         } 
         else {
-            return view('user.resetPassword')->with(['error_message' => "Information not found"]);
+            return view('user.resetPassword')->with(['error_message' => "Information not found"])->with('user_id', $request->user_id);
         }
     }
 }
