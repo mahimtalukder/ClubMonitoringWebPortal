@@ -134,7 +134,9 @@ class AdminController extends Controller
 
 
     public function directorList(){
-        $directors = Director::all();
+        $directors = User::select('directors.*', 'users.status')
+            ->join('directors', 'users.user_id', '=', 'directors.user_id')
+            ->get();
         return view('admin.directorList')->with('directors', $directors);
     }
 
@@ -146,6 +148,13 @@ class AdminController extends Controller
 
     public function directorUpdateSubmitted(Request $request){
 
+    }
+
+    public function directorStatusUpdate(Request  $request){
+        User::where('user_id', $request->id)->update([
+            'status' => $request->status_code
+        ]);
+        return redirect()->route('adminDirectorList')->with('message', 'Status changed successfully');
     }
 
 }

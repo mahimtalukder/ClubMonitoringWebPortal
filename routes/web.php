@@ -30,7 +30,7 @@ Route::post('/admin/create/director', [AdminController::class, 'adminCreateDirec
 Route::get('/admin/list/director', [AdminController::class, 'directorList'])->name('adminDirectorList');
 Route::get('/admin/update/director/{id}', [AdminController::class, 'directorUpdate'])->name('adminDirectorUpdate');
 Route::post('/admin/update/director/{id}', [AdminController::class, 'directorUpdateSubmitted'])->name('adminDirectorUpdateSubmitted');
-
+Route::get('/admin/update/status/director/{id}/{status_code}', [AdminController::class, 'directorStatusUpdate'])->name('directorStatusUpdate');
 
 /* Director */
 Route::get('/director/dashboard', [DirectorController::class, 'dashboard'])->name('directorDash');
