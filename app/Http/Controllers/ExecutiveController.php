@@ -76,19 +76,33 @@ class ExecutiveController extends Controller
 
 
   public function executiveImageUpload(Request $request){
-    $validate = $request->validate([
-      'image' => '',
-  ] );
-  $member_session = session()->get('executive');
-  $member = Member::where("user_id", $member_session["user_id"])->first();
+    $request->validate([
+      'image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000',
+  ]);
 
 
-  if(!empty($request->image)){
-    $filename=$request->image;
-    $path = public_path('C:/Users/mdali/Desktop/images' . $filename);
-    // $file->store('image');
-    // $path->save();
-    Image::make($request->image->getRealPath())->save($path);
+
+    if($request->hasFile('image')){
+        $member_session = session()->get('executive');
+        $imageName = time()."_".$request->file('image')->getClientOriginalName();
+        $request->image->move(public_path('assets_2/images'), $imageName);
+        $imageName = "assets_2/images/".$imageName;
+
+  
+          /* New File name */
+          $newFileName = 'assets_2/images/'.time()."_".$member_session['user_id'].'.'.$request->file('image')->getClientOriginalExtension();
+          rename($imageName, $newFileName);
+            
+        $imageName='../'.$newFileName;
+                 
+        $member = Member::where("user_id", $member_session["user_id"])->update([
+            'images' => $imageName
+            ]);
+        $member_session['images'] = $imageName;
+
+        session()->put('executive', $member_session);
+        return redirect()->route('executiveEditProfile');
+    }
   }
 
 
@@ -110,8 +124,7 @@ class ExecutiveController extends Controller
   //   $Member->save();
 
 
-  return redirect()->route('executiveEditProfile');
-  }
+ 
 
   public function ViewAllMamber(){
 

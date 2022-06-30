@@ -18,6 +18,7 @@ Route::post('/signinSubmitted',[UserController::class, 'signinSubmitted'])->name
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
 Route::get('/singup',[UserController::class, 'singup'])->name("singup");
+Route::get('/forgetPassword',[UserController::class, 'forgetPassword'])->name("forgetPassword");
 
 /* Admin */
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adminDash');

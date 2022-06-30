@@ -108,4 +108,9 @@ class UserController extends Controller
     {
         return view('user.singup');
     }
+
+    public function forgetPassword()
+    {
+        return view('user.forgetPassword');
+    }
 }
