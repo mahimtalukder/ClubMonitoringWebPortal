@@ -12,7 +12,7 @@
                 @if (!empty($error_message))
                     <h5 class="text-danger">{{$error_message}}</h5>
                 @endif
-                <form class="forms-sample" action="{{route('signinSubmitted')}}" method="post">
+                <form class="forms-sample" action="{{route('forgotPasswordSubmitted')}}" method="post">
                     {{csrf_field()}}
                     <div class="mb-3">
                         <label for="id" class="form-label">Enter Id</label>

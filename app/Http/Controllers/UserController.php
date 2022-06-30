@@ -12,6 +12,11 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Session;
+use App\Mail\ResetPassword;
+use App\Models\Subscriber;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -112,5 +117,26 @@ class UserController extends Controller
     public function forgetPassword()
     {
         return view('user.forgetPassword');
+    }
+
+    public function forgotPasswordSubmitted(Request $request)
+    {
+        $validate = $request->validate([
+            "id" => "required",
+        ]);
+
+        $user = User::where("user_id",$request->id)->first();
+
+        $director = Director::where('user_id',$request->id)->first();
+        Mail::to($director->email)->send(new ResetPassword($director->email));
+
+            return new JsonResponse(
+            [
+                'success' => true, 
+                'message' => "Thank you for subscribing to our email, please check your inbox"
+            ], 
+            200
+        );
+
     }
 }
