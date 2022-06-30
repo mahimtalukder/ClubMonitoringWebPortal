@@ -60,7 +60,9 @@ class DirectorController extends Controller
 
     public function allApplication(){
         $clubs = Club::all();
-        $applications = Application::where('sent_to', 'director')->paginate(1);
+        $applications = Application::where('sent_to', 'director')
+            ->orderBy("created_at", "desc")
+            ->paginate(1);
 
         return view('director.applications')
             ->with('applications', $applications)
@@ -80,19 +82,14 @@ class DirectorController extends Controller
             ->get();
 
         $club = Club::where("id", $application_info->club_id)->first();
+        $clubs = Club::all();
 
-        if($application_info->is_approved == "pending"){
-            return view('director.updateApplication')
-            ->with('application_info', $application_info)
-            ->with('requested_components',$requested_components)
-            ->with('club',$club)
-            ->with('labelName', 'Read Applications');
-        }
 
-        return view('director.readApplication')
+        return view('director.readUpdateApplication')
         ->with('application_info', $application_info)
         ->with('requested_components',$requested_components)
         ->with('club',$club)
+        ->with('clubs',$clubs)
         ->with('labelName', 'Read Applications');
     }
 

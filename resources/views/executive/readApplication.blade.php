@@ -51,7 +51,7 @@
                                 @if($requested_components->count() != 0)
                                 <div class="mb-3">Requested Components</div>
                                 <div class="col-md-12 border-2">
-                                    <div class="mb-3">
+                                    <div class="mb-3 table-responsive">
                                         <table class="table">
                                             <thead>
                                             <tr>
@@ -90,7 +90,7 @@
                                 <div class="mb-3">Approved Date: 13/05/2022</div>
                                 <div>Approved Components</div>
                                 <div class="col-md-12 border-2 mt-3">
-                                    <div class="mb-3">
+                                    <div class="mb-3 table-responsive">
                                         <table class="table table-bordered">
                                             <thead>
                                             <tr>

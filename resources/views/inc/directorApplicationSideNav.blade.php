@@ -23,7 +23,7 @@
         <div class="email-aside-nav collapse mt-2">
             <ul class="nav flex-column">
                 <li class="nav-item @if($labelName == "Applications") {{"active"}} @endif" >
-                    <a class="nav-link d-flex align-items-center" href="{{route('executiveAllApplication')}}">
+                    <a class="nav-link d-flex align-items-center" href="{{route('directorAllApplication')}}">
                         <i data-feather="inbox" class="icon-lg me-2"></i>
                         All Applications
                     </a>
