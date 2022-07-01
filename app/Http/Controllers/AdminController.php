@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPassword;
 use App\Models\Admin;
 use App\Models\Director;
 use App\Http\Requests\StoreAdminRequest;
@@ -10,6 +11,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DirectorAccountLoginCredentials;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -121,12 +126,27 @@ class AdminController extends Controller
                 $director->address = $request->address;
                 $director->images = "../assets_2/images/faces/default.png";
                 $director->save();
+
+                /*Mail login credentials to the user*/
+                $data = array(
+                    'name' => $request->name,
+                    'email' => $request->name,
+                    'user_id' => $unique_id,
+                    'password' => $unique_pass
+                );
+
+                Mail::to($request->email)->send(new DirectorAccountLoginCredentials($data));
+                /* Mail end */
+
             }, 5);
+
         }
         catch (\Exception $e){
             DB::rollBack();
             return $e->getMessage();
         }
+
+
 
 
         return view('admin.createDirector')->with('message', "Account created successfully. Note: User ID and Password sent to his email address.");
@@ -161,7 +181,6 @@ class AdminController extends Controller
         ]);
 
 
-        return redirect()->route('adminDirectorUpdate',['id' => $request->id]);
     }
 
 
@@ -169,26 +188,26 @@ class AdminController extends Controller
         $request->validate([
           'image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000',
       ]);
-    
-    
+
+
         if($request->hasFile('image')){
             $admin_session = session()->get('admin');
             $imageName = time()."_".$request->file('image')->getClientOriginalName();
             $request->image->move(public_path('assets_2/images'), $imageName);
             $imageName = "assets_2/images/".$imageName;
-    
-      
+
+
               /* New File name */
               $newFileName = 'assets_2/images/'.time()."_".$admin_session['user_id'].'.'.$request->file('image')->getClientOriginalExtension();
               rename($imageName, $newFileName);
-                
+
             $imageName='../'.$newFileName;
-                     
+
             $admin = Admin::where("user_id", $admin_session["user_id"])->update([
                 'images' => $imageName
                 ]);
             $admin_session['images'] = $imageName;
-    
+
             session()->put('admin', $admin_session);
             return redirect()->route('adminEditProfile');
         }
