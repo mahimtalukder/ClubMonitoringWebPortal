@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\ResetPassword;
 use App\Models\Admin;
+use App\Models\Club;
+use App\Models\Member;
 use App\Models\Director;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
@@ -48,7 +50,25 @@ class AdminController extends Controller
             }
         }
 
-      return view('admin.dashboard')->with('numberOfuser',$numberOfuser);
+        $clubs= Club::all();
+        $members= Member::all();
+
+        foreach ($clubs as $club){
+            $club['total_member']=0;
+        }
+
+        foreach ($members as $member){
+            foreach ($clubs as $club){
+                if($club['id']==$member->club_id){
+                    $club['total_member']+=1;
+                }
+            }
+
+        }
+
+
+
+      return view('admin.dashboard')->with('numberOfuser',$numberOfuser)->with('clubs',$clubs);
     }
 
     public function profile(){

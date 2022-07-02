@@ -1,4 +1,23 @@
+function getRandomColor() {
+  var colors2 = {
+    'primary'        : "#6571ff",
+    'secondary'      : "#7987a1",
+    'success'        : "#05a34a",
+    'info'           : "#66d1d1",
+    'warning'        : "#fbbc06",
+    'danger'         : "#ff3366",
+    'light'          : "#e9ecef",
+    'dark'           : "#060c17",
+    'muted'          : "#7987a1",
+  }
+
+  var col = Object.keys(colors2)[Math.floor(Math.random()*Object.keys(colors2).length)];
+  return col;
+}
+
+
 $(function() {
+
   'use strict';
 
 
@@ -17,22 +36,50 @@ $(function() {
     cardBg         : "#fff"
   }
 
+  var colors2 = {
+    'primary'        : "#6571ff",
+    'secondary'      : "#7987a1",
+    'success'        : "#05a34a",
+    'info'           : "#66d1d1",
+    'warning'        : "#fbbc06",
+    'danger'         : "#ff3366",
+    'light'          : "#e9ecef",
+    'dark'           : "#060c17",
+    'muted'          : "#7987a1",
+    'gridBorder'     : "rgba(77, 138, 240, .15)",
+    'bodyColor'      : "#000",
+    'cardBg'         : "#fff"
+  }
+
+
   var fontFamily = "'Roboto', Helvetica, sans-serif"
 
 
 
 
   // Bar chart
-  if($('#chartjsBar').length) {
-    new Chart($("#chartjsBar"), {
+  if($('#clubInfoChartjsBar').length) {
+    var total_club = $('#total_club').val();
+    var label =[];
+    var color = [];
+    var data_set = [];
+    for(var i = 0; i < total_club; i++)//see that I removed the $ preceeding the `for` keyword, it should not have been there
+    {
+      var club_name = '#'+'clubname'+i;
+      var total_menber = '#'+'total_menber'+i;
+      label.push($(club_name).val());
+      color.push(colors2[getRandomColor()]);
+      data_set.push($(total_menber).val());
+    } 
+    new Chart($("#clubInfoChartjsBar"), {
       type: 'bar',
       data: {
-        labels: [ "China", "America", "India", "Germany", "Oman"],
+        labels: label,
         datasets: [
           {
             label: "Population",
-            backgroundColor: [colors.primary, colors.danger, colors.warning, colors.success, colors.info],
-            data: [2478,5267,734,2084,1433],
+            backgroundColor: color,
+            data: data_set,
           }
         ]
       },
@@ -199,17 +246,7 @@ $(function() {
       type: 'line',
       data: {
         labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-        datasets: [{ 
-            data: [86,114,106,106,107,111,133,221,783,2478],
-            label: "Africa",
-            borderColor: colors.danger,
-            backgroundColor: 'rgba(255,51,102,.3)',
-            fill: true,
-            pointBackgroundColor: colors.cardBg,
-            pointBorderWidth: 2,
-            pointHoverBorderWidth: 3,
-            tension: .3
-          }, { 
+        datasets: [ { 
             data: [282,350,411,502,635,809,947,1402,3700,5267],
             label: "Asia",
             borderColor: colors.info,
