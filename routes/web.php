@@ -68,6 +68,16 @@ Route::get('/executive/NewMembers', [ExecutiveController::class, 'CreateNewMambe
 Route::post('/executive/NewMembers', [ExecutiveController::class, 'CreateMamber'])->name('executiveCreateMambersubmitted');
 
 
+Route::get('/executive/update/status/member/{user_id}/{status_code}', [ExecutiveController::class, 'MemberStatusUpdate'])->name('memberexecutiveStatusUpdate');
+
+
+Route::get('/executive/update/member/{user_id}', [ExecutiveController::class, 'UpdateMamber'])->name('executiveUpdateMamber');
+Route::post('/executive/update/member/{user_id}', [ExecutiveController::class, 'UpdateMemberSubmitted'])->name('executiveUpdateMemberSubmitted');
+
+
+
+
+
 
 
 

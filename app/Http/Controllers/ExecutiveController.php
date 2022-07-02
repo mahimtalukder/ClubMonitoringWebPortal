@@ -9,6 +9,9 @@ use App\Models\Club;
 use App\Http\Requests\StoreExecutiveRequest;
 use App\Http\Requests\UpdateExecutiveRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 //for image
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Postimage;
@@ -128,9 +131,18 @@ class ExecutiveController extends Controller
 
   public function ViewAllMamber(){
 
-    $Member = Member::paginate(6);
+    $member = User::select('members.*', 'users.status')
+    ->join('members', 'users.user_id', '=', 'members.user_id')
+    ->get();
 
-    return view('executive.ViewMember')->with('MemberList', $Member);
+
+    if (Session::has('message')){
+      $message = session()->get('message');
+      session()->forget('message');
+      return view('executive.ViewMember')->with('MemberList', $member)->with('message', $message);
+  }
+
+    return view('executive.ViewMember')->with('MemberList', $member);
   }
 
   public function CreateNewMamber(){
@@ -143,38 +155,71 @@ class ExecutiveController extends Controller
 
     $validate = $request->validate([
       "name" => "required|regex:/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/u",
-      "email" => "email",
-      "password" => "required"
-      
-      ] );
+      "email" => "email|unique:directors,email",
+      "phone" => "required|numeric||unique:directors,phone"
+  ]);
 
-      $member_session = session()->get('executive');
-      $member = Member::where("user_id", $member_session["user_id"])->first();
+  //Generating unique id for director
+  $members = json_encode(Member::all());
+  $members = json_decode($members);
+  $unique_id = "";
+  if(!empty($members)) {
+      $last_members = end($members);
+      $last_members_id = $last_members->user_id;
+      $arr = explode("-", $last_members_id);
+      $id_mid = (int)$arr[1];
+      $id_changed = $id_mid + 1;
+      $unique_id = "13" . "-" . $id_changed . "-" . "3";
+  }
+  else{
+      $unique_id= "13" . "-" ."10001"."-". "3";
+  }
 
-      static::created(function ($obj) {
-        // $obj->id= Member::"13-"."$Id+1"."-3";
-        $obj->save();
-    });
+  //generating unique password
+  $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+  $pass = array(); //remember to declare $pass as an array
+  $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+  for ($i = 0; $i < 8; $i++) {
+      $n = rand(0, $alphaLength);
+      $pass[] = $alphabet[$n];
+  }
+  $unique_pass = implode($pass);
 
-      $User = new  User();
-      $User->user_id = $request->user_id;
-      $User->password =$request->password;
-      $User->user_type="member";
-      $User->save();
+  $member_session = session()->get('executive');
+  $executive = Member::where("user_id", $member_session["user_id"])->first();
 
-      $Member = new  Member();
-      $Member->user_id = $request->user_id;
-      $Member->club_id = $request->club_id;
-      $Member->name = $request->name;
-      $Member->email = $request->email;
-      $Member->phone = $request->phone;
-      $Member->gender = $request->gender;
-      $Member->dob = $request->dob;
-      $Member->blood_group = $request->blood_group;
-      $Member->address = $request->address;
-      $Member->save();
 
-      return redirect()->route("executiveCreateMambersubmitted");
+      try {
+          DB::transaction(function () use ($unique_id, $unique_pass,$executive, $request){
+              $user = new User();
+              $user->user_id = $unique_id;
+              $user->password = Hash::make($unique_pass);
+              $user->user_type = "member";
+              $user->status=1;
+              $user->save();
+
+              $Member = new  Member();
+              $Member->user_id = $unique_id;
+              $Member->club_id = $executive->club_id;
+              $Member->name = $request->name;
+              $Member->designation = $request->designation;
+              $Member->email = $request->email;
+              $Member->phone = $request->phone;
+              $Member->blood_group = $request->blood_group;
+              $Member->gender = $request->gender;
+              $Member->dob = $request->dob;
+              $Member->address = $request->address;
+              $Member->images = "../assets_2/images/faces/default.png";
+              $Member->save();
+              }, 5);
+          }
+          catch (\Exception $e){
+              DB::rollBack();
+              return $e->getMessage();
+          }
+
+
+      return view("executive.NewMember")->with('message', "Account created successfully. Note: User ID and Password sent to his email address.");
       }
 
       public function MemberDelete(Request $request)
@@ -184,6 +229,54 @@ class ExecutiveController extends Controller
         
         return redirect()->route('employeeList')->with([ 'error_message' => "Employee deleted" ]);
       }
+
+
+      public function MemberStatusUpdate(Request $request){
+        User::where('user_id', $request->user_id)->where('user_type', 'member')->update([
+            'status' => $request->status_code
+        ]);
+
+        $message = "";
+        if($request->status_code == 0){
+            $message = $request->user_id." blocked successfully. To unblock press the Unblock button";
+        }
+        else
+        {
+            $message = $request->user_id." unblocked successfully. To block press the block button";
+        }
+
+        return redirect()->route('executiveViewAllMamber')->with('message', $message);
+    }
+
+
+    public function UpdateMamber(Request $request){
+
+      $member = Member::where('user_id', $request->user_id)->first();
+      if (Session::has('message')){
+          $message = session()->get('message');
+          session()->forget('message');
+          return view('executive.updateMember')->with('MemberList', $member)->with('message', $message);
+      }
+
+      return view('executive.updateMember')->with('MemberList', $member);
+    }
+
+
+    public function UpdateMemberSubmitted(Request $request){
+
+
+      $member = Member::where('user_id', $request->user_id)->update([
+          'name' => $request->name,
+          'email' => $request->email,
+          'phone' => $request->phone,
+          'gender' => $request->gender,
+          'dob' => $request->dob,
+          'blood_group' =>$request->blood_group,
+          'address' => $request->address,
+          ]);
+          return redirect()->route('executiveViewAllMamber',['user_id' => $request->user_id])->with('message', 'Account information updated');
+    }
+
 
 
 }

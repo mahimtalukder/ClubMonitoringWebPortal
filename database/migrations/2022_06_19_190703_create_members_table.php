@@ -20,16 +20,16 @@ class CreateMembersTable extends Migration
             $table->integer('club_id')->unsigned();
             $table->foreign('club_id')->references('id')->on('clubs');
             $table->string('name');
-            $table->string('images');
-            $table->string('dob');
-            $table->string('gender');
+            $table->string('images')->nullable();
+            $table->string('dob')->nullable();
+            $table->string('gender')->nullable();
             $table->string('phone');
             $table->string('email');
-            $table->string('designation');
-            $table->string('organisation');
-            $table->string('bio');
-            $table->text('address');
-            $table->string('blood_group');
+            $table->string('designation')->nullable();
+            $table->string('organisation')->nullable();
+            $table->string('bio')->nullable();
+            $table->text('address')->nullable();
+            $table->string('blood_group')->nullable();
         });
     }
 
