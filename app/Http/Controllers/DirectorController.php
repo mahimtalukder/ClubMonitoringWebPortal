@@ -80,7 +80,7 @@ class DirectorController extends Controller
         $requested_components = Application::select('requested_components.*', 'components.name')
             ->join('requested_components', 'applications.application_id', '=', 'requested_components.application_id')
             ->join('components', 'requested_components.component_id', '=', 'components.id')
-            ->where([['requested_components.application_id', "=", $request->id],["requested_components.is_approved", "=", "pending"]])
+            ->where([['requested_components.application_id', "=", $request->id]])
             ->get();
 
         $club = Club::where("id", $application_info->club_id)->first();

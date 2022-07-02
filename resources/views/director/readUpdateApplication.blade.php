@@ -36,6 +36,13 @@
                                     <a href="#"><i data-feather="printer" class="text-muted icon-lg me-2" data-bs-toggle="tooltip" title="Print"></i></a>
                                 </div>
                             </div>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        <li>All fields are required</li>
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="d-flex align-items-center justify-content-between flex-wrap px-3 py-2 border-bottom">
                                 <div class="d-flex align-items-center">
                                     <div class="d-flex align-items-center">
@@ -90,7 +97,7 @@
                             </div>
                             @if($application_info->is_approved == "approved")
                                 <div class="p-3 bg-body">
-                                    <div class="mb-3">Approved Date: 13/05/2022</div>
+                                    <div class="mb-3">Approved Date: {{$application_info->approve_date}}</div>
                                     <div>Approved Components</div>
                                     <div class="col-md-12 border-2 mt-3">
                                         <div class="mb-3 table-responsive">
@@ -102,25 +109,29 @@
                                                     <th>Start Time</th>
                                                     <th>End Time</th>
                                                     <th>Quantity</th>
-                                                    <th>Remarks</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Multipurpose</td>
-                                                    <td>8:00 AM</td>
-                                                    <td>10:00 AM</td>
-                                                    <td>2</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Classroom</td>
-                                                    <td>8:00 AM</td>
-                                                    <td>10:00 AM</td>
-                                                    <td>2</td>
-                                                </tr>
+                                                    @php
+                                                        $count=0;
+                                                    @endphp
+                                                    @foreach($requested_components as $component)
+                                                        <tr>
+                                                            @if($component->is_approved=="approved")
+                                                                <td>{{$count+1}}</td>
+                                                                <td>{{$component->name}}</td>
+                                                                <td>{{$component->approved_start_time}}</td>
+                                                                <td>{{$component->approved_end_time}}</td>
+                                                                <td>{{$component->quantity}}</td>
+                                                                @php
+                                                                    $count = $count+1;
+                                                                @endphp
+                                                            @endif
+                                                        </tr>
+                                                    @endforeach
+                                                    @if($count == 0)
+                                                        <tr><td>No Approved Components</td></tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -138,8 +149,18 @@
 
                             @if($application_info->is_approved == "pending")
                                 <form class="forms-sample" action="{{route('directorApplicationUpdateSubmitted')}}" method="post">
+                                    {{@csrf_field()}}
                                     <div class="p-3 bg-body">
                                     <div class="mb-3"><strong>Application Approval Section</strong></div>
+                                    <input type="hidden" name='application_id' value={{$application_info->application_id}}>
+                                    <div class="date">
+                                        <div class="row mb-3">
+                                            <label class="col-md-2 col-form-label">Approve Date</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control mb-4 mb-md-0" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="dd/mm/yyyy" inputmode="numeric" name="date">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-12 border-2">
                                             <div class="mb-3 table-responsive">
@@ -157,15 +178,17 @@
                                                     <div id="component_section">
                                                         @php $i=0; @endphp
                                                         @foreach($requested_components as $component)
-                                                            <tr id=@php echo "row".$component["id"]; @endphp>
-                                                                <input type="hidden" name='@php echo "component[".$i."][id]"; @endphp' value={{$component["id"]}}>
-                                                                <td>{{$component['name']}}</td>
-                                                                <td><input class='form-control' data-inputmask= "'alias':'datetime'" data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=@php echo "component[".$i."][approved_start_time]"; @endphp placeholder='hh:mm tm'></td>
-                                                                <td><input class='form-control' data-inputmask= "'alias':'datetime'" data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=@php echo "component[".$i."][approved_end_time]"; @endphp placeholder='hh:mm tm'></td>
-                                                                <td><input type='number' class='form-control' id='exampleInputMobile' placeholder='Quantity' name=@php echo "component[".$i."][approved_quantity]"; @endphp></td>
-                                                                <td><a class="btn btn-danger" onclick="reject({{$component['id']}},'{{$component->application_id}}')">Reject Component</a></td>
-                                                            </tr>
-                                                            @php $i++; @endphp
+                                                            @if($component->is_approved=="pending")
+                                                                <tr id=@php echo "row".$component["id"]; @endphp>
+                                                                    <input type="hidden" name='@php echo "component[".$i."][id]"; @endphp' value={{$component["id"]}}>
+                                                                    <td>{{$component['name']}}</td>
+                                                                    <td><input class='form-control' data-inputmask= "'alias':'datetime'" data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=@php echo "component[".$i."][approved_start_time]"; @endphp placeholder='hh:mm tm'></td>
+                                                                    <td><input class='form-control' data-inputmask= "'alias':'datetime'" data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=@php echo "component[".$i."][approved_end_time]"; @endphp placeholder='hh:mm tm'></td>
+                                                                    <td><input type='number' class='form-control' id='exampleInputMobile' placeholder='Quantity' name=@php echo "component[".$i."][approved_quantity]"; @endphp></td>
+                                                                    <td><a class="btn btn-danger" onclick="reject({{$component['id']}},'{{$component->application_id}}')">Reject Component</a></td>
+                                                                </tr>
+                                                                @php $i++; @endphp
+                                                            @endif
                                                         @endforeach
                                                         <input type="hidden" name='total_component' value={{$i}}>
                                                     </div>
@@ -175,12 +198,10 @@
                                         </div>
                                     </div>
 
-                                    <input type="hidden" name='total_componet' id='total_componet' value=0>
-
                                     <div>
                                         <div class="col-md-12">
                                             <button class="btn btn-primary me-1 mb-1" type="submit"> Approve</button>
-                                            <a class="btn btn-danger me-1 mb-1" onclick="reject_full_application('{{$component->application_id}}')">Reject Application</a>
+                                            <a class="btn btn-danger me-1 mb-1" onclick="reject_full_application('{{$application_info->application_id}}')">Reject Application</a>
                                         </div>
                                     </div>
                                 </div>

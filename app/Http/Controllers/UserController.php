@@ -196,6 +196,7 @@ class UserController extends Controller
         $user = User::where([['user_id', "=", $request->user_id],["reset_password_otp", "=", (int)$request->otp]])->first();
         if (!empty($user)) {
             $userUpdate = User::where("user_id", $request->user_id)->update([
+                'reset_password_otp'=>null,
                 'password' => Hash::make($request->password)
             ]);
             return view('user.signin')->with('message', "Password reset successfully done!");

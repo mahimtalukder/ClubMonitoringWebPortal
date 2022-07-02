@@ -299,23 +299,39 @@ class ApplicationController extends Controller
     }
 
     public function applicationUpdateSubmitted(Request $request){
-        $validate = $request->validate([
-            '*' => 'required'
-        ],
-        );
+        if((int)$request->total_component>0){
+            $validate = $request->validate([
+                'component' => 'array',
+                'component.*.approved_start_time' => 'required',
+                'component.*.approved_end_time' => 'required',
+                'date' => 'required'
+            ],
+            );
+        }
+        else{
+            $validate = $request->validate([
+                'date' => 'required',
+            ],
+            );
+        }
 
         if((int)$request->total_component>0)
         {
-            for ($i = 1; $i <= $request->total_component; $i++){
-                $approvedComponent = RequestedComponent::where("id", $request['component['.$i.'][id]'] )
+            for ($i = 0; $i < $request->total_component; $i++){
+                $approvedComponent = RequestedComponent::where("id", (int)$request->component[$i]['id'] )
                 ->update([
                     'is_approved' => "approved",
-                    'approved_start_time' => $request['component['.$i.'][approved_start_time]'],
-                    'approved_end_time' => $request['component['.$i.'][approved_end_time]'],
-                    'quantity' => $request['component['.$i.'][approved_quantity]']
+                    'approved_start_time' =>$request->component[$i]['approved_start_time'],
+                    'approved_end_time' => $request->component[$i]['approved_end_time'],
+                    'quantity' =>$request->component[$i]['approved_quantity']
                     ]);
             }
 
+            $approvedApplication = Application::where("application_id", $request->application_id )->update([
+                'is_approved' => "approved",
+                'approve_date' => $request->date
+                ]);
+        }else{
             $approvedApplication = Application::where("application_id", $request->application_id )->update([
                 'is_approved' => "approved",
                 'approve_date' => $request->date
