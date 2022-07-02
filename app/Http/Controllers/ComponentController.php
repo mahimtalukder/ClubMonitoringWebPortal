@@ -11,7 +11,7 @@ class ComponentController extends Controller
 {
     public function components(){
 
-        $components = Component::all();
+        $components = Component::paginate(3);
         return view('director.components') -> with('components', $components);
     }
 
@@ -32,5 +32,5 @@ class ComponentController extends Controller
         return redirect()->route('components');
 
     }
-    
+
 }

@@ -46,8 +46,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">All Components</h6>
-
                         <div class="table-responsive">
+                            {{$components->links('inc.paginator') }}
                             <table id="dataTableExample" class="table">
                                 <thead>
                                 <tr>

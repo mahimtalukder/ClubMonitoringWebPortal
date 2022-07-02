@@ -114,6 +114,7 @@
     <script src="{{ asset('js/chartjs-light.js') }}"></script>
     <!-- End custom js for this page -->
 
+
 </body>
 
 </html>
