@@ -171,7 +171,14 @@ class AdminController extends Controller
 
 
     public function directorUpdate(Request $request){
+
         $directors = Director::where('user_id', $request->id)->first();
+        if (Session::has('message')){
+            $message = session()->get('message');
+            session()->forget('message');
+            return view('admin.updateDirector')->with('director', $directors)->with('message', $message);
+        }
+
         return view('admin.updateDirector')->with('director', $directors);
     }
 
@@ -187,6 +194,7 @@ class AdminController extends Controller
             'address' => $request->address
 
         ]);
+        return redirect()->route('adminDirectorUpdate',['id' => $request->id])->with('message', 'Account information updated');
     }
 
 

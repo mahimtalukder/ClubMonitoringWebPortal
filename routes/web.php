@@ -32,8 +32,8 @@ Route::get('/admin/create/director', [AdminController::class, 'adminCreateDirect
 Route::post('/admin/create/director', [AdminController::class, 'adminCreateDirectorSubmitted'])->name('adminCreateDirectorSubmitted');
 Route::get('/admin/list/director', [AdminController::class, 'directorList'])->name('adminDirectorList');
 Route::get('/admin/update/director/{id}', [AdminController::class, 'directorUpdate'])->name('adminDirectorUpdate');
-Route::get('/admin/update/status/director/{user_id}/{status_code}', [AdminController::class, 'directorStatusUpdate'])->name('adminDirectorStatusUpdate');
 Route::post('/admin/update/director/{id}', [AdminController::class, 'directorUpdateSubmitted'])->name('adminDirectorUpdateSubmitted');
+Route::get('/admin/update/status/director/{user_id}/{status_code}', [AdminController::class, 'directorStatusUpdate'])->name('adminDirectorStatusUpdate');
 Route::post('/admin/edit/upload', [AdminController::class, 'adminImageUpload'])->name('adminImageUploadsubmitted');
 
 
