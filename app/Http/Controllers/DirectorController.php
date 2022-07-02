@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Director;
+use App\Models\User;
 use App\Models\Application;
 use App\Models\Club;
 use App\Models\Member;
@@ -19,7 +20,43 @@ class DirectorController extends Controller
     }
 
     public function dashboard(){
-        return view('director.dashboard');
+        $users = User::all();
+        $numberOfuser=[];
+        $numberOfuser['admin']=0;
+        $numberOfuser['director']=0;
+        $numberOfuser['member']=0;
+
+        foreach ($users as $user){
+            if($user->user_type=="director"){
+                $numberOfuser['director']+=1;
+            }
+            else if($user->user_type=="admin"){
+                $numberOfuser['admin']+=1;
+            }
+            else if($user->user_type=="member"){
+                $numberOfuser['member']+=1;
+            }
+        }
+
+        $clubs= Club::all();
+        $members= Member::all();
+
+        foreach ($clubs as $club){
+            $club['total_member']=0;
+        }
+
+        foreach ($members as $member){
+            foreach ($clubs as $club){
+                if($club['id']==$member->club_id){
+                    $club['total_member']+=1;
+                }
+            }
+
+        }
+
+
+
+      return view('director.dashboard')->with('numberOfuser',$numberOfuser)->with('clubs',$clubs);
     }
 
     public function profile(){
@@ -112,23 +149,24 @@ class DirectorController extends Controller
 
     public function allClub()
     {
-        $clubs = Club::orderBy("created_at", "desc")->paginate(1);
+        $clubs = Club::orderBy("created_at", "desc")->paginate(2);
 
         return view('director.allClub')->with('clubs', $clubs);
     }
 
     public function clubInfo(Request $request)
     {
-        $members = Member::where('club_id', '<=', $request->id)->get();
+        $members = Member::where('club_id', $request->id)->get();
         $total_member = $members->count();
 
-        $applications = Application::where('club_id', '<=', $request->id)->get();
+        $applications = Application::where('club_id', $request->id)->get();
         $total_application = $applications->count();
 
-        $executives = Executive::where('club_id', '<=', $request->id)->get();
+        $executives = Executive::where('club_id', $request->id)->get();
         $total_executive = $executives->count();
 
-        $club = Club::where('id', '<=', $request->id)->first();
+        $clubinfo = Club::where('id', $request->id)->first();
+        $club = $clubinfo->name;
 
         return view('director.clubInfo')
         ->with('total_member',$total_member)
