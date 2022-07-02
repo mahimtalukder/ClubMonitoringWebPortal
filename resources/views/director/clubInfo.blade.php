@@ -53,7 +53,7 @@
                 <div class="card-body">
                     <div class="container-fluid d-flex justify-content-between">
                         <div class="col-lg-3 ps-0">
-                            <h4 class="mt-1 mb-1">{{$club->name}}</h4>
+                            <h4 class="mt-1 mb-1">{{$club}}</h4>
                         </div>
                     </div>
                     <div class="container-fluid mt-5 d-flex justify-content-center w-100">
