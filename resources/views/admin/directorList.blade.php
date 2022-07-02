@@ -12,8 +12,15 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="card-title">Data Table</h6>
+                        <h6 class="card-title">Director List</h6>
                         <p class="text-muted mb-3">View, Edit and Block/Unblock Directors</p>
+
+                        @if(!empty($message))
+                            <div class="alert alert-success" role="alert">
+                                {{$message}}
+                            </div>
+                        @endif
+
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table">
                                 <thead>

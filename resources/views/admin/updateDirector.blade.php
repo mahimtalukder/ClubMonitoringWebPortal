@@ -13,6 +13,12 @@
                     <div class="card-body">
                         <h6 class="card-title">Update Director's Account</h6>
 
+                        @if(!empty($message))
+                            <div class="alert alert-success" role="alert">
+                                {{$message}}
+                            </div>
+                        @endif
+
                         <form action="/admin/update/director/{{$director->user_id}}" method="post">
                             {{@csrf_field()}}
                             <div class="row">

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DirectorAccountLoginCredentials;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -176,12 +177,26 @@ class AdminController extends Controller
         $directors = User::select('directors.*', 'users.status')
             ->join('directors', 'users.user_id', '=', 'directors.user_id')
             ->get();
+
+        if (Session::has('message')){
+            $message = session()->get('message');
+            session()->forget('message');
+            return view('admin.directorList')->with('directors', $directors)->with('message', $message);
+        }
+
         return view('admin.directorList')->with('directors', $directors);
     }
 
 
     public function directorUpdate(Request $request){
+
         $directors = Director::where('user_id', $request->id)->first();
+        if (Session::has('message')){
+            $message = session()->get('message');
+            session()->forget('message');
+            return view('admin.updateDirector')->with('director', $directors)->with('message', $message);
+        }
+
         return view('admin.updateDirector')->with('director', $directors);
     }
 
@@ -197,8 +212,7 @@ class AdminController extends Controller
             'address' => $request->address
 
         ]);
-
-
+        return redirect()->route('adminDirectorUpdate',['id' => $request->id])->with('message', 'Account information updated');
     }
 
 
@@ -229,6 +243,23 @@ class AdminController extends Controller
             session()->put('admin', $admin_session);
             return redirect()->route('adminEditProfile');
         }
+      }
+
+      public function directorStatusUpdate(Request $request){
+          User::where('user_id', $request->user_id)->where('user_type', 'director')->update([
+              'status' => $request->status_code
+          ]);
+
+          $message = "";
+          if($request->status_code == 0){
+              $message = $request->user_id." blocked successfully. To unblock press the Unblock button";
+          }
+          else
+          {
+              $message = $request->user_id." unblocked successfully. To block press the block button";
+          }
+
+          return redirect()->route('adminDirectorList')->with('message', $message);
       }
 
 }

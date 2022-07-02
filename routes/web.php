@@ -33,6 +33,7 @@ Route::post('/admin/create/director', [AdminController::class, 'adminCreateDirec
 Route::get('/admin/list/director', [AdminController::class, 'directorList'])->name('adminDirectorList');
 Route::get('/admin/update/director/{id}', [AdminController::class, 'directorUpdate'])->name('adminDirectorUpdate');
 Route::post('/admin/update/director/{id}', [AdminController::class, 'directorUpdateSubmitted'])->name('adminDirectorUpdateSubmitted');
+Route::get('/admin/update/status/director/{user_id}/{status_code}', [AdminController::class, 'directorStatusUpdate'])->name('adminDirectorStatusUpdate');
 Route::post('/admin/edit/upload', [AdminController::class, 'adminImageUpload'])->name('adminImageUploadsubmitted');
 
 
@@ -65,6 +66,16 @@ Route::post('/executive/edit/upload', [ExecutiveController::class, 'executiveIma
 Route::get('/executive/AllMembers', [ExecutiveController::class, 'ViewAllMamber'])->name('executiveViewAllMamber');
 Route::get('/executive/NewMembers', [ExecutiveController::class, 'CreateNewMamber'])->name('executiveCreateNewMamber');
 Route::post('/executive/NewMembers', [ExecutiveController::class, 'CreateMamber'])->name('executiveCreateMambersubmitted');
+
+
+Route::get('/executive/update/status/member/{user_id}/{status_code}', [ExecutiveController::class, 'MemberStatusUpdate'])->name('memberexecutiveStatusUpdate');
+
+
+Route::get('/executive/update/member/{user_id}', [ExecutiveController::class, 'UpdateMamber'])->name('executiveUpdateMamber');
+Route::post('/executive/update/member/{user_id}', [ExecutiveController::class, 'UpdateMemberSubmitted'])->name('executiveUpdateMemberSubmitted');
+
+
+
 
 
 
