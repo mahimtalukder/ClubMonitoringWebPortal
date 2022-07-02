@@ -30,6 +30,7 @@
                                         @error('name')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
+
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-6">

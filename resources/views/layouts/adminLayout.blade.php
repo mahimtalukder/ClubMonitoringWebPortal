@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{asset('../assets/vendors/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('../assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css')}}">
     <link rel="stylesheet" href="{{asset('../assets_2/vendors/datatables.net-bs5/dataTables.bootstrap5.css')}}">
+    <link rel="stylesheet" href="{{asset('../assets_2/vendors/sweetalert2/sweetalert2.min.css')}}">
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
@@ -89,6 +90,7 @@
     <script src="{{asset('../assets_2/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js')}}"></script>
     <script src="{{asset('../assets_2/vendors/datatables.net/jquery.dataTables.js')}}"></script>
     <script src="{{asset('../assets_2/vendors/datatables.net-bs5/dataTables.bootstrap5.js')}}"></script>
+    <script src="{{asset('../assets_2/vendors/sweetalert2/sweetalert2.min.js')}}"></script>
 
     <!-- End plugin js for this page -->
 
@@ -110,6 +112,7 @@
     <script src="{{asset('../assets_2/js/bootstrap-maxlength.js')}}"></script>
     <script src="{{asset('../assets_2/js/form-validation.js')}}"></script>
     <script src="{{asset('../assets_2/js/data-table.js')}}"></script>
+    <script src="{{asset('../assets_2/js/sweet-alert.js')}}"></script>
 
     <!-- End custom js for this page -->
 
