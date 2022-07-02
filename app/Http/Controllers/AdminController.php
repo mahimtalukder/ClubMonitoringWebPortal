@@ -29,7 +29,25 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-      return view('admin.dashboard');
+        $users = User::all();
+        $numberOfuser=[];
+        $numberOfuser['admin']=0;
+        $numberOfuser['director']=0;
+        $numberOfuser['member']=0;
+
+        foreach ($users as $user){
+            if($user->user_type=="director"){
+                $numberOfuser['director']+=1;
+            }
+            else if($user->user_type=="admin"){
+                $numberOfuser['admin']+=1;
+            }
+            else if($user->user_type=="member"){
+                $numberOfuser['member']+=1;
+            }
+        }
+
+      return view('admin.dashboard')->with('numberOfuser',$numberOfuser);
     }
 
     public function profile(){
