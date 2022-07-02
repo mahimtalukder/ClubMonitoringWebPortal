@@ -16,7 +16,7 @@ class CreateComponentsTable extends Migration
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('discription');
+            $table->string('description');
             $table->string('added_by');
             $table->foreign('added_by')->references('user_id')->on('directors');
         });

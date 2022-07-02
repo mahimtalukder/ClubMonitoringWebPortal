@@ -109,6 +109,32 @@
                       </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#clubs" role="button" aria-expanded="false"
+                       aria-controls="#clubs">
+                        <i class="link-icon" data-feather="mail"></i>
+                        <span class="link-title">Club</span>
+                        <i class="link-arrow" data-feather="chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="clubs">
+                        <ul class="nav sub-menu">
+                            <li class="nav-item">
+                                <a href="{{ route('directorAllClub') }}" class="nav-link">All Club</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('directorCreateClub') }}" class="nav-link">Create New Club</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('components')}}" class="nav-link">
+                        <i class="link-icon" data-feather="edit"></i>
+                        <span class="link-title">Components</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>

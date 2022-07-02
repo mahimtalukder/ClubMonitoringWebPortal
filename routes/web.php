@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\ComponentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UserController;
@@ -44,7 +45,8 @@ Route::get('/director/profile', [DirectorController::class, 'profile'])->name('d
 Route::get('/director/edit', [DirectorController::class, 'EditProfile'])->name('directorEditProfile');
 Route::post('/director/edit', [DirectorController::class, 'editProfileSubmitted'])->name('directorEditProfileSubmitted');
 Route::post('/director/edit/upload', [DirectorController::class, 'directorImageUpload'])->name('directorImageUploadsubmitted');
-
+Route::get('/director/components', [ComponentController::class, 'components'])->name('components');
+Route::post('/director/components', [ComponentController::class, 'addComponents'])->name('directorAddComponents');
 
 /* Member */
 Route::get('/member', [MemberController::class, 'dashboard'])->name('memberDash');

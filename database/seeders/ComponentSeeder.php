@@ -16,19 +16,19 @@ class ComponentSeeder extends Seeder
     {
         DB::table('components')->insert([
             'name' => 'Multipurpose',
-            'discription' => "Hall room",
+            'description' => "Hall room",
             'added_by' => '11-10001-3',
-        ]); 
+        ]);
 
         DB::table('components')->insert([
             'name' => 'Class Room',
-            'discription' => "Hall room",
+            'description' => "Hall room",
             'added_by' => '11-10002-3',
-        ]); 
+        ]);
 
         DB::table('components')->insert([
             'name' => 'Play Ground',
-            'discription' => "Hall room",
+            'description' => "Hall room",
             'added_by' => '11-10002-3',
         ]);
     }

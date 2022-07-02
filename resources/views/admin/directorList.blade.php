@@ -19,6 +19,10 @@
                             <div class="alert alert-success" role="alert">
                                 {{$message}}
                             </div>
+                        @else
+                            <div class="alert alert-dark" role="alert">
+                                After successful account creation, Unique ID and password will be sent to the provided email address. Remember, login credentials is only accessible from directors email.
+                            </div>
                         @endif
 
                         <div class="table-responsive">
