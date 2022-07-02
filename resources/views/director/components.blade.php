@@ -15,16 +15,26 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">Add Component</h6>
-
+                        @if(!empty($message))
+                            <div class="alert alert-success" role="alert">
+                                {{$message}}
+                            </div>
+                        @endif
                         <form class="forms-sample pt-3" action="{{route('directorAddComponents')}}" method="post">
                             {{csrf_field()}}
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Name</label>
                                 <input type="text" class="form-control" id="exampleInputUsername1" name="name" placeholder="Component Name">
+                                @error('name')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Description</label>
                                 <input type="text" class="form-control" id="exampleInputEmail1" name="description" placeholder="Component Description">
+                                @error('description')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
                         </form>
