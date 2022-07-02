@@ -16,6 +16,21 @@ class ComponentController extends Controller
     }
 
     public function addComponents(Request $request){
+        $validate = $request->validate([
+            "name" => "required",
+            "description" => "required"
+        ]);
+
+        $director= session()->get('director');
+
+        $components = new Component();
+        $components->name = $request->name;
+        $components->description = $request->description;
+        $components->added_by = $director->user_id;
+        $components->save();
+
+        return redirect()->route('components');
 
     }
+    
 }
