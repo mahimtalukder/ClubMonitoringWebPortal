@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Component;
 use App\Http\Requests\StoreComponentRequest;
 use App\Http\Requests\UpdateComponentRequest;
+use Illuminate\Http\Request;
 
 class ComponentController extends Controller
 {
@@ -12,5 +13,9 @@ class ComponentController extends Controller
 
         $components = Component::all();
         return view('director.components') -> with('components', $components);
+    }
+
+    public function addComponents(Request $request){
+
     }
 }

@@ -16,17 +16,19 @@
                     <div class="card-body">
                         <h6 class="card-title">Add Component</h6>
 
-                        <form class="forms-sample pt-3">
+                        <form class="forms-sample pt-3" action="{{route('directorAddComponents')}}" method="post">
+                            {{csrf_field()}}
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="exampleInputUsername1" autocomplete="off" placeholder="Username">
+                                <input type="text" class="form-control" id="exampleInputUsername1" name="name" placeholder="Component Name">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Description</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                <input type="text" class="form-control" id="exampleInputEmail1" name="description" placeholder="Component Description">
                             </div>
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
                         </form>
+
                     </div>
                 </div>
             </div>
