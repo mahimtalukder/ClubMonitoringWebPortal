@@ -109,6 +109,21 @@
                       </ul>
                     </div>
                 </li>
+
+
+                <li class="nav-item">
+                    <a href="{{route('components')}}" class="nav-link">
+                        <i class="link-icon" data-feather="edit"></i>
+                        <span class="link-title">Components</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('directorExecutiveList')}}" class="nav-link">
+                        <i class="link-icon" data-feather="edit"></i>
+                        <span class="link-title">Executives</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>

@@ -32,7 +32,13 @@ class ApplicationController extends Controller
         $total_componet=(int)$request->total_componet;
         if($total_componet>0){
             $validate = $request->validate([
-                '*' => 'required'
+                'subject' => 'required',
+                'date' => 'required',
+                'description' => 'required',
+                'component' => 'array',
+                'component.*.start_time' => 'required',
+                'component.*.end_time' => 'required',
+                'component.*.quantity' => 'required'
             ],
             );
 
@@ -60,23 +66,19 @@ class ApplicationController extends Controller
                 $applicaion->club_id = $executive->club_id;
                 $applicaion->save();
 
-                for ($i = 1; $i <= $total_componet; $i++) {
-                    $start_time = "start_time".(string)$i;
-                    $end_time = "end_time".(string)$i;
-                    $quantity = "quantity".(string)$i;
-                    $name = "component".(string)$i;
+                for ($i = 0; $i < $total_componet; $i++) {
 
                     $request_componet = new RequestedComponent();
                     $request_componet->application_id = $new_id;
-                    $components= Component::where('name', $request[$name])->get(['id']);
+                    $components= Component::where('name', $request->component[$i]['name'])->get(['id']);
                     $component_id='';
                     foreach($components as $cp){
                         $component_id = $cp['id'];
                     }
                     $request_componet->component_id = $component_id;
-                    $request_componet->start_time = $request[$start_time];
-                    $request_componet->end_time = $request[$end_time];
-                    $request_componet->quantity = $request[$quantity];
+                    $request_componet->start_time = $request->component[$i]['start_time'];
+                    $request_componet->end_time = $request->component[$i]['end_time'];
+                    $request_componet->quantity = $request->component[$i]['quantity'];
                     $request_componet->is_approved = "pending";
                     $request_componet->save();
                 }
@@ -99,23 +101,20 @@ class ApplicationController extends Controller
                 $applicaion->club_id = $executive->club_id;
                 $applicaion->save();
 
-                for ($i = 1; $i <= $total_componet; $i++) {
-                    $start_time = "start_time".(string)$i;
-                    $end_time = "end_time".(string)$i;
-                    $quantity = "quantity".(string)$i;
-                    $name = "component".(string)$i;
+                for ($i =0; $i < $total_componet; $i++) {
+                    $request->component[$i]['approved_start_time'];
 
                     $request_componet = new RequestedComponent();
                     $request_componet->application_id = $new_id;
-                    $components= Component::where('name', $request[$name])->get(['id']);
+                    $components= Component::where('name', $request->component[$i]['name'])->get(['id']);
                     $component_id='';
                     foreach($components as $cp){
                         $component_id = $cp['id'];
                     }
                     $request_componet->component_id = $component_id;
-                    $request_componet->start_time = $request[$start_time];
-                    $request_componet->end_time = $request[$end_time];
-                    $request_componet->quantity = $request[$quantity];
+                    $request_componet->start_time =$request->component[$i]['start_time'];
+                    $request_componet->end_time = $request->component[$i]['end_time'];;
+                    $request_componet->quantity = $request->component[$i]['quantity'];
                     $request_componet->is_approved = "pending";
                     $request_componet->save();
                 }
@@ -193,7 +192,7 @@ class ApplicationController extends Controller
         $executive = session()->get('executive');
         $club = Club::where("id", $executive['club_id'])->first();
 
-        $applications = Application::where('club_id', $club->id)->orderBy("created_at", "desc")->paginate(1);
+        $applications = Application::where('club_id', $club->id)->orderBy("created_at", "desc")->paginate(2);
 
         return view('executive.applications')
             ->with('club', $club)
