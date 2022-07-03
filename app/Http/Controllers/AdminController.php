@@ -285,5 +285,27 @@ class AdminController extends Controller
       public function changePassword(){
           return view('admin.changepassword');
       }
+     public function adminChangePasswordSubmitted(Request $request)
+     {
+        $validate = $request->validate([
+            
+            "current_password" => "required",
+            "new_password" => "required",
+            'confirm_password' => 'required|same:new_password'  
+            
+        ]); 
+        $admin_session = session()->get('admin');
+        $user = User::where([['user_id', "=", $admin_session->user_id]])->first();
+        if (Hash::check($request->password, $user['password'])){ 
+            $userUpdate = User::where("user_id", $admin_session->user_id)->update([
+                'password' => Hash::make($request->new_password)
+            ]);
+            return redirect()->route('adminChangePassword')->with('message', "Password reset successfully done!");
+        }
+        else{
+            return redirect()->route('adminChangePassword')->with(['error_message' => "Information not found"])->with('user_id', $request->user_id);
+        }
 
+
+     }
 }
