@@ -21,58 +21,71 @@ class DirectorController extends Controller
         $this->middleware('validDirector');
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         $users = User::all();
-        $numberOfuser=[];
-        $numberOfuser['admin']=0;
-        $numberOfuser['director']=0;
-        $numberOfuser['member']=0;
+        $numberOfuser = [];
+        $numberOfuser['admin'] = 0;
+        $numberOfuser['director'] = 0;
+        $numberOfuser['member'] = 0;
 
-        foreach ($users as $user){
-            if($user->user_type=="director"){
-                $numberOfuser['director']+=1;
-            }
-            else if($user->user_type=="admin"){
-                $numberOfuser['admin']+=1;
-            }
-            else if($user->user_type=="member"){
-                $numberOfuser['member']+=1;
+        foreach ($users as $user) {
+            if ($user->user_type == "director") {
+                $numberOfuser['director'] += 1;
+            } else if ($user->user_type == "admin") {
+                $numberOfuser['admin'] += 1;
+            } else if ($user->user_type == "member") {
+                $numberOfuser['member'] += 1;
             }
         }
 
-        $clubs= Club::all();
-        $members= Member::all();
+        $clubs = Club::all();
+        $members = Member::all();
 
-        foreach ($clubs as $club){
-            $club['total_member']=0;
+        foreach ($clubs as $club) {
+            $club['total_member'] = 0;
         }
 
-        foreach ($members as $member){
-            foreach ($clubs as $club){
-                if($club['id']==$member->club_id){
-                    $club['total_member']+=1;
+        foreach ($members as $member) {
+            foreach ($clubs as $club) {
+                if ($club['id'] == $member->club_id) {
+                    $club['total_member'] += 1;
                 }
             }
-
         }
 
 
         $all_applications = Application::where('created_at', '>', date('Y-m-d', strtotime("-7 days")))
-           ->get();
+            ->get();
 
-           $array =[
-            "foo" => "bar",
-            "bar" => "foo"
-           ];
+        $data = array();
+
+        for($i=15; $i>=0; $i--){
+            $array = [
+                "label" => date('M d', strtotime('-'. $i .' days')),
+                "value" => 0
+            ];
+            array_push($data, $array);
+    
+        }
 
 
+        foreach ($all_applications as $application) {
+            $i=0;
+            foreach ($data as $d){
+                if(date('M d', strtotime($application->created_at)) == $d['label']){
+                    $data[$i]['value'] += 1;
+                    break;
+                }
+                $i++;
+            }
+        }
 
 
-
-      return view('director.dashboard')
-      ->with('numberOfuser',$numberOfuser)
-      ->with('clubs',$clubs)
-      ->with('applications',$applications);
+        return view('director.dashboard')
+            ->with('numberOfuser', $numberOfuser)
+            ->with('clubs', $clubs)
+            ->with('applications', $data);
     }
 
     public function profile(){
