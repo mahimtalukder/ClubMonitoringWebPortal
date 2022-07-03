@@ -119,7 +119,7 @@
                     <a class="nav-link" data-bs-toggle="collapse" href="#notic-pages" role="button"
                         aria-expanded="false" aria-controls="notic-pages">
                         <i class="link-icon" data-feather="book"></i>
-                        <span class="link-title">Notic</span>
+                        <span class="link-title">Notice</span>
                         <i class="link-arrow" data-feather="chevron-down"></i>
                     </a>
                     <div class="collapse" id="notic-pages">
