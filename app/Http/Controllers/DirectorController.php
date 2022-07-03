@@ -262,9 +262,44 @@ class DirectorController extends Controller
     }
 
 
-    public function executiveList(){
+    public function committeeList(){
         $clubs = Club::orderBy("created_at", "desc")->get();
-        return view('director.executivesList')->with('clubs', $clubs);
+
+        if (Session::has('committees')){
+            $committees = session()->get('committees');
+            $selectedClub = session()->get('selectedClub');
+            $club_id = session()->get('club_id');
+
+            session()->forget('committees');
+            session()->forget('selectedClub');
+            session()->forget('club_id');
+
+            return view('director.executivesList')
+                ->with('executive_committes', $committees)
+                ->with('selectedClub', $selectedClub)
+                ->with('club_id', $club_id)
+                ->with('clubs', $clubs);
+        }
+
+        if (Session::has('executives')){
+            $executives = session()->get('executives');
+            $selectedClub = session()->get('selectedClub');
+            $committee_no = session()->get('committee_no');
+            $executive_committes = session()->get('executive_committes');
+
+            session()->forget('executives');
+            session()->forget('selectedClub');
+            session()->forget('committee_no');
+            session()->forget('executive_committes');
+
+            return view('director.executivesList')
+                ->with('executives', $executives)
+                ->with('selectedClub', $selectedClub)
+                ->with('committee_no', $committee_no)
+                ->with('executive_committes', $executive_committes)
+                ->with('clubs', $clubs);
+        }
+        return view('director.executivesList')->with('clubs', $clubs)->with('executive_committes', 'none');
     }
 
     public function assignExecutive(){
@@ -418,5 +453,36 @@ class DirectorController extends Controller
         }
 
         return redirect()->route('directorAssignExecutive');
+    }
+
+    public function clubWiseCommitteeList(Request $request){
+
+        $committees = Executive::select('committee_number')
+            ->where('club_id', $request->club_id)
+            ->groupBy('committee_number')
+            ->orderBy('join_at', 'desc')
+            ->get();
+
+        $selectedClub = Club::where('id', $request->club_id)->first();
+
+        return redirect()->route('directorCommitteeList')
+            ->with('selectedClub', $selectedClub)
+            ->with('club_id', $request->club_id)
+            ->with('committees', $committees);
+    }
+
+    public function committeeWiseExecutiveList(Request $request){
+
+        $executives = Executive::where('club_id', $request->club_id)
+            ->where('committee_number', $request->committee_no)
+            ->get();
+
+
+        $selectedClub = Club::where('id', $request->club_id)->first();
+        return redirect()->route('directorCommitteeList')
+            ->with('selectedClub', $selectedClub)
+            ->with('executive_committes', 'none')
+            ->with('committee_no', $request->committee_no)
+            ->with('executives', $executives);
     }
 }

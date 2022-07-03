@@ -48,11 +48,13 @@ Route::post('/director/edit', [DirectorController::class, 'editProfileSubmitted'
 Route::post('/director/edit/upload', [DirectorController::class, 'directorImageUpload'])->name('directorImageUploadsubmitted');
 Route::get('/director/components', [ComponentController::class, 'components'])->name('components');
 Route::post('/director/components', [ComponentController::class, 'addComponents'])->name('directorAddComponents');
-Route::get('/director/executives', [DirectorController::class, 'executiveList'])->name('directorExecutiveList');
+Route::get('/director/club/committees', [DirectorController::class, 'committeeList'])->name('directorCommitteeList');
 Route::get('/director/executives/assign', [DirectorController::class, 'assignExecutive'])->name('directorAssignExecutive');
 Route::get('/director/executives/assign/remove/{id}', [DirectorController::class, 'removeAssignExecutive'])->name('directorRemoveAssignExecutive');
 Route::post('/director/executives/assign', [DirectorController::class, 'assignExecutiveSubmitted'])->name('directorAssignExecutiveSubmitted');
 Route::get('/director/executives/confirm', [DirectorController::class, 'confirmExecutive'])->name('directorConfirmExecutive');
+Route::get('/director/clubs/committee/{club_id}', [DirectorController::class, 'clubWiseCommitteeList'])->name('directorClubWiseCommitteeList');
+Route::get('/director/club/committees/{club_id}/{committee_no}', [DirectorController::class, 'committeeWiseExecutiveList'])->name('directorCommitteeWiseExecutiveList');
 
 
 

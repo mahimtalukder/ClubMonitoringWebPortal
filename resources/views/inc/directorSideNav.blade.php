@@ -119,7 +119,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('directorExecutiveList')}}" class="nav-link">
+                    <a href="{{route('directorCommitteeList')}}" class="nav-link">
                         <i class="link-icon" data-feather="edit"></i>
                         <span class="link-title">Executives</span>
                     </a>

@@ -2,7 +2,7 @@
     <div class="aside-content">
         <div class="d-flex align-items-center justify-content-between">
             <div class="order-first">
-                <h4>Executive Handling</h4>
+                <h4>Executive Committees</h4>
             </div>
         </div>
         <div class="aside-header mt-3">
@@ -29,7 +29,7 @@
                 <div class="email-list">
                     @foreach($clubs as $club)
                         <div class="email-list-item row">
-                            <a href="/director/application/club/{{$club->id}}" class="email-list-detail">
+                            <a href="/director/clubs/committee/{{$club->id}}" class="email-list-detail">
                                 <div class="col-2">
                                     <i data-feather="folder" class="text-muted icon-lg me-2"></i>
                                 </div>
