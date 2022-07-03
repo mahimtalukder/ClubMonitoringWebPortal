@@ -248,7 +248,7 @@ $(function() {
         labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
         datasets: [ { 
             data: [282,350,411,502,635,809,947,1402,3700,5267],
-            label: "Asia",
+            label: "Application",
             borderColor: colors.info,
             backgroundColor: 'rgba(102,209,209,.3)',
             fill: true,

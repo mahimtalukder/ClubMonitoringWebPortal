@@ -101,7 +101,7 @@ class DirectorController extends Controller
         $clubs = Club::all();
         $applications = Application::where('sent_to', 'director')
             ->orderBy("created_at", "desc")
-            ->paginate(1);
+            ->paginate(3);
 
         return view('director.applications')
             ->with('applications', $applications)

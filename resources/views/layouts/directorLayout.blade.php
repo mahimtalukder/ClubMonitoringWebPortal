@@ -22,6 +22,7 @@
 
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('../assets_2/vendors/core/core.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets_2/dist/attention.css') }}">
     <!-- endinject -->
 
     <!-- Plugin css for this page -->
@@ -111,6 +112,7 @@
 
 
     <!-- Custom js for this page -->
+    <script src="{{ asset('../assets_2/dist/attention.js') }}"></script>
     <script src="{{ asset('js/chartjs-light.js') }}"></script>
     <!-- End custom js for this page -->
 
