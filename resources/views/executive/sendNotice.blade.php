@@ -35,21 +35,6 @@
             <input class="form-control" type="file" id="image"  name="file">
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="d-none d-md-block">
         <button class="btn btn-primary btn-icon-text" type="submit">
             Send Notice
