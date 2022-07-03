@@ -29,7 +29,7 @@
                                     <h6 class="card-title text-primary"></h6>
                                 @endif
 
-                                <form method="post" action="{{ route('directorCreateClubSubmitted') }}"
+                                <form method="post" action="{{ route('adminChangePasswordSubmitted') }}"
                                     novalidate="novalidate">
                                     {{ csrf_field() }}
 
