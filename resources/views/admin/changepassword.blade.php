@@ -39,7 +39,19 @@
                                             class="form-control @error('current_password') {{ 'is-invalid' }} @enderror"
                                             name="current_password" type="password" placeholder="Current Password">
 
-                                        @error('name')
+                                        @error('current_password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="new_password" class="form-label">New Password</label>
+                                        <input id="name"
+                                            class="form-control @error('new_password') {{ 'is-invalid' }} @enderror"
+                                            name="new_password" type="password" placeholder="New Password">
+
+                                        @error('new_password')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
 
@@ -51,7 +63,7 @@
                                             class="form-control @error('confirm_password') {{ 'is-invalid' }} @enderror"
                                             name="confirm_password" type="password" placeholder="Confirm Password">
 
-                                        @error('name')
+                                        @error('confirm_password')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
 
