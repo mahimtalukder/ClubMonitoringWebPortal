@@ -55,7 +55,7 @@
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
-                                            {{implode('',$errors->all('<div>:message</div>'))}}
+                                            <li>All fields are required</li>
                                         </ul>
                                     </div>
                                 @endif
@@ -86,7 +86,7 @@
                                         <div class="row mb-3">
                                             <label class="col-md-2 col-form-label">Subject</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="subject" type="text">
+                                                <input class="form-control" name="subject" type="text" placeholder="Subject">
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +94,10 @@
                                         <div class="row mb-3">
                                             <label class="col-md-2 col-form-label">Date</label>
                                             <div class="col-md-10">
-                                                <input class="form-control mb-4 mb-md-0" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="dd/mm/yyyy" inputmode="numeric" name="date">
+                                                <div class="input-group date datepicker" id="datePickerExample">
+                                                    <input type="text" class="form-control" name="date">
+                                                    <span class="input-group-text input-group-addon"><i data-feather="calendar"></i></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +118,7 @@
                                             <label class="form-label" for="simpleMdeEditor">Components </label>
                                             <div class="row">
                                                 <div class="col-11">
-                                                    <select class="compose-multiple-select form-select" multiple="multiple" id="components" name='components[]'>
+                                                    <select class="js-example-basic-multiple form-select" multiple="multiple" id="components" name='components[]'>
                                                         @foreach($components as $component)
                                                             <option value={{$component['id']}}>{{$component['name']}}</option>
                                                         @endforeach
