@@ -320,10 +320,15 @@ class ExecutiveController extends Controller
         "notice" => "required"
 
     ]);
+
+
+    $member_session = session()->get('executive');
+    $executive = Member::where("user_id", $member_session["user_id"])->first();
     
       $Notice = new  Notice();
       $Notice->title = $request->title;
       $Notice->notice = $request->notice;
+      $Notice->club_id = $executive->club_id;
       $Notice->save();
 
       return view('executive.sendNotice')->with('message','Notice sucsessfully posted');

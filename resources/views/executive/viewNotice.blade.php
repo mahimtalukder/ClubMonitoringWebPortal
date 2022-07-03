@@ -37,7 +37,7 @@
                                                 <p class="msg">{{ $NoticeList->notice }}</p>
                                             </div>
                                             <span class="date">
-                                                {{ $NoticeList->created_at }}
+                                                4 july
                                             </span>
                                         </a>
                                     </div>
