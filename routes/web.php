@@ -58,21 +58,24 @@ Route::post('/member/edit/upload', [MemberController::class, 'memberImageUpload'
 Route::get('/executive/dashboard', [ExecutiveController::class, 'dashboard'])->name('executiveDash');
 Route::get('/executive/profile', [ExecutiveController::class, 'profile'])->name('executiveProfile');
 Route::get('/executive/edit', [ExecutiveController::class, 'EditProfile'])->name('executiveEditProfile');
-
 Route::post('/executive/edit', [ExecutiveController::class, 'editProfileSubmitted'])->name('executiveEditProfileSubmitted');
-
 Route::post('/executive/edit/upload', [ExecutiveController::class, 'executiveImageUpload'])->name('executiveImageUpload');
 
+//Executive->Member
 Route::get('/executive/AllMembers', [ExecutiveController::class, 'ViewAllMamber'])->name('executiveViewAllMamber');
 Route::get('/executive/NewMembers', [ExecutiveController::class, 'CreateNewMamber'])->name('executiveCreateNewMamber');
 Route::post('/executive/NewMembers', [ExecutiveController::class, 'CreateMamber'])->name('executiveCreateMambersubmitted');
-
-
 Route::get('/executive/update/status/member/{user_id}/{status_code}', [ExecutiveController::class, 'MemberStatusUpdate'])->name('memberexecutiveStatusUpdate');
-
-
 Route::get('/executive/update/member/{user_id}', [ExecutiveController::class, 'UpdateMamber'])->name('executiveUpdateMamber');
 Route::post('/executive/update/member/{user_id}', [ExecutiveController::class, 'UpdateMemberSubmitted'])->name('executiveUpdateMemberSubmitted');
+
+//notice
+Route::get('/executive/sendNotice', [ExecutiveController::class, 'SendNotice'])->name('SendNoticeMamber');
+Route::post('/executive/sendNoticepost', [ExecutiveController::class, 'SendNoticePost'])->name('PostNoticeMamber');
+Route::get('/executive/ViewNotice', [ExecutiveController::class, 'ViewNotice'])->name('ViewAllNotice');
+// Route::get('/member/dashboard', [MemberController::class, 'ViewNotice'])->name('ViewAllNotice');
+
+
 
 
 

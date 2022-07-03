@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use App\Models\Notice;
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
+  
     public function __construct()
     {
         $this->middleware('validMember');
@@ -16,7 +18,8 @@ class MemberController extends Controller
 
     public function dashboard()
     {
-      return view('member.dashboard');
+      $Notice = Notice::paginate(6);
+      return view('member.dashboard')->with('NoticeList', $Notice);
     }
 
     public function profile(){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Notice;
 use App\Models\Executive;
 use App\Models\Member;
 use App\Models\Club;
@@ -275,6 +276,34 @@ class ExecutiveController extends Controller
           'address' => $request->address,
           ]);
           return redirect()->route('executiveViewAllMamber',['user_id' => $request->user_id])->with('message', 'Account information updated');
+    }
+
+
+    public function SendNotice(){
+
+      return view('executive.sendNotice');
+    }
+    
+
+    public function SendNoticePost(Request $request){
+
+      $Notice = new  Notice();
+      $Notice->title = $request->title;
+      $Notice->notice = $request->notice;
+      $Notice->file = $request->file;
+      $Notice->save();
+
+      return view('executive.sendNotice')->with('message','Notice sucsessfully posted');
+
+    }
+
+    public function ViewNotice(){
+
+      $Notice = Notice::paginate(6);
+
+      return view('executive.viewNotice')->with('NoticeList', $Notice);
+
+
     }
 
 
