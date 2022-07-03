@@ -24,14 +24,14 @@
                             {{csrf_field()}}
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="exampleInputUsername1" name="name" placeholder="Component Name">
+                                <input type="text" class="form-control  @error('name') {{"is-invalid"}} @enderror" id="exampleInputUsername1" name="name" placeholder="Component Name">
                                 @error('name')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Description</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" name="description" placeholder="Component Description">
+                                <input type="text" class="form-control @error('description') {{"is-invalid"}} @enderror" id="exampleInputEmail1" name="description" placeholder="Component Description">
                                 @error('description')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -63,10 +63,10 @@
                                     <tr>
                                         <td>{{$component->id}}</td>
                                         <td>{{$component->name}}</td>
-                                        <td>{{$component->discription}}</td>
+                                        <td>{{$component->description}}</td>
                                         <td>{{$component->added_by}}</td>
                                         <td>
-                                            <a href="" class="btn btn-primary w-100 mb-1">Edit</a>
+                                            <a data-toggle="modal" href="#myModal" class="btn btn-primary w-100 mb-1">Edit</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -77,6 +77,6 @@
                 </div>
             </div>
         </div>
-
     </div>
+
 @endsection

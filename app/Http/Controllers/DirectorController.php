@@ -199,31 +199,42 @@ class DirectorController extends Controller
 
     public function directorImageUpload(Request $request){
         $request->validate([
-          'image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000',
-      ]);
-    
-    
-    
+            'image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000',
+        ]);
+
+
+
         if($request->hasFile('image')){
             $director_session = session()->get('director');
             $imageName = time()."_".$request->file('image')->getClientOriginalName();
             $request->image->move(public_path('assets_2/images'), $imageName);
             $imageName = "assets_2/images/".$imageName;
-    
-      
+
+
               /* New File name */
               $newFileName = 'assets_2/images/'.time()."_".$director_session['user_id'].'.'.$request->file('image')->getClientOriginalExtension();
               rename($imageName, $newFileName);
-                
+
             $imageName='../'.$newFileName;
-                     
+
             $director = director::where("user_id", $director_session["user_id"])->update([
                 'images' => $imageName
                 ]);
             $director_session['images'] = $imageName;
-    
+
             session()->put('director', $director_session);
             return redirect()->route('directorEditProfile');
         }
-      }
+    }
+
+
+    public function executiveList(){
+        $clubs = Club::orderBy("created_at", "desc")->get();
+        return view('director.executivesList')->with('clubs', $clubs);
+    }
+
+    public function assignExecutive(){
+        
+        return view('director.assignExecutive');
+    }
 }
