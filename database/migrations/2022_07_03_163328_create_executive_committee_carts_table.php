@@ -21,7 +21,8 @@ class CreateExecutiveCommitteeCartsTable extends Migration
             $table->string('designation');
             $table->integer('club_id')->unsigned();
             $table->foreign('club_id')->references('id')->on('clubs');
-            $table->string('committee_number');
+            $table->integer('committee_number');
+            $table->string('added_by');
         });
     }
 
