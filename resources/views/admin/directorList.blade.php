@@ -1,6 +1,6 @@
 <?php $admin = session()->get('admin')?>
 @extends('layouts.adminLayout')
-@section('title', 'Create Director')
+@section('title', 'Director List')
 @php $picture = '../../'.$admin['images']; @endphp
 @section('picture', $picture)
 @section('name', $admin['name'])

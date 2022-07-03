@@ -282,4 +282,8 @@ class AdminController extends Controller
           return redirect()->route('adminDirectorList')->with('message', $message);
       }
 
+      public function changePassword(){
+          return view('admin.changepassword');
+      }
+
 }

@@ -1,4 +1,5 @@
 @extends('layouts.auth')
+@section('title', "SignIn")
 @section('contant')
     <div class="row">
         <div class="col-md-4 pe-md-0">
@@ -8,7 +9,7 @@
         </div>
         <div class="col-md-8 ps-md-0">
             <div class="auth-form-wrapper px-4 py-5">
-                <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
+                <a href="{{route('home')}}" class="noble-ui-logo d-block mb-2">CM<span>WP</span></a>
                 <h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
                 @if (!empty($message))
                     <div class="alert alert-success" role="alert">
@@ -47,8 +48,6 @@
                             Login
                         </button>
                     </div>
-                    <a href="{{route('singup')}}" class="d-block mt-3 text-muted">Not a user? Sign
-                        up</a>
 
                     <a href="{{route('forgetPassword')}}" class="d-block mt-3 text-muted">Forget password? Reset Password</a>    
                 </form>

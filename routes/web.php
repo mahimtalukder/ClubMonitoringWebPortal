@@ -18,7 +18,6 @@ Route::get('/signin',[UserController::class, 'signin'])->name("signin");
 Route::post('/signinSubmitted',[UserController::class, 'signinSubmitted'])->name("signinSubmitted");
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
-Route::get('/singup',[UserController::class, 'singup'])->name("singup");
 Route::get('/forgetPassword',[UserController::class, 'forgetPassword'])->name("forgetPassword");
 Route::post('/forgotPasswordSubmitted',[UserController::class, 'forgotPasswordSubmitted'])->name("forgotPasswordSubmitted");
 Route::get('/resetPassword/{user_id}',[UserController::class, 'resetPassword'])->name("resetPassword");
@@ -29,13 +28,15 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 Route::get('/admin/profile', [AdminController::class, 'profile'])->name('adminProfile');
 Route::get('/admin/edit', [AdminController::class, 'editProfile'])->name('adminEditProfile');
 Route::post('/admin/editSubmitted', [AdminController::class, 'editProfileSubmitted'])->name('adminEditProfileSubmitted');
-Route::get('/admin/create/director', [AdminController::class, 'adminCreateDirector'])->name('adminCreateDirector');
-Route::post('/admin/create/director', [AdminController::class, 'adminCreateDirectorSubmitted'])->name('adminCreateDirectorSubmitted');
+Route::get('/admin/createDirector', [AdminController::class, 'adminCreateDirector'])->name('adminCreateDirector');
+Route::post('/admin/createDirector', [AdminController::class, 'adminCreateDirectorSubmitted'])->name('adminCreateDirectorSubmitted');
 Route::get('/admin/list/director', [AdminController::class, 'directorList'])->name('adminDirectorList');
 Route::get('/admin/update/director/{id}', [AdminController::class, 'directorUpdate'])->name('adminDirectorUpdate');
 Route::post('/admin/update/director/{id}', [AdminController::class, 'directorUpdateSubmitted'])->name('adminDirectorUpdateSubmitted');
 Route::get('/admin/update/status/director/{user_id}/{status_code}', [AdminController::class, 'directorStatusUpdate'])->name('adminDirectorStatusUpdate');
 Route::post('/admin/edit/upload', [AdminController::class, 'adminImageUpload'])->name('adminImageUploadsubmitted');
+Route::get('/admin/change/password', [AdminController::class, 'changePassword'])->name('adminChangePassword');
+Route::post('/admin/change/password', [AdminController::class, 'changePassword'])->name('adminChangePasswordSubmitted');
 
 
 
@@ -83,13 +84,6 @@ Route::get('/executive/ViewNotice', [ExecutiveController::class, 'ViewNotice'])-
 
 
 
-
-
-
-
-
-
-
 //Executive Application
 Route::get('/executive/application/compose', [ApplicationController::class, 'applicationCompose'])
 ->name('executiveApplicationCompose')->middleware('validExecutive');
@@ -126,7 +120,7 @@ Route::post('/director/application/updateSubmitted', [ApplicationController::cla
 ->name('directorApplicationUpdateSubmitted')->middleware('validDirector');
 
 Route::get('/director/application/club/{id}', [DirectorController::class, 'clubWiseApplication'])
-->name('clubWiseApplication')->middleware('validDirector');
+->name('clubWiseApplication');
 
 
 

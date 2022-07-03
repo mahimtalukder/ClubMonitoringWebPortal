@@ -1,4 +1,5 @@
 @extends('layouts.auth')
+@section('title', "Forget Password")
 @section('contant')
     <div class="row">
         <div class="col-md-4 pe-md-0">
@@ -8,7 +9,7 @@
         </div>
         <div class="col-md-8 ps-md-0">
             <div class="auth-form-wrapper px-4 py-5">
-                <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
+                <a href="{{route('home')}}" class="noble-ui-logo d-block mb-2">CM<span>WP</span></a>
                 @if (!empty($message))
                     <div class="alert alert-success" role="alert">
                         <i data-feather="check" class="text-success icon-lg me-2"></i>
