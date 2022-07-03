@@ -241,13 +241,23 @@ $(function() {
 
 
   // Area Chart
-  if($('#chartjsArea').length) {
-    new Chart($('#chartjsArea'), {
+  if($('#chartjsAreaAllApplication').length) {
+    var totalNumberOfApplicationInstance = $('#totalNumberOfApplicationInstance').val();
+    var label =[];
+    var data_set = [];
+    for(var i = 0; i < totalNumberOfApplicationInstance; i++)//see that I removed the $ preceeding the `for` keyword, it should not have been there
+    {
+      var applicationLabel = '#'+'applicationLabel'+i;
+      var totalNumberOfApplication = '#'+'totalNumberOfApplication'+i;
+      label.push($(applicationLabel).val());
+      data_set.push($(totalNumberOfApplication).val());
+    }
+    new Chart($('#chartjsAreaAllApplication'), {
       type: 'line',
       data: {
-        labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+        labels: label,
         datasets: [ { 
-            data: [282,350,411,502,635,809,947,1402,3700,5267],
+            data: data_set,
             label: "Application",
             borderColor: colors.info,
             backgroundColor: 'rgba(102,209,209,.3)',

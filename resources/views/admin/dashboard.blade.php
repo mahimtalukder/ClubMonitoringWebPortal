@@ -42,16 +42,5 @@
           </div>
         </div>
     </div>
-
-    <div class="row">
-      <div class="col-xl-6 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <h6 class="card-title">Area chart</h6>
-            <canvas id="chartjsArea"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
     
 @endsection

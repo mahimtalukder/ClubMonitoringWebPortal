@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Executive;
 use App\Models\Member;
+use App\Models\Application;
 use App\Models\Club;
 use App\Http\Requests\StoreExecutiveRequest;
 use App\Http\Requests\UpdateExecutiveRequest;
@@ -29,7 +30,34 @@ class ExecutiveController extends Controller
 
     public function dashboard()
     {
-      return view('executive.dashboard');
+      $day=15;
+      $member_session = session()->get('executive');
+      $all_applications = Application::where([['created_at', '>', date('Y-m-d', strtotime("-".$day." days"))],['club_id', '=', $member_session->club_id]])
+      ->get();
+
+      $data = array();
+
+      for($i=$day; $i>=0; $i--){
+          $array = [
+              "label" => date('M d', strtotime('-'. $i .' days')),
+              "value" => 0
+          ];
+          array_push($data, $array);
+
+      }
+
+
+      foreach ($all_applications as $application) {
+          $i=0;
+          foreach ($data as $d){
+              if(date('M d', strtotime($application->created_at)) == $d['label']){
+                  $data[$i]['value'] += 1;
+                  break;
+              }
+              $i++;
+          }
+      }
+      return view('executive.dashboard') ->with('applications', $data);;
     }
 
     public function profile(){
