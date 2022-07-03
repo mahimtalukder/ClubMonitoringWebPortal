@@ -315,10 +315,15 @@ class ExecutiveController extends Controller
 
     public function SendNoticePost(Request $request){
 
+      $validate = $request->validate([
+        "title" => "required",
+        "notice" => "required"
+
+    ]);
+    
       $Notice = new  Notice();
       $Notice->title = $request->title;
       $Notice->notice = $request->notice;
-      $Notice->file = $request->file;
       $Notice->save();
 
       return view('executive.sendNotice')->with('message','Notice sucsessfully posted');

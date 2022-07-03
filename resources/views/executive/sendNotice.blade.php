@@ -33,7 +33,10 @@
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Title</label>
                                         <input id="name" class="form-control" name="title" placeholder="title" type="text"
-                                            value="">
+                                        value="">
+                                        @error('title')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
@@ -41,6 +44,9 @@
                                         <div class="input-group">
                                             <textarea class="form-control" name="notice" placeholder="Full notice" aria-label="With textarea"></textarea>
                                         </div>
+                                        @error('notice')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="d-none d-md-block">
