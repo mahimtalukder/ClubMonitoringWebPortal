@@ -2,7 +2,7 @@
     <nav class="sidebar">
         <div class="sidebar-header">
             <a href="{{ route('adminDash') }}" class="sidebar-brand">
-                MT<span>LTD</span>
+                CM<span>WP</span>
             </a>
             <div class="sidebar-toggler not-active">
                 <span></span>
@@ -40,7 +40,7 @@
       <nav class="sidebar">
         <div class="sidebar-header">
             <a href="{{ route('adminDash') }}" class="sidebar-brand">
-                MT<span>LTD</span>
+                CM<span>WP</span>
             </a>
             <div class="sidebar-toggler not-active">
                 <span></span>
@@ -70,8 +70,15 @@
                         <span class="link-title">Edit Profile</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('adminChangePassword')}}" class="nav-link">
+                        <i class="link-icon" data-feather="lock"></i>
+                        <span class="link-title">Change Password</span>
+                    </a>
+                </li>
 
                 <li class="nav-item nav-category">Director</li>
+
                 <li class="nav-item">
                     <a href="{{ route('adminCreateDirector') }}" class="nav-link">
                         <i class="link-icon" data-feather="box"></i>

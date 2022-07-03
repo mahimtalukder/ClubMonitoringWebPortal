@@ -51,8 +51,7 @@ class UserController extends Controller
             'password.min' => 'Minimum 6 Character',
         ];
         $this->validate($request, $rules, $messages);
-
-        $user = User::whereRaw("BINARY user_id = '$request->id'")->first();
+        $user = User::where([['user_id', "=", $request->id],["status", "=", '1']])->first();
 
 
         if (!empty($user)) {

@@ -16,21 +16,31 @@
                     <div class="card-body">
                         <h6 class="card-title">Assign Executive</h6>
                         @if(!empty($message))
-                            <div class="alert alert-success" role="alert">
+                            <div class="alert alert-danger" role="alert">
                                 {{$message}}
                             </div>
                         @endif
-                        <form class="forms-sample pt-3" action="" method="post">
+                        <form class="forms-sample pt-3" action="{{route('directorAssignExecutiveSubmitted')}}" method="post">
                             {{csrf_field()}}
 
                             <div class="border-bottom pb-3">
                                 <label class="form-label">Select a club to assign committee</label>
-                                <select class="form-select form-select-lg">
+                                <select class="form-select form-select-lg @error('club_id') {{"is-invalid"}} @enderror" name="club_id">
                                     <option selected="">Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    @if($selected != 'none')
+                                        @foreach($clubs as $club)
+                                        <option @if($selected_club->id == $club->id) {{'selected'}} @endif value="{{$club->id}}">{{$club->name}}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach($clubs as $club)
+                                            <option value="{{$club->id}}">{{$club->name}}</option>
+                                        @endforeach
+                                    @endif
+
                                 </select>
+                                @error('club_id')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
 
                             <div class="mb-3 mt-3">
@@ -42,12 +52,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Designation</label>
-                                <input type="text" class="form-control @error('designation') {{"is-invalid"}} @enderror" id="exampleInputEmail1" name="designation" placeholder="Component Description">
+                                <input type="text" class="form-control @error('designation') {{"is-invalid"}} @enderror" id="exampleInputEmail1" name="designation" placeholder="Enter designation">
                                 @error('designation')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary me-2">Add</button>
+                            <button type="submit" class="btn btn-outline-primary w-100 me-2">Add to list</button>
                         </form>
 
                     </div>
@@ -56,34 +66,39 @@
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="card-title">All Components</h6>
-{{--                        <div class="table-responsive">--}}
-{{--                            {{$components->links('inc.paginator') }}--}}
-{{--                            <table id="dataTableExample" class="table">--}}
-{{--                                <thead>--}}
-{{--                                <tr>--}}
-{{--                                    <th>ID</th>--}}
-{{--                                    <th>Name</th>--}}
-{{--                                    <th>Description</th>--}}
-{{--                                    <th>Added By</th>--}}
-{{--                                    <th>Action</th>--}}
-{{--                                </tr>--}}
-{{--                                </thead>--}}
-{{--                                <tbody>--}}
-{{--                                @foreach($components as $component)--}}
-{{--                                    <tr>--}}
-{{--                                        <td>{{$component->id}}</td>--}}
-{{--                                        <td>{{$component->name}}</td>--}}
-{{--                                        <td>{{$component->description}}</td>--}}
-{{--                                        <td>{{$component->added_by}}</td>--}}
-{{--                                        <td>--}}
-{{--                                            <a data-toggle="modal" href="#myModal" class="btn btn-primary w-100 mb-1">Edit</a>--}}
-{{--                                        </td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
-{{--                                </tbody>--}}
-{{--                            </table>--}}
-{{--                        </div>--}}
+                        @if($selected != "none")
+                        <h6 class="card-title">Added Executives for {{$selected_club->name}}</h6>
+                        <h6 class="card-header text-success">{{$committee_no}}st Executive Committee</h6>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NAME</th>
+                                    <th>Designation</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($carts as $cart)
+                                <tr>
+                                    <th>{{$cart->user_id}}</th>
+                                    <td>{{$cart->name}}</td>
+                                    <td>{{$cart->designation}}</td>
+                                    <td>
+                                        <a data-toggle="modal" href="/director/executives/assign/remove/{{$cart->user_id}}" class="btn btn-outline-danger w-100 mb-1">Remove</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        @else
+                            <div class="alert alert-dark" role="alert">
+                                When you add executive, this will show here.
+                            </div>
+                        @endif
+                            <a href="{{route('directorConfirmExecutive')}}" class="btn btn-primary w-100 me-2">Confirm</a>
                     </div>
                 </div>
             </div>

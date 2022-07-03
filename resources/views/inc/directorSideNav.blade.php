@@ -2,7 +2,7 @@
     <nav class="sidebar">
         <div class="sidebar-header">
             <a href="{{ route('directorDash') }}" class="sidebar-brand">
-                MT<span>LTD</span>
+                CM<span>WP</span>
             </a>
             <div class="sidebar-toggler not-active">
                 <span></span>
@@ -40,7 +40,7 @@
       <nav class="sidebar">
         <div class="sidebar-header">
             <a href="{{ route('directorDash') }}" class="sidebar-brand">
-                MT<span>LTD</span>
+                CM<span>WP</span>
             </a>
             <div class="sidebar-toggler not-active">
                 <span></span>
