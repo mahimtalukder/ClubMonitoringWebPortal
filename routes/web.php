@@ -124,7 +124,7 @@ Route::post('/director/application/updateSubmitted', [ApplicationController::cla
 ->name('directorApplicationUpdateSubmitted')->middleware('validDirector');
 
 Route::get('/director/application/club/{id}', [DirectorController::class, 'clubWiseApplication'])
-    ->name('clubWiseApplication')->middleware('validDirector');
+->name('clubWiseApplication')->middleware('validDirector');
 
 
 
