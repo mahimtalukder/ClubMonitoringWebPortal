@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Director;
+use App\Models\ExecutiveCommitteeCart;
 use App\Models\User;
 use App\Models\Application;
 use App\Models\Club;
@@ -11,6 +12,7 @@ use App\Models\Executive;
 use App\Http\Requests\StoreDirectorRequest;
 use App\Http\Requests\UpdateDirectorRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class DirectorController extends Controller
 {
@@ -249,6 +251,108 @@ class DirectorController extends Controller
 
     public function assignExecutive(){
 
-        return view('director.assignExecutive');
+        $clubs = Club::all();
+        $director_session = session()->get('director');
+        $carts = ExecutiveCommitteeCart::where('added_by', $director_session->user_id)->get();
+
+        $cart_selected_club = ExecutiveCommitteeCart::where('added_by', $director_session->user_id)->first();
+        if($cart_selected_club == ""){
+            $cart_selected_club = new ExecutiveCommitteeCart();
+            $cart_selected_club->club_id = '';
+            $cart_selected_club->name = '';
+
+            return view('director.assignExecutive')
+                ->with('clubs', $clubs)
+                ->with('selected', 'none');
+
+        }
+
+        $selected_club_info = Club::where('id', $cart_selected_club->club_id)->first();
+
+        $committee = Executive::where('club_id', $cart_selected_club->club_id)->first();
+
+        $new_committee_no = 1;
+        if(!empty($committee->committee_number)){
+            $new_committee_no = 1+$committee->committee_number;
+        }
+
+        if (Session::has('message')){
+            $message = session()->get('message');
+            session()->forget('message');
+            return view('director.assignExecutive')
+                ->with('clubs', $clubs)->with('carts', $carts)
+                ->with('message', $message)
+                ->with('committee_no', $new_committee_no)
+                ->with('selected_club', $cart_selected_club)
+                ->with('selected', $cart_selected_club->club_id);
+        }
+
+
+        return view('director.assignExecutive')
+            ->with('clubs', $clubs)
+            ->with('carts', $carts)
+            ->with('selected_club', $selected_club_info)
+            ->with('selected', $cart_selected_club->club_id)
+            ->with('committee_no', $new_committee_no);
+
+    }
+
+    public function assignExecutiveSubmitted(Request $request){
+        $validate = $request->validate([
+            "club_id" => "required|exists:clubs,id",
+            "id" => ['required', 'exists:members,user_id,club_id,'.$request->club_id],
+            "designation" => "required"
+        ]);
+
+        $member = Member::where('user_id', $request->id)->first();
+
+        $committee = Executive::where('club_id', $request->club_id)->first();
+
+        $new_committee_no = 1;
+        if(!empty($committee->committee_number)){
+            $new_committee_no = 1+$committee->committee_number;
+        }
+
+        $director_session = session()->get('director');
+
+        $cart_selected_club = ExecutiveCommitteeCart::where('added_by', $director_session->user_id)->first();
+
+
+
+        if(!empty($cart_selected_club->club_id)){
+
+            if ($cart_selected_club->club_id == $request->club_id){
+                $executiveCart = new ExecutiveCommitteeCart();
+                $executiveCart->user_id = $request->id;
+                $executiveCart->name = $member->name;
+                $executiveCart->designation = $request->designation;
+                $executiveCart->club_id = $request->club_id;
+                $executiveCart->committee_number = $new_committee_no;
+                $executiveCart->added_by = $director_session->user_id;
+                $executiveCart->save();
+            }
+            else
+            {
+                return redirect()->route('directorAssignExecutive')->with('message', 'Sorry! You  cannot add multiple club executive at a time. You have to cancel or complete this first.');
+            }
+        }
+        else{
+            $executiveCart = new ExecutiveCommitteeCart();
+            $executiveCart->user_id = $request->id;
+            $executiveCart->name = $member->name;
+            $executiveCart->designation = $request->designation;
+            $executiveCart->club_id = $request->club_id;
+            $executiveCart->committee_number = $new_committee_no;
+            $executiveCart->added_by = $director_session->user_id;
+            $executiveCart->save();
+        }
+
+
+        return redirect()->route('directorAssignExecutive');
+    }
+
+    public function removeAssignExecutive(Request $request){
+        ExecutiveCommitteeCart::where('user_id', $request->id)->delete();
+        return redirect()->route('directorAssignExecutive');
     }
 }
