@@ -62,8 +62,8 @@ class DirectorController extends Controller
             "foo" => "bar",
             "bar" => "foo"
            ];
-        
-        
+
+
 
 
 
@@ -248,7 +248,15 @@ class DirectorController extends Controller
     }
 
     public function assignExecutive(){
-        
-        return view('director.assignExecutive');
+        $clubs = Club::all();
+        return view('director.assignExecutive')->with('clubs', $clubs);
+    }
+
+    public function assignExecutiveSubmitted(Request $request){
+        $validate = $request->validate([
+            "club_id" => "required|exists:clubs,id",
+            "id" => "required|exists:members,user_id",
+            "designation" => "required",
+        ]);
     }
 }

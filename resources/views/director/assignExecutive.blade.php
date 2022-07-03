@@ -20,17 +20,20 @@
                                 {{$message}}
                             </div>
                         @endif
-                        <form class="forms-sample pt-3" action="" method="post">
+                        <form class="forms-sample pt-3" action="{{route('directorAssignExecutiveSubmitted')}}" method="post">
                             {{csrf_field()}}
 
                             <div class="border-bottom pb-3">
                                 <label class="form-label">Select a club to assign committee</label>
-                                <select class="form-select form-select-lg">
+                                <select class="form-select form-select-lg @error('club_id') {{"is-invalid"}} @enderror" name="club_id">
                                     <option selected="">Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    @foreach($clubs as $club)
+                                    <option value="{{$club->id}}">{{$club->name}}</option>
+                                    @endforeach
                                 </select>
+                                @error('club_id')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
 
                             <div class="mb-3 mt-3">
