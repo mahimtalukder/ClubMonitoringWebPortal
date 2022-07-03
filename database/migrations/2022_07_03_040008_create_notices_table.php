@@ -18,9 +18,9 @@ class CreateNoticesTable extends Migration
             $table->string('title');
             $table->text('notice');
             $table->string('file')->nullable();
+            $table->integer('club_id')->unsigned();
+            $table->foreign('club_id')->references('id')->on('clubs');
             $table->timestamps();
-
-
         });
     }
 

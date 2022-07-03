@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{asset('../assets_2/vendors/core/core.css')}}">
     <!-- endinject -->
 
+	<!-- End plugin css for this page -->
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{asset('../assets_2/vendors/select2/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('../assets_2/vendors/simplemde/simplemde.min.css')}}">
@@ -97,6 +98,19 @@
       <!-- inject:js -->
       <script src="{{asset('../assets_2/vendors/feather-icons/feather.min.js')}}"></script>
       <script src="{{asset('../assets_2/js/template.js')}}"></script>
+
+
+      	<!-- Custom js for this page -->
+	<script src="{{asset('../assets_2/js/bootstrap-maxlength.js')}}"></script>
+	<script src="{{asset('../assets_2/js/inputmask.js')}}"></script>
+	<script src="{{asset('../assets_2/js/select2.js')}}"></script>
+	<script src="{{asset('../assets_2/js/typeahead.js')}}"></script>
+	<script src="{{asset('../assets_2/js/tags-input.js')}}"></script>
+	<script src="{{asset('../assets_2/js/dropzone.js')}}"></script>
+	<script src="{{asset('../assets_2/js/dropify.js')}}"></script>
+	<script src="{{asset('../assets_2/js/bootstrap-colorpicker.js')}}"></script>
+	<script src="{{asset('../assets_2/js/datepicker.js')}}"></script>
+	<!-- End custom js for this page -->
       <!-- endinject -->
 
       <!-- Custom js for this page -->

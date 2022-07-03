@@ -315,10 +315,20 @@ class ExecutiveController extends Controller
 
     public function SendNoticePost(Request $request){
 
+      $validate = $request->validate([
+        "title" => "required",
+        "notice" => "required"
+
+    ]);
+
+
+    $member_session = session()->get('executive');
+    $executive = Member::where("user_id", $member_session["user_id"])->first();
+    
       $Notice = new  Notice();
       $Notice->title = $request->title;
       $Notice->notice = $request->notice;
-      $Notice->file = $request->file;
+      $Notice->club_id = $executive->club_id;
       $Notice->save();
 
       return view('executive.sendNotice')->with('message','Notice sucsessfully posted');
