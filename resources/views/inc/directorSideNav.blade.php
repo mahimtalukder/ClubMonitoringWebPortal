@@ -73,22 +73,10 @@
 
                 <li class="nav-item nav-category">Services</li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button" aria-expanded="false"
-                      aria-controls="general-pages">
-                      <i class="link-icon" data-feather="mail"></i>
-                      <span class="link-title">Application</span>
-                      <i class="link-arrow" data-feather="chevron-down"></i>
+                    <a href="{{route('directorAllApplication')}}" class="nav-link">
+                        <i class="link-icon" data-feather="mail"></i>
+                        <span class="link-title">Application</span>
                     </a>
-                    <div class="collapse" id="general-pages">
-                      <ul class="nav sub-menu">
-                          <li class="nav-item">
-                              <a href="{{route('directorAllApplication')}}" class="nav-link">All Application</a>
-                          </li>
-                        <li class="nav-item">
-                          <a href="#" class="nav-link">New Application</a>
-                        </li>
-                      </ul>
-                    </div>
                 </li>
 
                 <li class="nav-item">

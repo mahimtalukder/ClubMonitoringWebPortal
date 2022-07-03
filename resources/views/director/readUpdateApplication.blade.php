@@ -157,7 +157,12 @@
                                         <div class="row mb-3">
                                             <label class="col-md-2 col-form-label">Approve Date</label>
                                             <div class="col-md-10">
-                                                <input class="form-control mb-4 mb-md-0" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="dd/mm/yyyy" inputmode="numeric" name="date">
+                                                <div class="col-md-10">
+                                                    <div class="input-group date datepicker" id="datePickerExample">
+                                                        <input type="text" class="form-control" name="date">
+                                                        <span class="input-group-text input-group-addon"><i data-feather="calendar"></i></span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

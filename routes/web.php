@@ -36,7 +36,7 @@ Route::post('/admin/update/director/{id}', [AdminController::class, 'directorUpd
 Route::get('/admin/update/status/director/{user_id}/{status_code}', [AdminController::class, 'directorStatusUpdate'])->name('adminDirectorStatusUpdate');
 Route::post('/admin/edit/upload', [AdminController::class, 'adminImageUpload'])->name('adminImageUploadsubmitted');
 Route::get('/admin/change/password', [AdminController::class, 'changePassword'])->name('adminChangePassword');
-Route::post('/admin/change/password', [AdminController::class, 'changePassword'])->name('adminChangePasswordSubmitted');
+Route::post('/admin/change/password/submitted', [AdminController::class, 'changePasswordSubmitted'])->name('adminChangePasswordSubmitted');
 
 
 
@@ -53,6 +53,7 @@ Route::get('/director/executives/assign', [DirectorController::class, 'assignExe
 Route::get('/director/executives/assign/remove/{id}', [DirectorController::class, 'removeAssignExecutive'])->name('directorRemoveAssignExecutive');
 Route::post('/director/executives/assign', [DirectorController::class, 'assignExecutiveSubmitted'])->name('directorAssignExecutiveSubmitted');
 Route::get('/director/executives/confirm', [DirectorController::class, 'confirmExecutive'])->name('directorConfirmExecutive');
+
 
 
 
@@ -122,17 +123,18 @@ Route::get('/director/application/rejectApplication/{application_id}/{remarks}',
 Route::post('/director/application/updateSubmitted', [ApplicationController::class, 'applicationUpdateSubmitted'])
 ->name('directorApplicationUpdateSubmitted')->middleware('validDirector');
 
-Route::get('/director/application/club/{id}', [DirectorController::class, 'clubWiseApplication'])
+Route::get('/director/application/{id}/clubInfo', [DirectorController::class, 'clubWiseApplication'])
 ->name('clubWiseApplication');
 
 
 
 /* Director Club */
 Route::get('/director/club/allClub', [DirectorController::class, 'allClub'])->name('directorAllClub');
-Route::get('/director/club/info/{id}', [DirectorController::class, 'clubInfo'])->name('directorClubInfo');
+Route::get('/director/club/allClub/{id}', [DirectorController::class, 'clubInfo'])->name('directorClubInfo');
 
 Route::get('/director/club/create', [DirectorController::class, 'createClub'])->name('directorCreateClub');
 Route::post('/director/club/createSubmitted', [DirectorController::class, 'createClubSubmitted'])->name('directorCreateClubSubmitted');
+
 
 
 Route::get('/print', [ClubController::class, 'print'])->name('print');
