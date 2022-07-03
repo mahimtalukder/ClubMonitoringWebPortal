@@ -52,12 +52,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Designation</label>
-                                <input type="text" class="form-control @error('designation') {{"is-invalid"}} @enderror" id="exampleInputEmail1" name="designation" placeholder="Component Description">
+                                <input type="text" class="form-control @error('designation') {{"is-invalid"}} @enderror" id="exampleInputEmail1" name="designation" placeholder="Enter designation">
                                 @error('designation')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary w-100 me-2">Add to list</button>
+                            <button type="submit" class="btn btn-outline-primary w-100 me-2">Add to list</button>
                         </form>
 
                     </div>
@@ -98,6 +98,7 @@
                                 When you add executive, this will show here.
                             </div>
                         @endif
+                            <a href="{{route('directorConfirmExecutive')}}" class="btn btn-primary w-100 me-2">Confirm</a>
                     </div>
                 </div>
             </div>
