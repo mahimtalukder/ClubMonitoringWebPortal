@@ -221,6 +221,7 @@
         $(function(){
             reject_function = function(id,application_id)
             {
+                console.log("called");
                 new Attention.Prompt({
                     title: 'Are you sure want to reject this component?',
                     content: 'Please enter a remark:',

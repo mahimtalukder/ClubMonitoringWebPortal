@@ -87,44 +87,49 @@
                                 @endif
                             </div>
                             @if($application_info->is_approved == "approved")
-                            <div class="p-3 bg-body">
-                                <div class="mb-3">Approved Date: 13/05/2022</div>
-                                <div>Approved Components</div>
-                                <div class="col-md-12 border-2 mt-3">
-                                    <div class="mb-3 table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Start Time</th>
-                                                <th>End Time</th>
-                                                <th>Quantity</th>
-                                                <th>Remarks</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Multipurpose</td>
-                                                <td>8:00 AM</td>
-                                                <td>10:00 AM</td>
-                                                <td>2</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Classroom</td>
-                                                <td>8:00 AM</td>
-                                                <td>10:00 AM</td>
-                                                <td>2</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="p-3 bg-body">
+                                    <div class="mb-3">Approved Date: {{$application_info->approve_date}}</div>
+                                    <div>Approved Components</div>
+                                    <div class="col-md-12 border-2 mt-3">
+                                        <div class="mb-3 table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Start Time</th>
+                                                    <th>End Time</th>
+                                                    <th>Quantity</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                        $count=0;
+                                                    @endphp
+                                                    @foreach($requested_components as $component)
+                                                        <tr>
+                                                            @if($component->is_approved=="approved")
+                                                                <td>{{$count+1}}</td>
+                                                                <td>{{$component->name}}</td>
+                                                                <td>{{$component->approved_start_time}}</td>
+                                                                <td>{{$component->approved_end_time}}</td>
+                                                                <td>{{$component->quantity}}</td>
+                                                                @php
+                                                                    $count = $count+1;
+                                                                @endphp
+                                                            @endif
+                                                        </tr>
+                                                    @endforeach
+                                                    @if($count == 0)
+                                                        <tr><td>No Approved Components</td></tr>
+                                                    @endif
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endif
+
 
                             @if($application_info->is_approved == "rejected")
                                 <div class="p-3 bg-warning">
