@@ -55,8 +55,22 @@ class DirectorController extends Controller
         }
 
 
+        $all_applications = Application::where('created_at', '>', date('Y-m-d', strtotime("-7 days")))
+           ->get();
 
-      return view('director.dashboard')->with('numberOfuser',$numberOfuser)->with('clubs',$clubs);
+           $array =[
+            "foo" => "bar",
+            "bar" => "foo"
+           ];
+        
+        
+
+
+
+      return view('director.dashboard')
+      ->with('numberOfuser',$numberOfuser)
+      ->with('clubs',$clubs)
+      ->with('applications',$applications);
     }
 
     public function profile(){
@@ -101,7 +115,7 @@ class DirectorController extends Controller
         $clubs = Club::all();
         $applications = Application::where('sent_to', 'director')
             ->orderBy("created_at", "desc")
-            ->paginate(1);
+            ->paginate(3);
 
         return view('director.applications')
             ->with('applications', $applications)

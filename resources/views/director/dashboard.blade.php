@@ -23,6 +23,14 @@
     @endforeach
     <input type="hidden" id='total_club' value=@php echo $i @endphp>
 
+    @php $j=0; @endphp
+    @foreach($applications as $application)
+      <input type="hidden" id=@php echo 'application_name'.$j @endphp value='@php echo $club['name'] @endphp'>
+      <input type="hidden" id=@php echo 'total_menber'.$j @endphp value=@php echo $club['total_member'] @endphp>
+      @php $j++; @endphp
+    @endforeach
+    <input type="hidden" id='total_club' value=@php echo $i @endphp>
+
     <div class="row">
         <div class="col-xl-6 grid-margin stretch-card">
             <div class="card">

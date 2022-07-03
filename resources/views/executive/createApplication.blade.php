@@ -16,22 +16,23 @@
                 selected[$(this).val()]=$(this).text();
                 });
 
-            var i = 1;
+            var i = 0;
             $("#component_body").empty();
             $.each(selected, function(key, value){
                 if(typeof value != 'undefined'){
                     console.log(value);
-                    var html = "<tr> <td>"+i+"</td> <td>"+ value +"</td>";
+                    var count = i+1;
+                    var html = "<tr> <td>"+count+"</td> <td>"+ value +"</td>";
                         format = '\"\'alias\'' + ':' + '\'datetime\'\"';
-                        html += "<td> <input class='form-control' data-inputmask= " +  format + "data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name='start_time" + i + "' placeholder='hh:mm tm'></td>";
-                        html += "<td> <input class='form-control' data-inputmask= " +  format + "data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name='end_time" + i + "' placeholder='hh:mm tm'></td>";
-                        html += "<td> <input type='number' class='form-control' id='exampleInputMobile' placeholder='Quantity' name='quantity" + i + "'></td></tr>"
-                        html += "<input type='hidden' name='component"+i+"'  value='"+ value +"'>"
+                        html += "<td> <input class='form-control' data-inputmask= " +  format + "data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=\"component["+i+"][start_time]\" placeholder='hh:mm tm'></td>";
+                        html += "<td> <input class='form-control' data-inputmask= " +  format + "data-inputmask-inputformat='hh:mm tt' inputmode='numeric' name=\"component["+i+"][end_time]\" placeholder='hh:mm tm'></td>";
+                        html += "<td> <input type='number' class='form-control' id='exampleInputMobile' placeholder='Quantity' name=\"component["+i+"][quantity]\"></td></tr>"
+                        html += "<input type='hidden' name=\"component["+i+"][name]\"  value='"+ value +"'>"
                     $('#component_body').append(html);
                     i++;
                 }
             });
-            var total_components = i-1;
+            var total_components = i;
             document.getElementById('total_componet').value = total_components;
         });
     });
@@ -54,7 +55,7 @@
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
-                                            <li>All fields are required</li>
+                                            {{implode('',$errors->all('<div>:message</div>'))}}
                                         </ul>
                                     </div>
                                 @endif

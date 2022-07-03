@@ -101,7 +101,7 @@ Route::get('/executive/application/rejected', [ApplicationController::class, 'ap
 ->name('executiveApplicationRejected')->middleware('validExecutive');
 Route::get('/executive/application/read/{id}', [ApplicationController::class, 'applicationRead'])
 ->name('executiveApplicationRead')->middleware('validExecutive');
-Route::get('/executive/application/', [ApplicationController::class, 'allApplication'])
+Route::get('/executive/allApplication/', [ApplicationController::class, 'allApplication'])
 ->name('executiveAllApplication')->middleware('validExecutive');
 
 Route::get('/executive/application/search', [ApplicationController::class, 'searchExecutiveApplication'])
