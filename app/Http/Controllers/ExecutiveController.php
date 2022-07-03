@@ -337,7 +337,9 @@ class ExecutiveController extends Controller
 
     public function ViewNotice(){
 
-      $Notice = Notice::paginate(6);
+      $member_session = session()->get('executive');
+
+      $Notice = Notice::where("club_id", $member_session["club_id"])->paginate(6);
 
       return view('executive.viewNotice')->with('NoticeList', $Notice);
 
