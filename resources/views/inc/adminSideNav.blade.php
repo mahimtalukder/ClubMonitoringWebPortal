@@ -72,7 +72,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('adminChangePassword')}}" class="nav-link">
-                        <i class="link-icon" data-feather="edit"></i>
+                        <i class="link-icon" data-feather="lock"></i>
                         <span class="link-title">Change Password</span>
                     </a>
                 </li>
