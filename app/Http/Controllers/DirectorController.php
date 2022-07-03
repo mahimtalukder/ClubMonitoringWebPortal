@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Director;
+use App\Models\ExecutiveCommitteeCart;
 use App\Models\User;
 use App\Models\Application;
 use App\Models\Club;
@@ -11,6 +12,7 @@ use App\Models\Executive;
 use App\Http\Requests\StoreDirectorRequest;
 use App\Http\Requests\UpdateDirectorRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class DirectorController extends Controller
 {
@@ -19,89 +21,73 @@ class DirectorController extends Controller
         $this->middleware('validDirector');
     }
 
-    public function dashboard()
-    {
+    public function dashboard(){
         $users = User::all();
-        $numberOfuser = [];
-        $numberOfuser['admin'] = 0;
-        $numberOfuser['director'] = 0;
-        $numberOfuser['member'] = 0;
+        $numberOfuser=[];
+        $numberOfuser['admin']=0;
+        $numberOfuser['director']=0;
+        $numberOfuser['member']=0;
 
-        foreach ($users as $user) {
-            if ($user->user_type == "director") {
-                $numberOfuser['director'] += 1;
-            } else if ($user->user_type == "admin") {
-                $numberOfuser['admin'] += 1;
-            } else if ($user->user_type == "member") {
-                $numberOfuser['member'] += 1;
+        foreach ($users as $user){
+            if($user->user_type=="director"){
+                $numberOfuser['director']+=1;
+            }
+            else if($user->user_type=="admin"){
+                $numberOfuser['admin']+=1;
+            }
+            else if($user->user_type=="member"){
+                $numberOfuser['member']+=1;
             }
         }
 
-        $clubs = Club::all();
-        $members = Member::all();
+        $clubs= Club::all();
+        $members= Member::all();
 
-        foreach ($clubs as $club) {
-            $club['total_member'] = 0;
+        foreach ($clubs as $club){
+            $club['total_member']=0;
         }
 
-        foreach ($members as $member) {
-            foreach ($clubs as $club) {
-                if ($club['id'] == $member->club_id) {
-                    $club['total_member'] += 1;
+        foreach ($members as $member){
+            foreach ($clubs as $club){
+                if($club['id']==$member->club_id){
+                    $club['total_member']+=1;
                 }
             }
+
         }
 
 
         $all_applications = Application::where('created_at', '>', date('Y-m-d', strtotime("-7 days")))
-            ->get();
+           ->get();
 
-        $data = array();
-
-        for($i=15; $i>=0; $i--){
-            $array = [
-                "label" => date('M d', strtotime('-'. $i .' days')),
-                "value" => 0
-            ];
-            array_push($data, $array);
-    
-        }
+           $array =[
+            "foo" => "bar",
+            "bar" => "foo"
+           ];
 
 
-        foreach ($all_applications as $application) {
-            $i=0;
-            foreach ($data as $d){
-                if(date('M d', strtotime($application->created_at)) == $d['label']){
-                    $data[$i]['value'] += 1;
-                    break;
-                }
-                $i++;
-            }
-        }
 
 
-        return view('director.dashboard')
-            ->with('numberOfuser', $numberOfuser)
-            ->with('clubs', $clubs)
-            ->with('applications', $data);
+
+      return view('director.dashboard')
+      ->with('numberOfuser',$numberOfuser)
+      ->with('clubs',$clubs)
+      ->with('applications',$applications);
     }
 
-    public function profile()
-    {
+    public function profile(){
         $director_session = session()->get('director');
         $director = director::where("user_id", $director_session["user_id"])->first();
         return view('director.profile')->with('director', $director);
     }
 
-    public function editProfile()
-    {
+    public function editProfile(){
         $director_session = session()->get('director');
         $director = director::where("user_id", $director_session["user_id"])->first();
         return view('director.EditProfile')->with('director_info', $director);
     }
 
-    public function editProfileSubmitted(Request $request)
-    {
+    public function editProfileSubmitted(Request $request){
 
         $validate = $request->validate([
             "name" => "required|regex:/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/u",
@@ -119,14 +105,15 @@ class DirectorController extends Controller
             'phone' => $request->phone,
             'gender' => $request->gender,
             'dob' => $request->dob,
-            'blood_group' => $request->blood_group,
+            'blood_group' =>$request->blood_group,
             'address' => $request->address,
-        ]);
-        return redirect()->route('directorEditProfile');
+            ]);
+            return redirect()->route('directorEditProfile');
+
+
     }
 
-    public function allApplication()
-    {
+    public function allApplication(){
         $clubs = Club::all();
         $applications = Application::where('sent_to', 'director')
             ->orderBy("created_at", "desc")
@@ -138,11 +125,10 @@ class DirectorController extends Controller
             ->with('labelName', 'Applications');
     }
 
-    public function applicationRead(Request $request)
-    {
+    public function applicationRead(Request $request){
 
         $application_info = Application::where("application_id", $request->id)->first();
-        $is_approved = "no";
+        $is_approved ="no";
 
         $requested_components = Application::select('requested_components.*', 'components.name')
             ->join('requested_components', 'applications.application_id', '=', 'requested_components.application_id')
@@ -155,15 +141,14 @@ class DirectorController extends Controller
 
 
         return view('director.readUpdateApplication')
-            ->with('application_info', $application_info)
-            ->with('requested_components', $requested_components)
-            ->with('club', $club)
-            ->with('clubs', $clubs)
-            ->with('labelName', 'Read Applications');
+        ->with('application_info', $application_info)
+        ->with('requested_components',$requested_components)
+        ->with('club',$club)
+        ->with('clubs',$clubs)
+        ->with('labelName', 'Read Applications');
     }
 
-    public function clubWiseApplication(Request $request)
-    {
+    public function clubWiseApplication(Request $request){
         $director_session = session()->get('director');
         $clubs = Club::all();
         $club_info = Club::where("id", $request->id)->first();
@@ -175,7 +160,7 @@ class DirectorController extends Controller
             ->with('club_info', $club_info)
             ->with('clubs', $clubs)
             ->with('applications', $applications)
-            ->with('labelName', 'Applications of ' . $club_info->name);
+            ->with('labelName', 'Applications of '.$club_info->name);
     }
 
     public function allClub()
@@ -200,10 +185,10 @@ class DirectorController extends Controller
         $club = $clubinfo->name;
 
         return view('director.clubInfo')
-            ->with('total_member', $total_member)
-            ->with('total_application', $total_application)
-            ->with('total_executive', $total_executive)
-            ->with('club', $club);
+        ->with('total_member',$total_member)
+        ->with('total_application',$total_application)
+        ->with('total_executive',$total_executive)
+        ->with('club',$club);
     }
 
     public function createClub()
@@ -224,34 +209,33 @@ class DirectorController extends Controller
         $club->created_by = $director_session->user_id;
         $club->save();
 
-        return view('director.createClub')->with('message', 'New club successfully added!');
+        return view('director.createClub')->with('message','New club successfully added!');
     }
 
 
-    public function directorImageUpload(Request $request)
-    {
+    public function directorImageUpload(Request $request){
         $request->validate([
             'image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000',
         ]);
 
 
 
-        if ($request->hasFile('image')) {
+        if($request->hasFile('image')){
             $director_session = session()->get('director');
-            $imageName = time() . "_" . $request->file('image')->getClientOriginalName();
+            $imageName = time()."_".$request->file('image')->getClientOriginalName();
             $request->image->move(public_path('assets_2/images'), $imageName);
-            $imageName = "assets_2/images/" . $imageName;
+            $imageName = "assets_2/images/".$imageName;
 
 
-            /* New File name */
-            $newFileName = 'assets_2/images/' . time() . "_" . $director_session['user_id'] . '.' . $request->file('image')->getClientOriginalExtension();
-            rename($imageName, $newFileName);
+              /* New File name */
+              $newFileName = 'assets_2/images/'.time()."_".$director_session['user_id'].'.'.$request->file('image')->getClientOriginalExtension();
+              rename($imageName, $newFileName);
 
-            $imageName = '../' . $newFileName;
+            $imageName='../'.$newFileName;
 
             $director = director::where("user_id", $director_session["user_id"])->update([
                 'images' => $imageName
-            ]);
+                ]);
             $director_session['images'] = $imageName;
 
             session()->put('director', $director_session);
@@ -260,15 +244,115 @@ class DirectorController extends Controller
     }
 
 
-    public function executiveList()
-    {
+    public function executiveList(){
         $clubs = Club::orderBy("created_at", "desc")->get();
         return view('director.executivesList')->with('clubs', $clubs);
     }
 
-    public function assignExecutive()
-    {
+    public function assignExecutive(){
 
-        return view('director.assignExecutive');
+        $clubs = Club::all();
+        $director_session = session()->get('director');
+        $carts = ExecutiveCommitteeCart::where('added_by', $director_session->user_id)->get();
+
+        $cart_selected_club = ExecutiveCommitteeCart::where('added_by', $director_session->user_id)->first();
+        if($cart_selected_club == ""){
+            $cart_selected_club = new ExecutiveCommitteeCart();
+            $cart_selected_club->club_id = '';
+            $cart_selected_club->name = '';
+
+            return view('director.assignExecutive')
+                ->with('clubs', $clubs)
+                ->with('selected', 'none');
+
+        }
+
+        $selected_club_info = Club::where('id', $cart_selected_club->club_id)->first();
+
+        $committee = Executive::where('club_id', $cart_selected_club->club_id)->first();
+
+        $new_committee_no = 1;
+        if(!empty($committee->committee_number)){
+            $new_committee_no = 1+$committee->committee_number;
+        }
+
+        if (Session::has('message')){
+            $message = session()->get('message');
+            session()->forget('message');
+            return view('director.assignExecutive')
+                ->with('clubs', $clubs)->with('carts', $carts)
+                ->with('message', $message)
+                ->with('committee_no', $new_committee_no)
+                ->with('selected_club', $cart_selected_club)
+                ->with('selected', $cart_selected_club->club_id);
+        }
+
+
+        return view('director.assignExecutive')
+            ->with('clubs', $clubs)
+            ->with('carts', $carts)
+            ->with('selected_club', $selected_club_info)
+            ->with('selected', $cart_selected_club->club_id)
+            ->with('committee_no', $new_committee_no);
+
+    }
+
+    public function assignExecutiveSubmitted(Request $request){
+        $validate = $request->validate([
+            "club_id" => "required|exists:clubs,id",
+            "id" => ['required', 'exists:members,user_id,club_id,'.$request->club_id],
+            "designation" => "required"
+        ]);
+
+        $member = Member::where('user_id', $request->id)->first();
+
+        $committee = Executive::where('club_id', $request->club_id)->first();
+
+        $new_committee_no = 1;
+        if(!empty($committee->committee_number)){
+            $new_committee_no = 1+$committee->committee_number;
+        }
+
+        $director_session = session()->get('director');
+
+        $cart_selected_club = ExecutiveCommitteeCart::where('added_by', $director_session->user_id)->first();
+
+
+
+        if(!empty($cart_selected_club->club_id)){
+
+            if ($cart_selected_club->club_id == $request->club_id){
+                $executiveCart = new ExecutiveCommitteeCart();
+                $executiveCart->user_id = $request->id;
+                $executiveCart->name = $member->name;
+                $executiveCart->designation = $request->designation;
+                $executiveCart->club_id = $request->club_id;
+                $executiveCart->committee_number = $new_committee_no;
+                $executiveCart->added_by = $director_session->user_id;
+                $executiveCart->save();
+            }
+            else
+            {
+                return redirect()->route('directorAssignExecutive')->with('message', 'Sorry! You  cannot add multiple club executive at a time. You have to cancel or complete this first.');
+            }
+        }
+        else{
+            $executiveCart = new ExecutiveCommitteeCart();
+            $executiveCart->user_id = $request->id;
+            $executiveCart->name = $member->name;
+            $executiveCart->designation = $request->designation;
+            $executiveCart->club_id = $request->club_id;
+            $executiveCart->committee_number = $new_committee_no;
+            $executiveCart->added_by = $director_session->user_id;
+            $executiveCart->save();
+        }
+
+
+        return redirect()->route('directorAssignExecutive');
+    }
+
+    public function removeAssignExecutive(Request $request){
+        ExecutiveCommitteeCart::where('user_id', $request->id)->delete();
+        return redirect()->route('directorAssignExecutive');
     }
 }

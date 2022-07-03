@@ -50,6 +50,8 @@ Route::get('/director/components', [ComponentController::class, 'components'])->
 Route::post('/director/components', [ComponentController::class, 'addComponents'])->name('directorAddComponents');
 Route::get('/director/executives', [DirectorController::class, 'executiveList'])->name('directorExecutiveList');
 Route::get('/director/executives/assign', [DirectorController::class, 'assignExecutive'])->name('directorAssignExecutive');
+Route::get('/director/executives/assign/remove/{id}', [DirectorController::class, 'removeAssignExecutive'])->name('directorRemoveAssignExecutive');
+Route::post('/director/executives/assign', [DirectorController::class, 'assignExecutiveSubmitted'])->name('directorAssignExecutiveSubmitted');
 
 
 
