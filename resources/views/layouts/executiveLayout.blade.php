@@ -101,20 +101,13 @@
       <!-- endinject -->
 
       <!-- Custom js for this page -->
-      <script src="{{asset('../assets_2/js/email.js')}}"></script>
-      <script src="{{asset('../assets_2/js/timepicker.js')}}"></script>
-      <script src="{{asset('../assets_2/js/datepicker.js')}}"></script>
-      <script src="{{asset('../assets_2/js/inputmask.js')}}"></script>
-      <script src="{{asset('../assets_2/js/select2.js')}}"></script>
-      <script src="{{asset('../assets_2/js/typeahead.js')}}"></script>
-      <script src="{{asset('../assets_2/js/dropzone.js')}}"></script>
-      <script src="{{asset('../assets_2/js/dropify.js')}}"></script>
-      <script src="{{asset('../assets_2/js/tags-input.js')}}"></script>
-      <script src="{{asset('../assets_2/js/bootstrap-maxlength.js')}}"></script>
-      <script src="{{asset('../assets_2/js/form-validation.js')}}"></script>
-      <script src="{{asset('../assets_2/js/data-table.js')}}"></script>
-      <script src="{{asset('../assets_2/js/sweet-alert.js')}}"></script>
+      <!-- Plugin js for this page -->
+      <script src="{{asset('../assets_2/vendors/chartjs/Chart.min.js')}}"></script>
+      <!-- End plugin js for this page -->
 
+
+      <!-- Custom js for this page -->
+      <script src="{{asset('js/chartjs-light.js')}}"></script>
       <!-- End custom js for this page -->
 
 

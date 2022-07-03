@@ -112,6 +112,22 @@
                         </ul>
                       </div>
                     </li>
+
+
+                    <li class="nav-item nav-category">Notices</li>
+                    <li class="nav-item">
+                        <a href="{{ route('SendNoticeMamber') }}" class="nav-link">
+                            <i class="link-icon" data-feather="user"></i>
+                            <span class="link-title">Send Notice</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('ViewAllNotice') }}" class="nav-link">
+                            <i class="link-icon" data-feather="user"></i>
+                            <span class="link-title">Notices</span>
+                        </a>
+                    </li>
+
             </ul>
 
 

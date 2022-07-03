@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Notice;
 use App\Models\Executive;
 use App\Models\Member;
+use App\Models\Application;
 use App\Models\Club;
 use App\Http\Requests\StoreExecutiveRequest;
 use App\Http\Requests\UpdateExecutiveRequest;
@@ -29,7 +31,34 @@ class ExecutiveController extends Controller
 
     public function dashboard()
     {
-      return view('executive.dashboard');
+      $day=15;
+      $member_session = session()->get('executive');
+      $all_applications = Application::where([['created_at', '>', date('Y-m-d', strtotime("-".$day." days"))],['club_id', '=', $member_session->club_id]])
+      ->get();
+
+      $data = array();
+
+      for($i=$day; $i>=0; $i--){
+          $array = [
+              "label" => date('M d', strtotime('-'. $i .' days')),
+              "value" => 0
+          ];
+          array_push($data, $array);
+
+      }
+
+
+      foreach ($all_applications as $application) {
+          $i=0;
+          foreach ($data as $d){
+              if(date('M d', strtotime($application->created_at)) == $d['label']){
+                  $data[$i]['value'] += 1;
+                  break;
+              }
+              $i++;
+          }
+      }
+      return view('executive.dashboard') ->with('applications', $data);;
     }
 
     public function profile(){
@@ -275,6 +304,34 @@ class ExecutiveController extends Controller
           'address' => $request->address,
           ]);
           return redirect()->route('executiveViewAllMamber',['user_id' => $request->user_id])->with('message', 'Account information updated');
+    }
+
+
+    public function SendNotice(){
+
+      return view('executive.sendNotice');
+    }
+    
+
+    public function SendNoticePost(Request $request){
+
+      $Notice = new  Notice();
+      $Notice->title = $request->title;
+      $Notice->notice = $request->notice;
+      $Notice->file = $request->file;
+      $Notice->save();
+
+      return view('executive.sendNotice')->with('message','Notice sucsessfully posted');
+
+    }
+
+    public function ViewNotice(){
+
+      $Notice = Notice::paginate(6);
+
+      return view('executive.viewNotice')->with('NoticeList', $Notice);
+
+
     }
 
 

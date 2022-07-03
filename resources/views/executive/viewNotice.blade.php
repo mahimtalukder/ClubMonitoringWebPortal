@@ -1,17 +1,11 @@
-<?php $member = session()->get('member')?>
-@extends('layouts.memberLayout')
-@section('title', 'Dashboard')
-@section('picture', $member['images'])
-@section('name', $member['name'])
-@section('phone', $member['phone'])
-@section('contant') 
-    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-        <div>
-            <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
-        </div>
-    </div>   
-    
-    <h3>Notices</h3>
+<?php $executive = session()->get('executive')?>
+@extends('layouts.executiveLayout')
+@section('title', $executive['name'])
+@section('picture', $executive['images'])
+@section('name', $executive['name'])
+@section('phone', $executive['phone'])
+@section('content')
+<h3>Notices</h3>
 
 <div class="email-list">
 
