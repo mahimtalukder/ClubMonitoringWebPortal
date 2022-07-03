@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DirectorAccountLoginCredentials;
 use App\Models\Director;
 use App\Models\ExecutiveCommitteeCart;
 use App\Models\User;
@@ -11,7 +12,11 @@ use App\Models\Member;
 use App\Models\Executive;
 use App\Http\Requests\StoreDirectorRequest;
 use App\Http\Requests\UpdateDirectorRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class DirectorController extends Controller
@@ -66,7 +71,7 @@ class DirectorController extends Controller
                 "value" => 0
             ];
             array_push($data, $array);
-    
+
         }
 
 
@@ -366,6 +371,52 @@ class DirectorController extends Controller
 
     public function removeAssignExecutive(Request $request){
         ExecutiveCommitteeCart::where('user_id', $request->id)->delete();
+        return redirect()->route('directorAssignExecutive');
+    }
+
+    public function confirmExecutive(){
+        $director_session = session()->get('director');
+        $carts = ExecutiveCommitteeCart::where('added_by', $director_session->user_id)->get();
+        $info = ExecutiveCommitteeCart::where('added_by', $director_session->user_id)->first();
+        try {
+            DB::transaction(function () use ($carts, $info, $director_session){
+                //Expire old team
+                Executive::where('club_id',$info->club_id)
+                    ->update(['end_at'=>Carbon::now()->format('Y-m-d H:i:s')]);
+
+                //insert new team
+                foreach ($carts as $new){
+                    $executive = new Executive();
+                    $executive->user_id = $new->user_id;
+                    $executive->designation = $new->designation;
+                    $executive->committee_number = $new->committee_number;
+                    $executive->club_id = $new->club_id;
+                    $executive->join_at = Carbon::now()->format('Y-m-d H:i:s');
+                    $executive->save();
+                }
+
+                //truncate cart
+                ExecutiveCommitteeCart::where('added_by', $director_session->user_id)->delete();
+
+//                /*Mail login credentials to the user*/
+//                $data = array(
+//                    'name' => $request->name,
+//                    'email' => $request->name,
+//                    'user_id' => $unique_id,
+//                    'password' => $unique_pass
+//                );
+//
+//                Mail::to($request->email)->send(new DirectorAccountLoginCredentials($data));
+//                /* Mail end */
+
+            }, 5);
+
+        }
+        catch (\Exception $e){
+            DB::rollBack();
+            return $e->getMessage();
+        }
+
         return redirect()->route('directorAssignExecutive');
     }
 }

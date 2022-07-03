@@ -52,6 +52,7 @@ Route::get('/director/executives', [DirectorController::class, 'executiveList'])
 Route::get('/director/executives/assign', [DirectorController::class, 'assignExecutive'])->name('directorAssignExecutive');
 Route::get('/director/executives/assign/remove/{id}', [DirectorController::class, 'removeAssignExecutive'])->name('directorRemoveAssignExecutive');
 Route::post('/director/executives/assign', [DirectorController::class, 'assignExecutiveSubmitted'])->name('directorAssignExecutiveSubmitted');
+Route::get('/director/executives/confirm', [DirectorController::class, 'confirmExecutive'])->name('directorConfirmExecutive');
 
 
 
