@@ -23,7 +23,7 @@
                             <div class="card-body">
                                 <h3>Notices</h3>
 
-                                @foreach ($NoticeList as $NoticeList)
+                                @foreach ($NoticeList as $Notice)
                                     <!-- email list item -->
                                     <div class="email-list-item email-list-item--unread">
                                         <div class="email-list-actions">
@@ -33,11 +33,11 @@
                                         <a class="email-list-detail">
                                             <div class="content">
                                                 <span class="from" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalLongScollable">{{ $NoticeList->title }}</span>
-                                                <p class="msg">{{ $NoticeList->notice }}</p>
+                                                    data-bs-target="#exampleModalLongScollable">{{ $Notice->title }}</span>
+                                                <p class="msg">{{ $Notice->notice }}</p>
                                             </div>
                                             <span class="date">
-                                                4 july
+                                                {{date("M d, Y", strtotime($Notice->created_at))}}
                                             </span>
                                         </a>
                                     </div>
