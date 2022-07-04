@@ -16,7 +16,7 @@
                     <div class="row">
                         @include(('inc.directorExecutiveSideNav'))
 
-                        @if($executive_committes != 'none')
+                        @if($status == 1)
                             <div class="col-lg-9">
                                 <div class="p-3 border-bottom">
                                     <div class="row align-items-center">
@@ -44,7 +44,7 @@
                             </div>
                         @endif
 
-                        @if($executive_committes == 'none')
+                        @if($status == 2)
                             <div class="col-lg-9">
                                 <div class="p-3 border-bottom">
                                     <div class="row align-items-center">

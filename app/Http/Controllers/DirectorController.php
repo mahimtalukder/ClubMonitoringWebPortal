@@ -278,6 +278,7 @@ class DirectorController extends Controller
                 ->with('executive_committes', $committees)
                 ->with('selectedClub', $selectedClub)
                 ->with('club_id', $club_id)
+                ->with('status', 1)
                 ->with('clubs', $clubs);
         }
 
@@ -297,9 +298,10 @@ class DirectorController extends Controller
                 ->with('selectedClub', $selectedClub)
                 ->with('committee_no', $committee_no)
                 ->with('executive_committes', $executive_committes)
+                ->with('status', 2)
                 ->with('clubs', $clubs);
         }
-        return view('director.executivesList')->with('clubs', $clubs)->with('executive_committes', 'none');
+        return view('director.executivesList')->with('clubs', $clubs)->with('executive_committes', 'none')->with('status', 0);
     }
 
     public function assignExecutive(){
@@ -481,7 +483,7 @@ class DirectorController extends Controller
         $selectedClub = Club::where('id', $request->club_id)->first();
         return redirect()->route('directorCommitteeList')
             ->with('selectedClub', $selectedClub)
-            ->with('executive_committes', 'none')
+            ->with('executive_committes', 'list')
             ->with('committee_no', $request->committee_no)
             ->with('executives', $executives);
     }
