@@ -60,7 +60,7 @@ Route::get('/director/club/committees/{club_id}/{committee_no}', [DirectorContro
 
 
 /* Member */
-Route::get('/member', [MemberController::class, 'dashboard'])->name('memberDash');
+Route::get('/member/dashboard', [MemberController::class, 'dashboard'])->name('memberDash');
 Route::get('/member/profile', [MemberController::class, 'profile'])->name('memberProfile');
 Route::get('/member/edit', [MemberController::class, 'EditProfile'])->name('memberEditProfile');
 Route::post('/member/edit', [MemberController::class, 'editProfileSubmitted'])->name('memberEditProfileSubmitted');
