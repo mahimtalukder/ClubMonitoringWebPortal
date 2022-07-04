@@ -101,6 +101,17 @@
 
     <!-- End plugin js for this page -->
 
+    <!-- Custom js for this page -->
+	<script src="{{asset('../assets_2/js/bootstrap-maxlength.js')}}"></script>
+	<script src="{{asset('../assets_2/js/inputmask.js')}}"></script>
+	<script src="{{asset('../assets_2/js/select2.js')}}"></script>
+	<script src="{{asset('../assets_2/js/typeahead.js')}}"></script>
+	<script src="{{asset('../assets_2/js/tags-input.js')}}"></script>
+	<script src="{{asset('../assets_2/js/dropzone.js')}}"></script>
+	<script src="{{asset('../assets_2/js/dropify.js')}}"></script>
+	<script src="{{asset('../assets_2/js/bootstrap-colorpicker.js')}}"></script>
+	<script src="{{asset('../assets_2/js/datepicker.js')}}"></script>
+	<!-- End custom js for this page -->
     <!-- inject:js -->
     <script src="{{ asset('../assets_2/vendors/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('../assets_2/js/template.js') }}"></script>

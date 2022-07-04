@@ -41,7 +41,7 @@
                 <div class="email-list">
                 @foreach($clubs as $club)
                     <div class="email-list-item row">
-                        <a href="/director/application/club/{{$club->id}}" class="email-list-detail">
+                        <a href="{{route('clubWiseApplication',['id' => $club->id])}}" class="email-list-detail">
                             <div class="col-2">
                                 <i data-feather="folder" class="text-muted icon-lg me-2"></i>
                             </div>

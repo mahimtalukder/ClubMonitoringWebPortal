@@ -37,7 +37,7 @@
                                                 <p class="msg">{{ $NoticeList->notice }}</p>
                                             </div>
                                             <span class="date">
-                                                4 july
+                                                {{date("M d, Y", strtotime($NoticeList->created_at))}}
                                             </span>
                                         </a>
                                     </div>

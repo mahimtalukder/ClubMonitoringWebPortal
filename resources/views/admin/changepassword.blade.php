@@ -29,14 +29,12 @@
                                     <h6 class="card-title text-primary"></h6>
                                 @endif
 
-                                <form method="post" action="{{ route('adminChangePasswordSubmitted') }}"
-                                    novalidate="novalidate">
+                                <form method="post" action="{{ route('adminChangePasswordSubmitted') }}" >
                                     {{ csrf_field() }}
 
                                     <div class="mb-3">
                                         <label for="current_password" class="form-label">Currernt Password</label>
-                                        <input id="name"
-                                            class="form-control @error('current_password') {{ 'is-invalid' }} @enderror"
+                                        <input id="current_password" class="form-control @error('current_password') {{ 'is-invalid' }} @enderror"
                                             name="current_password" type="password" placeholder="Current Password">
 
                                         @error('current_password')
@@ -47,7 +45,7 @@
 
                                     <div class="mb-3">
                                         <label for="new_password" class="form-label">New Password</label>
-                                        <input id="name"
+                                        <input id="new_password"
                                             class="form-control @error('new_password') {{ 'is-invalid' }} @enderror"
                                             name="new_password" type="password" placeholder="New Password">
 
@@ -59,7 +57,7 @@
 
                                     <div class="mb-3">
                                         <label for="confirm_password" class="form-label">Confirm Password</label>
-                                        <input id="name"
+                                        <input id="confirm_password"
                                             class="form-control @error('confirm_password') {{ 'is-invalid' }} @enderror"
                                             name="confirm_password" type="password" placeholder="Confirm Password">
 

@@ -55,7 +55,6 @@
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Added By</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -65,9 +64,6 @@
                                         <td>{{$component->name}}</td>
                                         <td>{{$component->description}}</td>
                                         <td>{{$component->added_by}}</td>
-                                        <td>
-                                            <a data-toggle="modal" href="#myModal" class="btn btn-primary w-100 mb-1">Edit</a>
-                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
