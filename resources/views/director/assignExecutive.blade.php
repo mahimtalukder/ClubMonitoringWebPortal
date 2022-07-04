@@ -93,12 +93,14 @@
                                 </tbody>
                             </table>
                         </div>
+                            <a href="{{route('directorConfirmExecutive')}}" class="btn btn-primary w-100 me-2">Confirm</a>
                         @else
                             <div class="alert alert-dark" role="alert">
                                 When you add executive, this will show here.
                             </div>
+
                         @endif
-                            <a href="{{route('directorConfirmExecutive')}}" class="btn btn-primary w-100 me-2">Confirm</a>
+
                     </div>
                 </div>
             </div>

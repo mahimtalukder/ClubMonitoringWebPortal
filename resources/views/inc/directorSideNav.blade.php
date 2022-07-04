@@ -107,9 +107,16 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{route('directorAssignExecutiveSubmitted')}}" class="nav-link">
+                        <i class="link-icon" data-feather="edit"></i>
+                        <span class="link-title">Assign Executive</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{route('directorCommitteeList')}}" class="nav-link">
                         <i class="link-icon" data-feather="edit"></i>
-                        <span class="link-title">Executives</span>
+                        <span class="link-title">Executive List</span>
                     </a>
                 </li>
             </ul>

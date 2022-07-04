@@ -355,7 +355,7 @@ class DirectorController extends Controller
     public function assignExecutiveSubmitted(Request $request){
         $validate = $request->validate([
             "club_id" => "required|exists:clubs,id",
-            "id" => ['required', 'exists:members,user_id,club_id,'.$request->club_id],
+            "id" => ['required','unique:executives,user_id', 'exists:members,user_id,club_id,'.$request->club_id],
             "designation" => "required"
         ]);
 
