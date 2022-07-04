@@ -18,7 +18,10 @@ class MemberController extends Controller
 
     public function dashboard()
     {
-      $Notice = Notice::paginate(6);
+      
+      $member_session = session()->get('member');
+      $Notice = Notice::where("club_id", $member_session["club_id"])->paginate(6);
+      
       return view('member.dashboard')->with('NoticeList', $Notice);
     }
 
