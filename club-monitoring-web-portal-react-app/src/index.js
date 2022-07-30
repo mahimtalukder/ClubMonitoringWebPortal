@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Home from './Components/Home';
-import SignIn from './Components/layouts/SignInLayouts';
+import Auth from './Components/layouts/AuthLayouts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +12,8 @@ root.render(
     <Router>
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route exact path='/signin' element={<SignIn />} />
+        <Route exact path='/signin' element={<Auth path="signin"/>} />
+        <Route exact path='/forgetPassword' element={<Auth path="forgetPassword"/>} />
       </Routes>
     </Router>
   </React.StrictMode>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import SignInValidation from './SignInValidation';
 
 const SignIn = () => {
@@ -56,8 +57,7 @@ const SignIn = () => {
                                 Login
                             </button>
                         </div>
-
-                        <a href="#" className="d-block mt-3 text-muted">Forget password? Reset Password</a>
+                        <Link className='d-block mt-3 text-muted' to="/forgetPassword">Forget password? Reset Password</Link>
                     </form>
                 </div>
             </div>
