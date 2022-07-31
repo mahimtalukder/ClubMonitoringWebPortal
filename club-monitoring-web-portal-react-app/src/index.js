@@ -6,7 +6,8 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Home from './Components/Home';
 import Auth from './Components/layouts/AuthLayouts';
-
+import DirectorLayout from './Components/layouts/DirectorLayout';
+import Logout from './Components/user/Logout'
 
 var token = null;
 if(localStorage.getItem('user')){
@@ -24,6 +25,9 @@ root.render(
         <Route exact path='/' element={<Home />} />
         <Route exact path='/signin' element={<Auth path="signin"/>} />
         <Route exact path='/forgetPassword' element={<Auth path="forgetPassword"/>} />
+        <Route exact path='/logout' element={<Logout />} />
+
+        <Route exact path='/director/dashboard' element={<DirectorLayout path="dashboard"/>} />
       </Routes>
     </Router>
   </React.StrictMode>

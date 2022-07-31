@@ -17,18 +17,18 @@ class ValidDirector
      */
     public function handle(Request $request, Closure $next)
     {
-        // if($request->session()->get('director')){
-        //     return $next($request);
-        // }
-        // return redirect()->route('signin');
-
-        $token = $request->header("Authorization");
-        $token = json_decode($token);
-        $check_token = Token::where('token',$token->access_token)->where('expired_at',NULL)->first();
-        if ($check_token) {
+        if($request->session()->get('director')){
             return $next($request);
-
         }
-        else return response("Invalid token",401);
+        return redirect()->route('signin');
+
+        //$token = $request->header("Authorization");
+        //$token = json_decode($token);
+        //$check_token = Token::where('token',$token->access_token)->where('expired_at',NULL)->first();
+        //if ($check_token) {
+       //     return $next($request);
+
+       // }
+       // else return response("Invalid token",401);
     }
 }

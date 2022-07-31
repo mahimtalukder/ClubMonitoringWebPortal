@@ -12,7 +12,8 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Session;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use App\Mail\ResetPassword;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -36,29 +37,31 @@ class ApiUserController extends Controller
             if (Hash::check($request->password, $user['password'])) {
                 if ($user['user_type'] == 'admin') {
                     $admin = Admin::whereRaw("BINARY user_id = '$request->id'")->first();
-                    $request->session()->put('admin', $admin);
                     //token code
                     $api_token = Str::random(64);
-                    $Token = new Token();
-                    $Token->user_id = $user->user_id;
-                    $Token->token = $api_token;
-                    $Token->created_at = new DateTime();
-                    $Token->user_type = 'admin';
-                    $Token->save();
-                    return $token;
+                    $token = new Token();
+                    $token->user_id = $user->user_id;
+                    $token->token = $api_token;
+                    $token->created_at = Carbon::now()->format('Y-m-d H:i:s');
+                    $token->user_type = 'admin';
+                    $token->save();
+                    $admin['user_type']='admin';
+                    $admin['token']=$api_token;
+                    return $admin;
                     // return redirect()->route('adminDash');
                 } else if ($user['user_type'] == 'director') {
                     $director = Director::whereRaw("BINARY user_id = '$request->id'")->first();
-                    $request->session()->put('director', $director);
                     //token code
                     $api_token = Str::random(64);
-                    $Token = new Token();
-                    $Token->user_id = $user->user_id;
-                    $Token->token = $api_token;
-                    $Token->created_at = new DateTime();
-                    $Token->user_type = 'director';
-                    $Token->save();
-                    return $token;
+                    $token = new Token();
+                    $token->user_id = $user->user_id;
+                    $token->token = $api_token;
+                    $token->created_at = Carbon::now()->format('Y-m-d H:i:s');
+                    $token->user_type = 'director';
+                    $token->save();
+                    $director['token']=$api_token;
+                    $director['user_type']='director';
+                    return $director;
                     //return redirect()->route('directorDash');
                 } else if ($user['user_type'] == 'member') {
                     $member = Member::whereRaw("BINARY user_id = '$request->id'")->first();
@@ -66,33 +69,45 @@ class ApiUserController extends Controller
                     if (!empty($executive)) {
                         $request->session()->put('executive', $member);
                         //token code
-                    $api_token = Str::random(64);
-                    $Token = new Token();
-                    $Token->user_id = $user->user_id;
-                    $Token->token = $api_token;
-                    $Token->created_at = new DateTime();
-                    $Token->user_type = 'executive';
-                    $Token->save();
-                    return $token;
+                        $api_token = Str::random(64);
+                        $token = new Token();
+                        $token->user_id = $user->user_id;
+                        $token->token = $api_token;
+                        $token->created_at = Carbon::now()->format('Y-m-d H:i:s');
+                        $token->user_type = 'executive';
+                        $token->save();
+                        $member['token']=$api_token;
+                        $member['user_type']='executive';
+                        return $member;
                         //return redirect()->route('executiveDash');
                     }
                     $request->session()->put('member', $member);
                     //token code
                     $api_token = Str::random(64);
                     $token = new Token();
-                    $Token->user_id = $user->user_id;
-                    $Token->token = $api_token;
-                    $Token->created_at = new DateTime();
-                    $Token->user_type = 'member';
-                    $Token->save();
-                    return $token;
+                    $token->user_id = $user->user_id;
+                    $token->token = $api_token;
+                    $token->created_at = Carbon::now()->format('Y-m-d H:i:s');
+                    $token->user_type = 'member';
+                    $token->save();
+                    $member['token']=$api_token;
+                    $member['user_type']='member';
+                    return $member;
                     //return redirect()->route('memberDash');
                 }
             } else {
-                return redirect()->route('signin')->with(['error_message' => "Information not found"]);
+                return "Information not found";
             }
         } else {
-            return redirect()->route('signin')->with(['error_message' => "Information not found"]);
+            return "Information not found";
         }
+    }
+
+    public function logout(Request $request){
+        $token = Token::where("token", $request->token)->update([
+            'expired_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ]);
+        
+        return "logout success";
     }
 }

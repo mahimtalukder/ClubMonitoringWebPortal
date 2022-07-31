@@ -17,18 +17,18 @@ class ValidExecutive
      */
     public function handle(Request $request, Closure $next)
     {
-    //     if($request->session()->get('executive')){
-    //         return $next($request);
-    //     }
-    //     return redirect()->route('signin');
-    // }
-
-    $token = $request->header("Authorization");
-    $token = json_decode($token);
-    $check_token = Token::where('token',$token->access_token)->where('expired_at',NULL)->first();
-    if ($check_token) {
-        return $next($request);
-
+    if($request->session()->get('executive')){
+          return $next($request);
+       }
+       return redirect()->route('signin');
     }
-    else return response("Invalid token",401);
+
+    // $token = $request->header("Authorization");
+    // $token = json_decode($token);
+    // $check_token = Token::where('token',$token->access_token)->where('expired_at',NULL)->first();
+    // if ($check_token) {
+    //     return $next($request);
+
+    // }
+    // else return response("Invalid token",401);
 }
