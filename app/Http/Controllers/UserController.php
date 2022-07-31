@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Director;
 use App\Models\Member;
 use App\Models\Executive;
+use App\Models\Token;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
@@ -52,7 +53,6 @@ class UserController extends Controller
         ];
         $this->validate($request, $rules, $messages);
         $user = User::where([['user_id', "=", $request->id],["status", "=", '1']])->first();
-
 
         if (!empty($user)) {
             if (Hash::check($request->password, $user['password'])) {
