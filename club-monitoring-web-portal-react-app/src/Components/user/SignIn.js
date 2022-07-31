@@ -1,11 +1,40 @@
 import React from 'react';
 import SignInValidation from './SignInValidation';
-
+import {useState}  from 'react';
+import axios from 'axios';
 const SignIn = () => {
       //Final submit function
+    let[token, setToken]= useState("");
+    let[user_id, setUser_id] = useState("");
+    let[password, setPassword] =useState("");
+  
+
+
+
+
   const formLogin = () => {
     console.log("Callback function when form is submitted!");
     console.log("Form Values ", values);
+
+
+
+
+    var obj = {
+        "user_id": "user_id",
+        "password": "password"
+    };
+    var obj = {user_id: user_id, password: password};
+    axios.post("/signinSubmitted",obj)
+    .then(resp=>{
+        console.log(resp.data);
+        var token = resp.data;
+        console.log(token);
+        var user = {user_id: token.user_id, access_token:token.token};
+        localStorage.setItem('user',JSON.stringify(user));
+         console.log(localStorage.getItem('user'));
+    }).catch(err=>{
+        console.log(err);
+    });
   }
 
   //Custom hook call

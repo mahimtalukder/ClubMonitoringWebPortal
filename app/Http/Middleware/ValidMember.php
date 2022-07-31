@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\Token;
 
 class ValidMember
 {
@@ -16,9 +17,17 @@ class ValidMember
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->session()->get('member')){
-            return $next($request);
-        }
-        return redirect()->route('signin');
+        // if($request->session()->get('member')){
+        //     return $next($request);
+        // }
+        // return redirect()->route('signin');
+    $token = $request->header("Authorization");
+    $token = json_decode($token);
+    $check_token = Token::where('token',$token->access_token)->where('expired_at',NULL)->first();
+    if ($check_token) {
+        return $next($request);
+
+    }
+    else return response("Invalid token",401);
     }
 }

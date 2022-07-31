@@ -1,10 +1,20 @@
 import React from 'react';
+import axios from 'axios';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Home from './Components/Home';
 import SignIn from './Components/layouts/SignInLayouts';
+
+
+var token = null;
+if(localStorage.getItem('user')){
+  var obj = JSON.parse(localStorage.getItem('user'));
+  token = obj.access_token;
+}
+axios.defaults.baseURL="http://127.0.0.1:8000/api/";
+axios.defaults.headers.common["Authorization"] = token;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
