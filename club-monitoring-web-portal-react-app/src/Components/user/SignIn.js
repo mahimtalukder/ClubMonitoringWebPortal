@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import SignInValidation from './SignInValidation';
 import {useState}  from 'react';
 import axios from 'axios';
@@ -13,6 +14,7 @@ const SignIn = () => {
 
 
   const formLogin = () => {
+      //Write your code here
     console.log("Callback function when form is submitted!");
     console.log("Form Values ", values);
 
@@ -84,8 +86,7 @@ const SignIn = () => {
                                 Login
                             </button>
                         </div>
-
-                        <a href="#" className="d-block mt-3 text-muted">Forget password? Reset Password</a>
+                        <Link className='d-block mt-3 text-muted' to="/forgetPassword">Forget password? Reset Password</Link>
                     </form>
                 </div>
             </div>

@@ -1,7 +1,15 @@
 import React from 'react';
 import SignIn from '../user/SignIn'
+import ForgetPassword from '../user/ForgetPassword'
 
-const Auth = () => {
+function Auth(props) {
+    const renderAuth = () => {
+        if (props.path == 'signin') {
+          return <SignIn/>;
+        } else if(props.path == 'forgetPassword') {
+          return <ForgetPassword/>;
+        }
+      }
   return (
     <div className="main-wrapper">
         <div className="page-wrapper full-page">
@@ -10,7 +18,7 @@ const Auth = () => {
                 <div className="row w-100 mx-0 auth-page">
                     <div className="col-md-8 col-xl-6 mx-auto">
                         <div className="card">
-                            <SignIn/>
+                            {renderAuth()}
                         </div>
                     </div>
                 </div>
