@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 import SignInValidation from './SignInValidation';
 import { useNavigate  } from "react-router-dom";
 import axios from "axios";
-
 const SignIn = () => {
     const navigate  = useNavigate();
+
+    // let user = JSON.parse(localStorage.getItem('user'));
+    // if(Object.keys(user).length != 0){ 
+    //     if(user.user_type === 'director'){
+    //         navigate('/director/dashboard');
+    //     }
+    // }
     //Final submit function
 
 

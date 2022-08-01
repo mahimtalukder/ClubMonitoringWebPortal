@@ -9,13 +9,6 @@ import Auth from './Components/layouts/AuthLayouts';
 import DirectorLayout from './Components/layouts/DirectorLayout';
 import Logout from './Components/user/Logout'
 
-var token = null;
-if(localStorage.getItem('user')){
-  var obj = JSON.parse(localStorage.getItem('user'));
-  token = obj.access_token;
-}
-axios.defaults.baseURL="http://127.0.0.1:8000/api/";
-axios.defaults.headers.common["Authorization"] = token;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

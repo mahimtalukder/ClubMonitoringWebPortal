@@ -1,16 +1,24 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import DirectorSideNav from '../inc/DirectorSideNav'
 import DirectorTopNav from '../inc/DirectorTopNav'
 import Dashboard from '../Director/Dashboard'
 import { useNavigate  } from "react-router-dom";
+import AxiosConfig from '../axiosConfig';
 
 function DirectorLayout(props) {
     const navigate  = useNavigate();
+    useEffect(()=>{
+        AxiosConfig.get("director/dashboard")
+        .then(resp=>{
+          console.log(resp.data);
+         }).catch(err=>{
+            navigate("/signin");
+        console.log(err);
+    });
+    },[]);
+
+    
     const component = () => {
-        let user = JSON.parse(localStorage.getItem('user'));
-        if(Object.keys(user).length === 0){ 
-            navigate('/signin');
-        }
         
         if (props.path == 'dashboard') {
             return <Dashboard />;
