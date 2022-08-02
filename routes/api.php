@@ -12,7 +12,7 @@ use App\Http\Controllers\ClubController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ExecutiveController;
 use App\Http\Controllers\ApiUserController;
-
+use App\Http\Controllers\ApiDirectorController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,4 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/signinSubmitted',[ApiUserController::class, 'signinSubmitted'])->name("signinSubmitted");
+Route::post('/signinSubmitted',[ApiUserController::class, 'signinSubmitted']);
+Route::post('/logout',[ApiUserController::class, 'logout']);
+
+
+Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);

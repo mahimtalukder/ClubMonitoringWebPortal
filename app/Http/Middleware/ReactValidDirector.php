@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
+use App\Models\Token;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Token;
 
-class ValidDirector
+class ReactValidDirector
 {
     /**
      * Handle an incoming request.
@@ -17,18 +17,13 @@ class ValidDirector
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->session()->get('director')){
+        $token = $request->header("Authorization");
+        $token = json_decode($token);
+        $check_token = Token::where('token',$token->token)->where('expired_at',NULL)->first();
+        if ($check_token) {
             return $next($request);
+
         }
-        return redirect()->route('signin');
-
-        //$token = $request->header("Authorization");
-        //$token = json_decode($token);
-        //$check_token = Token::where('token',$token->access_token)->where('expired_at',NULL)->first();
-        //if ($check_token) {
-       //     return $next($request);
-
-       // }
-       // else return response("Invalid token",401);
+        else return response("Invalid token",401);
     }
 }

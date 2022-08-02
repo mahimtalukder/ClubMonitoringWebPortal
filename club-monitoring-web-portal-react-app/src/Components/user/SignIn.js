@@ -1,48 +1,43 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import SignInValidation from './SignInValidation';
-import {useState}  from 'react';
-import axios from 'axios';
+import { useNavigate  } from "react-router-dom";
+import axios from "axios";
 const SignIn = () => {
-      //Final submit function
-    let[token, setToken]= useState("");
-    let[user_id, setUser_id] = useState("");
-    let[password, setPassword] =useState("");
-  
+    const navigate  = useNavigate();
+
+    // let user = JSON.parse(localStorage.getItem('user'));
+    // if(Object.keys(user).length != 0){ 
+    //     if(user.user_type === 'director'){
+    //         navigate('/director/dashboard');
+    //     }
+    // }
+    //Final submit function
 
 
-
-
-  const formLogin = () => {
-      //Write your code here
-    console.log("Callback function when form is submitted!");
-    console.log("Form Values ", values);
-
-
-
-
-    var obj = {
-        "user_id": "user_id",
-        "password": "password"
-    };
-    var obj = {user_id: user_id, password: password};
-    axios.post("/signinSubmitted",obj)
-    .then(resp=>{
-        console.log(resp.data);
-        var token = resp.data;
-        console.log(token);
-        var user = {user_id: token.user_id, access_token:token.token};
-        localStorage.setItem('user',JSON.stringify(user));
-         console.log(localStorage.getItem('user'));
-    }).catch(err=>{
-        console.log(err);
-    });
-  }
-
-  //Custom hook call
-  const {handleChange, values,errors, submitErrors, handleSubmit} = SignInValidation(formLogin);
-    return (
+    const formLogin = () => {
         
+        //Write your code here
+        var obj = {id: values.id, password: values.password};
+        axios.post("http://127.0.0.1:8000/api/signinSubmitted",obj)
+        .then(resp=>{
+            var data = resp.data;
+            localStorage.setItem('user',JSON.stringify(data));
+            let user = JSON.parse(localStorage.getItem('user'));
+            if(user.user_type=="director"){
+                navigate('/director/dashboard');
+                console.log(user.user_type);
+            }
+        }).catch(err=>{
+            console.log(err);
+        });
+
+    }
+
+    //Custom hook call
+    const { handleChange, values, errors, submitErrors, handleSubmit } = SignInValidation(formLogin);
+    return (
+
         <div className="row">
             <div className="col-md-4 pe-md-0">
                 <div className="auth-side-wrapper">
@@ -61,25 +56,25 @@ const SignIn = () => {
                     @endif 
                     */}
                     {submitErrors.error && <h5 className="text-danger">{submitErrors.error}</h5>}
-                    
+
                     <form className="forms-sample" onSubmit={handleSubmit}>
                         {/* {{ csrf_field() }} */}
                         <div className="mb-3">
                             <label for="id" className="form-label">ID</label>
-                            <input type="text" className="form-control" id="id" name="id" onChange={handleChange} placeholder="XX-XXXXX-XX"/>
+                            <input type="text" className="form-control" id="id" name="id" onChange={handleChange} placeholder="XX-XXXXX-XX" />
                             {errors.id && <span className="font-weight-light text-danger">{errors.id}</span>}
                         </div>
                         <div className="mb-3">
                             <label for="password" className="form-label">Password</label>
-                            <input type="password" className="form-control" id="password" name="password" onChange={handleChange} placeholder="Password"/>
+                            <input type="password" className="form-control" id="password" name="password" onChange={handleChange} placeholder="Password" />
                             {errors.password && <span className="font-weight-light text-danger">{errors.password}</span>}
-                                
+
                         </div>
                         <div className="form-check mb-3">
-                            <input type="checkbox" className="form-check-input" id="authCheck"/>
-                                <label className="form-check-label" for="authCheck">
-                                    Remember me
-                                </label> 
+                            <input type="checkbox" className="form-check-input" id="authCheck" />
+                            <label className="form-check-label" for="authCheck">
+                                Remember me
+                            </label>
                         </div>
                         <div>
                             <button type="submit" className="btn btn-primary me-2 mb-2 mb-md-0 text-white">
