@@ -12,7 +12,6 @@ const Logout = () => {
     .then(resp=>{
         var data = resp.data;
         console.log(data);
-        localStorage.removeItem("user");
         navigate('/signin');
     }).catch(err=>{
         console.log(err);

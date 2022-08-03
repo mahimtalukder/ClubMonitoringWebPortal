@@ -60,7 +60,7 @@ class ApiUserController extends Controller
                     $token->user_type = 'director';
                     $token->save();
                     $director['token']=$api_token;
-                    $director['user_type']='director';
+            ○        $director['user_type']='director';
                     return $director;
                     //return redirect()->route('directorDash');
                 } else if ($user['user_type'] == 'member') {
@@ -107,7 +107,7 @@ class ApiUserController extends Controller
         $token = Token::where("token", $request->token)->update([
             'expired_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-        
+
         return "logout success";
     }
 }
