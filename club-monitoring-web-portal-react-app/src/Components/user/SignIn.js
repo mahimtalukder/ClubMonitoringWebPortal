@@ -3,20 +3,14 @@ import { Link } from "react-router-dom";
 import SignInValidation from './SignInValidation';
 import { useNavigate  } from "react-router-dom";
 import axios from "axios";
+
 const SignIn = () => {
     const navigate  = useNavigate();
-
-    // let user = JSON.parse(localStorage.getItem('user'));
-    // if(Object.keys(user).length != 0){ 
-    //     if(user.user_type === 'director'){
-    //         navigate('/director/dashboard');
-    //     }
-    // }
     //Final submit function
 
 
     const formLogin = () => {
-        
+
         //Write your code here
         var obj = {id: values.id, password: values.password};
         axios.post("http://127.0.0.1:8000/api/signinSubmitted",obj)
@@ -53,7 +47,7 @@ const SignIn = () => {
                         {{ $message }}
                     </div>
                     <h6 className="card-title text-primary"></h6>
-                    @endif 
+                    @endif
                     */}
                     {submitErrors.error && <h5 className="text-danger">{submitErrors.error}</h5>}
 

@@ -107,7 +107,7 @@ class ApiUserController extends Controller
         $token = Token::where("token", $request->token)->update([
             'expired_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-        
+
         return "logout success";
     }
 }
