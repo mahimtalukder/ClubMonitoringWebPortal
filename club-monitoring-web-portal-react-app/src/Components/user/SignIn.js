@@ -10,7 +10,7 @@ const SignIn = () => {
 
 
     const formLogin = () => {
-        
+
         //Write your code here
         var obj = {id: values.id, password: values.password};
         axios.post("http://127.0.0.1:8000/api/signinSubmitted",obj)
@@ -19,9 +19,6 @@ const SignIn = () => {
             localStorage.setItem('user',JSON.stringify(data));
             let user = JSON.parse(localStorage.getItem('user'));
             if(user.user_type=="director"){
-                setTimeout(()=>{
-                    window.location.reload(false);
-                }, 500);
                 navigate('/director/dashboard');
                 console.log(user.user_type);
             }
@@ -50,7 +47,7 @@ const SignIn = () => {
                         {{ $message }}
                     </div>
                     <h6 className="card-title text-primary"></h6>
-                    @endif 
+                    @endif
                     */}
                     {submitErrors.error && <h5 className="text-danger">{submitErrors.error}</h5>}
 

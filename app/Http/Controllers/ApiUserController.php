@@ -60,7 +60,7 @@ class ApiUserController extends Controller
                     $token->user_type = 'director';
                     $token->save();
                     $director['token']=$api_token;
-            ○        $director['user_type']='director';
+                    $director['user_type']='director';
                     return $director;
                     //return redirect()->route('directorDash');
                 } else if ($user['user_type'] == 'member') {
