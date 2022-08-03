@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Token;
 
-class ValidExecutive
+class ReactValidAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,9 +16,13 @@ class ValidExecutive
      */
     public function handle(Request $request, Closure $next)
     {
-    if($request->session()->get('executive')){
-          return $next($request);
-       }
-       return redirect()->route('signin');
+       $token = $request->header("Authorization");
+        $token = json_decode($token);
+        $check_token = Token::where('token',$token->token)->where('expired_at',NULL)->first();
+        if ($check_token) {
+            return $next($request);
+
+        }
+        else return response("Invalid token",401);
     }
 }

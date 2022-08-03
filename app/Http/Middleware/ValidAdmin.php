@@ -22,16 +22,5 @@ class ValidAdmin
         }
         return redirect()->route('signin');
 
-<<<<<<< HEAD
-=======
-        // $token = $request->header("Authorization");
-        // $token = json_decode($token);
-        // $check_token = Token::where('token',$token->access_token)->where('expired_at',NULL)->first();
-        // if ($check_token) {
-        //     return $next($request);
-
-        // }
-        // else return response("Invalid token",401);
     }
->>>>>>> 8bdbf27e0247a346075e649072b51fa091738067
 }
