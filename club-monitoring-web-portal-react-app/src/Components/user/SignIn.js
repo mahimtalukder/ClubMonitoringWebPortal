@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import SignInValidation from './SignInValidation';
 import { useNavigate  } from "react-router-dom";
 import axios from "axios";
 const SignIn = () => {
     const navigate  = useNavigate();
+    const [submitErrorHook, setSubmitErrorsHook] = useState("");
 
     // let user = JSON.parse(localStorage.getItem('user'));
     // if(Object.keys(user).length != 0){ 
@@ -25,10 +26,13 @@ const SignIn = () => {
             localStorage.setItem('user',JSON.stringify(data));
             let user = JSON.parse(localStorage.getItem('user'));
             if(user.user_type=="director"){
+                setSubmitErrorsHook("");
                 navigate('/director/dashboard');
-                console.log(user.user_type);
+            }else{
+                setSubmitErrorsHook("Invalide input");
             }
         }).catch(err=>{
+            setSubmitErrorsHook("Invalide input");
             console.log(err);
         });
 
@@ -55,7 +59,8 @@ const SignIn = () => {
                     <h6 className="card-title text-primary"></h6>
                     @endif 
                     */}
-                    {submitErrors.error && <h5 className="text-danger">{submitErrors.error}</h5>}
+                    <h5 className="text-danger" id="submitErrors">{submitErrorHook}</h5>
+                    {submitErrors.error && <h5 className="text-danger" id="submitErrors">{submitErrors.error}{submitErrorHook}</h5>}
 
                     <form className="forms-sample" onSubmit={handleSubmit}>
                         {/* {{ csrf_field() }} */}

@@ -104,10 +104,12 @@ class ApiUserController extends Controller
     }
 
     public function logout(Request $request){
-        $token = Token::where("token", $request->token)->update([
-            'expired_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            ]);
+        $token = Token::where("token",  $request->token)->first();
+        if($token){
+             $token->expired_at = Carbon::now()->format('Y-m-d H:i:s');
+             $token->save();
+             return "logout success";  
+        }
         
-        return "logout success";
     }
 }

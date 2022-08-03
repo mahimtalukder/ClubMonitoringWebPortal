@@ -1,7 +1,36 @@
-import React from 'react'
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
+import { Link, useNavigate } from "react-router-dom"
+import axios from "axios"
+import ForgetPasswordValidation from './ForgetPasswordValidation'
+
 
 const ForgetPassword = () => {
+    const navigate  = useNavigate();
+    const [submitErrorHook, setSubmitErrorsHook] = useState("")
+    const formReset = () => {
+        
+        //Write your code here
+        var obj = {id: values.id};
+        axios.post("http://127.0.0.1:8000/api/signinSubmitted",obj)
+        .then(resp=>{
+            var data = resp.data;
+            localStorage.setItem('user',JSON.stringify(data));
+            let user = JSON.parse(localStorage.getItem('user'));
+            if(user.user_type=="director"){
+                setSubmitErrorsHook("");
+                navigate('/director/dashboard');
+            }else{
+                setSubmitErrorsHook("Invalide input");
+            }
+        }).catch(err=>{
+            setSubmitErrorsHook("Invalide input");
+            console.log(err);
+        });
+
+    }
+
+    //Custom hook call
+    const { handleChange, values, errors, submitErrors, handleSubmit } = ForgetPasswordValidation(formReset);
   return (
 <div class="row">
         <div class="col-md-4 pe-md-0">
@@ -22,10 +51,12 @@ const ForgetPassword = () => {
                 @if (!empty($error_message))
                     <h5 class="text-danger">{{$error_message}}</h5>
                 @endif */}
-                <form class="forms-sample"  method="post">
+                {submitErrors.error && <h5 className="text-danger" id="submitErrors">{submitErrors.error}{submitErrorHook}</h5>}
+                <form class="forms-sample" onSubmit={handleSubmit}  method="post">
                     <div class="mb-3">
                         <label for="id" class="form-label">Enter Id</label>
-                        <input type="text" class="form-control" id="id" name="id" placeholder="XX-XXXXX-XX"/>
+                        <input type="text" class="form-control" id="id" name="id" onChange={handleChange} placeholder="XX-XXXXX-XX"/>
+                        {errors.id && <span className="font-weight-light text-danger">{errors.id}</span>}
                         {/* @error('id')
                             <span class="font-weight-light text-danger">{{$message}}</span>
                         @enderror */}
