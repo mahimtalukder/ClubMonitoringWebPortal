@@ -1,6 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Director;
+use App\Models\ExecutiveCommitteeCart;
+use App\Models\User;
+use App\Models\Application;
+use App\Models\Club;
+use App\Models\Member;
+use App\Models\Executive;
 
 use Illuminate\Http\Request;
 
@@ -15,6 +22,16 @@ class ApiDirectorController extends Controller
         
       return "success";
     }
+
+    public function allApplication(){
+      $clubs = Club::all();
+      $applications = Application::all();
+      
+      $values["applications"] = $applications;
+      $values["clubs"] = $clubs;
+
+      return $values;
+  }
 
     
     // public function profile(){

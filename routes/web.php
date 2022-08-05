@@ -111,8 +111,7 @@ Route::get('/executive/application/search', [ApplicationController::class, 'sear
     ->name('searchExecutiveApplication')->middleware('validExecutive');
 
 /* Director Application */
-Route::get('/director/application', [DirectorController::class, 'allApplication'])
-->name('directorAllApplication');
+Route::get('/director/application', [DirectorController::class, 'allApplication'])->name('directorAllApplication');
 Route::get('/director/application/read/{id}', [DirectorController::class, 'applicationRead'])
 ->name('directorApplicationRead');
 
