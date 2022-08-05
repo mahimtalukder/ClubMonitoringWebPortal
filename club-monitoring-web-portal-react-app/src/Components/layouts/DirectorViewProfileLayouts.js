@@ -11,7 +11,7 @@ const DirectorPrifile = ()=>{
     const [director, setdirector] = useState([]);
 
     useEffect(()=>{
-        AxiosConfig.get("http://127.0.0.1:8000/api/director/profile")
+        AxiosConfig.get("director/profile")
             .then(resp=>{
                 console.log(resp.data);
                 setdirector(resp.data);

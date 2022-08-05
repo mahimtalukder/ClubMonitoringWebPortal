@@ -67,7 +67,6 @@ class ApiUserController extends Controller
                     $member = Member::whereRaw("BINARY user_id = '$request->id'")->first();
                     $executive = Executive::whereRaw("BINARY user_id = '$request->id'")->first();
                     if (!empty($executive)) {
-                        $request->session()->put('executive', $member);
                         //token code
                         $api_token = Str::random(64);
                         $token = new Token();
@@ -81,7 +80,6 @@ class ApiUserController extends Controller
                         return $member;
                         //return redirect()->route('executiveDash');
                     }
-                    $request->session()->put('member', $member);
                     //token code
                     $api_token = Str::random(64);
                     $token = new Token();

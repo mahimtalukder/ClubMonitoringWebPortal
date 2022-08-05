@@ -31,6 +31,18 @@ const SignIn = () => {
                 }, 500);
                 navigate('/admin/dashboard');
             }
+            else if(user.user_type=="executive"){
+                setTimeout(()=>{
+                    window.location.reload(false);
+                }, 500);
+                navigate('/executive/dashboard');
+            }
+            else if(user.user_type=="member"){
+                setTimeout(()=>{
+                    window.location.reload(false);
+                }, 500);
+                navigate('/member/dashboard');
+            }
         }).catch(err=>{
             console.log(err);
         });
