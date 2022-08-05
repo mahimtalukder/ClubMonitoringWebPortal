@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 
 const DirectorSideNav = () => {
@@ -19,7 +19,10 @@ const DirectorSideNav = () => {
                     <ul className="nav">
                         <li className="nav-item nav-category">Main</li>
                         <li className="nav-item">
-                            <Link to={"/director/dashboard"} className="nav-link">
+                            <Link
+                                to={"/director/dashboard"}
+                                className="nav-link"
+                            >
                                 <i className="link-icon" data-feather="box"></i>
                                 <span className="link-title">Dashboard</span>
                             </Link>
@@ -27,13 +30,19 @@ const DirectorSideNav = () => {
                         <li className="nav-item nav-category">Personal</li>
                         <li className="nav-item">
                             <a href="#" className="nav-link">
-                                <i className="link-icon" data-feather="user"></i>
+                                <i
+                                    className="link-icon"
+                                    data-feather="user"
+                                ></i>
                                 <span className="link-title">View Profile</span>
                             </a>
                         </li>
                         <li className="nav-item">
                             <a href="#" className="nav-link">
-                                <i className="link-icon" data-feather="edit"></i>
+                                <i
+                                    className="link-icon"
+                                    data-feather="edit"
+                                ></i>
                                 <span className="link-title">Edit Profile</span>
                             </a>
                         </li>
@@ -55,79 +64,121 @@ const DirectorSideNav = () => {
                     <ul className="nav">
                         <li className="nav-item nav-category">Main</li>
                         <li className="nav-item">
-                            <Link to={"/director/dashboard"} className="nav-link">
+                            <Link
+                                to={"/director/dashboard"}
+                                className="nav-link"
+                            >
                                 <i className="link-icon" data-feather="box"></i>
                                 <span className="link-title">Dashboard</span>
                             </Link>
                         </li>
                         <li className="nav-item nav-category">Personal</li>
                         <li className="nav-item">
-                            <a href="#" className="nav-link">
-                                <i className="link-icon" data-feather="user"></i>
+                            <Link to="/director/profile" className="nav-link">
+                                <i
+                                    className="link-icon"
+                                    data-feather="user"
+                                ></i>
                                 <span className="link-title">View Profile</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a href="#" className="nav-link">
-                                <i className="link-icon" data-feather="edit"></i>
+                                <i
+                                    className="link-icon"
+                                    data-feather="edit"
+                                ></i>
                                 <span className="link-title">Edit Profile</span>
                             </a>
                         </li>
 
                         <li className="nav-item nav-category">Services</li>
                         <li className="nav-item">
-                            <Link to={"/director/application"} className="nav-link">
-                                <i className="link-icon" data-feather="mail"></i>
+                            <Link
+                                to={"/director/application"}
+                                className="nav-link"
+                            >
+                                <i
+                                    className="link-icon"
+                                    data-feather="mail"
+                                ></i>
                                 <span className="link-title">Application</span>
                             </Link>
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link" data-bs-toggle="collapse" href="#clubs" role="button" aria-expanded="false"
-                                aria-controls="#clubs">
-                                <i className="link-icon" data-feather="mail"></i>
+                            <a
+                                className="nav-link"
+                                data-bs-toggle="collapse"
+                                href="#clubs"
+                                role="button"
+                                aria-expanded="false"
+                                aria-controls="#clubs"
+                            >
+                                <i
+                                    className="link-icon"
+                                    data-feather="mail"
+                                ></i>
                                 <span className="link-title">Club</span>
-                                <i className="link-arrow" data-feather="chevron-down"></i>
+                                <i
+                                    className="link-arrow"
+                                    data-feather="chevron-down"
+                                ></i>
                             </a>
                             <div className="collapse" id="clubs">
                                 <ul className="nav sub-menu">
                                     <li className="nav-item">
-                                        <a href="#" className="nav-link">All Club</a>
+                                        <a href="#" className="nav-link">
+                                            All Club
+                                        </a>
                                     </li>
                                     <li className="nav-item">
-                                        <a href="#" className="nav-link">Create New Club</a>
+                                        <a href="#" className="nav-link">
+                                            Create New Club
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
 
-
                         <li className="nav-item">
                             <a href="#" className="nav-link">
-                                <i className="link-icon" data-feather="edit"></i>
+                                <i
+                                    className="link-icon"
+                                    data-feather="edit"
+                                ></i>
                                 <span className="link-title">Components</span>
                             </a>
                         </li>
 
                         <li className="nav-item">
                             <a href="#" className="nav-link">
-                                <i className="link-icon" data-feather="edit"></i>
-                                <span className="link-title">Assign Executive</span>
+                                <i
+                                    className="link-icon"
+                                    data-feather="edit"
+                                ></i>
+                                <span className="link-title">
+                                    Assign Executive
+                                </span>
                             </a>
                         </li>
 
                         <li className="nav-item">
                             <a href="#" className="nav-link">
-                                <i className="link-icon" data-feather="edit"></i>
-                                <span className="link-title">Executive List</span>
+                                <i
+                                    className="link-icon"
+                                    data-feather="edit"
+                                ></i>
+                                <span className="link-title">
+                                    Executive List
+                                </span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
+    );
+};
 
-    )
-}
-
-export default DirectorSideNav
+export default DirectorSideNav;

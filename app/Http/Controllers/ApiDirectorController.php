@@ -15,14 +15,13 @@ class ApiDirectorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('reactValidUser');
+        // $this->middleware('reactValidUser');
     }
     public function dashboard()
     {
         
       return "success";
     }
-
     public function allApplication(){
       $clubs = Club::all();
       $applications = Application::all();

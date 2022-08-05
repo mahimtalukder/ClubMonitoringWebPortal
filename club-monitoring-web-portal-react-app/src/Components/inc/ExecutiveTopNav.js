@@ -73,7 +73,7 @@ const ExecutiveTopNav = () => {
                   <li className="dropdown-item py-2">
                     <Link className="text-body ms-0" to="/logout">
                     <i className="me-2 icon-md" data-feather="log-out"></i>
-                        <span>Log Out</span></Link>
+                    <span>Log Out</span></Link>
                   </li>
                 </ul>
               </div>
