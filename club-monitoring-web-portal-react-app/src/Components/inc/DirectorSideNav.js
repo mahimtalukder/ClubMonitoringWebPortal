@@ -1,8 +1,4 @@
 import React from "react";
-import DirectorViewProfile from "../Director/DirectorViewProfile";
-import { Link } from "react-router-dom";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import React from "react";
 import { Link } from "react-router-dom";
 
 const DirectorSideNav = () => {

@@ -1,13 +1,8 @@
 import { React, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AxiosConfig from "../axiosConfig";
-
 import DirectorSideNav from "../inc/DirectorSideNav";
 import DirectorTopNav from "../inc/DirectorTopNav";
 import Footer from "../inc/Footer";
 import Dashboard from "../Director/Dashboard";
-import { useNavigate } from "react-router-dom";
-import AxiosConfig from "../axiosConfig";
 import DirectorViewProfile from "../Director/DirectorViewProfile";
 import AllAplication from "../Director/Application";
 
