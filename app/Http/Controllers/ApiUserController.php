@@ -45,8 +45,8 @@ class ApiUserController extends Controller
                     $token->created_at = Carbon::now()->format('Y-m-d H:i:s');
                     $token->user_type = 'admin';
                     $token->save();
-                    $admin['user_type']='admin';
                     $admin['token']=$api_token;
+                    $admin['user_type']='admin';
                     return $admin;
                     // return redirect()->route('adminDash');
                 } else if ($user['user_type'] == 'director') {

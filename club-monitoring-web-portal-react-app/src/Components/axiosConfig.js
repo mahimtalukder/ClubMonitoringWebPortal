@@ -6,8 +6,6 @@ const AxiosConfig = axios.create({
 
 AxiosConfig.interceptors.request.use(function (config) {
     config.headers.common['Authorization'] =  localStorage.getItem("user");
-    // console.log( config.headers.common['Authorization']);
-    // console.log("intercepted");
 
     return config;
   }, function (error) {

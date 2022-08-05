@@ -13,6 +13,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ExecutiveController;
 use App\Http\Controllers\ApiUserController;
 use App\Http\Controllers\ApiDirectorController;
+use App\Http\Controllers\ApiAdminController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,7 +32,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/signinSubmitted',[ApiUserController::class, 'signinSubmitted']);
 Route::post('/logout',[ApiUserController::class, 'logout']);
 
-
+//Director
 Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
-Route::get('/director/profile', [ApiDirectorController::class, 'profile']);
 
+
+//Admin
+Route::get('/admin/dashboard',[ApiAdminController::class, 'dashboard']);
+
+// Route::get('/director/profile', [ApiDirectorController::class, 'profile'])

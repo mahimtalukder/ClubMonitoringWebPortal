@@ -19,8 +19,17 @@ const SignIn = () => {
             localStorage.setItem('user',JSON.stringify(data));
             let user = JSON.parse(localStorage.getItem('user'));
             if(user.user_type=="director"){
+                setTimeout(()=>{
+                    window.location.reload(false);
+                }, 500);
                 navigate('/director/dashboard');
                 console.log(user.user_type);
+            }
+            else if(user.user_type=="admin"){
+                setTimeout(()=>{
+                    window.location.reload(false);
+                }, 500);
+                navigate('/admin/dashboard');
             }
         }).catch(err=>{
             console.log(err);
