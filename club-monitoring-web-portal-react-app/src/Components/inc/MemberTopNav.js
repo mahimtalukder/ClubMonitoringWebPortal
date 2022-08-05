@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 
-const ExecutiveTopNav = () => {
+const MemberTopNav = () => {
   let user = JSON.parse(localStorage.getItem('user'));
   return (
     <div>
@@ -19,7 +19,7 @@ const ExecutiveTopNav = () => {
               <div className="dropdown-menu p-0" aria-labelledby="messageDropdown">
                 <div className="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
                   <p>0 New Messages</p>
-                  <a href="#" className="text-muted">Clear all</a>
+                  <a href="javascript:;" className="text-muted">Clear all</a>
                 </div>
               </div>
             </li>
@@ -34,10 +34,10 @@ const ExecutiveTopNav = () => {
               <div className="dropdown-menu p-0" aria-labelledby="notificationDropdown">
                 <div className="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
                   <p>0 New Notifications</p>
-                  <a href="#" className="text-muted">Clear all</a>
+                  <a href="javascript:;" className="text-muted">Clear all</a>
                 </div>
                 <div className="px-3 py-2 d-flex align-items-center justify-content-center border-top">
-                  <a href="#">View all</a>
+                  <a href="javascript:;">View all</a>
                 </div>
               </div>
             </li>
@@ -45,12 +45,12 @@ const ExecutiveTopNav = () => {
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img className="wd-30 ht-30 rounded-circle" src={user.images} alt=""/>
+            <img className="wd-30 ht-30 rounded-circle" src={user.images} alt="" />
               </a>
               <div className="dropdown-menu p-0" aria-labelledby="profileDropdown">
                 <div className="d-flex flex-column align-items-center border-bottom px-5 py-3">
                   <div className="mb-3">
-                    <img className="wd-80 ht-80 rounded-circle" src={user.images} alt=""/>
+                    <img className="wd-80 ht-80 rounded-circle" src={user.images} alt="" />
                   </div>
                   <div className="text-center">
                     <p className="tx-16 fw-bolder">{user.name}</p>
@@ -82,8 +82,8 @@ const ExecutiveTopNav = () => {
         </div>
       </nav>
     </div>
-
+    
   )
 }
 
-export default ExecutiveTopNav
+export default MemberTopNav

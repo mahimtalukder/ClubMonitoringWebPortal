@@ -9,7 +9,7 @@ import DirectorLayout from './Components/layouts/DirectorLayout'
 import Logout from './Components/user/Logout'
 import AdminLayouts from './Components/layouts/AdminLayouts'
 import ExecutiveLayout from './Components/layouts/ExecutiveLayout'
-// import MemberLayouts from './Components/layouts/MemberLayouts'
+import MemberLayout from './Components/layouts/MemberLayout'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -24,12 +24,17 @@ root.render(
 
         {/* Director */}
         <Route exact path='/director/dashboard' element={<DirectorLayout path="dashboard"/>} />
+        <Route exact path='/director/profile' element={<DirectorLayout path="profile"/>} />
 
         {/* Admin */}
         <Route exact path='/admin/dashboard' element={<AdminLayouts path="dashboard"/>} />
         
         {/*Executive*/}
         <Route exact path='/executive/dashboard' element={<ExecutiveLayout path="dashboard"/>} />
+        
+
+        {/*Member*/}
+        <Route exact path='/member/dashboard' element={<MemberLayout path="dashboard"/>} />
 
       </Routes>
     </Router>

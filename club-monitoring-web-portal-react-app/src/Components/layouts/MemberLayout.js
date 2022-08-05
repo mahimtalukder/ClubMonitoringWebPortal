@@ -1,17 +1,16 @@
 import { React, useEffect } from 'react'
-import DirectorSideNav from '../inc/DirectorSideNav'
-import DirectorTopNav from '../inc/DirectorTopNav'
+import MemberSideNav from '../inc/MemberSideNav'
+import MemberTopNav from '../inc/MemberTopNav'
 import Footer from '../inc/Footer'
-import Dashboard from '../Director/Dashboard'
+import Dashboard from '../Member/Dashboard'
 import { useNavigate } from "react-router-dom"
 import AxiosConfig from '../axiosConfig'
-import DirectorViewProfile from '../Director/DirectorViewProfile'
 
-function DirectorLayout(props) {
+function MemberLayout(props) {
     const navigate = useNavigate();
     useEffect(() => {
         if (props.path == 'dashboard') {
-            AxiosConfig.get("director/dashboard")
+            AxiosConfig.get("member/dashboard")
                 .then(resp => {
                     console.log(resp.data);
                 }).catch(err => {
@@ -22,20 +21,22 @@ function DirectorLayout(props) {
     }, []);
 
     const component = () => {
+        console.log(props.path)
         if (props.path == 'dashboard') {
             return <Dashboard />;
-        } else if (props.path == 'profile') {
-            return <DirectorViewProfile />;
+            
+        } else if (props.path == '') {
+            return "";
         }
     }
     return (
         <div className="main-wrapper">
 
-            <DirectorSideNav />
+            <MemberSideNav />
 
             <div className="page-wrapper">
 
-                <DirectorTopNav />
+                <MemberTopNav />
 
                 <div className="page-content">
                     {component()}
@@ -48,4 +49,4 @@ function DirectorLayout(props) {
     )
 }
 
-export default DirectorLayout
+export default MemberLayout

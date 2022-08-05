@@ -41,7 +41,7 @@ Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
 //Admin
 Route::get('/admin/dashboard',[ApiAdminController::class, 'dashboard']);
 
-// Route::get('/director/profile', [ApiDirectorController::class, 'profile'])
+
 
 //Executive
 Route::get('/executive/dashboard',[ApiExecutiveController::class, 'dashboard']);
