@@ -136,6 +136,7 @@ class DirectorController extends Controller
         $applications = Application::where('sent_to', 'director')
             ->orderBy("created_at", "desc")
             ->paginate(3);
+        
 
         return view('director.applications')
             ->with('applications', $applications)

@@ -36,6 +36,7 @@ Route::post('/logout',[ApiUserController::class, 'logout']);
 
 //Director
 Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
+Route::get('/director/application', [ApiDirectorController::class, 'allApplication']);
 
 
 //Admin

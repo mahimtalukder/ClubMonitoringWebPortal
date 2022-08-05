@@ -2,6 +2,8 @@ import React from "react";
 import DirectorViewProfile from "../Director/DirectorViewProfile";
 import { Link } from "react-router-dom";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const DirectorSideNav = () => {
     return (
@@ -21,10 +23,13 @@ const DirectorSideNav = () => {
                     <ul className="nav">
                         <li className="nav-item nav-category">Main</li>
                         <li className="nav-item">
-                            <a href="#" className="nav-link">
+                            <Link
+                                to={"/director/dashboard"}
+                                className="nav-link"
+                            >
                                 <i className="link-icon" data-feather="box"></i>
                                 <span className="link-title">Dashboard</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item nav-category">Personal</li>
                         <li className="nav-item">
@@ -63,10 +68,13 @@ const DirectorSideNav = () => {
                     <ul className="nav">
                         <li className="nav-item nav-category">Main</li>
                         <li className="nav-item">
-                            <a href="#" className="nav-link">
+                            <Link
+                                to={"/director/dashboard"}
+                                className="nav-link"
+                            >
                                 <i className="link-icon" data-feather="box"></i>
                                 <span className="link-title">Dashboard</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item nav-category">Personal</li>
                         <li className="nav-item">
@@ -90,13 +98,16 @@ const DirectorSideNav = () => {
 
                         <li className="nav-item nav-category">Services</li>
                         <li className="nav-item">
-                            <a href="#" className="nav-link">
+                            <Link
+                                to={"/director/application"}
+                                className="nav-link"
+                            >
                                 <i
                                     className="link-icon"
                                     data-feather="mail"
                                 ></i>
                                 <span className="link-title">Application</span>
-                            </a>
+                            </Link>
                         </li>
 
                         <li className="nav-item">
