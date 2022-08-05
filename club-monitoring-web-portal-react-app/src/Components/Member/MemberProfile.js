@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const MemberProfile = (props) => {
     let user = JSON.parse(localStorage.getItem("user"));
@@ -30,12 +31,12 @@ const MemberProfile = (props) => {
                                         <a class="nav-link active">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a
+                                        <Link
                                             class="nav-link"
-                                            href="{{route('directorEditProfile')}}"
+                                            to="/member/editprofile"
                                         >
                                             Edit Profile
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>

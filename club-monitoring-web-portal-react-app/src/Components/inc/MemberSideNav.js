@@ -90,16 +90,13 @@ const MemberSideNav = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a
-                                href="{{route('memberEditProfile')}}"
-                                className="nav-link"
-                            >
+                            <Link to="/member/editprofile" className="nav-link">
                                 <i
                                     className="link-icon"
                                     data-feather="edit"
                                 ></i>
                                 <span className="link-title">Edit Profile</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>

@@ -83,6 +83,11 @@ root.render(
                     path="/member/profile"
                     element={<MemberLayout path="profile" />}
                 />
+                <Route
+                    exact
+                    path="/member/editprofile"
+                    element={<MemberLayout path="editprofile" />}
+                />
             </Routes>
         </Router>
     </React.StrictMode>
