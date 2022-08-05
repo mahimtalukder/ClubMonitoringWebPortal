@@ -33,5 +33,5 @@ Route::post('/logout',[ApiUserController::class, 'logout']);
 
 
 Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
-// Route::get('/director/profile', [ApiDirectorController::class, 'profile']);
+Route::get('/director/profile', [ApiDirectorController::class, 'profile']);
 
