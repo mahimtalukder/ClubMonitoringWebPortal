@@ -34,11 +34,9 @@ Route::post('/logout',[ApiUserController::class, 'logout']);
 
 //Director
 Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
-<<<<<<< HEAD
+
 
 //Admin
 Route::get('/admin/dashboard',[ApiAdminController::class, 'dashboard']);
-=======
-// Route::get('/director/profile', [ApiDirectorController::class, 'profile']);
 
->>>>>>> 9d2f30bbadb357b06ee15c5ebbd3b3d45a65ec3c
+// Route::get('/director/profile', [ApiDirectorController::class, 'profile'])
