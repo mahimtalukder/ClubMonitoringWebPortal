@@ -14,6 +14,8 @@ use App\Http\Controllers\ExecutiveController;
 use App\Http\Controllers\ApiUserController;
 use App\Http\Controllers\ApiDirectorController;
 use App\Http\Controllers\ApiAdminController;
+use App\Http\Controllers\ApiExecutiveController;
+use App\Http\Controllers\ApiMemberController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,3 +42,8 @@ Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
 Route::get('/admin/dashboard',[ApiAdminController::class, 'dashboard']);
 
 // Route::get('/director/profile', [ApiDirectorController::class, 'profile'])
+
+//Executive
+Route::get('/executive/dashboard',[ApiExecutiveController::class, 'dashboard']);
+//Member
+Route::get('/member/dashboard',[ApiMemberController::class, 'dashboard']);

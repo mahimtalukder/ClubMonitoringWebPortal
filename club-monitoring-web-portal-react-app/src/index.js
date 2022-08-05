@@ -8,6 +8,8 @@ import Auth from './Components/layouts/AuthLayouts'
 import DirectorLayout from './Components/layouts/DirectorLayout'
 import Logout from './Components/user/Logout'
 import AdminLayouts from './Components/layouts/AdminLayouts'
+import ExecutiveLayout from './Components/layouts/ExecutiveLayout'
+// import MemberLayouts from './Components/layouts/MemberLayouts'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,6 +27,10 @@ root.render(
 
         {/* Admin */}
         <Route exact path='/admin/dashboard' element={<AdminLayouts path="dashboard"/>} />
+        
+        {/*Executive*/}
+        <Route exact path='/executive/dashboard' element={<ExecutiveLayout path="dashboard"/>} />
+
       </Routes>
     </Router>
   </React.StrictMode>
