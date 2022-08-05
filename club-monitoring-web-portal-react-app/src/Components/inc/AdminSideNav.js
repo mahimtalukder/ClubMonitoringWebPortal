@@ -1,4 +1,5 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
 const AdminSideNav = () => {
     return (
@@ -25,13 +26,19 @@ const AdminSideNav = () => {
                         </li>
                         <li class="nav-item nav-category">Personal</li>
                         <li class="nav-item">
-                            <a href="{{route('adminProfile')}}" class="nav-link">
+                            <a
+                                href="{{route('adminProfile')}}"
+                                class="nav-link"
+                            >
                                 <i class="link-icon" data-feather="user"></i>
                                 <span class="link-title">View Profile</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('adminEditProfile')}}" class="nav-link">
+                            <a
+                                href="{{route('adminEditProfile')}}"
+                                class="nav-link"
+                            >
                                 <i class="link-icon" data-feather="edit"></i>
                                 <span class="link-title">Edit Profile</span>
                             </a>
@@ -54,26 +61,32 @@ const AdminSideNav = () => {
                     <ul class="nav">
                         <li class="nav-item nav-category">Main</li>
                         <li class="nav-item">
-                            <a href="{{ route('adminDash') }}" class="nav-link">
+                            <Link to="/admin/dashboard" class="nav-link">
                                 <i class="link-icon" data-feather="box"></i>
                                 <span class="link-title">Dashboard</span>
-                            </a>
+                            </Link>
                         </li>
                         <li class="nav-item nav-category">Personal</li>
                         <li class="nav-item">
-                            <a href="{{route('adminProfile')}}" class="nav-link">
+                            <Link to="/admin/profile" class="nav-link">
                                 <i class="link-icon" data-feather="user"></i>
                                 <span class="link-title">View Profile</span>
-                            </a>
+                            </Link>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('adminEditProfile')}}" class="nav-link">
+                            <a
+                                href="{{route('adminEditProfile')}}"
+                                class="nav-link"
+                            >
                                 <i class="link-icon" data-feather="edit"></i>
                                 <span class="link-title">Edit Profile</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('adminChangePassword')}}" class="nav-link">
+                            <a
+                                href="{{route('adminChangePassword')}}"
+                                class="nav-link"
+                            >
                                 <i class="link-icon" data-feather="lock"></i>
                                 <span class="link-title">Change Password</span>
                             </a>
@@ -82,13 +95,21 @@ const AdminSideNav = () => {
                         <li class="nav-item nav-category">Director</li>
 
                         <li class="nav-item">
-                            <a href="{{ route('adminCreateDirector') }}" class="nav-link">
+                            <a
+                                href="{{ route('adminCreateDirector') }}"
+                                class="nav-link"
+                            >
                                 <i class="link-icon" data-feather="box"></i>
-                                <span class="link-title">Create Director Account</span>
+                                <span class="link-title">
+                                    Create Director Account
+                                </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('adminDirectorList') }}" class="nav-link">
+                            <a
+                                href="{{ route('adminDirectorList') }}"
+                                class="nav-link"
+                            >
                                 <i class="link-icon" data-feather="box"></i>
                                 <span class="link-title">Director List</span>
                             </a>
@@ -97,7 +118,7 @@ const AdminSideNav = () => {
                 </div>
             </nav>
         </div>
-    )
-}
+    );
+};
 
-export default AdminSideNav
+export default AdminSideNav;

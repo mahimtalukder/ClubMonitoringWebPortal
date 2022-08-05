@@ -49,6 +49,11 @@ root.render(
                     path="/admin/dashboard"
                     element={<AdminLayouts path="dashboard" />}
                 />
+                <Route
+                    exact
+                    path="/admin/profile"
+                    element={<AdminLayouts path="profile" />}
+                />
 
                 {/*Executive*/}
                 <Route
@@ -56,12 +61,22 @@ root.render(
                     path="/executive/dashboard"
                     element={<ExecutiveLayout path="dashboard" />}
                 />
+                <Route
+                    exact
+                    path="/executive/profile"
+                    element={<ExecutiveLayout path="profile" />}
+                />
 
                 {/*Member*/}
                 <Route
                     exact
                     path="/member/dashboard"
                     element={<MemberLayout path="dashboard" />}
+                />
+                <Route
+                    exact
+                    path="/member/profile"
+                    element={<MemberLayout path="profile" />}
                 />
             </Routes>
         </Router>

@@ -1,5 +1,6 @@
 import { divide } from "lodash";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MemberSideNav = () => {
     return (
@@ -32,16 +33,13 @@ const MemberSideNav = () => {
                         </li>
                         <li className="nav-item nav-category">Personal</li>
                         <li className="nav-item">
-                            <a
-                                href="{{ route('memberProfile') }}"
-                                className="nav-link"
-                            >
+                            <Link to="/member/profile" className="nav-link">
                                 <i
                                     className="link-icon"
                                     data-feather="user"
                                 ></i>
                                 <span className="link-title">View Profile</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a
@@ -76,26 +74,20 @@ const MemberSideNav = () => {
                     <ul className="nav">
                         <li className="nav-item nav-category">Main</li>
                         <li className="nav-item">
-                            <a
-                                href="{{ route('memberDash') }}"
-                                className="nav-link"
-                            >
+                            <Link to="/member/dashboard" className="nav-link">
                                 <i className="link-icon" data-feather="box"></i>
                                 <span className="link-title">Dashboard</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item nav-category">Personal</li>
                         <li className="nav-item">
-                            <a
-                                href="{{ route('memberProfile') }}"
-                                className="nav-link"
-                            >
+                            <Link to="/member/profile" className="nav-link">
                                 <i
                                     className="link-icon"
                                     data-feather="user"
                                 ></i>
                                 <span className="link-title">View Profile</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a
