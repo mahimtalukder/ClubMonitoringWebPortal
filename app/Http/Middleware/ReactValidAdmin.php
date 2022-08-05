@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
-use App\Models\Token;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\Token;
 
-class ReactValidDirector
+class ReactValidAdmin
 {
     /**
      * Handle an incoming request.

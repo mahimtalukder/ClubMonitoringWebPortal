@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ApiDirectorController extends Controller
+class ApiAdminController extends Controller
 {
     public function __construct()
     {

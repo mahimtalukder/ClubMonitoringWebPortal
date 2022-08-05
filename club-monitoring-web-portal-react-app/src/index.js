@@ -1,13 +1,13 @@
-import React from 'react';
-import axios from 'axios';
+import React from 'react'
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './index.css';
-import reportWebVitals from './reportWebVitals';
-import Home from './Components/Home';
-import Auth from './Components/layouts/AuthLayouts';
-import DirectorLayout from './Components/layouts/DirectorLayout';
+import reportWebVitals from './reportWebVitals'
+import Home from './Components/Home'
+import Auth from './Components/layouts/AuthLayouts'
+import DirectorLayout from './Components/layouts/DirectorLayout'
 import Logout from './Components/user/Logout'
+import AdminLayouts from './Components/layouts/AdminLayouts'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,7 +20,11 @@ root.render(
         <Route exact path='/forgetPassword' element={<Auth path="forgetPassword"/>} />
         <Route exact path='/logout' element={<Logout />} />
 
+        {/* Director */}
         <Route exact path='/director/dashboard' element={<DirectorLayout path="dashboard"/>} />
+
+        {/* Admin */}
+        <Route exact path='/admin/dashboard' element={<AdminLayouts path="dashboard"/>} />
       </Routes>
     </Router>
   </React.StrictMode>

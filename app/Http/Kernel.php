@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'validDirector' => \App\Http\Middleware\ValidDirector::class,
         'validMember' => \App\Http\Middleware\ValidMember::class,
         'validExecutive' => \App\Http\Middleware\ValidExecutive::class,
-        'reactValidDirector' => \App\Http\Middleware\ReactValidDirector::class,
+        'reactValidUser' => \App\Http\Middleware\ReactValidUser::class,
+        'reactValidAdmin' => \App\Http\Middleware\ReactValidAdmin::class,
     ];
 }
