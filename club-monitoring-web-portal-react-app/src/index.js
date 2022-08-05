@@ -24,6 +24,11 @@ root.render(
                     path="/forgetPassword"
                     element={<Auth path="forgetPassword" />}
                 />
+                <Route
+                    exact
+                    path="/resetPassword/:id"
+                    element={<Auth path="resetPassword" />}
+                />
                 <Route exact path="/logout" element={<Logout />} />
 
                 {/* Director */}

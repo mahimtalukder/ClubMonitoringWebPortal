@@ -1,6 +1,7 @@
 import React from 'react';
 import SignIn from '../user/SignIn'
 import ForgetPassword from '../user/ForgetPassword'
+import ResetPassword from '../user/ResetPassword'
 
 function Auth(props) {
     const renderAuth = () => {
@@ -8,6 +9,8 @@ function Auth(props) {
           return <SignIn/>;
         } else if(props.path == 'forgetPassword') {
           return <ForgetPassword/>;
+        }else if(props.path == 'resetPassword') {
+          return <ResetPassword/>;
         }
       }
   return (

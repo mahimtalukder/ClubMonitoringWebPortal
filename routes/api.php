@@ -34,6 +34,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/signinSubmitted',[ApiUserController::class, 'signinSubmitted']);
 Route::post('/logout',[ApiUserController::class, 'logout']);
 
+Route::post('/forgotPasswordSubmitted',[ApiUserController::class, 'forgotPasswordSubmitted']);
+
 //Director
 Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
 Route::get('/director/application', [ApiDirectorController::class, 'allApplication']);

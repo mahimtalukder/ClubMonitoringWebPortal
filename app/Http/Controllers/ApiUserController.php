@@ -101,6 +101,68 @@ class ApiUserController extends Controller
         }
     }
 
+    public function forgotPasswordSubmitted(Request $request)
+    {
+        $validate = $request->validate([
+            "id" => "required",
+        ]);
+
+        $user = User::where("user_id", $request->id)->first();
+        if (!empty($user)) {
+            if ($user['user_type'] == 'admin') {
+                $admin = Admin::where('user_id', $request->id)->first();
+                $otp = (int)rand(100000, 900000);
+
+                $adminUpdate = User::where("user_id", $admin["user_id"])->update([
+                    'reset_password_otp' => $otp
+                ]);
+                $data = array(
+                    'name' => $admin['name'],
+                    'email' => $admin->email,
+                    'reset_password_otp' => $otp
+                );
+
+                Mail::to($admin->email)->send(new ResetPassword($data));
+                return "success";
+            } 
+            else if ($user['user_type'] == 'director') {
+                $director = Director::where('user_id', $request->id)->first();
+                $otp = (int)rand(100000, 900000);
+
+                $directorUpdate = User::where("user_id", $director["user_id"])->update([
+                    'reset_password_otp' => $otp
+                ]);
+                $data = array(
+                    'name' => $director['name'],
+                    'email' => $director->email,
+                    'reset_password_otp' => $otp
+                );
+
+                Mail::to($director->email)->send(new ResetPassword($data));
+                return "success";
+            } 
+            else if ($user['user_type'] == 'member') {
+                $member = Member::where('user_id', $request->id)->first();
+                $otp = (int)rand(100000, 900000);
+
+                $memberUpdate = User::where("user_id", $member["user_id"])->update([
+                    'reset_password_otp' => $otp
+                ]);
+                $data = array(
+                    'name' => $member['name'],
+                    'email' => $member->email,
+                    'reset_password_otp' => $otp
+                );
+
+                Mail::to($member->email)->send(new ResetPassword($data));
+                return "success";
+            }
+        } 
+        else {
+            return "error";
+        }
+    }
+
     public function logout(Request $request){
         $token = Token::where("token", $request->token)->update([
             'expired_at' => Carbon::now()->format('Y-m-d H:i:s'),

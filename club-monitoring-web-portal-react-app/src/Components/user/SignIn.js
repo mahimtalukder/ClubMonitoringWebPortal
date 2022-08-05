@@ -1,51 +1,55 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import SignInValidation from './SignInValidation';
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SignIn = () => {
-    const navigate  = useNavigate();
+    const navigate = useNavigate();
+    const [dberror, setDberror] = useState("");
     //Final submit function
 
 
     const formLogin = () => {
 
         //Write your code here
-        var obj = {id: values.id, password: values.password};
-        axios.post("http://127.0.0.1:8000/api/signinSubmitted",obj)
-        .then(resp=>{
-            var data = resp.data;
-            localStorage.setItem('user',JSON.stringify(data));
-            let user = JSON.parse(localStorage.getItem('user'));
-            if(user.user_type=="director"){
-                setTimeout(()=>{
-                    window.location.reload(false);
-                }, 500);
-                navigate('/director/dashboard');
-                console.log(user.user_type);
-            }
-            else if(user.user_type=="admin"){
-                setTimeout(()=>{
-                    window.location.reload(false);
-                }, 500);
-                navigate('/admin/dashboard');
-            }
-            else if(user.user_type=="executive"){
-                setTimeout(()=>{
-                    window.location.reload(false);
-                }, 500);
-                navigate('/executive/dashboard');
-            }
-            else if(user.user_type=="member"){
-                setTimeout(()=>{
-                    window.location.reload(false);
-                }, 500);
-                navigate('/member/dashboard');
-            }
-        }).catch(err=>{
-            console.log(err);
-        });
+        var obj = { id: values.id, password: values.password };
+        axios.post("http://127.0.0.1:8000/api/signinSubmitted", obj)
+            .then(resp => {
+                var data = resp.data;
+                localStorage.setItem('user', JSON.stringify(data));
+                let user = JSON.parse(localStorage.getItem('user'));
+                if (user.user_type == "director") {
+                    setTimeout(() => {
+                        window.location.reload(false);
+                    }, 500);
+                    navigate('/director/dashboard');
+                    console.log(user.user_type);
+                }
+                else if (user.user_type == "admin") {
+                    setTimeout(() => {
+                        window.location.reload(false);
+                    }, 500);
+                    navigate('/admin/dashboard');
+                }
+                else if (user.user_type == "executive") {
+                    setTimeout(() => {
+                        window.location.reload(false);
+                    }, 500);
+                    navigate('/executive/dashboard');
+                }
+                else if (user.user_type == "member") {
+                    setTimeout(() => {
+                        window.location.reload(false);
+                    }, 500);
+                    navigate('/member/dashboard');
+                } else {
+                    setDberror("Invalid Input");
+                }
+            }).catch(err => {
+                setDberror("Invalid Input");
+                console.log(err);
+            });
 
     }
 
@@ -70,7 +74,8 @@ const SignIn = () => {
                     <h6 className="card-title text-primary"></h6>
                     @endif
                     */}
-                    {submitErrors.error && <h5 className="text-danger">{submitErrors.error}</h5>}
+                    {dberror ?  <h5 className="text-danger">{dberror}</h5>
+                        : submitErrors.error && <h5 className="text-danger">{submitErrors.error}</h5>}
 
                     <form className="forms-sample" onSubmit={handleSubmit}>
                         {/* {{ csrf_field() }} */}
