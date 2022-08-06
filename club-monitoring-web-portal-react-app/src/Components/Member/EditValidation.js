@@ -1,37 +1,66 @@
 import React, { useState } from "react";
-import { omit } from "lodash";
+import { isEmpty, omit } from "lodash";
 
-const SignInValidation = (callback) => {
+const EditValidation = (callback) => {
     const [values, setValues] = useState({});
     const [errors, setErrors] = useState({});
     const [submitErrors, setSubmitErrors] = useState({});
 
     const validate = (event, name, value) => {
         switch (name) {
-            case "id":
-                if (value.length > 10 || value.length < 10) {
+            case "name":
+                if (value.length < 11) {
                     setErrors({
                         ...errors,
-                        id: "ID can contains 10 characters",
+                        name: "name cannot be empty",
                     });
                 } else {
-                    let obj = omit(errors, "id");
+                    let obj = omit(errors, "name");
                     setErrors(obj);
                 }
                 break;
 
-            case "password":
-                if (value.length < 8) {
+            case "email":
+                if (value === "") {
                     setErrors({
                         ...errors,
-                        password: "Password has to be least 8 characters",
+                        password: "email cannot be empty",
+                    });
+                }
+                break;
+            case "phone":
+                if (value.length < 11) {
+                    setErrors({
+                        ...errors,
+                        phone: "A phone number has to be least 11 digits",
                     });
                 } else {
-                    let newObj = omit(errors, "password");
+                    let newObj = omit(errors, "phone");
                     setErrors(newObj);
                 }
                 break;
-
+            // case "dob":
+            //     if (!value) {
+            //         setErrors({
+            //             ...errors,
+            //             dob: "A date of birth is required",
+            //         });
+            //     } else {
+            //         let newObj = omit(errors, "dob");
+            //         setErrors(newObj);
+            //     }
+            //     break;
+            case "address":
+                if (value === "") {
+                    setErrors({
+                        ...errors,
+                        address: "A date of birth is required",
+                    });
+                } else {
+                    let newObj = omit(errors, "dob");
+                    setErrors(newObj);
+                }
+                break;
             default:
                 break;
         }
@@ -40,6 +69,7 @@ const SignInValidation = (callback) => {
     const handleChange = (event) => {
         //To stop default events
         event.persist();
+        console.log(event);
 
         let name = event.target.name;
         let val = event.target.value;
@@ -80,4 +110,4 @@ const SignInValidation = (callback) => {
     };
 };
 
-export default SignInValidation;
+export default EditValidation;

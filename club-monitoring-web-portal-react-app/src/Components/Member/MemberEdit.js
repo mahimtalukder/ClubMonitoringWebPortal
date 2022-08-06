@@ -1,20 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import { useFormik } from "formik";
+import { Formik, Form, Field } from "formik";
+import { useNavigate } from "react-router-dom";
+import EditValidation from "./EditValidation";
 const MemberEdit = (props) => {
+    // const navigate = useNavigate();
+    // const [dberror, setDberror] = useState("");
     let user = JSON.parse(localStorage.getItem("user"));
     console.log(localStorage.getItem("user"));
-
-    // var obj = {id: values.id};
-    // axios.get("http://127.0.0.1:8000/api/director/dashboard",obj)
-    // .then(resp=>{
-    //     var data = resp.data;
-    //     localStorage.setItem('user',JSON.stringify(data));
-    // }).catch(err=>{
-    //     console.log(err);
-    // });
-
+    // const [name, setName] = useState(user.name);
+    // const [email, setEmail] = useState(user.email);
+    // const [phone, setPhone] = useState(user.phone);
+    // const [dob, setDob] = useState(user.dob);
+    // const [address, setAddress] = useState(user.address);
+    // const handleinputchange = (el) => {
+    //     if (el.target.name == "name") {
+    //         setName(el.target.value);
+    //     } else if (el.target.name == "email") {
+    //         setEmail(el.target.value);
+    //     } else if (el.target.name == "phone") {
+    //         setPhone(el.target.value);
+    //     } else if (el.target.name == "dob") {
+    //         setDob(el.target.value);
+    //     } else if (el.target.name == "address") {
+    //         setAddress(el.target.value);
+    //     }
+    // };
+    const FormEdit = () => {
+        var obj = { id: values.id };
+        axios
+            .get("http://127.0.0.1:8000/api/director/dashboard", obj)
+            .then((resp) => {
+                var data = resp.data;
+                localStorage.setItem("user", JSON.stringify(data));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    const { handleChange, values, errors, submitErrors, handleSubmit } =
+        EditValidation(FormEdit);
     return (
         <div>
             <div class="page-content mx-0 px-0 my-0 py-0">
@@ -111,12 +138,14 @@ const MemberEdit = (props) => {
                                         </h4>
 
                                         <form
+                                            // onSubmit={handleSubmit}
                                             method="post"
-                                            action="{{route('memberEditProfileSubmitted')}}"
+                                            action="#"
                                             novalidate="novalidate"
                                         >
                                             <div class="mb-3">
                                                 <label
+                                                    htmlFor="name"
                                                     for="name"
                                                     class="form-label"
                                                 >
@@ -127,8 +156,14 @@ const MemberEdit = (props) => {
                                                     class="form-control"
                                                     name="name"
                                                     type="text"
-                                                    value={user.name}
+                                                    // value={user.name}
+                                                    onChange={handleChange}
                                                 />
+                                                {errors.name && (
+                                                    <span className="font-weight-light text-danger">
+                                                        {errors.name}
+                                                    </span>
+                                                )}
                                             </div>
                                             <div class="mb-3">
                                                 <label
@@ -143,6 +178,8 @@ const MemberEdit = (props) => {
                                                     name="email"
                                                     type="email"
                                                     value={user.email}
+                                                    onChange={handleChange}
+                                                    // onBlur={handleBlur}
                                                 />
                                             </div>
                                             <div class="mb-3">
@@ -157,32 +194,38 @@ const MemberEdit = (props) => {
                                                     class="form-control"
                                                     name="phone"
                                                     type="text"
-                                                    value={user.phone}
+                                                    // value={user.phone}
+                                                    onChange={handleChange}
                                                 />
+                                                {errors.phone && (
+                                                    <span className="font-weight-light text-danger">
+                                                        {errors.phone}
+                                                    </span>
+                                                )}
                                             </div>
                                             {/* <div class="mb-3">
-                                    <label class="form-label">Gender</label>
-                                    <div>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="gender" value="male" id="gender1" {{ user.gender == 'male' ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="gender1">
-                                                Male
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="gender" value="female" id="gender2" {{ user.gender == 'female' ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="gender2">
-                                                Female
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="gender" value="Other" id="gender3" { user.gender == 'Other' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="gender3">
-                                                Other
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div> */}
+                                                                                <label class="form-label">Gender</label>
+                                                                                <div>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" name="gender" value="male" id="gender1" {{ user.gender == 'male' ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="gender1">
+                                                    Male
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" name="gender" value="female" id="gender2" {{ user.gender == 'female' ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="gender2">
+                                                    Female
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" name="gender" value="Other" id="gender3" { user.gender == 'Other' ? 'checked' : '' }>
+                                                <label class="form-check-label" for="gender3">
+                                                    Other
+                                                </label>
+                                            </div>
+                                                                                </div>
+                                                                            </div> */}
                                             <div class="mb-3">
                                                 <label class="form-label">
                                                     Date of Birth
@@ -196,6 +239,7 @@ const MemberEdit = (props) => {
                                                         name="dob"
                                                         class="form-control"
                                                         value={user.dob}
+                                                        onChange={handleChange}
                                                     />
                                                     <span class="input-group-text input-group-addon">
                                                         <svg
@@ -241,20 +285,19 @@ const MemberEdit = (props) => {
                                                 </div>
                                             </div>
                                             {/* <div class="mb-3">
-                                    <label class="form-label">Blood Group</label>
-                                    <select class="js-example-basic-single form-select select2-hidden-accessible" name="blood_group" id="blood_group" data-width="100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                        <option name="blood_group" value="" data-select2-id="1">Select blood group</option>
-                                        <option name="blood_group" value="a-pos" data-select2-id="3" { user.blood_group == 'a-pos' ? 'selected' : '' }>A+</option>
-                                        <option name="blood_group" value="a-neg" data-select2-id="13" { user.blood_group == 'a-neg' ? 'selected' : '' }>A-</option>
-                                        <option name="blood_group" value="ab-pos" data-select2-id="14" { user.blood_group == 'ab-pos' ? 'selected' : '' }>AB+</option>
-                                        <option name="blood_group" value="ab-neg" data-select2-id="15" { user.blood_group == 'ab-neg' ? 'selected' : '' }>AB-</option>
-                                        <option name="blood_group" value="o-pos" data-select2-id="17" {user.blood_group == 'o-pos' ? 'selected' : ''}>O+</option>
-                                        <option name="blood_group" value="o-neg" data-select2-id="18" { user.blood_group == 'o-neg' ? 'selected' : '' }>O-</option>
-                                        <option name="blood_group" value="b-pos" data-select2-id="19" { user.blood_group == 'b-pos' ? 'selected' : '' }>B+</option>
-                                        <option name="blood_group" value="b-neg" data-select2-id="11" { user.blood_group == 'b-neg' ? 'selected' : '' }>B-</option>
-                                    </select>
-                                </div> */}
-
+                                                                                <label class="form-label">Blood Group</label>
+                                                                                <select class="js-example-basic-single form-select select2-hidden-accessible" name="blood_group" id="blood_group" data-width="100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option name="blood_group" value="" data-select2-id="1">Select blood group</option>
+                                            <option name="blood_group" value="a-pos" data-select2-id="3" { user.blood_group == 'a-pos' ? 'selected' : '' }>A+</option>
+                                            <option name="blood_group" value="a-neg" data-select2-id="13" { user.blood_group == 'a-neg' ? 'selected' : '' }>A-</option>
+                                            <option name="blood_group" value="ab-pos" data-select2-id="14" { user.blood_group == 'ab-pos' ? 'selected' : '' }>AB+</option>
+                                            <option name="blood_group" value="ab-neg" data-select2-id="15" { user.blood_group == 'ab-neg' ? 'selected' : '' }>AB-</option>
+                                            <option name="blood_group" value="o-pos" data-select2-id="17" {user.blood_group == 'o-pos' ? 'selected' : ''}>O+</option>
+                                            <option name="blood_group" value="o-neg" data-select2-id="18" { user.blood_group == 'o-neg' ? 'selected' : '' }>O-</option>
+                                            <option name="blood_group" value="b-pos" data-select2-id="19" { user.blood_group == 'b-pos' ? 'selected' : '' }>B+</option>
+                                            <option name="blood_group" value="b-neg" data-select2-id="11" { user.blood_group == 'b-neg' ? 'selected' : '' }>B-</option>
+                                                                                </select>
+                                                                            </div> */}
                                             <div class="mb-3">
                                                 <label
                                                     for="name"
@@ -267,10 +310,10 @@ const MemberEdit = (props) => {
                                                     class="form-control"
                                                     name="address"
                                                     type="text"
+                                                    onChange={handleChange}
                                                     value={user.address}
                                                 />
                                             </div>
-
                                             <div class="mb-3">
                                                 <div class="form-check">
                                                     <label
