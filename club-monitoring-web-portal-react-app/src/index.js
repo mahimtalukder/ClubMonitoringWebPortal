@@ -14,55 +14,83 @@ import MemberLayout from "./Components/layouts/MemberLayout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route exact path='/' element={<Home />} />
-        <Route exact path='/signin' element={<Auth path="signin" />} />
-        <Route exact path='/forgetPassword' element={<Auth path="forgetPassword" />} />
-        <Route exact path='/resetPassword/:id' element={<Auth path="resetPassword" />} />
-        <Route exact path='/logout' element={<Logout />} />
+    <React.StrictMode>
+        <Router>
+            <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/signin" element={<Auth path="signin" />} />
+                <Route
+                    exact
+                    path="/forgetPassword"
+                    element={<Auth path="forgetPassword" />}
+                />
+                <Route
+                    exact
+                    path="/resetPassword/:id"
+                    element={<Auth path="resetPassword" />}
+                />
+                <Route exact path="/logout" element={<Logout />} />
 
-        {/* Director */}
-        <Route
-          exact
-          path="/director/dashboard"
-          element={<DirectorLayout path="dashboard" />}
-        />
-        <Route
-          exact
-          path="/director/profile"
-          element={<DirectorLayout path="profile" />}
-        />
-        <Route
-          exact
-          path="/director/application"
-          element={<DirectorLayout path="allapplication" />}
-        />
+                {/* Director */}
+                <Route
+                    exact
+                    path="/director/dashboard"
+                    element={<DirectorLayout path="dashboard" />}
+                />
+                <Route
+                    exact
+                    path="/director/profile"
+                    element={<DirectorLayout path="profile" />}
+                />
+                <Route
+                    exact
+                    path="/director/application"
+                    element={<DirectorLayout path="allapplication" />}
+                />
 
-        {/* Admin */}
-        <Route
-          exact
-          path="/admin/dashboard"
-          element={<AdminLayouts path="dashboard" />}
-        />
+                {/* Admin */}
+                <Route
+                    exact
+                    path="/admin/dashboard"
+                    element={<AdminLayouts path="dashboard" />}
+                />
+                <Route
+                    exact
+                    path="/admin/profile"
+                    element={<AdminLayouts path="profile" />}
+                />
 
-        {/*Executive*/}
-        <Route
-          exact
-          path="/executive/dashboard"
-          element={<ExecutiveLayout path="dashboard" />}
-        />
+                {/*Executive*/}
+                <Route
+                    exact
+                    path="/executive/dashboard"
+                    element={<ExecutiveLayout path="dashboard" />}
+                />
+                <Route
+                    exact
+                    path="/executive/profile"
+                    element={<ExecutiveLayout path="profile" />}
+                />
 
-        {/*Member*/}
-        <Route
-          exact
-          path="/member/dashboard"
-          element={<MemberLayout path="dashboard" />}
-        />
-      </Routes>
-    </Router>
-  </React.StrictMode>
+                {/*Member*/}
+                <Route
+                    exact
+                    path="/member/dashboard"
+                    element={<MemberLayout path="dashboard" />}
+                />
+                <Route
+                    exact
+                    path="/member/profile"
+                    element={<MemberLayout path="profile" />}
+                />
+                <Route
+                    exact
+                    path="/member/editprofile"
+                    element={<MemberLayout path="editprofile" />}
+                />
+            </Routes>
+        </Router>
+    </React.StrictMode>
 );
 
 reportWebVitals();

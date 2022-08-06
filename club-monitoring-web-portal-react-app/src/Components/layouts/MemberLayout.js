@@ -5,6 +5,8 @@ import Footer from "../inc/Footer";
 import Dashboard from "../Member/Dashboard";
 import { useNavigate } from "react-router-dom";
 import AxiosConfig from "../axiosConfig";
+import MemberProfile from "../Member/MemberProfile";
+import MemberEdit from "../Member/MemberEdit";
 
 function MemberLayout(props) {
     const navigate = useNavigate();
@@ -25,8 +27,10 @@ function MemberLayout(props) {
         console.log(props.path);
         if (props.path == "dashboard") {
             return <Dashboard />;
-        } else if (props.path == "") {
-            return "";
+        } else if (props.path == "profile") {
+            return <MemberProfile />;
+        } else if (props.path == "editprofile") {
+            return <MemberEdit />;
         }
     };
     return (
