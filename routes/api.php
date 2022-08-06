@@ -35,6 +35,7 @@ Route::post('/signinSubmitted',[ApiUserController::class, 'signinSubmitted']);
 Route::post('/logout',[ApiUserController::class, 'logout']);
 
 Route::post('/forgotPasswordSubmitted',[ApiUserController::class, 'forgotPasswordSubmitted']);
+Route::post('/resetPasswordSubmitted',[ApiUserController::class, 'resetPasswordSubmitted']);
 
 //Director
 Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);

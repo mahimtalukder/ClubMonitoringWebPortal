@@ -7,10 +7,13 @@ import axios from "axios";
 const SignIn = () => {
     const navigate = useNavigate();
     const [dberror, setDberror] = useState("");
+    let message = "";
+
     //Final submit function
 
 
     const formLogin = () => {
+
 
         //Write your code here
         var obj = { id: values.id, password: values.password };
@@ -66,6 +69,7 @@ const SignIn = () => {
                 <div className="auth-form-wrapper px-4 py-5">
                     <a href="#" className="noble-ui-logo d-block mb-2">CM<span>WP</span></a>
                     <h5 className="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
+
                     {/* @if (!empty($message))
                     <div className="alert alert-success" role="alert">
                         <i data-feather="check" className="text-success icon-lg me-2"></i>
@@ -74,7 +78,7 @@ const SignIn = () => {
                     <h6 className="card-title text-primary"></h6>
                     @endif
                     */}
-                    {dberror ?  <h5 className="text-danger">{dberror}</h5>
+                    {dberror ? <h5 className="text-danger">{dberror}</h5>
                         : submitErrors.error && <h5 className="text-danger">{submitErrors.error}</h5>}
 
                     <form className="forms-sample" onSubmit={handleSubmit}>
