@@ -163,6 +163,27 @@ class ApiUserController extends Controller
         }
     }
 
+    public function resetPasswordSubmitted(Request $request)
+    {
+        $validate = $request->validate([
+            "*" => "required",
+            'otp' => 'required|min:6|max:6',
+            'confirm_password' => 'required|same:password'
+        ]);
+
+        $user = User::where([['user_id', "=", $request->id],["reset_password_otp", "=", (int)$request->otp]])->first();
+        if (!empty($user)) {
+            $userUpdate = User::where("user_id", $request->id)->update([
+                'reset_password_otp'=>null,
+                'password' => Hash::make($request->password)
+            ]);
+            return "success";
+        } 
+        else {
+            return "error";
+        }
+    }
+
     public function logout(Request $request){
         $token = Token::where("token", $request->token)->update([
             'expired_at' => Carbon::now()->format('Y-m-d H:i:s'),

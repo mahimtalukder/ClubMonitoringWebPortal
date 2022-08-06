@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import BootstrapDatePickerComponent from './BootstrapDatePickerComponent'
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
+          <BootstrapDatePickerComponent />  
           Learn React
         </a>
       </header>

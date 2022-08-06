@@ -64,7 +64,7 @@ const Application = () => {
                                         <div className="email-list">
                                             {
                                                 applications.map(application => (
-                                                    <List is_approved={application.is_approved} subject={application.subject} created_at={application.created_at} description={application.description}></List>
+                                                    <List is_approved={application.is_approved} subject={application.subject} created_at={application.created_at} description={application.description} application_id={application.application_id}></List>
                                                 ))
                                             }
                                         </div>

@@ -5,6 +5,7 @@ import Footer from "../inc/Footer";
 import Dashboard from "../Director/Dashboard";
 import DirectorViewProfile from "../Director/DirectorViewProfile";
 import AllAplication from "../Director/Application";
+import ApplicationRead from "../Director/ApplicationRead"
 
 function DirectorLayout(props) {
     const component = () => {
@@ -14,6 +15,8 @@ function DirectorLayout(props) {
             return <DirectorViewProfile />;
         } else if (props.path == "allapplication") {
             return <AllAplication />;
+        } else if (props.path == "applicationRead") {
+            return <ApplicationRead />;
         }
     };
 

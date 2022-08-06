@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 const ApplicationList = (props) => {
+    console.log(props);
     const date = new Date();
     return (
         <div className="email-list-item">
@@ -15,13 +17,13 @@ const ApplicationList = (props) => {
                     <i data-feather="x" className="text-danger icon-lg me-2"></i>
                 }
             </div>
-            <a href="{{route('directorApplicationRead',['id' => $application->application_id])}}" className="email-list-detail">
+            <Link to={"/director/application/read/"+props.application_id} className="email-list-detail">
                 <div className="content">
                     <span className="from">{props.subject}</span>
                     <p className="msg">{props.description}</p>
                 </div>
                 <span className="date">{new Date(props.created_at).toDateString()}</span>
-            </a>
+            </Link>
         </div>
 
     )

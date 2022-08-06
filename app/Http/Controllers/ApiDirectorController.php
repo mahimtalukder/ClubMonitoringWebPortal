@@ -32,6 +32,29 @@ class ApiDirectorController extends Controller
       return $values;
   }
 
+  public function applicationRead(Request $request){
+
+    $application_info = Application::where("application_id", $request->id)->first();
+    $is_approved ="no";
+
+    $requested_components = Application::select('requested_components.*', 'components.name')
+        ->join('requested_components', 'applications.application_id', '=', 'requested_components.application_id')
+        ->join('components', 'requested_components.component_id', '=', 'components.id')
+        ->where([['requested_components.application_id', "=", $request->id]])
+        ->get();
+
+    $club = Club::where("id", $application_info->club_id)->first();
+    $clubs = Club::all();
+
+    $values['application'] = $application_info;
+    $values['requested_components'] = $requested_components;
+    $values['club'] = $club;
+    $values['clubs'] = $clubs;
+
+
+    return $values;
+}
+
     
     // public function profile(){
     //     $director_session = session()->get('director');
