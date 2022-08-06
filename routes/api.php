@@ -40,6 +40,7 @@ Route::post('/resetPasswordSubmitted',[ApiUserController::class, 'resetPasswordS
 //Director
 Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
 Route::get('/director/application', [ApiDirectorController::class, 'allApplication']);
+Route::get('/director/application/read/{id}', [ApiDirectorController::class, 'applicationRead']);
 
 
 //Admin
