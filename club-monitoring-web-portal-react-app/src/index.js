@@ -54,16 +54,13 @@ root.render(
                 />
 
                 {/* Admin */}
-                <Route
-                    exact
-                    path="/admin/dashboard"
-                    element={<AdminLayouts path="dashboard" />}
-                />
+                <Route exact path="/admin/dashboard"  element={<AdminLayouts path="dashboard" />} />
                 <Route
                     exact
                     path="/admin/profile"
                     element={<AdminLayouts path="profile" />}
                 />
+                <Route exact path="/admin/createDirector"  element={<AdminLayouts path="createDirector" />} />
 
                 {/*Executive*/}
                 <Route

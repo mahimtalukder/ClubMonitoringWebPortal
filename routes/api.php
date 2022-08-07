@@ -46,6 +46,7 @@ Route::get('/director/application/removeComponent/{id}/{application_id}/{remarks
 
 //Admin
 Route::get('/admin/dashboard',[ApiAdminController::class, 'dashboard']);
+Route::get('/admin/list/director', [ApiAdminController::class, 'directorList']);
 
 
 
