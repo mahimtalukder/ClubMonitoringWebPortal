@@ -30,11 +30,7 @@ root.render(
                 <Route exact path="/director/application/read/:applicationID" element={<DirectorLayout path="applicationRead" />}/>
 
                 {/* Admin */}
-                <Route
-                    exact
-                    path="/admin/dashboard"
-                    element={<AdminLayouts path="dashboard" />}
-                />
+                <Route exact path="/admin/dashboard" element={<AdminLayouts path="dashboard" />}/>
                 <Route
                     exact
                     path="/admin/profile"
@@ -52,6 +48,7 @@ root.render(
                     path="/executive/profile"
                     element={<ExecutiveLayout path="profile" />}
                 />
+                <Route exact path="/admin/createDirector" element={<AdminLayouts path="createDirector" />}/>
 
                 {/*Member*/}
                 <Route
