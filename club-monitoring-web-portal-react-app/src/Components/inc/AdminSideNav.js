@@ -103,13 +103,10 @@ const AdminSideNav = () => {
                             </Link>
                         </li>
                         <li class="nav-item">
-                            <a
-                                href="{{ route('adminDirectorList') }}"
-                                class="nav-link"
-                            >
+                            <Link to="/admin/list/director" class="nav-link">
                                 <i class="link-icon" data-feather="box"></i>
                                 <span class="link-title">Director List</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>

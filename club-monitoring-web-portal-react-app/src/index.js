@@ -61,6 +61,8 @@ root.render(
                     element={<AdminLayouts path="profile" />}
                 />
                 <Route exact path="/admin/createDirector"  element={<AdminLayouts path="createDirector" />} />
+                <Route exact path="/admin/list/director"  element={<AdminLayouts path="directorList" />} />
+                <Route exact path="/admin/update/director/:directorID"  element={<AdminLayouts path="viewDirector" />} />
 
                 {/*Executive*/}
                 <Route

@@ -177,23 +177,11 @@ const ApplicationRead = () => {
                                                             <table className="table">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>
-                                                                            #
-                                                                        </th>
-                                                                        <th>
-                                                                            Name
-                                                                        </th>
-                                                                        <th>
-                                                                            Start
-                                                                            Time
-                                                                        </th>
-                                                                        <th>
-                                                                            End
-                                                                            Time
-                                                                        </th>
-                                                                        <th>
-                                                                            Quantity
-                                                                        </th>
+                                                                        <th>#</th>
+                                                                        <th>Name</th>
+                                                                        <th>Start Time</th>
+                                                                        <th>End Time</th>
+                                                                        <th>Quantity</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -364,9 +352,7 @@ const ApplicationRead = () => {
                                                                                 index
                                                                             ) => (
                                                                                 <ApplicationApproveComponetList
-                                                                                    id={
-                                                                                        requested_component.id
-                                                                                    }
+                                                                                    id={ requested_component.id }
                                                                                     name={
                                                                                         requested_component.name
                                                                                     }
