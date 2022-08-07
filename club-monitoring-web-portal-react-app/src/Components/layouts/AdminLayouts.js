@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import AxiosConfig from "../axiosConfig";
 import AdminProfile from "../Admin/AdminProfile";
 import CreateDirector from "../Admin/CreateDirector"; 
+import DirectorList from "../Admin/DirectorList";
+import ViewDirector from "../Admin/ViewDirector";
 
 function AdminLayouts(props) {
     const navigate = useNavigate();
@@ -32,6 +34,10 @@ function AdminLayouts(props) {
             return <AdminProfile />;
         } else if (props.path == "createDirector") {
             return <CreateDirector />;
+        }else if (props.path == "directorList") {
+            return <DirectorList />;
+        }else if (props.path == "viewDirector") {
+            return <ViewDirector />;
         }
     };
     return (
