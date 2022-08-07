@@ -24,8 +24,11 @@ const EditValidation = (callback) => {
                 if (value === "") {
                     setErrors({
                         ...errors,
-                        password: "email cannot be empty",
+                        email: "email cannot be empty",
                     });
+                } else {
+                    let newObj = omit(errors, "email");
+                    setErrors(newObj);
                 }
                 break;
             case "phone":
@@ -57,7 +60,18 @@ const EditValidation = (callback) => {
                         address: "A date of birth is required",
                     });
                 } else {
-                    let newObj = omit(errors, "dob");
+                    let newObj = omit(errors, "address");
+                    setErrors(newObj);
+                }
+                break;
+            case "designation":
+                if (value === "") {
+                    setErrors({
+                        ...errors,
+                        designation: "A date of birth is required",
+                    });
+                } else {
+                    let newObj = omit(errors, "designation");
                     setErrors(newObj);
                 }
                 break;

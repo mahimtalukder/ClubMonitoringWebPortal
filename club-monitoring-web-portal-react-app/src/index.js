@@ -19,15 +19,39 @@ root.render(
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/signin" element={<Auth path="signin" />} />
-                <Route exact path="/forgetPassword" element={<Auth path="forgetPassword" />}/>
-                <Route exact path="/resetPassword/:id" element={<Auth path="resetPassword" />}/>
+                <Route
+                    exact
+                    path="/forgetPassword"
+                    element={<Auth path="forgetPassword" />}
+                />
+                <Route
+                    exact
+                    path="/resetPassword/:id"
+                    element={<Auth path="resetPassword" />}
+                />
                 <Route exact path="/logout" element={<Logout />} />
 
                 {/* Director */}
-                <Route exact path="/director/dashboard"element={<DirectorLayout path="dashboard" />}/>
-                <Route exact path="/director/profile" element={<DirectorLayout path="profile" />} />
-                <Route exact path="/director/application" element={<DirectorLayout path="allapplication" />}/>
-                <Route exact path="/director/application/read/:applicationID" element={<DirectorLayout path="applicationRead" />}/>
+                <Route
+                    exact
+                    path="/director/dashboard"
+                    element={<DirectorLayout path="dashboard" />}
+                />
+                <Route
+                    exact
+                    path="/director/profile"
+                    element={<DirectorLayout path="profile" />}
+                />
+                <Route
+                    exact
+                    path="/director/application"
+                    element={<DirectorLayout path="allapplication" />}
+                />
+                <Route
+                    exact
+                    path="/director/application/read/:applicationID"
+                    element={<DirectorLayout path="applicationRead" />}
+                />
 
                 {/* Admin */}
                 <Route
@@ -51,6 +75,16 @@ root.render(
                     exact
                     path="/executive/profile"
                     element={<ExecutiveLayout path="profile" />}
+                />
+                <Route
+                    exact
+                    path="/executive/createMember"
+                    element={<ExecutiveLayout path="createMember" />}
+                />
+                <Route
+                    exact
+                    path="/executive/editExecutive"
+                    element={<ExecutiveLayout path="editExecutive" />}
                 />
 
                 {/*Member*/}

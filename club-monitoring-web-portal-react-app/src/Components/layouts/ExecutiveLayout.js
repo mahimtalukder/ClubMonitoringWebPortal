@@ -6,6 +6,8 @@ import Dashboard from "../Executive/Dashboard";
 import { useNavigate } from "react-router-dom";
 import AxiosConfig from "../axiosConfig";
 import ExecutiveProfile from "../Executive/ExecutiveProfile";
+import CreateMember from "../Executive/CreateMember";
+import EditExecutive from "../Executive/EditExecutive";
 
 function ExecutiveLayout(props) {
     const navigate = useNavigate();
@@ -28,6 +30,12 @@ function ExecutiveLayout(props) {
             return <Dashboard />;
         } else if (props.path == "profile") {
             return <ExecutiveProfile />;
+        } else if (props.path == "profile") {
+            return <ExecutiveProfile />;
+        } else if (props.path == "createMember") {
+            return <CreateMember />;
+        } else if (props.path == "editExecutive") {
+            return <EditExecutive />;
         }
     };
     return (
