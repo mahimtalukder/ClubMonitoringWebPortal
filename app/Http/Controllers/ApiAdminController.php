@@ -109,5 +109,22 @@ class ApiAdminController extends Controller
         return "Account created successfully. Note: User ID and Password sent to his email address.";
     }
 
+    public function directorStatusUpdate(Request $request){
+        User::where('user_id', $request->user_id)->where('user_type', 'director')->update([
+            'status' => $request->status_code
+        ]);
+
+        $message = "";
+        if($request->status_code == 0){
+            $message = $request->user_id." blocked successfully. To unblock press the Unblock button";
+        }
+        else
+        {
+            $message = $request->user_id." unblocked successfully. To block press the block button";
+        }
+
+        return $message;
+    }
+
 
 }
