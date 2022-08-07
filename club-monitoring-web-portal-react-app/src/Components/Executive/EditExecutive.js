@@ -9,6 +9,7 @@ const EditExecutive = (props) => {
     const [dberror, setDberror] = useState("");
     const FormEdit = () => {
         var obj = {
+            id: values.id,
             name: values.name,
             designation: values.designation,
             email: values.email,
