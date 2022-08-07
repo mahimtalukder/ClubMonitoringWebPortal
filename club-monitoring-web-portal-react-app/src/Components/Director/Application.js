@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react'
-import AxiosConfig from '../axiosConfig'
+import AxiosConfig from '../axiosConfig' 
 import List from './ApplicationList'
 import { useNavigate } from "react-router-dom"
 

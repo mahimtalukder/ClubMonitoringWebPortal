@@ -9,15 +9,15 @@ const CreateDirectorValidation = (callback) => {
     const validate =(event, name, value) => {
 
         switch(name){
-            case 'id':
-                if(value.length>10 || value.length<10){
+            case 'name':
+                if(value.length < 7){
                     setErrors(
                        { ...errors,
-                        id:'ID can contains 10 characters'}
+                        name:'Name cannot be empty'}
                     )
                 }
                 else{
-                    let obj = omit(errors,'id');
+                    let obj = omit(errors,'name');
                     setErrors(obj);
                 }
             break;
