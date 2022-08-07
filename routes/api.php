@@ -51,5 +51,9 @@ Route::get('/admin/dashboard',[ApiAdminController::class, 'dashboard']);
 
 //Executive
 Route::get('/executive/dashboard',[ApiExecutiveController::class, 'dashboard']);
+Route::post('/executive/CreateMamber',[ApiExecutiveController::class, 'CreateMamber']);
+Route::post('/executive/editProfileSubmitted',[ApiExecutiveController::class, 'editProfileSubmitted']);
+
+
 //Member
 Route::get('/member/dashboard',[ApiMemberController::class, 'dashboard']);

@@ -29,8 +29,6 @@ function MemberLayout(props) {
             return <Dashboard />;
         } else if (props.path == "profile") {
             return <MemberProfile />;
-        } else if (props.path == "editprofile") {
-            return <MemberEdit />;
         }
     };
     return (

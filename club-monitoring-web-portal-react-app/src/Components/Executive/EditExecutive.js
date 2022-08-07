@@ -3,13 +3,25 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import EditValidation from "./EditValidation";
-const MemberEdit = (props) => {
+const EditExecutive = (props) => {
     let user = JSON.parse(localStorage.getItem("user"));
     console.log(localStorage.getItem("user"));
+    const [dberror, setDberror] = useState("");
     const FormEdit = () => {
-        var obj = { id: values.id };
+        var obj = {
+            id: values.id,
+            name: values.name,
+            designation: values.designation,
+            email: values.email,
+            phone: values.phone,
+            dob: values.dob,
+            address: values.address,
+        };
         axios
-            .get("http://127.0.0.1:8000/api/director/dashboard", obj)
+            .post(
+                "http://127.0.0.1:8000/api/executive/editProfileSubmitted",
+                obj
+            )
             .then((resp) => {
                 var data = resp.data;
                 localStorage.setItem("user", JSON.stringify(data));
@@ -36,15 +48,18 @@ const MemberEdit = (props) => {
                                         <li class="nav-item">
                                             <Link
                                                 class="nav-link"
-                                                to="/member/profile"
+                                                to="/executive/profile"
                                             >
                                                 About
                                             </Link>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active">
+                                            <Link
+                                                class="nav-link active"
+                                                to="/executive/editExecutive"
+                                            >
                                                 Edit Profile
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -114,9 +129,20 @@ const MemberEdit = (props) => {
                                         <h4 class="card-title pb-3">
                                             Update personal information
                                         </h4>
+                                        {dberror ? (
+                                            <h5 className="text-danger">
+                                                {dberror}
+                                            </h5>
+                                        ) : (
+                                            submitErrors.error && (
+                                                <h5 className="text-danger">
+                                                    {submitErrors.error}
+                                                </h5>
+                                            )
+                                        )}
 
                                         <form
-                                            // onSubmit={handleSubmit}
+                                            onSubmit={handleSubmit}
                                             method="post"
                                             action="#"
                                             novalidate="novalidate"
@@ -182,8 +208,8 @@ const MemberEdit = (props) => {
                                                 )}
                                             </div>
                                             {/* <div class="mb-3">
-                                                                                <label class="form-label">Gender</label>
-                                                                                <div>
+                                            <label class="form-label">Gender</label>
+                                            <div>
                                             <div class="form-check form-check-inline">
                                                 <input type="radio" class="form-check-input" name="gender" value="male" id="gender1" {{ user.gender == 'male' ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="gender1">
@@ -202,8 +228,8 @@ const MemberEdit = (props) => {
                                                     Other
                                                 </label>
                                             </div>
-                                                                                </div>
-                                                                            </div> */}
+                                            </div>
+                                            </div> */}
                                             <div class="mb-3">
                                                 <label class="form-label">
                                                     Date of Birth
@@ -384,4 +410,4 @@ const MemberEdit = (props) => {
         </div>
     );
 };
-export default MemberEdit;
+export default EditExecutive;

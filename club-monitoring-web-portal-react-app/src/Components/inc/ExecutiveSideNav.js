@@ -95,8 +95,8 @@ const ExecutiveSideNav = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a
-                                href="{{ route('executiveEditProfile') }}"
+                            <Link
+                                to="/executive/editExecutive"
                                 className="nav-link"
                             >
                                 <i
@@ -104,7 +104,7 @@ const ExecutiveSideNav = () => {
                                     data-feather="edit"
                                 ></i>
                                 <span className="link-title">Edit Profile</span>
-                            </a>
+                            </Link>
                         </li>
 
                         <li className="nav-item nav-category">Services</li>
@@ -180,12 +180,12 @@ const ExecutiveSideNav = () => {
                                         </a>
                                     </li>
                                     <li className="nav-item">
-                                        <a
-                                            href="{{ route('executiveCreateNewMamber') }}"
+                                        <Link
+                                            to="/executive/createMember"
                                             className="nav-link"
                                         >
                                             New Members
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
