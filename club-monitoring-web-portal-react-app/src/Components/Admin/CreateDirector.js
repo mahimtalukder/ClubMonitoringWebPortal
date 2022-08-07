@@ -9,12 +9,14 @@ const CreateDirector = () => {
     const [success, setSuccess] = useState("");
     const submitDirector = () => {
         //Write your code here
-        var obj = { name: values.name, password: values.password, confirm_password: values.confirm_password };
-        AxiosConfig.get("director/application", obj)
+        var obj = { name: values.name, designation: values.designation, email: values.email, phone: values.phone, dob: values.dob, address: values.address };
+        AxiosConfig.post("admin/create/director", obj)
             .then(resp => {
                 setSuccess(resp.data);
+                setDberror("");
             }).catch(err => {
-                setDberror("Invalid Input!");
+                setDberror("Database error!");
+                setSuccess("");
                 console.log(err);
             });
     }
@@ -33,7 +35,7 @@ const CreateDirector = () => {
                                 {dberror ? <h5 className="text-danger">{dberror}</h5>
                                     : submitErrors.error && <h5 className="text-danger">{submitErrors.error}</h5>}
 
-                                {submitErrors.error &&
+                                {success &&
                                     <div className="alert alert-success" role="alert">
                                         {success}
                                     </div>
@@ -42,7 +44,7 @@ const CreateDirector = () => {
                             <div className="alert alert-success" role="alert">
                                {{$message}}
                             </div>
-                            
+
                         @else
                             <div className="alert alert-dark" role="alert">
                                 After successful account creation, Unique ID and password will be sent to the provided email address. Remember, login credentials is only accessible from directors email.
@@ -56,7 +58,7 @@ const CreateDirector = () => {
                                                 <label className="form-label">Name *</label>
                                                 <input type="text" className="form-control" placeholder="Enter full name" name="name" onChange={handleChange} />
                                                 {errors.name && <span className="text-danger">{errors.name}</span>}
-                                                {/* 
+                                                {/*
                                         @error('name')
                                         <span className="text-danger">{{$message}}</span>
                                         @enderror */}

@@ -1,79 +1,64 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import {omit} from 'lodash'
 
 const CreateDirectorValidation = (callback) => {
-    const [values, setValues]= useState({});
+    const [values, setValues] = useState({});
     const [errors, setErrors] = useState({});
     const [submitErrors, setSubmitErrors] = useState({});
 
-    const validate =(event, name, value) => {
+    const validate = (event, name, value) => {
 
-        switch(name){
+        switch (name) {
             case 'name':
-                if(value.length < 7){
+                if (value == "") {
                     setErrors(
-                       { ...errors,
-                        name:'Name cannot be empty'}
+                        {
+                            ...errors,
+                            name: 'Name cannot be empty'
+                        }
                     )
-                }
-                else{
-                    let obj = omit(errors,'name');
+                } else {
+                    let obj = omit(errors, 'name');
                     setErrors(obj);
                 }
-            break;
+                break;
 
-            case 'otp':
-                if(value.length !== 6){
+            case 'email':
+                if (value == "") {
                     setErrors(
-                       { ...errors,
-                        otp:'Otp can contains 6 characters'}
+                        {
+                            ...errors,
+                            email: 'Name cannot be empty'
+                        }
                     )
-                }
-                else{
-                    let obj = omit(errors,'otp');
+                } else {
+                    let obj = omit(errors, 'email');
                     setErrors(obj);
                 }
-            break;
+                break;
 
-            case 'password':
-                if(value.length<8){
-                    setErrors({
-                        ...errors,
-                        password:'Password has to be least 8 characters'
-                    })
-                }else{
-
-                    let newObj = omit(errors, "password");
-                    setErrors(newObj);
-                    
+            case 'phone':
+                if (value == "") {
+                    setErrors(
+                        {
+                            ...errors,
+                            phone: 'Name cannot be empty'
+                        }
+                    )
+                } else {
+                    let obj = omit(errors, 'phone');
+                    setErrors(obj);
                 }
-            break;
-
-            case 'confirm_password':
-                console.log(values.password);
-                if(value !== values.password){
-                    setErrors({
-                        ...errors,
-                        confirm_password:'Not matches password'
-                    })
-                }else{
-
-                    let newObj = omit(errors, "confirm_password");
-                    setErrors(newObj);
-                    
-                }
-            break;
-
-
+                break;
 
             default:
                 break;
         }
-        
+
     }
-    
+
     const handleChange = (event) => {
-        //To stop default events    
+        //To stop default events
         event.persist();
 
         let name = event.target.name;
@@ -81,26 +66,26 @@ const CreateDirectorValidation = (callback) => {
 
         setValues({
             ...values,
-            [name]:val,
+            [name]: val,
         })
 
-        validate(event,name,val);
+        validate(event, name, val);
         //Let's set these values in state
 
     }
 
     const handleSubmit = (event) => {
-        if(event) event.preventDefault();
+        if (event) event.preventDefault();
 
-        if(Object.keys(errors).length === 0 && Object.keys(values).length !==0 ){
+        if (Object.keys(errors).length === 0 && Object.keys(values).length !== 0) {
             let newObj = omit(submitErrors, "error");
             setSubmitErrors(newObj);
             callback();
 
-        }else{
+        } else {
             setSubmitErrors({
                 ...submitErrors,
-                error:'Invalid Input'
+                error: 'Invalid Input'
             })
         }
     }
