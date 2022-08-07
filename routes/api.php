@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ComponentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
@@ -16,6 +15,7 @@ use App\Http\Controllers\ApiDirectorController;
 use App\Http\Controllers\ApiAdminController;
 use App\Http\Controllers\ApiExecutiveController;
 use App\Http\Controllers\ApiMemberController;
+use App\Http\Controllers\ApiApplicationController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,6 +41,7 @@ Route::post('/resetPasswordSubmitted',[ApiUserController::class, 'resetPasswordS
 Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
 Route::get('/director/application', [ApiDirectorController::class, 'allApplication']);
 Route::get('/director/application/read/{id}', [ApiDirectorController::class, 'applicationRead']);
+Route::get('/director/application/removeComponent/{id}/{application_id}/{remarks}', [ApiApplicationController::class, 'removeComponent']);
 
 
 //Admin

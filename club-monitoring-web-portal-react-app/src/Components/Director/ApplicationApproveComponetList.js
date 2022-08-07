@@ -1,10 +1,42 @@
 import React from 'react'
-import { Helmet } from "react-helmet";
+import { confirmAlert } from 'react-confirm-alert' // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+import AxiosConfig from "../axiosConfig"
+import { useNavigate } from "react-router-dom";
+
+function Redirect(props){
+    let navigate = useNavigate();
+    navigate(props);
+}
 const handleClick = (event, { component_id, application_id }) => {
-    <Helmet>
-        <script src="../../../public/assets_2/dist/attention.js" type="text/javascript" />
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    </Helmet>
+    confirmAlert({
+        title: 'Reject',
+        message: 'Are you sure to do this?'+component_id,
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {
+                // var url = "director/application/removeComponent/"+component_id+"/"+application_id+"/Reject";
+                var url = "/director/application/removeComponent/1/22-10001-06/Reject";
+                AxiosConfig.get(url)
+                    .then((resp) => {
+                        if(resp.data === "success"){
+                            var nav = "/director/application/read/"+application_id;
+                            console.log(nav);
+                            useNavigate(nav);
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+          },
+          {
+            label: 'No',
+            onClick: () => alert('Click No')
+          }
+        ]
+      });
 };
 
 const ApplicationApproveComponetList = (props) => {
