@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class ApiAdminController extends Controller
 {
@@ -124,6 +125,12 @@ class ApiAdminController extends Controller
         }
 
         return $message;
+    }
+
+    public function directorInfo(Request $request){
+
+        $director = Director::where('user_id', $request->id)->first();
+        return $director;
     }
 
 

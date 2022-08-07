@@ -49,6 +49,7 @@ Route::get('/admin/dashboard',[ApiAdminController::class, 'dashboard']);
 Route::get('/admin/list/director', [ApiAdminController::class, 'directorList']);
 Route::post('/admin/create/director', [ApiAdminController::class, 'adminCreateDirectorSubmitted']);
 Route::get('/admin/update/status/director/{user_id}/{status_code}', [ApiAdminController::class, 'directorStatusUpdate']);
+Route::get('/admin/director/{id}', [ApiAdminController::class, 'directorInfo']);
 
 
 
