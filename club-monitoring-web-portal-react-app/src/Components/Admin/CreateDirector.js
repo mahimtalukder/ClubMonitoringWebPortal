@@ -1,6 +1,15 @@
 import React from 'react'
+import CreateDirectorValidation from './CreateDirectorValidation';
 
 const CreateDirector = () => {
+    const navigate = useNavigate();
+    const [dberror, setDberror] = useState("");
+    const submitDirector = () => {
+        //Write your code here
+    }
+
+    //Custom hook call
+    const { handleChange, values, errors, submitErrors, handleSubmit } = CreateDirectorValidation(submitDirector);
     return (
         <div>
             <div className="page-content mx-0 px-0 my-0 py-0">
