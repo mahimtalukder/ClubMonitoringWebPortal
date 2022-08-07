@@ -30,7 +30,7 @@ const ApplicationRead = () => {
             })
             .catch((err) => {
                 setLoading(false);
-                //navigate("/signin");
+                navigate("/signin");
                 console.log(err);
             });
     };
@@ -369,6 +369,9 @@ const ApplicationRead = () => {
                                                                                     }
                                                                                     name={
                                                                                         requested_component.name
+                                                                                    }
+                                                                                    application_id={
+                                                                                        requested_component.application_id
                                                                                     }
                                                                                     i={
                                                                                         index

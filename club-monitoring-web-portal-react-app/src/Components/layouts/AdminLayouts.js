@@ -6,6 +6,7 @@ import Dashboard from "../Admin/Dashboard";
 import { useNavigate } from "react-router-dom";
 import AxiosConfig from "../axiosConfig";
 import AdminProfile from "../Admin/AdminProfile";
+import CreateDirector from "../Admin/CreateDirector"; 
 
 function AdminLayouts(props) {
     const navigate = useNavigate();
@@ -27,6 +28,10 @@ function AdminLayouts(props) {
             return <Dashboard />;
         } else if (props.path == "profile") {
             return <AdminProfile />;
+        } else if (props.path == "profile") {
+            return <AdminProfile />;
+        } else if (props.path == "createDirector") {
+            return <CreateDirector />;
         }
     };
     return (

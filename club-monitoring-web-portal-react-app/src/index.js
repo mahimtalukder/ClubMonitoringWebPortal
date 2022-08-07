@@ -76,16 +76,6 @@ root.render(
                     path="/executive/profile"
                     element={<ExecutiveLayout path="profile" />}
                 />
-                <Route
-                    exact
-                    path="/executive/createMember"
-                    element={<ExecutiveLayout path="createMember" />}
-                />
-                <Route
-                    exact
-                    path="/executive/editExecutive"
-                    element={<ExecutiveLayout path="editExecutive" />}
-                />
 
                 {/*Member*/}
                 <Route

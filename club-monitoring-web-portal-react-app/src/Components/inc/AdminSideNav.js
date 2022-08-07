@@ -95,15 +95,12 @@ const AdminSideNav = () => {
                         <li class="nav-item nav-category">Director</li>
 
                         <li class="nav-item">
-                            <a
-                                href="{{ route('adminCreateDirector') }}"
-                                class="nav-link"
-                            >
+                            <Link to="/admin/createDirector" class="nav-link">
                                 <i class="link-icon" data-feather="box"></i>
                                 <span class="link-title">
                                     Create Director Account
                                 </span>
-                            </a>
+                            </Link>
                         </li>
                         <li class="nav-item">
                             <a
