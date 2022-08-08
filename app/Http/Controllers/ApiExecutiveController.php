@@ -14,6 +14,8 @@ use App\Http\Requests\UpdateExecutiveRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MemberAccountLoginCredentials;
 
 class ApiExecutiveController extends Controller
 {
@@ -86,6 +88,17 @@ class ApiExecutiveController extends Controller
               $Member->address = $request->address;
               $Member->images = "../assets_2/images/faces/default.png";
               $Member->save();
+
+              /*Mail login credentials to the user*/
+                $data = array(
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'user_id' => $unique_id,
+                    'password' => $unique_pass
+                );
+
+                Mail::to($request->email)->send(new MemberAccountLoginCredentials($data));
+                /* Mail end */
               }, 5);
           }
           catch (\Exception $e){

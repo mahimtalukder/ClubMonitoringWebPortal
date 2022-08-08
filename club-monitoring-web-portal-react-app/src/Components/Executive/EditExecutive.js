@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import EditValidation from "./EditValidation";
 const EditExecutive = (props) => {
     let user = JSON.parse(localStorage.getItem("user"));
-    console.log(localStorage.getItem("user"));
     const [dberror, setDberror] = useState("");
     const FormEdit = () => {
         var obj = {
@@ -17,6 +16,7 @@ const EditExecutive = (props) => {
             dob: values.dob,
             address: values.address,
         };
+        console.log(values);
         axios
             .post(
                 "http://127.0.0.1:8000/api/executive/editProfileSubmitted",
@@ -24,7 +24,6 @@ const EditExecutive = (props) => {
             )
             .then((resp) => {
                 var data = resp.data;
-                localStorage.setItem("user", JSON.stringify(data));
             })
             .catch((err) => {
                 console.log(err);
@@ -144,8 +143,6 @@ const EditExecutive = (props) => {
                                         <form
                                             onSubmit={handleSubmit}
                                             method="post"
-                                            action="#"
-                                            novalidate="novalidate"
                                         >
                                             <div class="mb-3">
                                                 <label
