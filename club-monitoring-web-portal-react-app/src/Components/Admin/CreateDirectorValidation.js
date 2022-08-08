@@ -28,7 +28,7 @@ const CreateDirectorValidation = (callback) => {
                     setErrors(
                         {
                             ...errors,
-                            email: 'Name cannot be empty'
+                            email: 'Email cannot be empty'
                         }
                     )
                 } else {
@@ -42,10 +42,19 @@ const CreateDirectorValidation = (callback) => {
                     setErrors(
                         {
                             ...errors,
-                            phone: 'Name cannot be empty'
+                            phone: 'Invalid phone number'
                         }
                     )
-                } else {
+                }
+                else if(value.length > 11){
+                    setErrors(
+                        {
+                            ...errors,
+                            phone: 'Invalid phone number'
+                        }
+                    )
+                }
+                else {
                     let obj = omit(errors, 'phone');
                     setErrors(obj);
                 }
