@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Mail\DirectorAccountLoginCredentials;
+use App\Mail\DirectorAccountBlock;
 use App\Models\Director;
 use App\Models\User;
 
@@ -111,6 +112,7 @@ class ApiAdminController extends Controller
     }
 
     public function directorStatusUpdate(Request $request){
+        $director = Director::whereRaw("BINARY user_id = '$request->user_id'")->first();
         User::where('user_id', $request->user_id)->where('user_type', 'director')->update([
             'status' => $request->status_code
         ]);
@@ -123,6 +125,9 @@ class ApiAdminController extends Controller
         {
             $message = $request->user_id." unblocked successfully. To block press the block button";
         }
+        $data["name"] = $director["name"];
+        $data["status_code"] =$request->status_code ;
+        Mail::to($director->email)->send(new DirectorAccountBlock($data));
 
         return $message;
     }

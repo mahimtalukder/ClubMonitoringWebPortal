@@ -21,4 +21,20 @@ class ApiApplicationController extends Controller
 
         return "success";
     }
+
+    public function rejectApplication(Request $request){
+
+        $rejectApplication = Application::where("application_id", $request->application_id )->update([
+            'is_approved' => "rejected",
+            'rejection_msg' => $request->remarks
+            ]);
+
+        $rejectComponent = RequestedComponent::where("application_id", $request->application_id )
+        ->update([
+            'is_approved' => "rejected",
+            'remarks' => $request->remarks
+            ]);
+
+        return "rejected";
+    }
 }
