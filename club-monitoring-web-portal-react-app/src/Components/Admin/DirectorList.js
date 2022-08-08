@@ -20,7 +20,7 @@ const DirectorList = () => {
                 setLoading(false);
             }).catch(err => {
                 setLoading(false);
-                //navigate("/signin");
+                navigate("/signin");
                 console.log(err);
             });
     };
@@ -49,7 +49,6 @@ const DirectorList = () => {
                                             <table id="dataTableExample" className="table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Image</th>
                                                         <th>Name</th>
                                                         <th>ID</th>
                                                         <th>Email</th>

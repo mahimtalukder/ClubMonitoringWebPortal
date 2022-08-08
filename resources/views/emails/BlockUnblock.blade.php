@@ -1,10 +1,10 @@
 @component('mail::message')
 
-Dear {{$data['name']}},
-@if($data['status_code']==0)
+Dear {{$data['name']}},</b>
+@if($data['status_code'] == 0)
     Sorry! Your acount has been block by the admin!</b>
 @endif
-@if($data['status_code']==1)
+@if($data['status_code'] == 1)
     Congratulations! Your acount has been unblock by the admin!</b>
 @endif
 

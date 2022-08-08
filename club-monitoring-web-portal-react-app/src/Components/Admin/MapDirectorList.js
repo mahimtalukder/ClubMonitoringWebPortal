@@ -17,9 +17,6 @@ const MapDirectorList = (props) => {
     };
     return (
         <tr>
-            <td>
-                <img className="wd-30 ht-30 rounded-circle" src={props.images} />
-            </td>
             <td>{props.name}</td>
             <td>{props.user_id}</td>
             <td>{props.email}</td>
