@@ -16,7 +16,7 @@ const DirectorList = () => {
         setLoading(true);
         AxiosConfig.get("admin/list/director")
             .then(resp => {
-                setDirectors(resp.data.directors);
+                setDirectors(resp.data);
                 setLoading(false);
             }).catch(err => {
                 setLoading(false);
@@ -68,6 +68,7 @@ const DirectorList = () => {
                                                                 phone={director.phone}
                                                                 designation={director.designation}
                                                                 status={director.status}
+                                                                images={director.images}
                                                             ></MapDirectorList>
                                                         ))
                                                     }

@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import AxiosConfig from "../axiosConfig";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import DirectorApplicationSideNav from "../inc/DirectorApplicationSideNav";
 import { Form } from "react-bootstrap";
 import ApplicationApproveComponetList from "./ApplicationApproveComponetList";
+import { confirmAlert } from 'react-confirm-alert' // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+import ComponentList from "./ComponentList";
+import ApprorovedComponent from "./ApprorovedComponent";
+
+
 
 const ApplicationRead = () => {
+
     let { applicationID } = useParams();
-    console.log(applicationID);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [club, setClub] = useState([]);
@@ -35,6 +41,34 @@ const ApplicationRead = () => {
             });
     };
 
+    const handleClick = (event, { application_id }) => {
+        confirmAlert({
+            title: 'Reject',
+            message: 'Are you sure to do this?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        console.log(url);
+                        var url = "/director/application/rejectApplication/" + application_id + "/Reject";
+                        AxiosConfig.get(url)
+                            .then((resp) => {
+                                if (resp.data === "success") {
+                                    navigate(-1)
+                                }
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                    }
+                },
+                {
+                    label: 'No',
+                }
+            ]
+        });
+    };
+
     return (
         <>
             {loading ? (
@@ -51,42 +85,36 @@ const ApplicationRead = () => {
                                             <div className="d-flex align-items-center">
                                                 {application["is_approved"] ===
                                                     "approved" && (
-                                                    <i
-                                                        data-feather="check"
-                                                        className="text-success icon-lg me-2"
-                                                    ></i>
-                                                )}
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check text-success icon-lg me-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                                    )}
 
                                                 {application["is_approved"] ===
                                                     "rejected" && (
-                                                    <i
-                                                        data-feather="x"
-                                                        className="text-danger icon-lg me-2"
-                                                    ></i>
-                                                )}
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x text-danger icon-lg me-2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                    )}
 
                                                 {application["is_approved"] ===
                                                     "pending" && (
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="24"
-                                                        height="24"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        class="feather feather-clock text-muted icon-lg me-2"
-                                                    >
-                                                        <circle
-                                                            cx="12"
-                                                            cy="12"
-                                                            r="10"
-                                                        ></circle>
-                                                        <polyline points="12 6 12 12 16 14"></polyline>
-                                                    </svg>
-                                                )}
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="24"
+                                                            height="24"
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            stroke-width="2"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="feather feather-clock text-muted icon-lg me-2"
+                                                        >
+                                                            <circle
+                                                                cx="12"
+                                                                cy="12"
+                                                                r="10"
+                                                            ></circle>
+                                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                                        </svg>
+                                                    )}
 
                                                 {
                                                     <span>
@@ -168,36 +196,45 @@ const ApplicationRead = () => {
                                             </div>
                                             {requested_components.length !=
                                                 0 && (
-                                                <div>
-                                                    <div className="mb-3">
-                                                        Requested Components
-                                                    </div>
-                                                    <div className="col-md-12 border-2">
+                                                    <div>
                                                         <div className="mb-3">
-                                                            <table className="table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>
-                                                                            #
-                                                                        </th>
-                                                                        <th>
-                                                                            Name
-                                                                        </th>
-                                                                        <th>
-                                                                            Start
-                                                                            Time
-                                                                        </th>
-                                                                        <th>
-                                                                            End
-                                                                            Time
-                                                                        </th>
-                                                                        <th>
-                                                                            Quantity
-                                                                        </th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    {/* @php
+                                                            Requested Components
+                                                        </div>
+                                                        <div className="col-md-12 border-2">
+                                                            <div className="mb-3">
+                                                                <table className="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>#</th>
+                                                                            <th>Name</th>
+                                                                            <th>Start Time</th>
+                                                                            <th>End Time</th>
+                                                                            <th>Quantity</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {requested_components.map(
+                                                                            (
+                                                                                requested_component,
+                                                                                index
+                                                                            ) => (
+                                                                                <ComponentList
+                                                                                    id={requested_component.id}
+                                                                                    name={
+                                                                                        requested_component.name
+                                                                                    }
+                                                                                    start_time={
+                                                                                        requested_component.start_time
+                                                                                    }
+                                                                                    end_time={requested_component.end_time}
+                                                                                    quantity={requested_component.quantity}
+                                                                                    i={
+                                                                                        index
+                                                                                    }
+                                                                                ></ComponentList>
+                                                                            )
+                                                                        )}
+                                                                        {/* @php
                                                                 $count=0;
                                                                 @endphp
                                                                 @foreach($requested_components as $component)
@@ -213,44 +250,66 @@ const ApplicationRead = () => {
                                                                     @endphp
                                                                 </tr>
                                                                 @endforeach */}
-                                                                </tbody>
-                                                            </table>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            )}
+                                                )}
                                         </div>
                                         {application.is_approved ==
                                             "approved" && (
-                                            <div className="p-3 bg-body">
-                                                <div className="mb-3">
-                                                    Approved Date:{" "}
-                                                    {application.approve_date}
-                                                </div>
-                                                <div>Approved Components</div>
-                                                <div className="col-md-12 border-2 mt-3">
-                                                    <div className="mb-3 table-responsive">
-                                                        <table className="table table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>
-                                                                        Name
-                                                                    </th>
-                                                                    <th>
-                                                                        Start
-                                                                        Time
-                                                                    </th>
-                                                                    <th>
-                                                                        End Time
-                                                                    </th>
-                                                                    <th>
-                                                                        Quantity
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                {/* @php
+                                                <div className="p-3 bg-body">
+                                                    <div className="mb-3">
+                                                        Approved Date:{" "}
+                                                        {application.approve_date}
+                                                    </div>
+                                                    <div>Approved Components</div>
+                                                    <div className="col-md-12 border-2 mt-3">
+                                                        <div className="mb-3 table-responsive">
+                                                            <table className="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>
+                                                                            Name
+                                                                        </th>
+                                                                        <th>
+                                                                            Start
+                                                                            Time
+                                                                        </th>
+                                                                        <th>
+                                                                            End Time
+                                                                        </th>
+                                                                        <th>
+                                                                            Quantity
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {requested_components.map(
+                                                                        (
+                                                                            requested_component,
+                                                                            index
+                                                                        ) => (
+                                                                            <ApprorovedComponent
+                                                                                id={requested_component.id}
+                                                                                name={
+                                                                                    requested_component.name
+                                                                                }
+                                                                                start_time={
+                                                                                    requested_component.start_time
+                                                                                }
+                                                                                end_time={requested_component.end_time}
+                                                                                quantity={requested_component.quantity}
+                                                                                i={
+                                                                                    index
+                                                                                }
+                                                                                is_approved={requested_component.is_approved}
+                                                                            ></ApprorovedComponent>
+                                                                        )
+                                                                    )}
+                                                                    {/* @php
                                                         $count=0;
                                                         @endphp
                                                         @foreach($requested_components as $component)
@@ -270,124 +329,124 @@ const ApplicationRead = () => {
                                                         @if($count == 0)
                                                         <tr><td>No Approved Components</td></tr>
                                                         @endif */}
-                                                            </tbody>
-                                                        </table>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        )}
+                                            )}
 
                                         {application.is_approved ==
                                             "rejected" && (
-                                            <div className="p-3 bg-warning">
-                                                <div className="mb-3">
-                                                    <strong>
-                                                        Application Rejected
-                                                    </strong>
+                                                <div className="p-3 bg-warning">
+                                                    <div className="mb-3">
+                                                        <strong>
+                                                            Application Rejected
+                                                        </strong>
+                                                    </div>
+                                                    <div>Directors Comment:</div>
+                                                    {application.rejection_msg}
                                                 </div>
-                                                <div>Directors Comment:</div>
-                                                {application.rejection_msg}
-                                            </div>
-                                        )}
+                                            )}
 
                                         {application.is_approved ==
                                             "pending" && (
-                                            <form
-                                                className="forms-sample"
-                                                action="{{route('directorApplicationUpdateSubmitted')}}"
-                                                method="post"
-                                            >
-                                                <div className="p-3 bg-body">
-                                                    <div className="mb-3">
-                                                        <strong>
-                                                            Application Approval
-                                                            Section
-                                                        </strong>
-                                                    </div>
-                                                    <input
-                                                        type="hidden"
-                                                        name="application_id"
-                                                        value={
-                                                            application.application_id
-                                                        }
-                                                    />
-                                                    <div className="date">
-                                                        <div className="row mb-3">
-                                                            <label className="col-md-2 col-form-label">
-                                                                Approve Date
-                                                            </label>
-                                                            <div className="col-md-10">
+                                                <form
+                                                    className="forms-sample"
+
+                                                    method="post"
+                                                >
+                                                    <div className="p-3 bg-body">
+                                                        <div className="mb-3">
+                                                            <strong>
+                                                                Application Approval
+                                                                Section
+                                                            </strong>
+                                                        </div>
+                                                        <input
+                                                            type="hidden"
+                                                            name="application_id"
+                                                            value={
+                                                                application.application_id
+                                                            }
+
+                                                        />
+                                                        <div className="date">
+                                                            <div className="row mb-3">
+                                                                <label className="col-md-2 col-form-label">
+                                                                    Approve Date
+                                                                </label>
                                                                 <div className="col-md-10">
-                                                                    <div className="input-group date datepicker">
-                                                                        <Form.Control
-                                                                            type="date"
-                                                                            className="form-control"
-                                                                            name="date"
-                                                                        />
+                                                                    <div className="col-md-10">
+                                                                        <div className="input-group date datepicker">
+                                                                            <Form.Control
+                                                                                type="date"
+                                                                                className="form-control"
+                                                                                name="date"
+                                                                            />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-12 border-2">
-                                                            <div className="mb-3 table-responsive">
-                                                                <table className="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>
-                                                                                Name
-                                                                            </th>
-                                                                            <th>
-                                                                                Approved
-                                                                                Start
-                                                                                Time
-                                                                            </th>
-                                                                            <th>
-                                                                                Approved
-                                                                                Start
-                                                                                Time
-                                                                            </th>
-                                                                            <th>
-                                                                                Approved
-                                                                                Quantity
-                                                                            </th>
-                                                                            <th>
-                                                                                Action
-                                                                            </th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="component_body">
-                                                                        {requested_components.map(
-                                                                            (
-                                                                                requested_component,
-                                                                                index
-                                                                            ) => (
-                                                                                <ApplicationApproveComponetList
-                                                                                    id={
-                                                                                        requested_component.id
-                                                                                    }
-                                                                                    name={
-                                                                                        requested_component.name
-                                                                                    }
-                                                                                    application_id={
-                                                                                        requested_component.application_id
-                                                                                    }
-                                                                                    i={
-                                                                                        index
-                                                                                    }
-                                                                                ></ApplicationApproveComponetList>
-                                                                            )
-                                                                        )}
-                                                                        <input
-                                                                            type="hidden"
-                                                                            name="total_component"
-                                                                            value={
-                                                                                requested_components.length
-                                                                            }
-                                                                        />
-                                                                        <div id="component_section">
-                                                                            {/* @php $i=0; @endphp
+                                                        <div className="row">
+                                                            <div className="col-md-12 border-2">
+                                                                <div className="mb-3 table-responsive">
+                                                                    <table className="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>
+                                                                                    Name
+                                                                                </th>
+                                                                                <th>
+                                                                                    Approved
+                                                                                    Start
+                                                                                    Time
+                                                                                </th>
+                                                                                <th>
+                                                                                    Approved
+                                                                                    Start
+                                                                                    Time
+                                                                                </th>
+                                                                                <th>
+                                                                                    Approved
+                                                                                    Quantity
+                                                                                </th>
+                                                                                <th>
+                                                                                    Action
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="component_body">
+                                                                            {requested_components.map(
+                                                                                (
+                                                                                    requested_component,
+                                                                                    index
+                                                                                ) => (
+                                                                                    <ApplicationApproveComponetList
+                                                                                        id={requested_component.id}
+                                                                                        name={
+                                                                                            requested_component.name
+                                                                                        }
+                                                                                        application_id={
+                                                                                            requested_component.application_id
+                                                                                        }
+                                                                                        is_approved={requested_component.is_approved}
+                                                                                        i={
+                                                                                            index
+                                                                                        }
+                                                                                    ></ApplicationApproveComponetList>
+                                                                                )
+                                                                            )}
+                                                                            <input
+                                                                                type="hidden"
+                                                                                name="total_component"
+                                                                                value={
+                                                                                    requested_components.length
+                                                                                }
+                                                                            />
+                                                                            <div id="component_section">
+                                                                                {/* @php $i=0; @endphp
                                                                     @foreach($requested_components as $component)
                                                                 @if($component->is_approved=="pending")
                                                                     <tr id=@php echo "row".$component["id"]; @endphp>
@@ -402,34 +461,34 @@ const ApplicationRead = () => {
                                                                     @endif
                                                                     @endforeach
                                                                     <input type="hidden" name='total_component' value={{ $i }}/> */}
-                                                                        </div>
-                                                                    </tbody>
-                                                                </table>
+                                                                            </div>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div>
+                                                            <div className="col-md-12">
+                                                                <button
+                                                                    className="btn btn-primary me-1 mb-1"
+                                                                    type="submit"
+                                                                >
+                                                                    {" "}
+                                                                    Approve
+                                                                </button>
+                                                                <a
+                                                                    className="btn btn-danger me-1 mb-1"
+                                                                    onClick={event => handleClick(event, { application_id: applicationID })}
+                                                                >
+                                                                    Reject
+                                                                    Application
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div>
-                                                        <div className="col-md-12">
-                                                            <button
-                                                                className="btn btn-primary me-1 mb-1"
-                                                                type="submit"
-                                                            >
-                                                                {" "}
-                                                                Approve
-                                                            </button>
-                                                            <a
-                                                                className="btn btn-danger me-1 mb-1"
-                                                                onclick="reject_full_application('{{$application_info->application_id}}')"
-                                                            >
-                                                                Reject
-                                                                Application
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        )}
+                                                </form>
+                                            )}
                                     </div>
                                 </div>
                             </div>

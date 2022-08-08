@@ -88,6 +88,7 @@ const EditValidation = (callback) => {
         let name = event.target.name;
         let val = event.target.value;
 
+
         validate(event, name, val);
         //Let's set these values in state
 
