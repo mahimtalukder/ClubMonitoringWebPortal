@@ -80,13 +80,19 @@ const EditExecutive = () => {
         },
         validate:validateEmployee,
         onSubmit:values=>{
-        alert(JSON.stringify(values));
         values.user_id = user.user_id;
         AxiosConfig.post("executive/editProfileSubmitted", values)
             .then(resp => {
                 if (resp.data === "success") {
                     setSuccess("Profile successfully done!");
                     setDberror("");
+                    user.name = values.name;
+                    user.email = values.email;
+                    user.phone = values.phone;
+                    user.dob = values.dob;
+                    user.address = values.address;
+                    localStorage.setItem('user', JSON.stringify(user));
+                    window.location.reload(false);
                 }else{
                     setDberror("profile update filed");
                     setSuccess("");
