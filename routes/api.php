@@ -65,6 +65,8 @@ Route::get('/executive/member/{id}', [ApiExecutiveController::class, 'memberInfo
 
 Route::post('/executive/sendNoticepost', [ApiExecutiveController::class, 'SendNoticePost']);
 
+Route::post('/executive/ViewNotice', [ApiExecutiveController::class, 'ViewNotice']);
+
 
 //Member
 Route::get('/member/dashboard',[ApiMemberController::class, 'dashboard']);

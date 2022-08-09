@@ -11,6 +11,7 @@ import EditExecutive from "../Executive/EditExecutive";
 import MemberList from "../Executive/MemberList";
 import ViewMember from "../Executive/ViewMember";
 import PostNotice from "../Executive/PostNotice";
+import ViewNotece from "../Executive/ViewNotice";
 
 function ExecutiveLayout(props) {
     const navigate = useNavigate();
@@ -45,6 +46,8 @@ function ExecutiveLayout(props) {
             return <ViewMember />;
         }else if (props.path == "Noitce") {
             return <PostNotice />;
+        }else if (props.path == "ViewNoitce") {
+            return <ViewNotece />;
         }
     };
     return (

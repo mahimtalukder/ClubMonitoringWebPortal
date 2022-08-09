@@ -222,12 +222,12 @@ const ExecutiveSideNav = () => {
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <a
-                                            href="{{ route('ViewAllNotice') }}"
+                                        <Link
+                                            to="/executive/ViewNotice"
                                             className="nav-link"
                                         >
                                             View Notice
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
