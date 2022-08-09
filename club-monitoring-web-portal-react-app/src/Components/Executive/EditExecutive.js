@@ -223,7 +223,9 @@ const EditExecutive = (props) => {
                                                     name="email"
                                                     type="email"
                                                     // onBlur={handleBlur}
-                                                />
+                                                    value={formik.values.email}
+                                                    onChange={formik.handleChange} onBlur={formik.handleBlur}></input>
+                                               {formik.touched.Name && formik.errors.email ? <span style={{color:'red'}}>{formik.errors.email}</span> : null}
                                             </div>
                                             {/* <div class="mb-3">
                                                 <label
