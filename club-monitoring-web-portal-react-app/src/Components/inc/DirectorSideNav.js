@@ -156,13 +156,10 @@ const DirectorSideNav = () => {
                         </li>
 
                         <li className="nav-item">
-                            <a href="#" className="nav-link">
-                                <i
-                                    className="link-icon"
-                                    data-feather="edit"
-                                ></i>
+                            <Link to="/director/component" className="nav-link">
+                                <i className="link-icon" data-feather="edit"></i>
                                 <span className="link-title">Components</span>
-                            </a>
+                            </Link>
                         </li>
 
                         <li className="nav-item">

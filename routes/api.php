@@ -78,3 +78,4 @@ Route::get('/member/dashboard',[ApiMemberController::class, 'dashboard']);
 Route::get('/component/list',[ApiComponentController::class, 'components']);
 Route::post('/component/add',[ApiComponentController::class, 'addComponents']);
 Route::get('/component/find/{name}',[ApiComponentController::class, 'IsComponentNameExist']);
+Route::get('/component/delete/{id}',[ApiComponentController::class, 'deleteComponent']);

@@ -23,7 +23,7 @@ const ViewDirector = () => {
             })
             .catch((err) => {
                 setLoading(false);
-                //navigate("/signin");
+                navigate("/signin");
                 console.log(err);
             });
     };
