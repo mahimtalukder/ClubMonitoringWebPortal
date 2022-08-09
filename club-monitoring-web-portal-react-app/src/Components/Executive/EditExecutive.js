@@ -4,35 +4,93 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import EditValidation from "./EditValidation";
 import AxiosConfig from '../axiosConfig' 
-const EditExecutive = (props) => {
-    let members = JSON.parse(localStorage.getItem("members"));
-    const [dberror, setDberror] = useState("");
-    // const [members, setMember] = useState([]);
-    const FormEdit = () => {
-        var obj = {
-            id: values.id,
-            name: values.name,
-            designation: values.designation,
-            email: values.email,
-            phone: values.phone,
-            dob: values.dob,
-            address: values.address,
-        };
-        console.log(values);
-        AxiosConfig
-            .post(
-                "executive/editProfileSubmitted",
-                obj
-            )
-            .then((resp) => {
-                //setMember(resp.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+
+import {useFormik} from 'formik';
+
+
+const validateEmployee = empData => {
+    const errors = {};
+    
+    if (!empData.Name) {
+        errors.Name = 'Please Enter Employee Name';
+    } else if (empData.Name.length > 20) {
+        errors.Name = 'Name cannot exceed 20 characters';
+    }
+    
+    if (!empData.Location) {
+        errors.Location = 'Please Enter Employee Location';
+    } 
+    
+    if (!empData.EmailId) {
+        errors.EmailId = 'Please Enter Email ID';
+    }
+    
+    return errors;
     };
-    const { handleChange, values, errors, submitErrors, handleSubmit } =
-        EditValidation(FormEdit);
+
+
+
+const EditExecutive = (props) => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    const [dberror, setDberror] = useState("");
+    // const [user, setMember] = useState([]);
+    // const FormEdit = () => {
+    //     var obj = {
+    //         // id: values.id,
+    //         // name: values.name,
+    //         // designation: values.designation,
+    //         // email: values.email,
+    //         // phone: values.phone,
+    //         // dob: values.dob,
+    //         // address: values.address,
+    // //     };
+    // //     // console.log(values);
+    // //     AxiosConfig
+    // //         .post(
+    // //             "executive/editProfileSubmitted",
+    // //             obj
+    // //         )
+    // //         .then((resp) => {
+    // //             //setMember(resp.data);
+    // //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // };
+
+
+    
+
+    const formik=useFormik({
+        initialValues:{
+        name:user.name,
+        email:user.email,
+        // Location:'',
+        // Salary:'',
+        // EmailId:''
+        },
+        validate:validateEmployee,
+        onSubmit:values=>{
+        alert(JSON.stringify(values));
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return (
         <div>
             <div class="page-content mx-0 px-0 my-0 py-0">
@@ -76,48 +134,48 @@ const EditExecutive = (props) => {
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h6 class="card-title mb-0">Overview</h6>
                                 </div>
-                                <p>{members.bio}</p>
+                                <p>{user.bio}</p>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Full Name:
                                     </label>
-                                    <p class="text-muted">{members.name}</p>
+                                    <p class="text-muted">{user.name}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         ID:
                                     </label>
-                                    <p class="text-muted">{members.members_id}</p>
+                                    <p class="text-muted">{user.user_id}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Email:
                                     </label>
-                                    <p class="text-muted">{members.email}</p>
+                                    <p class="text-muted">{user.email}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Phone:
                                     </label>
-                                    <p class="text-muted">{members.phone}</p>
+                                    <p class="text-muted">{user.phone}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Date of Birth:
                                     </label>
-                                    <p class="text-muted">{members.dob}</p>
+                                    <p class="text-muted">{user.dob}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Blood Group:
                                     </label>
-                                    <p class="text-muted">{members.blood_group}</p>
+                                    <p class="text-muted">{user.blood_group}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Address:
                                     </label>
-                                    <p class="text-muted">{members.address}</p>
+                                    <p class="text-muted">{user.address}</p>
                                 </div>
                             </div>
                         </div>
@@ -130,20 +188,9 @@ const EditExecutive = (props) => {
                                         <h4 class="card-title pb-3">
                                             Update personal information
                                         </h4>
-                                        {dberror ? (
-                                            <h5 className="text-danger">
-                                                {dberror}
-                                            </h5>
-                                        ) : (
-                                            submitErrors.error && (
-                                                <h5 className="text-danger">
-                                                    {submitErrors.error}
-                                                </h5>
-                                            )
-                                        )}
 
                                         <form
-                                            onSubmit={handleSubmit}
+                                            onSubmit={formik.handleSubmit}
                                             method="post"
                                         >
                                             <div class="mb-3">
@@ -159,14 +206,9 @@ const EditExecutive = (props) => {
                                                     class="form-control"
                                                     name="name"
                                                     type="text"
-                                                    defaultValue={members.name}
-                                                    onChange={handleChange}
-                                                />
-                                                {errors.name && (
-                                                    <span className="font-weight-light text-danger">
-                                                        {errors.name}
-                                                    </span>
-                                                )}
+                                                    value={formik.values.name}
+                                                    onChange={formik.handleChange} onBlur={formik.handleBlur}></input>
+                                               {formik.touched.Name && formik.errors.name ? <span style={{color:'red'}}>{formik.errors.name}</span> : null}
                                             </div>
                                             <div class="mb-3">
                                                 <label
@@ -180,12 +222,10 @@ const EditExecutive = (props) => {
                                                     class="form-control"
                                                     name="email"
                                                     type="email"
-                                                    defaultValue={members.email}
-                                                    onChange={handleChange}
                                                     // onBlur={handleBlur}
                                                 />
                                             </div>
-                                            <div class="mb-3">
+                                            {/* <div class="mb-3">
                                                 <label
                                                     for="phone"
                                                     class="form-label"
@@ -197,7 +237,7 @@ const EditExecutive = (props) => {
                                                     class="form-control"
                                                     name="phone"
                                                     type="text"
-                                                    defaultValue={members.phone}
+                                                    defaultValue={user.phone}
                                                     onChange={handleChange}
                                                 />
                                                 {errors.phone && (
@@ -206,29 +246,7 @@ const EditExecutive = (props) => {
                                                     </span>
                                                 )}
                                             </div>
-                                            {/* <div class="mb-3">
-                                            <label class="form-label">Gender</label>
-                                            <div>
-                                            <div class="form-check form-check-inline">
-                                                <input type="radio" class="form-check-input" name="gender" value="male" id="gender1" {{ members.gender == 'male' ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="gender1">
-                                                    Male
-                                                </label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input type="radio" class="form-check-input" name="gender" value="female" id="gender2" {{ members.gender == 'female' ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="gender2">
-                                                    Female
-                                                </label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input type="radio" class="form-check-input" name="gender" value="Other" id="gender3" { members.gender == 'Other' ? 'checked' : '' }>
-                                                <label class="form-check-label" for="gender3">
-                                                    Other
-                                                </label>
-                                            </div>
-                                            </div>
-                                            </div> */}
+
                                             <div class="mb-3">
                                                 <label class="form-label">
                                                     Date of Birth
@@ -241,7 +259,7 @@ const EditExecutive = (props) => {
                                                         id="datepicker"
                                                         name="dob"
                                                         class="form-control"
-                                                        defaultValue={members.dob}
+                                                        defaultValue={user.dob}
                                                         onChange={handleChange}
                                                     />
                                                     <span class="input-group-text input-group-addon">
@@ -287,20 +305,6 @@ const EditExecutive = (props) => {
                                                     </span>
                                                 </div>
                                             </div>
-                                            {/* <div class="mb-3">
-                                                                                <label class="form-label">Blood Group</label>
-                                                                                <select class="js-example-basic-single form-select select2-hidden-accessible" name="blood_group" id="blood_group" data-width="100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option name="blood_group" value="" data-select2-id="1">Select blood group</option>
-                                            <option name="blood_group" value="a-pos" data-select2-id="3" { members.blood_group == 'a-pos' ? 'selected' : '' }>A+</option>
-                                            <option name="blood_group" value="a-neg" data-select2-id="13" { members.blood_group == 'a-neg' ? 'selected' : '' }>A-</option>
-                                            <option name="blood_group" value="ab-pos" data-select2-id="14" { members.blood_group == 'ab-pos' ? 'selected' : '' }>AB+</option>
-                                            <option name="blood_group" value="ab-neg" data-select2-id="15" { members.blood_group == 'ab-neg' ? 'selected' : '' }>AB-</option>
-                                            <option name="blood_group" value="o-pos" data-select2-id="17" {members.blood_group == 'o-pos' ? 'selected' : ''}>O+</option>
-                                            <option name="blood_group" value="o-neg" data-select2-id="18" { members.blood_group == 'o-neg' ? 'selected' : '' }>O-</option>
-                                            <option name="blood_group" value="b-pos" data-select2-id="19" { members.blood_group == 'b-pos' ? 'selected' : '' }>B+</option>
-                                            <option name="blood_group" value="b-neg" data-select2-id="11" { members.blood_group == 'b-neg' ? 'selected' : '' }>B-</option>
-                                                                                </select>
-                                                                            </div> */}
                                             <div class="mb-3">
                                                 <label
                                                     for="name"
@@ -314,7 +318,7 @@ const EditExecutive = (props) => {
                                                     name="address"
                                                     type="text"
                                                     onChange={handleChange}
-                                                    defaultValue={members.address}
+                                                    defaultValue={user.address}
                                                 />
                                             </div>
                                             <div class="mb-3">
@@ -336,17 +340,19 @@ const EditExecutive = (props) => {
                                                         id="termsCheck"
                                                     />
                                                 </div>
-                                            </div>
-                                            <input
-                                                class="btn btn-primary"
+                                            </div> */}
+                                            <button
+                                            class="btn btn-primary"
                                                 type="submit"
-                                                value="Submit"
-                                            />
+                                                >
+                                                    submit
+                                            </button>
+
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 stretch-card">
+                            {/* <div class="col-md-12 stretch-card">
                                 <div class="card">
                                     <div class="card-body">
                                         <form
@@ -400,13 +406,13 @@ const EditExecutive = (props) => {
                                             </div>
                                         </form>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     );
 };
 export default EditExecutive;
