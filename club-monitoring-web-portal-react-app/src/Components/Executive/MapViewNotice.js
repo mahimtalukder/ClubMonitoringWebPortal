@@ -6,11 +6,11 @@ import AxiosConfig from "../axiosConfig";
 const MapViewNotice = (props) => {
     const navigate = useNavigate();
     return (
-forEach(
+        <div>
     <div class="email-list-item email-list-item--unread">
-    <div class="email-list-actions">
+        <div class="email-list-actions">
         <a class="favorite" href="javascript:;"><span><i
-                    data-feather="star"></i></span></a>
+        data-feather="star"></i></span></a>
     </div>
     <a class="email-list-detail">
         <div class="content">
@@ -22,9 +22,9 @@ forEach(
             {props.created_at}
         </span>
     </a>
-</div>
+    </div>
+        </div>
 
-)
     )
 }
 
