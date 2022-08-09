@@ -42,6 +42,7 @@ Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
 Route::get('/director/application', [ApiDirectorController::class, 'allApplication']);
 Route::get('/director/application/read/{id}', [ApiDirectorController::class, 'applicationRead']);
 Route::get('/director/application/removeComponent/{id}/{application_id}/{remarks}', [ApiApplicationController::class, 'removeComponent']);
+Route::get('/director/application/rejectApplication/{application_id}/{remarks}', [ApiApplicationController::class, 'rejectApplication']);
 
 
 //Admin
