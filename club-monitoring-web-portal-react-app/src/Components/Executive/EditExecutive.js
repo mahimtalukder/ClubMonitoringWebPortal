@@ -3,9 +3,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import EditValidation from "./EditValidation";
+import AxiosConfig from '../axiosConfig' 
 const EditExecutive = (props) => {
-    let user = JSON.parse(localStorage.getItem("user"));
+    let members = JSON.parse(localStorage.getItem("members"));
     const [dberror, setDberror] = useState("");
+    // const [members, setMember] = useState([]);
     const FormEdit = () => {
         var obj = {
             id: values.id,
@@ -17,13 +19,13 @@ const EditExecutive = (props) => {
             address: values.address,
         };
         console.log(values);
-        axios
+        AxiosConfig
             .post(
-                "http://127.0.0.1:8000/api/executive/editProfileSubmitted",
+                "executive/editProfileSubmitted",
                 obj
             )
             .then((resp) => {
-                var data = resp.data;
+                // setMember(resp.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -74,48 +76,48 @@ const EditExecutive = (props) => {
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h6 class="card-title mb-0">Overview</h6>
                                 </div>
-                                <p>{user.bio}</p>
+                                <p>{members.bio}</p>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Full Name:
                                     </label>
-                                    <p class="text-muted">{user.name}</p>
+                                    <p class="text-muted">{members.name}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         ID:
                                     </label>
-                                    <p class="text-muted">{user.user_id}</p>
+                                    <p class="text-muted">{members.members_id}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Email:
                                     </label>
-                                    <p class="text-muted">{user.email}</p>
+                                    <p class="text-muted">{members.email}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Phone:
                                     </label>
-                                    <p class="text-muted">{user.phone}</p>
+                                    <p class="text-muted">{members.phone}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Date of Birth:
                                     </label>
-                                    <p class="text-muted">{user.dob}</p>
+                                    <p class="text-muted">{members.dob}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Blood Group:
                                     </label>
-                                    <p class="text-muted">{user.blood_group}</p>
+                                    <p class="text-muted">{members.blood_group}</p>
                                 </div>
                                 <div class="mt-3">
                                     <label class="tx-11 fw-bolder mb-0 text-uppercase">
                                         Address:
                                     </label>
-                                    <p class="text-muted">{user.address}</p>
+                                    <p class="text-muted">{members.address}</p>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +159,7 @@ const EditExecutive = (props) => {
                                                     class="form-control"
                                                     name="name"
                                                     type="text"
-                                                    defaultValue={user.name}
+                                                    defaultValue={members.name}
                                                     onChange={handleChange}
                                                 />
                                                 {errors.name && (
@@ -178,7 +180,7 @@ const EditExecutive = (props) => {
                                                     class="form-control"
                                                     name="email"
                                                     type="email"
-                                                    defaultValue={user.email}
+                                                    defaultValue={members.email}
                                                     onChange={handleChange}
                                                     // onBlur={handleBlur}
                                                 />
@@ -195,7 +197,7 @@ const EditExecutive = (props) => {
                                                     class="form-control"
                                                     name="phone"
                                                     type="text"
-                                                    defaultValue={user.phone}
+                                                    defaultValue={members.phone}
                                                     onChange={handleChange}
                                                 />
                                                 {errors.phone && (
@@ -208,19 +210,19 @@ const EditExecutive = (props) => {
                                             <label class="form-label">Gender</label>
                                             <div>
                                             <div class="form-check form-check-inline">
-                                                <input type="radio" class="form-check-input" name="gender" value="male" id="gender1" {{ user.gender == 'male' ? 'checked' : '' }}>
+                                                <input type="radio" class="form-check-input" name="gender" value="male" id="gender1" {{ members.gender == 'male' ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="gender1">
                                                     Male
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input type="radio" class="form-check-input" name="gender" value="female" id="gender2" {{ user.gender == 'female' ? 'checked' : '' }}>
+                                                <input type="radio" class="form-check-input" name="gender" value="female" id="gender2" {{ members.gender == 'female' ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="gender2">
                                                     Female
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input type="radio" class="form-check-input" name="gender" value="Other" id="gender3" { user.gender == 'Other' ? 'checked' : '' }>
+                                                <input type="radio" class="form-check-input" name="gender" value="Other" id="gender3" { members.gender == 'Other' ? 'checked' : '' }>
                                                 <label class="form-check-label" for="gender3">
                                                     Other
                                                 </label>
@@ -239,7 +241,7 @@ const EditExecutive = (props) => {
                                                         id="datepicker"
                                                         name="dob"
                                                         class="form-control"
-                                                        defaultValue={user.dob}
+                                                        defaultValue={members.dob}
                                                         onChange={handleChange}
                                                     />
                                                     <span class="input-group-text input-group-addon">
@@ -289,14 +291,14 @@ const EditExecutive = (props) => {
                                                                                 <label class="form-label">Blood Group</label>
                                                                                 <select class="js-example-basic-single form-select select2-hidden-accessible" name="blood_group" id="blood_group" data-width="100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option name="blood_group" value="" data-select2-id="1">Select blood group</option>
-                                            <option name="blood_group" value="a-pos" data-select2-id="3" { user.blood_group == 'a-pos' ? 'selected' : '' }>A+</option>
-                                            <option name="blood_group" value="a-neg" data-select2-id="13" { user.blood_group == 'a-neg' ? 'selected' : '' }>A-</option>
-                                            <option name="blood_group" value="ab-pos" data-select2-id="14" { user.blood_group == 'ab-pos' ? 'selected' : '' }>AB+</option>
-                                            <option name="blood_group" value="ab-neg" data-select2-id="15" { user.blood_group == 'ab-neg' ? 'selected' : '' }>AB-</option>
-                                            <option name="blood_group" value="o-pos" data-select2-id="17" {user.blood_group == 'o-pos' ? 'selected' : ''}>O+</option>
-                                            <option name="blood_group" value="o-neg" data-select2-id="18" { user.blood_group == 'o-neg' ? 'selected' : '' }>O-</option>
-                                            <option name="blood_group" value="b-pos" data-select2-id="19" { user.blood_group == 'b-pos' ? 'selected' : '' }>B+</option>
-                                            <option name="blood_group" value="b-neg" data-select2-id="11" { user.blood_group == 'b-neg' ? 'selected' : '' }>B-</option>
+                                            <option name="blood_group" value="a-pos" data-select2-id="3" { members.blood_group == 'a-pos' ? 'selected' : '' }>A+</option>
+                                            <option name="blood_group" value="a-neg" data-select2-id="13" { members.blood_group == 'a-neg' ? 'selected' : '' }>A-</option>
+                                            <option name="blood_group" value="ab-pos" data-select2-id="14" { members.blood_group == 'ab-pos' ? 'selected' : '' }>AB+</option>
+                                            <option name="blood_group" value="ab-neg" data-select2-id="15" { members.blood_group == 'ab-neg' ? 'selected' : '' }>AB-</option>
+                                            <option name="blood_group" value="o-pos" data-select2-id="17" {members.blood_group == 'o-pos' ? 'selected' : ''}>O+</option>
+                                            <option name="blood_group" value="o-neg" data-select2-id="18" { members.blood_group == 'o-neg' ? 'selected' : '' }>O-</option>
+                                            <option name="blood_group" value="b-pos" data-select2-id="19" { members.blood_group == 'b-pos' ? 'selected' : '' }>B+</option>
+                                            <option name="blood_group" value="b-neg" data-select2-id="11" { members.blood_group == 'b-neg' ? 'selected' : '' }>B-</option>
                                                                                 </select>
                                                                             </div> */}
                                             <div class="mb-3">
@@ -312,7 +314,7 @@ const EditExecutive = (props) => {
                                                     name="address"
                                                     type="text"
                                                     onChange={handleChange}
-                                                    defaultValue={user.address}
+                                                    defaultValue={members.address}
                                                 />
                                             </div>
                                             <div class="mb-3">
