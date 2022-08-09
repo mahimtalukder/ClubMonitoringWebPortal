@@ -85,6 +85,9 @@ root.render(
                     path="/executive/editExecutive"
                     element={<ExecutiveLayout path="editExecutive" />}
                 />
+                 <Route exact path="/executive/list/member"  element={<ExecutiveLayout path="memberList" />} />
+                 <Route exact path="/executive/update/member/:memberID"  element={<ExecutiveLayout path="viewMember" />} />
+                 <Route exact path="/executive/Noitce"  element={<ExecutiveLayout path="Noitce" />} />
 
                 {/*Member*/}
                 <Route

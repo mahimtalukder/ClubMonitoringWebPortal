@@ -3,16 +3,6 @@ import axios from "axios";
 
 const ExecutiveProfile = (props) => {
     let user = JSON.parse(localStorage.getItem("user"));
-    console.log(localStorage.getItem("user"));
-
-    // var obj = {id: values.id};
-    // axios.get("http://127.0.0.1:8000/api/director/dashboard",obj)
-    // .then(resp=>{
-    //     var data = resp.data;
-    //     localStorage.setItem('user',JSON.stringify(data));
-    // }).catch(err=>{
-    //     console.log(err);
-    // });
 
     return (
         <div class="page-content mx-0 px-0 my-0 py-0">

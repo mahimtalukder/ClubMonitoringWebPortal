@@ -6,7 +6,6 @@ import EditValidation from "./EditValidation";
 const CreateMember = (props) => {
     const [dberror, setDberror] = useState("");
     let user = JSON.parse(localStorage.getItem("user"));
-    console.log(localStorage.getItem("user"));
     const FormEdit = () => {
         var obj = {
             name: values.name,

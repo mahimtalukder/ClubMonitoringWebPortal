@@ -8,6 +8,9 @@ import AxiosConfig from "../axiosConfig";
 import ExecutiveProfile from "../Executive/ExecutiveProfile";
 import CreateMember from "../Executive/CreateMember";
 import EditExecutive from "../Executive/EditExecutive";
+import MemberList from "../Executive/MemberList";
+import ViewMember from "../Executive/ViewMember";
+import PostNotice from "../Executive/PostNotice";
 
 function ExecutiveLayout(props) {
     const navigate = useNavigate();
@@ -36,6 +39,12 @@ function ExecutiveLayout(props) {
             return <CreateMember />;
         } else if (props.path == "editExecutive") {
             return <EditExecutive />;
+        }else if (props.path == "memberList") {
+            return <MemberList />;
+        }else if (props.path == "viewMember") {
+            return <ViewMember />;
+        }else if (props.path == "Noitce") {
+            return <PostNotice />;
         }
     };
     return (

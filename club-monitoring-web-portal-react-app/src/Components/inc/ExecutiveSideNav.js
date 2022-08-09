@@ -172,12 +172,12 @@ const ExecutiveSideNav = () => {
                             <div className="collapse" id="member-pages">
                                 <ul className="nav sub-menu">
                                     <li className="nav-item">
-                                        <a
-                                            href="{{ route('executiveViewAllMamber') }}"
+                                        <Link
+                                            to="/executive/list/member"
                                             className="nav-link"
                                         >
-                                            All Members
-                                        </a>
+                                            Members List
+                                        </Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link
@@ -214,12 +214,12 @@ const ExecutiveSideNav = () => {
                             <div className="collapse" id="notic-pages">
                                 <ul className="nav sub-menu">
                                     <li className="nav-item">
-                                        <a
-                                            href="{{ route('SendNoticeMamber') }}"
+                                        <Link
+                                            to="/executive/Noitce"
                                             className="nav-link"
                                         >
                                             Send Notice
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li className="nav-item">
                                         <a

@@ -57,6 +57,12 @@ Route::get('/admin/director/{id}', [ApiAdminController::class, 'directorInfo']);
 Route::get('/executive/dashboard',[ApiExecutiveController::class, 'dashboard']);
 Route::post('/executive/CreateMamber',[ApiExecutiveController::class, 'CreateMamber']);
 Route::post('/executive/editProfileSubmitted',[ApiExecutiveController::class, 'editProfileSubmitted']);
+Route::get('/executive/list/member', [ApiExecutiveController::class, 'memberList']);
+Route::get('/executive/update/status/member/{user_id}/{status_code}', [ApiExecutiveController::class, 'memberStatusUpdate']);
+Route::get('/executive/member/{id}', [ApiExecutiveController::class, 'memberInfo']);
+
+
+Route::post('/executive/sendNoticepost', [ApiExecutiveController::class, 'SendNoticePost']);
 
 
 //Member

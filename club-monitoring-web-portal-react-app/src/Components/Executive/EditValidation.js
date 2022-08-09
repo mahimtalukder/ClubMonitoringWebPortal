@@ -57,7 +57,7 @@ const EditValidation = (callback) => {
                 if (value === "") {
                     setErrors({
                         ...errors,
-                        address: "A date of birth is required",
+                        address: "A Address is required",
                     });
                 } else {
                     let newObj = omit(errors, "address");
@@ -68,13 +68,35 @@ const EditValidation = (callback) => {
                 if (value === "") {
                     setErrors({
                         ...errors,
-                        designation: "A date of birth is required",
+                        designation: "A designation is required",
                     });
                 } else {
                     let newObj = omit(errors, "designation");
                     setErrors(newObj);
                 }
                 break;
+                case "title":
+                    if (value === "") {
+                        setErrors({
+                            ...errors,
+                            address: "A title is required",
+                        });
+                    } else {
+                        let newObj = omit(errors, "title");
+                        setErrors(newObj);
+                    }
+                    break;
+                case "notice":
+                    if (value === "") {
+                        setErrors({
+                            ...errors,
+                            designation: "A notice is required",
+                        });
+                    } else {
+                        let newObj = omit(errors, "notice");
+                        setErrors(newObj);
+                    }
+                    break;
             default:
                 break;
         }
