@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import EditValidation from "./EditValidation";
 const PostNotice = (props) => {
     const [dberror, setDberror] = useState("");
+    const [message, setMessage] = useState("");
     let user = JSON.parse(localStorage.getItem("user"));
     const FormEdit = () => {
         var obj = {
@@ -16,11 +17,14 @@ const PostNotice = (props) => {
         axios
             .post("http://127.0.0.1:8000/api/executive/sendNoticepost", obj)
             .then((resp) => {
-                var data = resp.data;
-                localStorage.setItem("user", JSON.stringify(data));
+                if(resp.data == "success"){
+                    setMessage("Notice posted.");
+                    setDberror("");
+                }
             })
             .catch((err) => {
                 setDberror("Database error!");
+                setMessage("");
                 console.log(err);
             });
     };
@@ -44,6 +48,11 @@ const PostNotice = (props) => {
                                         </h5>
                                     )
                                 )}
+
+                                {message !="" &&
+                                    <div class="alert alert-success" role="alert">
+                                        {message}
+                                    </div>}
                                 <form method="post" onSubmit={handleSubmit}>
                                     <h3 class="card-title">Send Notice</h3>
                                     <div class="mb-3">
