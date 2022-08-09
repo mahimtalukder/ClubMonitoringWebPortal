@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import MapMemberList from './MapMemberList'
+import MapViewNotice from './MapViewNotice'
 import AxiosConfig from '../axiosConfig' 
 import { useNavigate } from "react-router-dom"
 
 const ViewNotece = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const [notice, setnotice] = useState([]);
+    const [notices, setnotice] = useState([]);
+    let user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
         fetchData();
@@ -15,9 +16,9 @@ const ViewNotece = () => {
     const fetchData = () => {
         setLoading(true);
         var obj = {
-            club_id: values.club_id,
+            club_id: user.club_id,
         };
-        AxiosConfig.get("executive/viewNotice",obj)
+        AxiosConfig.get("/executive/ViewNotice",obj)
             .then(resp => {
                 setnotice(resp.data);
                 setLoading(false);
@@ -42,23 +43,17 @@ const ViewNotece = () => {
                 <div class="card">
                     <div class="card-body">
                         <h3>Notices</h3>
+                            {
+                            notices.map(notice => (
+                                <MapViewNotice
+                                    title={notice.title}
+                                    notice={notice.notice}
+                                    created_at={notice.created_at}
+                                ></MapViewNotice>
+                            ))
+                        }
 
-                            <div class="email-list-item email-list-item--unread">
-                                <div class="email-list-actions">
-                                    <a class="favorite" href="javascript:;"><span><i
-                                                data-feather="star"></i></span></a>
-                                </div>
-                                <a class="email-list-detail">
-                                    <div class="content">
-                                        <span class="from" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModalLongScollable">{notice.title }</span>
-                                        <p class="msg">{ notice.notice }</p>
-                                    </div>
-                                    <span class="date">
-                                        {notice.created_at}
-                                    </span>
-                                </a>
-                            </div>
+
                     </div>
                 </div>
             </div>
@@ -70,7 +65,7 @@ const ViewNotece = () => {
 </div>
 
 
-<div class="example">
+{/* <div class="example">
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLongScollable">
 Launch demo modal
 </button>
@@ -79,7 +74,7 @@ Launch demo modal
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle">{ $NoticeList.title }</h5>
+                <h5 class="modal-title" id="exampleModalScrollableTitle">{ notice.title }</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
             </div>
             <div class="modal-body">{notice.notice }</div>
@@ -89,7 +84,7 @@ Launch demo modal
         </div>
     </div>
 </div>
-</div>
+</div> */}
 
        </div>
     )
