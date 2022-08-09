@@ -188,7 +188,7 @@ class ApiExecutiveController extends Controller
 
     public function ViewNotice(){
 
-      $Notice = Notice::where("club_id",  $request->club_id))->paginate(6);
+      $Notice = Notice::where("club_id",  $request->club_id)->paginate(6);
 
       return view('executive.viewNotice')->with('NoticeList', $Notice);
 

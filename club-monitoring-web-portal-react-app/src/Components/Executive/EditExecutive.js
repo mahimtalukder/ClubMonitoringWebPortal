@@ -25,7 +25,7 @@ const EditExecutive = (props) => {
                 obj
             )
             .then((resp) => {
-                // setMember(resp.data);
+                //setMember(resp.data);
             })
             .catch((err) => {
                 console.log(err);
