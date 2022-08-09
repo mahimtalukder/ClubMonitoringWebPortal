@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiComponentController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ComponentController;
 use Illuminate\Support\Facades\Route;
@@ -72,3 +73,6 @@ Route::post('/executive/ViewNotice', [ApiExecutiveController::class, 'ViewNotice
 
 //Member
 Route::get('/member/dashboard',[ApiMemberController::class, 'dashboard']);
+
+//Component
+Route::get('/component/list',[ApiComponentController::class, 'components']);

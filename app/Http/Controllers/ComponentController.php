@@ -12,7 +12,7 @@ class ComponentController extends Controller
 {
     public function components(){
 
-        $components = Component::paginate(3);
+        $components = Component::all();
         if (Session::has('message')){
             $message = session()->get('message');
             session()->forget('message');
