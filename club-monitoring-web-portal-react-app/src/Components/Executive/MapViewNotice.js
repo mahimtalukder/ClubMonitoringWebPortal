@@ -5,6 +5,7 @@ import AxiosConfig from "../axiosConfig";
 
 const MapViewNotice = (props) => {
     const navigate = useNavigate();
+    const date = new Date();
     return (
         <div>
     <div class="email-list-item email-list-item--unread">
@@ -19,7 +20,7 @@ const MapViewNotice = (props) => {
             <p class="msg">{ props.notice }</p>
         </div>
         <span class="date">
-            {props.created_at}
+        {new Date(props.created_at).toDateString()}
         </span>
     </a>
     </div>
