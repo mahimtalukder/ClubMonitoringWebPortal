@@ -21,7 +21,7 @@ class ApiExecutiveController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('reactValidUser');
+        // $this->middleware('reactValidUser');
     }
     public function dashboard()
     {

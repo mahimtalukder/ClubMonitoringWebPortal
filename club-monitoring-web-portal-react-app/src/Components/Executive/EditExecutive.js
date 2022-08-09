@@ -4,35 +4,43 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import EditValidation from "./EditValidation";
 import AxiosConfig from '../axiosConfig' 
-
 import {useFormik} from 'formik';
 
 
 const validateEmployee = empData => {
     const errors = {};
     
-    if (!empData.Name) {
-        errors.Name = 'Please Enter Employee Name';
-    } else if (empData.Name.length > 20) {
-        errors.Name = 'Name cannot exceed 20 characters';
+    if (!empData.name) {
+        errors.name = 'Please Enter Name';
+    } else if (empData.name.length > 20) {
+        errors.name = 'Name cannot exceed 20 characters';
     }
     
-    if (!empData.Location) {
-        errors.Location = 'Please Enter Employee Location';
-    } 
-    
-    if (!empData.EmailId) {
-        errors.EmailId = 'Please Enter Email ID';
+    if (!empData.email) {
+        errors.email = 'Please Enter Email';
     }
+
+    if (empData.phone.length > 11) {
+        errors.phone = 'phone cannot exceed 11 characters';
+    }
+
+    // if (!empData.dob) {
+    //     errors.dob = 'Please Enter dob';
+    // }
+
+    // if (!empData.address) {
+    //     errors.address = 'Please Enter address';
+    // }
     
     return errors;
     };
 
 
 
-const EditExecutive = (props) => {
+const EditExecutive = () => {
     let user = JSON.parse(localStorage.getItem("user"));
     const [dberror, setDberror] = useState("");
+    const [success, setSuccess] = useState("");
     // const [user, setMember] = useState([]);
     // const FormEdit = () => {
     //     var obj = {
@@ -65,28 +73,31 @@ const EditExecutive = (props) => {
         initialValues:{
         name:user.name,
         email:user.email,
-        // Location:'',
-        // Salary:'',
-        // EmailId:''
+        phone:user.phone,
+        dob :user.dob,
+        address : user.address,
+
         },
         validate:validateEmployee,
         onSubmit:values=>{
         alert(JSON.stringify(values));
+        values.user_id = user.user_id;
+        AxiosConfig.post("executive/editProfileSubmitted", values)
+            .then(resp => {
+                if (resp.data === "success") {
+                    setSuccess("Profile successfully done!");
+                    setDberror("");
+                }else{
+                    setDberror("profile update filed");
+                    setSuccess("");
+                }
+            }).catch(err => {
+                setDberror("Internal error!");
+                setSuccess("");
+                console.log(err);
+            });
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -188,6 +199,11 @@ const EditExecutive = (props) => {
                                         <h4 class="card-title pb-3">
                                             Update personal information
                                         </h4>
+                                        {success && <div className="alert alert-success" role="alert">
+                                            <i data-feather="check" className="text-success icon-lg me-2"></i>
+                                            {success}
+                                        </div>}
+                                        {dberror &&  <span className="text-danger">{dberror}</span>}
 
                                         <form
                                             onSubmit={formik.handleSubmit}
@@ -208,7 +224,7 @@ const EditExecutive = (props) => {
                                                     type="text"
                                                     value={formik.values.name}
                                                     onChange={formik.handleChange} onBlur={formik.handleBlur}></input>
-                                               {formik.touched.Name && formik.errors.name ? <span style={{color:'red'}}>{formik.errors.name}</span> : null}
+                                               {formik.touched.name && formik.errors.name ? <span style={{color:'red'}}>{formik.errors.name}</span> : null}
                                             </div>
                                             <div class="mb-3">
                                                 <label
@@ -225,9 +241,9 @@ const EditExecutive = (props) => {
                                                     // onBlur={handleBlur}
                                                     value={formik.values.email}
                                                     onChange={formik.handleChange} onBlur={formik.handleBlur}></input>
-                                               {formik.touched.Name && formik.errors.email ? <span style={{color:'red'}}>{formik.errors.email}</span> : null}
+                                               {formik.touched.email && formik.errors.email ? <span style={{color:'red'}}>{formik.errors.email}</span> : null}
                                             </div>
-                                            {/* <div class="mb-3">
+                                            <div class="mb-3">
                                                 <label
                                                     for="phone"
                                                     class="form-label"
@@ -239,14 +255,9 @@ const EditExecutive = (props) => {
                                                     class="form-control"
                                                     name="phone"
                                                     type="text"
-                                                    defaultValue={user.phone}
-                                                    onChange={handleChange}
-                                                />
-                                                {errors.phone && (
-                                                    <span className="font-weight-light text-danger">
-                                                        {errors.phone}
-                                                    </span>
-                                                )}
+                                                    value={formik.values.phone}
+                                                    onChange={formik.handleChange} onBlur={formik.handleBlur}></input>
+                                               {formik.touched.phone && formik.errors.phone ? <span style={{color:'red'}}>{formik.errors.phone}</span> : null}
                                             </div>
 
                                             <div class="mb-3">
@@ -261,9 +272,11 @@ const EditExecutive = (props) => {
                                                         id="datepicker"
                                                         name="dob"
                                                         class="form-control"
-                                                        defaultValue={user.dob}
-                                                        onChange={handleChange}
-                                                    />
+                                                        value={formik.values.dob}
+                                                        onChange={formik.handleChange} onBlur={formik.handleBlur}></input>
+                                                        {formik.touched.dob && formik.errors.dob ? <span style={{color:'red'}}>{formik.errors.dob}</span> : null}
+                                                </div>
+                                                <div>
                                                     <span class="input-group-text input-group-addon">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -319,9 +332,10 @@ const EditExecutive = (props) => {
                                                     class="form-control"
                                                     name="address"
                                                     type="text"
-                                                    onChange={handleChange}
-                                                    defaultValue={user.address}
-                                                />
+                                                    value={formik.values.address}
+                                                    onChange={formik.handleChange} onBlur={formik.handleBlur}></input>
+                                                    {formik.touched.address && formik.errors.address ? <span style={{color:'red'}}>{formik.errors.address}</span> : null}
+                                                
                                             </div>
                                             <div class="mb-3">
                                                 <div class="form-check">
@@ -342,7 +356,7 @@ const EditExecutive = (props) => {
                                                         id="termsCheck"
                                                     />
                                                 </div>
-                                            </div> */}
+                                            </div>
                                             <button
                                             class="btn btn-primary"
                                                 type="submit"
@@ -414,7 +428,7 @@ const EditExecutive = (props) => {
                     </div>
                 </div>
             </div>
-        // </div>
+        //  </div>
     );
 };
 export default EditExecutive;
