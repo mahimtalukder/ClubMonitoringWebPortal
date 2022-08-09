@@ -6,6 +6,7 @@ import Dashboard from "../Director/Dashboard";
 import DirectorViewProfile from "../Director/DirectorViewProfile";
 import AllAplication from "../Director/Application";
 import ApplicationRead from "../Director/ApplicationRead"
+import ChangePassword from "../Director/ChangePassword"
 
 function DirectorLayout(props) {
     const component = () => {
@@ -17,6 +18,9 @@ function DirectorLayout(props) {
             return <AllAplication />;
         } else if (props.path == "applicationRead") {
             return <ApplicationRead />;
+        }
+        else if (props.path == "changePassword") {
+            return <ChangePassword />;
         }
     };
 

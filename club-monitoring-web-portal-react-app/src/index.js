@@ -52,6 +52,7 @@ root.render(
                     path="/director/application/read/:applicationID"
                     element={<DirectorLayout path="applicationRead" />}
                 />
+                <Route exact path="/director/changePassword" element={<DirectorLayout path="changePassword" />} />
 
                 {/* Admin */}
                 <Route exact path="/admin/dashboard"  element={<AdminLayouts path="dashboard" />} />

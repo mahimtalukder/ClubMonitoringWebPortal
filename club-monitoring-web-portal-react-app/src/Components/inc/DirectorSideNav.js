@@ -46,6 +46,13 @@ const DirectorSideNav = () => {
                                 <span className="link-title">Edit Profile</span>
                             </a>
                         </li>
+
+                        <li class="nav-item active">
+                            <a href="http://127.0.0.1:8000/admin/change/password" class="nav-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock link-icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                <span class="link-title">Change Password</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -90,6 +97,13 @@ const DirectorSideNav = () => {
                                 ></i>
                                 <span className="link-title">Edit Profile</span>
                             </a>
+                        </li>
+
+                        <li className="nav-item">
+                            <Link to="/director/changePassword" className="nav-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock link-icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                <span className="link-title">Change Password</span>
+                            </Link>
                         </li>
 
                         <li className="nav-item nav-category">Services</li>

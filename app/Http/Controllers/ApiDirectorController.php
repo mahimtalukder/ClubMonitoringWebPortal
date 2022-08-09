@@ -8,6 +8,7 @@ use App\Models\Application;
 use App\Models\Club;
 use App\Models\Member;
 use App\Models\Executive;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 
@@ -53,6 +54,26 @@ class ApiDirectorController extends Controller
 
 
     return $values;
+}
+
+public function changePasswordSubmitted(Request $request)
+{
+   $validate = $request->validate([
+       "*" => "required",
+       'confirm_password' => 'required|same:new_password'   
+   ]); 
+
+   $user = User::where([['user_id', "=", $request->user_id]])->first();
+   if (Hash::check($request->current_password, $user['password'])){ 
+       $userUpdate = User::where("user_id", $request->user_id)->update([
+           'password' => Hash::make($request->new_password)
+       ]);
+       return "success";
+   }
+   return "error";
+
+
+
 }
 
     

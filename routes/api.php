@@ -43,6 +43,7 @@ Route::get('/director/application', [ApiDirectorController::class, 'allApplicati
 Route::get('/director/application/read/{id}', [ApiDirectorController::class, 'applicationRead']);
 Route::get('/director/application/removeComponent/{id}/{application_id}/{remarks}', [ApiApplicationController::class, 'removeComponent']);
 Route::get('/director/application/rejectApplication/{application_id}/{remarks}', [ApiApplicationController::class, 'rejectApplication']);
+Route::post('/director/changePasswordSubmitted', [ApiDirectorController::class, 'changePasswordSubmitted']);
 
 
 //Admin
@@ -51,6 +52,7 @@ Route::get('/admin/list/director', [ApiAdminController::class, 'directorList']);
 Route::post('/admin/create/director', [ApiAdminController::class, 'adminCreateDirectorSubmitted']);
 Route::get('/admin/update/status/director/{user_id}/{status_code}', [ApiAdminController::class, 'directorStatusUpdate']);
 Route::get('/admin/director/{id}', [ApiAdminController::class, 'directorInfo']);
+
 
 
 
