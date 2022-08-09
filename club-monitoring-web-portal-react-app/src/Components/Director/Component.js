@@ -48,7 +48,6 @@ const Component = () => {
                     if (resp.data != 1) {
                         errors.name = 'Name is not unique';
                         setNameErr('Name is not unique');
-                        console.log(errors);
                     } else {
                         setNameErr("");
                     }

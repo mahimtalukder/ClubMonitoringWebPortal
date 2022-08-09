@@ -18,7 +18,7 @@ class ApiComponentController extends Controller
 
     public function addComponents(Request $request){
         $validate = $request->validate([
-            "name" => "required",
+            "name" => "required|unique:components,name",
             "description" => "required"
         ]);
 
@@ -45,11 +45,12 @@ class ApiComponentController extends Controller
 
     public function deleteComponent(Request $request){
 
-        $components = RequestedComponent::all();
+        $requestComponents = RequestedComponent::all();
         $hasComponent = "false";
-        foreach($components as $component){
-            if($component->component_id == $request->id && $component->is_approved == 'pending'){
+        foreach($requestComponents as $requestComponent){
+            if($requestComponent->component_id == $request->id){
                 $hasComponent = "true";
+                break;
             }
         }
         
@@ -57,7 +58,7 @@ class ApiComponentController extends Controller
             $deleteComponent = Component::where("id", $request->id)->delete();
             return "success";
         }else{
-            return "This component is requested with a application and that application is in pending state.";
+            return "This component is used in some application. Please delete the application first.";
         }
     }
 }

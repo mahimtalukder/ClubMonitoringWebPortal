@@ -15,12 +15,11 @@ const ViewNotece = () => {
 
     const fetchData = () => {
         setLoading(true);
-        var obj = {
-            club_id: user.club_id,
-        };
-        AxiosConfig.get("/executive/ViewNotice",obj)
+        let url = "/executive/ViewNotice/" + user.club_id;
+        AxiosConfig.get(url)
             .then(resp => {
                 setnotice(resp.data);
+                console.log(user.club_id);
                 setLoading(false);
             }).catch(err => {
                 setLoading(false);

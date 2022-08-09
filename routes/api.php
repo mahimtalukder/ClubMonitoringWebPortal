@@ -42,8 +42,8 @@ Route::post('/resetPasswordSubmitted',[ApiUserController::class, 'resetPasswordS
 Route::get('/director/dashboard',[ApiDirectorController::class, 'dashboard']);
 Route::get('/director/application', [ApiDirectorController::class, 'allApplication']);
 Route::get('/director/application/read/{id}', [ApiDirectorController::class, 'applicationRead']);
-Route::get('/director/application/removeComponent/{id}/{application_id}/{remarks}', [ApiApplicationController::class, 'removeComponent']);
-Route::get('/director/application/rejectApplication/{application_id}/{remarks}', [ApiApplicationController::class, 'rejectApplication']);
+Route::get('/director/application/removeComponent/{id}/{application_id}/{remarks}', [ApiApplicationController::class, 'removeComponent'])->middleware('reactValidUser');
+Route::get('/director/application/rejectApplication/{application_id}/{remarks}', [ApiApplicationController::class, 'rejectApplication'])->middleware('reactValidUser');
 Route::post('/director/changePasswordSubmitted', [ApiDirectorController::class, 'changePasswordSubmitted']);
 
 
@@ -68,14 +68,14 @@ Route::get('/executive/member/{id}', [ApiExecutiveController::class, 'memberInfo
 
 Route::post('/executive/sendNoticepost', [ApiExecutiveController::class, 'SendNoticePost']);
 
-Route::post('/executive/ViewNotice', [ApiExecutiveController::class, 'ViewNotice']);
+Route::get('/executive/ViewNotice/{club_id}', [ApiExecutiveController::class, 'ViewNotice']);
 
 
 //Member
 Route::get('/member/dashboard',[ApiMemberController::class, 'dashboard']);
 
 //Component
-Route::get('/component/list',[ApiComponentController::class, 'components']);
-Route::post('/component/add',[ApiComponentController::class, 'addComponents']);
-Route::get('/component/find/{name}',[ApiComponentController::class, 'IsComponentNameExist']);
-Route::get('/component/delete/{id}',[ApiComponentController::class, 'deleteComponent']);
+Route::get('/component/list',[ApiComponentController::class, 'components'])->middleware('reactValidUser');
+Route::post('/component/add',[ApiComponentController::class, 'addComponents'])->middleware('reactValidUser');
+Route::get('/component/find/{name}',[ApiComponentController::class, 'IsComponentNameExist'])->middleware('reactValidUser');
+Route::get('/component/delete/{id}',[ApiComponentController::class, 'deleteComponent'])->middleware('reactValidUser');

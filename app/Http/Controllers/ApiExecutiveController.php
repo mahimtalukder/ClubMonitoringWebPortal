@@ -21,7 +21,7 @@ class ApiExecutiveController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('reactValidUser');
+        $this->middleware('reactValidUser');
     }
     public function dashboard()
     {
@@ -122,7 +122,7 @@ class ApiExecutiveController extends Controller
       //     'address' => 'required'
       // ] );
 
-      $Member = Member::where([['user_id', "=", $request->id]])->update([
+      $Member = Member::where([['user_id', "=", $request->user_id]])->update([
           'name' => $request->name,
           'email' => $request->email,
           'phone' => $request->phone,
@@ -186,11 +186,11 @@ class ApiExecutiveController extends Controller
 
     }
 
-    public function ViewNotice(){
+    public function ViewNotice(Request $request){
 
-      $Notice = Notice::where("club_id",  $request->club_id)->paginate(6);
+      $Notice = Notice::where("club_id",  $request->club_id)->get();
 
-      return view('executive.viewNotice')->with('NoticeList', $Notice);
+      return $Notice;
 
 
     }
