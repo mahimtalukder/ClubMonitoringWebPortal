@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import EditValidation from "./EditValidation";
+import AxiosConfig from '../axiosConfig'
+
 const PostNotice = (props) => {
+    const navigate = useNavigate();
     const [dberror, setDberror] = useState("");
     const [message, setMessage] = useState("");
     let user = JSON.parse(localStorage.getItem("user"));
+
+    useEffect(() => {
+        AxiosConfig.get("director/dashboard")
+            .then(resp => {
+                console.log(resp.data);
+            }).catch(err => {
+                navigate("/signin");
+                console.log(err);
+            });
+
+    }, []);
+
     const FormEdit = () => {
         var obj = {
             id: values.id,
@@ -14,8 +29,8 @@ const PostNotice = (props) => {
             notice: values.notice,
         };
         console.log(values);
-        axios
-            .post("http://127.0.0.1:8000/api/executive/sendNoticepost", obj)
+        AxiosConfig
+            .post("executive/sendNoticepost", obj)
             .then((resp) => {
                 if(resp.data == "success"){
                     setMessage("Notice posted.");
