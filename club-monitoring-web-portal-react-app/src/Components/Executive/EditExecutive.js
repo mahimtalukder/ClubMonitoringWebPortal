@@ -24,13 +24,13 @@ const validateEmployee = empData => {
         errors.phone = 'phone cannot exceed 11 characters';
     }
 
-    // if (!empData.dob) {
-    //     errors.dob = 'Please Enter dob';
-    // }
+    if (!empData.dob) {
+        errors.dob = 'Please Enter dob';
+    }
 
-    // if (!empData.address) {
-    //     errors.address = 'Please Enter address';
-    // }
+    if (!empData.address) {
+        errors.address = 'Please Enter address';
+    }
     
     return errors;
     };
