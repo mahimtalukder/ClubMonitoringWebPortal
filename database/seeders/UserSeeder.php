@@ -35,6 +35,51 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
+            'user_id' => '11-10003-3',
+            'password' => Hash::make('Admin@123'),
+            'user_type' => 'director',
+            'status' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('users')->insert([
+            'user_id' => '11-10004-3',
+            'password' => Hash::make('Admin@123'),
+            'user_type' => 'director',
+            'status' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('users')->insert([
+            'user_id' => '11-10005-3',
+            'password' => Hash::make('Admin@123'),
+            'user_type' => 'director',
+            'status' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('users')->insert([
+            'user_id' => '11-10006-3',
+            'password' => Hash::make('Admin@123'),
+            'user_type' => 'director',
+            'status' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('users')->insert([
+            'user_id' => '11-10007-3',
+            'password' => Hash::make('Admin@123'),
+            'user_type' => 'director',
+            'status' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('users')->insert([
             'user_id' => '12-10001-3',
             'password' => Hash::make('Admin@123'),
             'user_type' => 'admin',

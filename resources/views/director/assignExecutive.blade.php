@@ -45,11 +45,26 @@
 
                             <div class="mb-3 mt-3">
                                 <label for="exampleInputUsername1" class="form-label">Member ID</label>
-                                <input type="text" class="form-control  @error('id') {{"is-invalid"}} @enderror" id="exampleInputUsername1" name="id" placeholder="Enter member's ID">
+{{--                                <input type="text" class="form-control  @error('id') {{"is-invalid"}} @enderror" id="exampleInputUsername1" name="id" placeholder="Enter member's ID">--}}
+
+                                <input type="text" list="memberNames"
+                                       class="form-control  @error('id') {{"is-invalid"}} @enderror" id="exampleInputUsername1" name="id" placeholder="Search member by id or name..."/>
+
+                                <datalist id="memberNames">
+                                    @foreach($members as $m)
+                                    <option value="{{$m->user_id}}">{{$m->name}}</option>
+                                    @endforeach
+                                </datalist>
+
                                 @error('id')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
+
+
+
+
+
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Designation</label>
                                 <input type="text" class="form-control @error('designation') {{"is-invalid"}} @enderror" id="exampleInputEmail1" name="designation" placeholder="Enter designation">

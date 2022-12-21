@@ -184,7 +184,7 @@ class ApplicationController extends Controller
         $applications = Application::where('is_approved', 'approved')
             ->where('club_id', $club->id)
             ->orderBy("created_at", "desc")
-            ->paginate(1);
+            ->paginate(10);
 
         return view('executive.applications')->with('club', $club)->with('applications', $applications)->with('labelName', 'Approved Applications');
     }
@@ -192,7 +192,7 @@ class ApplicationController extends Controller
         $executive = session()->get('executive');
         $club = Club::where("id", $executive['club_id'])->first();
 
-        $applications = Application::where('club_id', $club->id)->orderBy("created_at", "desc")->paginate(2);
+        $applications = Application::where('club_id', $club->id)->orderBy("created_at", "desc")->paginate(10);
 
         return view('executive.applications')
             ->with('club', $club)

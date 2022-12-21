@@ -136,7 +136,7 @@ class DirectorController extends Controller
         $applications = Application::where('sent_to', 'director')
             ->orderBy("created_at", "desc")
             ->paginate(3);
-        
+
 
         return view('director.applications')
             ->with('applications', $applications)
@@ -184,7 +184,7 @@ class DirectorController extends Controller
 
     public function allClub()
     {
-        $clubs = Club::orderBy("created_at", "desc")->paginate(2);
+        $clubs = Club::orderBy("created_at", "desc")->paginate(10);
 
         return view('director.allClub')->with('clubs', $clubs);
     }
@@ -307,6 +307,7 @@ class DirectorController extends Controller
 
     public function assignExecutive(){
 
+        $members = Member::select('user_id','name')->get();
         $clubs = Club::all();
         $director_session = session()->get('director');
         $carts = ExecutiveCommitteeCart::where('added_by', $director_session->user_id)->get();
@@ -319,6 +320,7 @@ class DirectorController extends Controller
 
             return view('director.assignExecutive')
                 ->with('clubs', $clubs)
+                ->with('members', $members)
                 ->with('selected', 'none');
 
         }
@@ -340,6 +342,7 @@ class DirectorController extends Controller
                 ->with('message', $message)
                 ->with('committee_no', $new_committee_no)
                 ->with('selected_club', $cart_selected_club)
+                ->with('members', $members)
                 ->with('selected', $cart_selected_club->club_id);
         }
 
@@ -347,6 +350,7 @@ class DirectorController extends Controller
         return view('director.assignExecutive')
             ->with('clubs', $clubs)
             ->with('carts', $carts)
+            ->with('members', $members)
             ->with('selected_club', $selected_club_info)
             ->with('selected', $cart_selected_club->club_id)
             ->with('committee_no', $new_committee_no);
@@ -359,6 +363,7 @@ class DirectorController extends Controller
             "id" => ['required','unique:executives,user_id', 'exists:members,user_id,club_id,'.$request->club_id],
             "designation" => "required"
         ]);
+
 
         $member = Member::where('user_id', $request->id)->first();
 

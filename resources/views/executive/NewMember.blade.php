@@ -11,14 +11,14 @@
         <div class="col-md-12 stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Create Director's Account</h6>
+                    <h6 class="card-title">Create Member's Account</h6>
                     @if(!empty($message))
                         <div class="alert alert-success" role="alert">
                            {{$message}}
                         </div>
                     @else
                         <div class="alert alert-dark" role="alert">
-                            After successful account creation, Unique ID and password will be sent to the provided email address. Remember, login credentials is only accessible from directors email.
+                            After successful account creation, Unique ID and password will be sent to the provided email address. Remember, login credentials is only accessible from this members email.
                         </div>
                     @endif
 

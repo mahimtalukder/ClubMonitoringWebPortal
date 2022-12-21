@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
-  
+
     public function __construct()
     {
         $this->middleware('validMember');
@@ -18,10 +18,10 @@ class MemberController extends Controller
 
     public function dashboard()
     {
-      
+
       $member_session = session()->get('member');
-      $Notice = Notice::where("club_id", $member_session["club_id"])->paginate(6);
-      
+      $Notice = Notice::where("club_id", $member_session["club_id"])->orderBy('created_at', 'DESC')->paginate(10);
+
       return view('member.dashboard')->with('NoticeList', $Notice);
     }
 
@@ -65,27 +65,27 @@ class MemberController extends Controller
         $request->validate([
           'image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000',
       ]);
-    
-    
-    
+
+
+
         if($request->hasFile('image')){
             $member_session = session()->get('member');
             $imageName = time()."_".$request->file('image')->getClientOriginalName();
             $request->image->move(public_path('assets_2/images'), $imageName);
             $imageName = "assets_2/images/".$imageName;
-    
-      
+
+
               /* New File name */
               $newFileName = 'assets_2/images/'.time()."_".$member_session['user_id'].'.'.$request->file('image')->getClientOriginalExtension();
               rename($imageName, $newFileName);
-                
+
             $imageName='../'.$newFileName;
-                     
+
             $member = Member::where("user_id", $member_session["user_id"])->update([
                 'images' => $imageName
                 ]);
             $member_session['images'] = $imageName;
-    
+
             session()->put('member', $member_session);
             return redirect()->route('memberEditProfile');
         }

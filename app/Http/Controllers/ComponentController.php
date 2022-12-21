@@ -12,7 +12,7 @@ class ComponentController extends Controller
 {
     public function components(){
 
-        $components = Component::all();
+        $components = Component::paginate(5);
         if (Session::has('message')){
             $message = session()->get('message');
             session()->forget('message');
@@ -20,6 +20,7 @@ class ComponentController extends Controller
         }
         return view('director.components') -> with('components', $components);
     }
+
 
     public function addComponents(Request $request){
         $validate = $request->validate([
