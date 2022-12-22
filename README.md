@@ -56,3 +56,5 @@ For React: (Go to "club-monitoring-web-portal-react-app" folder inside project d
 ![App Screenshot](https://raw.githubusercontent.com/mahimtalukder/ClubMonitoringWebPortal/main/screenshots/assign_executives.png)
 
 ![App Screenshot](https://raw.githubusercontent.com/mahimtalukder/ClubMonitoringWebPortal/main/screenshots/notices.png)
+
+![App Screenshot](https://raw.githubusercontent.com/mahimtalukder/ClubMonitoringWebPortal/main/screenshots/email.png)
